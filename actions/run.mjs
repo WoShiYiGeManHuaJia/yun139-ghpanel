@@ -514,12 +514,15 @@ async function readCloudNum(page) {
   } catch (e) { return null; }
 }
 
-async function receiveBubbles(authorization, phone) {
+async function receiveBubbles(authorization, phone, dev) {
   const steps = [];
+  dev = dev || {};
   let chromium = null;
   try { const pw = await import("playwright"); chromium = pw.chromium; }
   catch (e) { return { ok: false, error: "playwright 未安装", got: 0, steps }; }
-  const jwt = await getJwt(authorization, phone);
+  let jwt;
+  try { jwt = await getJwt(authorization, phone); }
+  catch (e) { return { ok: false, error: "令牌失效或鉴权失败: " + String(e.message || e).slice(0, 80), got: 0, steps }; }
   const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
   let before = null, after = null, got = 0;
   try {
@@ -528,13 +531,15 @@ async function receiveBubbles(authorization, phone) {
       deviceScaleFactor: 3, isMobile: true, hasTouch: true,
       locale: "zh-CN", timezoneId: "Asia/Shanghai",
     });
-    await ctx.addCookies([
+    const cookies = [
       { name: "jwtToken", value: jwt, domain: "m.mcloud.139.com", path: "/" },
-      { name: "ud_id", value: "1235293937743367395", domain: "m.mcloud.139.com", path: "/" },
-      { name: "a_k", value: "Um7AMDEqBJxN3vJO", domain: "m.mcloud.139.com", path: "/" },
       { name: "NATION_CODE", value: "86", domain: "m.mcloud.139.com", path: "/" },
       { name: "platform", value: "2", domain: "m.mcloud.139.com", path: "/" },
-    ]);
+    ];
+    // 设备标识仅在该账号自己提供时才携带，避免多账号共用同一设备ID触发风控
+    if (dev.ud_id) cookies.push({ name: "ud_id", value: String(dev.ud_id), domain: "m.mcloud.139.com", path: "/" });
+    if (dev.a_k) cookies.push({ name: "a_k", value: String(dev.a_k), domain: "m.mcloud.139.com", path: "/" });
+    await ctx.addCookies(cookies);
     const page = await ctx.newPage();
     const recv = [];
     page.on("response", async (r) => {
@@ -730,12 +735,19 @@ async function main() {
       if (!targets.length) throw new Error("未找到目标账号");
       const rows = [];
       for (const a of targets) {
-        const rb = await receiveBubbles(a.authorization, a.phone);
+        let rb;
+        try {
+          rb = await receiveBubbles(a.authorization, a.phone, { ud_id: a.ud_id, a_k: a.a_k });
+        } catch (e) {
+          rb = { ok: false, error: String(e.message || e).slice(0, 120), got: 0, steps: ["异常中断"] };
+        }
         rows.push({ phone: a.phone, masked: maskPhone(a.phone), ok: !!rb.ok,
           before: rb.before, after: rb.after, got: rb.got, steps: rb.steps,
           error: rb.error || (rb.ok ? "" : "未知") });
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise(r => setTimeout(r, 1500));
       }
+      // 令牌失效的账号在结果中明确标注，方便前端提示用户重新粘贴
+      out.badAccounts = rows.filter(r => !r.ok && /令牌|鉴权|失效/.test(String(r.error || ""))).map(r => r.masked || r.phone);
       out.receiveList = rows;
       out.receive = rows.length === 1 ? rows[0] : null;
       out.ok = rows.some(r => r.ok);

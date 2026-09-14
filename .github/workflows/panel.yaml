@@ -21,6 +21,10 @@ jobs:
   run-task:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    # 同一时刻只允许一个任务写 result.json，避免并发 push 冲突
+    concurrency:
+      group: yun139-panel-result
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,8 +56,27 @@ jobs:
 
       - name: Commit result
         run: |
+          set -e
           git config user.name "yun139-panel-bot"
           git config user.email "yun139-panel-bot@users.noreply.github.com"
           git add data/result.json
-          git commit -m "chore: update panel result $(date -u +%Y%m%d%H%M%S)" || echo "no change"
-          git push
+          if git diff --cached --quiet; then
+            echo "结果无变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "chore: update panel result $(date -u +%Y%m%d%H%M%S)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git rebase origin/main; then
+              if git push origin HEAD:main; then
+                echo "提交成功"
+                exit 0
+              fi
+            else
+              git rebase --abort || true
+            fi
+            echo "第 $i 次提交失败，重试…"
+            sleep 8
+          done
+          echo "提交失败：已达到最大重试次数"
+          exit 1

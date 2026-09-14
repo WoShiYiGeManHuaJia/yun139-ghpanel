@@ -394,11 +394,11 @@
     const list = await loadAccounts();
     if (!list.length) { toast("无账号", "err"); return; }
     setBusy($("btn_status"), true, "查询中…");
-    pending = { type: "status", kind: "status" };
+    armPending({ type: "status", kind: "status"  });
     try {
       await dispatch("status", { cipher: await encText(JSON.stringify(list)) });
       log("已触发云朵状态查询…", "warn"); lastTs = ""; startWatch();
-    } catch (e) { setBusy($("btn_status"), false); pending = null; log(e.message, "err"); toast(e.message, "err"); }
+    } catch (e) { setBusy($("btn_status"), false); clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
 
   async function renderAccounts(flashIdx) {
@@ -461,6 +461,41 @@
   // 结果驱动的等待状态：发起后按钮变忙，收到终态才恢复
   let pending = null;
   let batchBusy = false;
+  // 超时兜底：避免任务失败/结果未回写时按钮永久卡住
+  let pendingTimer = null;
+  const TIMEOUT_MS = {
+    status: 3 * 60 * 1000,
+    receive: 6 * 60 * 1000,
+    task: 4 * 60 * 1000,
+    sign: 3 * 60 * 1000,
+    refresh: 3 * 60 * 1000,
+    do_login: 3 * 60 * 1000,
+    list: 3 * 60 * 1000,
+  };
+  function armPending(p) {
+    if (pendingTimer) clearTimeout(pendingTimer);
+    pending = p;
+    const ms = TIMEOUT_MS[p.type] || (3 * 60 * 1000);
+    pendingTimer = setTimeout(function () {
+      if (!pending) return;
+      const t = pending.type;
+      log("等待超时（" + Math.round(ms / 60000) + " 分钟未收到结果），已自动恢复按钮。可到 GitHub Actions 查看失败原因。", "err");
+      toast("执行超时，请查看 Actions 日志", "err");
+      clearPending();
+      releaseAllBusy();
+    }, ms);
+  }
+  function clearPending() {
+    pending = null;
+    if (pendingTimer) { clearTimeout(pendingTimer); pendingTimer = null; }
+  }
+  const BTNS = () => [$("btn_sign"), $("btn_refresh"), $("btn_tasks"), $("btn_list"), $("btn_receive"), $("btn_status"), $("btn_login")];
+  function releaseAllBusy() {
+    BTNS().forEach(function (b) { if (b) setBusy(b, false); });
+    document.querySelectorAll("[data-rec]").forEach(function (b) { if (b.disabled) setBusy(b, false); });
+    batchBusy = false;
+    closeBusy();
+  }
 
   // ---- 粘贴 authorization（弹窗 + 智能识别）----
   function openPasteDialog() {
@@ -647,7 +682,7 @@
       const sum = (j.status || []).reduce(function (s2, x) { return s2 + (x.receivable || 0); }, 0);
       toast(sum > 0 ? ("共 " + sum + " 豆可领") : "暂无可领气泡", sum > 0 ? "" : "err");
     }
-    pending = null;
+    clearPending();
   }
   async function pollResult() {
     try {
@@ -689,20 +724,20 @@
     const list = await loadAccounts();
     if (!list.length) { log("无账号，请先在上方添加", "err"); toast("无账号", "err"); return; }
     batchBusy = true;
-    pending = { type: "sign", kind: "batch" };
+    armPending({ type: "sign", kind: "batch"  });
     setBusy($("btn_sign"), true, "签到执行中…");
     try { await dispatch("sign", { cipher: await encText(JSON.stringify(list)) }); log("签到任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); }
-    catch (e) { setBusy($("btn_sign"), false); setBusy($("btn_refresh"), false); batchBusy = false; pending = null; log(e.message, "err"); toast(e.message, "err"); }
+    catch (e) { setBusy($("btn_sign"), false); setBusy($("btn_refresh"), false); batchBusy = false; clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
   async function runRefresh() {
     if (batchBusy) { toast("有任务执行中，请稍候", "err"); return; }
     const list = await loadAccounts();
     if (!list.length) { log("无账号，请先在上方添加", "err"); toast("无账号", "err"); return; }
     batchBusy = true;
-    pending = { type: "refresh", kind: "batch" };
+    armPending({ type: "refresh", kind: "batch"  });
     setBusy($("btn_refresh"), true, "续期执行中…");
     try { await dispatch("refresh", { cipher: await encText(JSON.stringify(list)) }); log("续期任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); }
-    catch (e) { setBusy($("btn_sign"), false); setBusy($("btn_refresh"), false); batchBusy = false; pending = null; log(e.message, "err"); toast(e.message, "err"); }
+    catch (e) { setBusy($("btn_sign"), false); setBusy($("btn_refresh"), false); batchBusy = false; clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
   async function runSend() {
     const phone = $("inp_phone").value.trim();
@@ -715,14 +750,14 @@
     const phone = $("inp_phone").value.trim(), code = $("inp_code").value.trim();
     if (!/^1\d{10}$/.test(phone) || !code) { log("请填写手机号和验证码", "err"); toast("请先填写手机号和验证码", "err"); return; }
     openBusy();
-    pending = { type: "do_login", kind: "login" };
+    armPending({ type: "do_login", kind: "login"  });
     setBusy($("btn_login"), true, "登录中…");
     try {
       const list = await loadAccounts();
       await dispatch("do_login", { phone, code, cipher: await encText(JSON.stringify(list)) });
       log("登录任务已触发，成功后将自动保存令牌…", "warn"); lastTs = ""; startWatch();
     } catch (e) {
-      setBusy($("btn_login"), false); closeBusy(); stopSendCountdown(); pending = null;
+      setBusy($("btn_login"), false); closeBusy(); stopSendCountdown(); clearPending();
       log(e.message, "err"); toast(e.message, "err");
     }
   }
@@ -730,13 +765,13 @@
     const list = await loadAccounts();
     if (!list.length) { toast("无账号，请先添加", "err"); return; }
     if (btn) setBusy(btn, true, "领取中…");
-    pending = { type: "receive", kind: "receive", phone: phone || "" };
+    armPending({ type: "receive", kind: "receive", phone: phone || ""  });
     try {
       await dispatch("receive", { phone: phone || "", cipher: await encText(JSON.stringify(list)) });
       log((phone ? "139-" + phone.slice(-4) : "全部账号") + " 气泡领取已触发，后台需启动真实浏览器，约 2-3 分钟…", "warn");
       lastTs = ""; startWatch();
     } catch (e) {
-      if (btn) setBusy(btn, false); pending = null;
+      if (btn) setBusy(btn, false); clearPending();
       log(e.message, "err"); toast(e.message, "err");
     }
   }
@@ -761,7 +796,14 @@
   function renderReceiveRows(rows) {
     (rows || []).forEach(function (r) {
       const tag = "139-" + String(r.phone).slice(-4);
-      if (!r.ok) { log(tag + " 领取失败：" + (r.error || "未知"), "err"); return; }
+      const em = String(r.error || "未知");
+      if (/令牌|鉴权|失效/.test(em)) {
+        log(tag + " 令牌已失效，请重新用「方式二」粘贴该号码的 authorization 更新后再试", "err");
+        toast(tag + " 令牌失效，请重新粘贴更新", "err");
+      } else {
+        log(tag + " 领取失败：" + em, "err");
+      }
+      return;
       applyCloudCache(r.phone, { total: r.after });
       log(tag + " 云豆 " + r.before + " → " + r.after + (r.got > 0 ? "（+" + r.got + "）" : "（无可领）"), r.got > 0 ? "ok" : "");
       (r.steps || []).forEach(function (x) { log("   · " + x, x.indexOf("+") >= 0 ? "ok" : ""); });
@@ -783,17 +825,17 @@
     const list = await loadAccounts();
     if (!list.length) { log("无账号，请先在上方添加", "err"); toast("无账号", "err"); return; }
     setBusy($("btn_tasks"), true, "任务执行中…");
-    pending = { type: "task", kind: "task" };
+    armPending({ type: "task", kind: "task"  });
     try { await dispatch("rtask", { tasks, cipher: await encText(JSON.stringify(list)) }); log("云朵任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); }
-    catch (e) { setBusy($("btn_tasks"), false); pending = null; log(e.message, "err"); toast(e.message, "err"); }
+    catch (e) { setBusy($("btn_tasks"), false); clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
 
   async function fetchTaskList() {
     const list = await loadAccounts();
     setBusy($("btn_list"), true, "拉取中…");
-    pending = { type: "list", kind: "task" };
+    armPending({ type: "list", kind: "task"  });
     try { await dispatch("list", { cipher: await encText(JSON.stringify(list)) }); log("已触发拉取…", "warn"); lastTs = ""; startWatch(); }
-    catch (e) { setBusy($("btn_list"), false); pending = null; log(e.message, "err"); toast(e.message, "err"); }
+    catch (e) { setBusy($("btn_list"), false); clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
 
   // ---- init ----
