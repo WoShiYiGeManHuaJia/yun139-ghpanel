@@ -1,17 +1,6 @@
 {
-  "ts": "2026-09-14 17:30:00",
+  "ts": "2026-09-14 17:33:04",
   "type": "receive",
-  "ok": true,
-  "msg": "气泡领取完成，云豆 934 → 934（+0）",
-  "receive": {
-    "ok": true,
-    "before": 934,
-    "after": 934,
-    "got": 0,
-    "recv": [],
-    "steps": [
-      "初始云豆 934",
-      "最终云豆 934"
-    ]
-  }
+  "ok": false,
+  "msg": "page.goto: Timeout 120000ms exceeded.\nCall log:\n  - navigating to \"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1#/newsignin\", waiting until \"domcontentloaded\"\n"
 }
