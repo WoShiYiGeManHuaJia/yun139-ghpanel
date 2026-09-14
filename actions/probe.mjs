@@ -1,12 +1,8 @@
 const AUTH = process.env.YUN139_AUTHORIZATION || "";
 const PHONE = process.env.YUN139_PHONE || "";
-const out = { ts: new Date().toISOString(), before: {}, clicks: {}, after: {} };
+const out = { ts: new Date().toISOString() };
 const UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
 const B = "https://caiyun.feixin.10086.cn:7071";
-// 只试「无副作用或副作用仅为体验类」的 click 任务；
-// 跳过 548/549(开启备份) 550/551(APP通知开关) 585/609(需真实接口) 522(需真上传) 431(云手机)
-const SAFE = [409, 604, 547, 319, 113, 434, 106];
-
 async function main() {
   let jwt = "";
   const auth = "Basic " + String(AUTH).trim().replace(/^basic /i, "");
@@ -17,31 +13,38 @@ async function main() {
   const r2 = await fetch(B + "/portal/auth/tyrzLogin.action?ssoToken=" + encodeURIComponent(j1.data.token), { headers: { "Accept": "*/*" }, signal: AbortSignal.timeout(20000) });
   jwt = (await r2.json()).result.token;
   const H = { "User-Agent": UA, "Host": "caiyun.feixin.10086.cn:7071", "jwtToken": jwt, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest" };
-
-  async function list() {
+  async function raw() {
     const r = await fetch(B + "/market/signin/task/taskList?marketname=sign_in_3", { headers: H, signal: AbortSignal.timeout(20000) });
     const j = await r.json();
     const m = {};
-    for (const arr of Object.values(j.result || {})) if (Array.isArray(arr)) for (const t of arr) m[t.id] = { name: t.name, state: t.state, process: t.process, reward: t.content_display2 || "" };
+    for (const arr of Object.values(j.result || {})) if (Array.isArray(arr)) for (const t of arr) { m[t.id] = JSON.parse(JSON.stringify(t)); delete m[t.id].icon; delete m[t.id].button; delete m[t.id].buttonProperty; }
     return m;
   }
-  out.before = await list();
-  for (const id of SAFE) {
-    const b0 = out.before[id] || {};
-    if (b0.state === "FINISH") { out.clicks[id] = { skip: "已完成" }; continue; }
-    try {
-      const r = await fetch(B + "/market/signin/task/click?key=task&id=" + id, { headers: H, signal: AbortSignal.timeout(20000) });
-      const t = (await r.text()).slice(0, 300);
-      out.clicks[id] = { task: b0.name, reward: b0.reward, status: r.status, body: t };
-    } catch (e) { out.clicks[id] = { task: b0.name, err: String(e && e.message || e) }; }
-    await new Promise(r => setTimeout(r, 800));
+  const before = await raw();
+  // 只点 106（每日上传）观察字段变化
+  const r = await fetch(B + "/market/signin/task/click?key=task&id=106", { headers: H, signal: AbortSignal.timeout(20000) });
+  out.click106 = (await r.text()).slice(0, 200);
+  await new Promise(x => setTimeout(x, 1200));
+  const after = await raw();
+  const diff = {};
+  for (const id of Object.keys(before)) {
+    const b = before[id], a = after[id] || {};
+    for (const k of new Set([...Object.keys(b), ...Object.keys(a)])) {
+      if (JSON.stringify(b[k]) !== JSON.stringify(a[k])) {
+        diff[id] = diff[id] || { name: b.name };
+        diff[id][k] = { before: b[k], after: a[k] };
+      }
+    }
   }
-  out.after = await list();
+  out.changed = diff;
+  // 采样：完整字段（去掉超长）
+  out.sample_106 = after["106"];
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
   .finally(async () => {
     const fs = await import("fs");
     let dump = JSON.stringify(out, null, 1);
     if (PHONE) dump = dump.split(PHONE).join(PHONE.slice(0, 3) + "****" + PHONE.slice(-4));
+    dump = dump.replace(/"icon":"[^"]*"/g, '"icon":"…"');
     fs.writeFileSync(new URL("../data/probe.json", import.meta.url), dump);
   });
