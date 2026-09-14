@@ -233,11 +233,16 @@ async function getJwtOnce(authorization, phone) {
   const j = await r.json();
   if (String(j.code) !== "0") throw new Error(`querySpecToken 失败 code=${j.code} msg=${j.message}`);
   const ssoToken = j.data.token;
-  const r2 = await fetch(`https://caiyun.feixin.10086.cn:7071/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(ssoToken)}`, {
-    headers: { "Host": "caiyun.feixin.10086.cn:7071", "Accept": "*/*" },
-  });
-  const j2 = await r2.json();
-  return j2.result.token;
+  for (const h of CY_HOSTS) {
+    try {
+      const r2 = await fetch(`${h}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(ssoToken)}`, {
+        headers: { "Host": h.replace("https://", ""), "Accept": "*/*" }, signal: AbortSignal.timeout(20000),
+      });
+      const j2 = await r2.json();
+      if (j2 && j2.result && j2.result.token) return j2.result.token;
+    } catch (e) { /* 换下一个主机 */ }
+  }
+  throw new Error("tyrzLogin 所有主机均失败");
 }
 async function getJwt(authorization, phone) {
   let last;
@@ -396,13 +401,21 @@ function stableJsonStringify(obj) {
 
 // ---------------- 云朵真实任务引擎（2026-09 新增，已实测可用） ----------------
 const UA_CLOUD = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
-const CY = "https://caiyun.feixin.10086.cn:7071";
-function cyHeaders(jwt) {
-  return { "User-Agent": UA_CLOUD, "Host": "caiyun.feixin.10086.cn:7071", "jwtToken": jwt, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest" };
+const CY_HOSTS = ["https://caiyun.feixin.10086.cn:7071", "https://caiyun.feixin.10086.cn", "https://yun.139.com"];
+function cyHeaders(jwt, host) {
+  return { "User-Agent": UA_CLOUD, "Host": host.replace("https://", ""), "jwtToken": jwt, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest" };
 }
 async function fetchTaskListOnce(jwt) {
-  const r = await fetch(CY + "/market/signin/task/taskList?marketname=sign_in_3", { headers: cyHeaders(jwt) });
-  const j = await r.json();
+  let j = null, lastErr = null;
+  for (const h of CY_HOSTS) {
+    try {
+      const r = await fetch(h + "/market/signin/task/taskList?marketname=sign_in_3", { headers: cyHeaders(jwt, h), signal: AbortSignal.timeout(20000) });
+      j = await r.json();
+      if (String(j.code) === "0") break;
+      j = null;
+    } catch (e) { lastErr = e; }
+  }
+  if (!j) throw new Error("所有主机均不可用: " + String((lastErr && lastErr.message) || "未知"));
   if (String(j.code) !== "0") throw new Error("任务列表获取失败: " + j.msg);
   const list = [];
   for (const arr of Object.values(j.result || {})) {
@@ -424,8 +437,14 @@ async function fetchTaskList(jwt) {
   throw last;
 }
 async function clickTask(jwt, id) {
-  const r = await fetch(CY + "/market/signin/task/click?key=task&id=" + id, { headers: cyHeaders(jwt) });
-  const txt = await r.text();
+  let txt = "", got = false, lastErr = null;
+  for (const h of CY_HOSTS) {
+    try {
+      const r = await fetch(h + "/market/signin/task/click?key=task&id=" + id, { headers: cyHeaders(jwt, h), signal: AbortSignal.timeout(20000) });
+      txt = await r.text(); got = true; break;
+    } catch (e) { lastErr = e; }
+  }
+  if (!got) throw new Error("点击失败: " + String((lastErr && lastErr.message) || "未知"));
   let j = {}; try { j = JSON.parse(txt); } catch { j = { msg: txt.slice(0, 120) }; }
   return { ok: String(j.code) === "0", code: j.code, msg: j.msg || "" };
 }
