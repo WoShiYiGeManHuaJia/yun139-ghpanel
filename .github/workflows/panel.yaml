@@ -2,7 +2,7 @@ name: yun139-panel-task
 
 on:
   repository_dispatch:
-    types: [sign, refresh, send_code, do_login]
+    types: [sign, refresh, send_code, do_login, task]
 
 permissions:
   contents: write
