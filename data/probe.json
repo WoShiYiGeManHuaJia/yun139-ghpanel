@@ -1,215 +1,255 @@
 {
- "ts": "2026-09-14T13:43:17.082Z",
- "lists": {
-  "sign_in_3": {
-   "cloudEmail": [
-    {
-     "id": 431,
-     "name": "去使用移动云手机",
-     "reward": "+20豆",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "sendcloud/processbindtask/click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    }
-   ],
-   "month": [
-    {
-     "id": 604,
-     "name": "去云盘图书馆阅读书籍",
-     "reward": "+10豆",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "sendcloud/click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 409,
-     "name": "从固定入口访问云朵中心",
-     "reward": "+6豆",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "sendcloud/click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 113,
-     "name": "使用PC客户端",
-     "reward": "+60豆",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "sendcloud/nda/click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 434,
-     "name": "分享文件领好礼<span id='share_title'>0/7</span>",
-     "reward": "",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "sendcloud/checktime/nda/click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 607,
-     "name": "下月签到领惊喜福利",
-     "reward": "+50豆",
-     "state": "FINISH",
-     "limit": "MONTH",
-     "steps": "reservationstep/finish/click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 3
-    }
-   ],
-   "hidden": [
-    {
-     "id": 118,
-     "name": "调查问卷",
-     "reward": "",
-     "state": "WAIT",
-     "limit": "EVER",
-     "steps": "click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    }
-   ],
-   "hiddenabc": [
-    {
-     "id": 319,
-     "name": "小云互动礼",
-     "reward": "",
-     "state": "WAIT",
-     "limit": "DAY",
-     "steps": "sendcloud/click",
-     "process": 1,
-     "currDay": 0,
-     "currstep": 0
-    }
-   ],
-   "time": [
-    {
-     "id": 548,
-     "name": "开启备份领好礼",
-     "reward": "首月+400豆",
-     "state": "WAIT",
-     "limit": "EVER",
-     "steps": "click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 549,
-     "name": "开启备份领好礼",
-     "reward": "+200豆",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 550,
-     "name": "开启云盘APP通知领好礼",
-     "reward": "+200豆",
-     "state": "WAIT",
-     "limit": "EVER",
-     "steps": "click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 551,
-     "name": "连续31天开启云盘APP通知",
-     "reward": "",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 522,
-     "name": "当月上传文件满100个",
-     "reward": "",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "sendcloud/sendsms/interfacecallback",
-     "process": 17,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 585,
-     "name": "去体验AI相机",
-     "reward": "",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "sendcloud/click/interfacecallback",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 609,
-     "name": "和AI助手对话",
-     "reward": "+20豆",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "cloudtasklogstep/sendcloud/processbindtask/click/interfacecallback",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    },
-    {
-     "id": 547,
-     "name": "加入一个知识库",
-     "reward": "+10豆",
-     "state": "WAIT",
-     "limit": "MONTH",
-     "steps": "sendcloud/click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    }
-   ],
-   "day": [
-    {
-     "id": 106,
-     "name": "手动上传一个文件",
-     "reward": "+6豆",
-     "state": "WAIT",
-     "limit": "DAY",
-     "steps": "sendcloud/nda/click",
-     "process": 0,
-     "currDay": 0,
-     "currstep": 0
-    }
-   ]
+ "ts": "2026-09-14T13:46:27.573Z",
+ "before": {
+  "106": {
+   "name": "手动上传一个文件",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+6豆"
   },
-  "newsign_139mail": {
-   "err": "fetch failed"
+  "113": {
+   "name": "使用PC客户端",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+60豆"
   },
-  "sign_in": {
-   "err": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+  "118": {
+   "name": "调查问卷",
+   "state": "WAIT",
+   "process": 0,
+   "reward": ""
   },
-  "cloud_bean": {
-   "err": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+  "319": {
+   "name": "小云互动礼",
+   "state": "WAIT",
+   "process": 1,
+   "reward": ""
+  },
+  "409": {
+   "name": "从固定入口访问云朵中心",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+6豆"
+  },
+  "431": {
+   "name": "去使用移动云手机",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+20豆"
+  },
+  "434": {
+   "name": "分享文件领好礼<span id='share_title'>0/7</span>",
+   "state": "WAIT",
+   "process": 0,
+   "reward": ""
+  },
+  "522": {
+   "name": "当月上传文件满100个",
+   "state": "WAIT",
+   "process": 17,
+   "reward": ""
+  },
+  "547": {
+   "name": "加入一个知识库",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+10豆"
+  },
+  "548": {
+   "name": "开启备份领好礼",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "首月+400豆"
+  },
+  "549": {
+   "name": "开启备份领好礼",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+200豆"
+  },
+  "550": {
+   "name": "开启云盘APP通知领好礼",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+200豆"
+  },
+  "551": {
+   "name": "连续31天开启云盘APP通知",
+   "state": "WAIT",
+   "process": 0,
+   "reward": ""
+  },
+  "585": {
+   "name": "去体验AI相机",
+   "state": "WAIT",
+   "process": 0,
+   "reward": ""
+  },
+  "604": {
+   "name": "去云盘图书馆阅读书籍",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+10豆"
+  },
+  "607": {
+   "name": "下月签到领惊喜福利",
+   "state": "FINISH",
+   "process": 0,
+   "reward": "+50豆"
+  },
+  "609": {
+   "name": "和AI助手对话",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+20豆"
+  }
+ },
+ "clicks": {
+  "106": {
+   "task": "手动上传一个文件",
+   "reward": "+6豆",
+   "status": 200,
+   "body": "{\"code\":0,\"msg\":\"success\"}"
+  },
+  "113": {
+   "task": "使用PC客户端",
+   "reward": "+60豆",
+   "status": 200,
+   "body": "{\"code\":0,\"msg\":\"success\"}"
+  },
+  "319": {
+   "task": "小云互动礼",
+   "reward": "",
+   "status": 200,
+   "body": "{\"code\":0,\"msg\":\"success\"}"
+  },
+  "409": {
+   "task": "从固定入口访问云朵中心",
+   "reward": "+6豆",
+   "status": 200,
+   "body": "{\"code\":0,\"msg\":\"success\"}"
+  },
+  "434": {
+   "task": "分享文件领好礼<span id='share_title'>0/7</span>",
+   "reward": "",
+   "status": 200,
+   "body": "{\"code\":0,\"msg\":\"success\"}"
+  },
+  "547": {
+   "task": "加入一个知识库",
+   "reward": "+10豆",
+   "status": 200,
+   "body": "{\"code\":0,\"msg\":\"success\"}"
+  },
+  "604": {
+   "task": "去云盘图书馆阅读书籍",
+   "reward": "+10豆",
+   "status": 200,
+   "body": "{\"code\":0,\"msg\":\"success\"}"
+  }
+ },
+ "after": {
+  "106": {
+   "name": "手动上传一个文件",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+6豆"
+  },
+  "113": {
+   "name": "使用PC客户端",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+60豆"
+  },
+  "118": {
+   "name": "调查问卷",
+   "state": "WAIT",
+   "process": 0,
+   "reward": ""
+  },
+  "319": {
+   "name": "小云互动礼",
+   "state": "WAIT",
+   "process": 2,
+   "reward": ""
+  },
+  "409": {
+   "name": "从固定入口访问云朵中心",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+6豆"
+  },
+  "431": {
+   "name": "去使用移动云手机",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+20豆"
+  },
+  "434": {
+   "name": "分享文件领好礼<span id='share_title'>0/7</span>",
+   "state": "WAIT",
+   "process": 0,
+   "reward": ""
+  },
+  "522": {
+   "name": "当月上传文件满100个",
+   "state": "WAIT",
+   "process": 17,
+   "reward": ""
+  },
+  "547": {
+   "name": "加入一个知识库",
+   "state": "FINISH",
+   "process": 0,
+   "reward": "+10豆"
+  },
+  "548": {
+   "name": "开启备份领好礼",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "首月+400豆"
+  },
+  "549": {
+   "name": "开启备份领好礼",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+200豆"
+  },
+  "550": {
+   "name": "开启云盘APP通知领好礼",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+200豆"
+  },
+  "551": {
+   "name": "连续31天开启云盘APP通知",
+   "state": "WAIT",
+   "process": 0,
+   "reward": ""
+  },
+  "585": {
+   "name": "去体验AI相机",
+   "state": "WAIT",
+   "process": 0,
+   "reward": ""
+  },
+  "604": {
+   "name": "去云盘图书馆阅读书籍",
+   "state": "FINISH",
+   "process": 0,
+   "reward": "+10豆"
+  },
+  "607": {
+   "name": "下月签到领惊喜福利",
+   "state": "FINISH",
+   "process": 0,
+   "reward": "+50豆"
+  },
+  "609": {
+   "name": "和AI助手对话",
+   "state": "WAIT",
+   "process": 0,
+   "reward": "+20豆"
   }
  }
 }
