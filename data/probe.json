@@ -1,5 +1,53 @@
 {
- "ts": "2026-09-14T13:27:45.988Z",
- "steps": [],
- "fatal": "fetch failed"
+ "ts": "2026-09-14T13:30:01.501Z",
+ "steps": [
+  {
+   "GET_yun139_root": {
+    "ok": true,
+    "status": 200,
+    "ms": 1795,
+    "body": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"force-rendering\" content=\"webkit\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,c"
+   }
+  },
+  {
+   "GET_mcloud_root": {
+    "ok": true,
+    "status": 200,
+    "ms": 6933,
+    "body": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"force-rendering\" content=\"webkit\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,c"
+   }
+  },
+  {
+   "GET_orches_root": {
+    "ok": true,
+    "status": 404,
+    "ms": 1502,
+    "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n"
+   }
+  },
+  {
+   "GET_caiyun_root": {
+    "ok": false,
+    "ms": 861,
+    "err": "fetch failed",
+    "cause": "ETIMEDOUT"
+   }
+  },
+  {
+   "GET_api_mcloud": {
+    "ok": true,
+    "status": 200,
+    "ms": 685,
+    "body": "{\"code\":90001,\"msg\":\"未登录\"}"
+   }
+  },
+  {
+   "POST_querySpecToken": {
+    "ok": true,
+    "status": 200,
+    "ms": 278,
+    "body": "{\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidsso…(已打码)\"}}"
+   }
+  }
+ ]
 }
