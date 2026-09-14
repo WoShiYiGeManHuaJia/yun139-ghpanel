@@ -273,10 +273,11 @@
     return r;
   }
   function dispatch(type, payload) {
-    return api(`https://api.github.com/repos/${owner()}/${repo()}/dispatches`, {
+    // 用 workflow_dispatch 触发：只要求 Actions write（细致令牌可配只读+触发），不要求 contents 写
+    return api(`https://api.github.com/repos/${owner()}/${repo()}/actions/workflows/panel.yaml/dispatches`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ event_type: type, client_payload: payload || {} }),
+      body: JSON.stringify({ ref: "main", inputs: { event_type: type, payload: JSON.stringify(payload || {}) } }),
     });
   }
 
