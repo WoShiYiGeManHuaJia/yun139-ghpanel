@@ -19,7 +19,10 @@
   input.reveal { -webkit-text-security:none; }
   .row { display:flex; gap:8px; align-items:center; }
   .row > * { flex:1; }
-  .btn { border:none; cursor:pointer; background:var(--acc); color:#06222e; font-weight:600; margin-top:12px; }
+  .btn { border:none; cursor:pointer; background:var(--acc); color:#06222e; font-weight:600; margin-top:12px;
+         flex:none; width:100%; min-height:44px; line-height:1.35; padding:11px 12px;
+         white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .btn.wrap { white-space:normal; }
   .btn:disabled { opacity:.5; cursor:not-allowed; }
   .btn.warn { background:var(--warn); color:#3a2400; }
   .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--txt); font-weight:400; }
@@ -79,6 +82,8 @@
   .tab { flex:1; background:#0b1220; color:var(--mut); border:1px solid var(--line); cursor:pointer; font-size:13px; padding:11px 6px; }
   .tab.active { border-color:var(--acc); color:var(--acc); background:rgba(56,189,248,.08); font-weight:600; }
   .pane { margin-top:2px; }
+  #tasklist { min-height:8px; }
+  .card .btn + .btn { margin-top:8px; }
   .tasklist { display:flex; flex-direction:column; gap:6px; }
   .tasklist .tsk { display:flex; align-items:center; gap:10px; background:#0b1220; border:1px solid var(--line); border-radius:10px; padding:10px 12px; color:var(--txt); font-size:13px; }
   .tasklist .tsk input { width:auto; height:16px; accent-color:var(--acc); flex:none; }
@@ -244,6 +249,26 @@
       <div class="tut-step">导出内容会自动复制到剪贴板；回到本页「方式二」→「＋ 粘贴 authorization 添加」，整体粘贴 →「识别并添加」即可。</div>
       <div class="row">
         <button class="btn ghost" id="btn_tut_close" style="margin:0">我知道了</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 任务执行前提示：云朵延迟到账 -->
+  <div class="mask" id="maskTaskTip">
+    <div class="dialog">
+      <h3>⏳ 做任务前先看这个（重要）</h3>
+      <div class="tip">云朵<b>不会立刻到账</b>，这是正常机制，不是失败：</div>
+      <div class="tut-step">① <b>延迟多久</b>：任务完成后，云朵一般要等 <b>24 小时内（次日）</b> 才会变成可领取的气泡。</div>
+      <div class="tut-step">② <b>月度奖励更久</b>：带「月」标的任务，奖励要到 <b>次月 1 号</b> 才可领，面板会显示为「下月 X 豆」。</div>
+      <div class="tut-step">③ <b>刚做完就去领 → 显示 0</b>：这是正常的，因为气泡还没生成。<b>请不要急着反复点「领气泡」</b>，更别以为脚本坏了。</div>
+      <div class="tut-step">④ <b>推荐节奏</b>：今天执行任务，<b>明天</b>再点「刷新全部云朵状态」或「领气泡」，就能领到了。</div>
+      <div class="tip" style="margin:10px 0 2px;color:var(--warn)">每天 09:05 的定时任务会自动做任务 + 领气泡，其实不用手动点。</div>
+      <label style="display:flex;align-items:center;gap:8px;margin:12px 0 0;font-size:13px;color:var(--txt)">
+        <input type="checkbox" id="tip_nomore" style="width:auto;height:16px;accent-color:var(--acc)"> 不再提示
+      </label>
+      <div class="row">
+        <button class="btn ghost" id="btn_tip_cancel" style="margin:0">取消</button>
+        <button class="btn" id="btn_tip_ok" style="margin:0">知道了，去执行</button>
       </div>
     </div>
   </div>
@@ -744,6 +769,14 @@
     document.querySelectorAll("[data-rec]").forEach(function (b) { if (b.disabled) setBusy(b, false); });
   }
 
+  const LS_TIP = "gh139_tasktip_off";
+  function tipOff() { try { return localStorage.getItem(LS_TIP) === "1"; } catch (e) { return false; } }
+  function askTaskTip() {
+    if (tipOff()) { runTasks(); return; }
+    $("maskTaskTip").classList.add("show");
+  }
+  function closeTaskTip() { $("maskTaskTip").classList.remove("show"); }
+
   async function runTasks() {
     const tasks = selectedTasks();
     if (!tasks.length) { toast("请至少勾选一个任务", "err"); return; }
@@ -792,7 +825,13 @@
   $("btn_refresh").onclick = runRefresh;
   $("btn_send").onclick = runSend;
   $("btn_login").onclick = runLogin;
-  $("btn_tasks").onclick = runTasks;
+  $("btn_tasks").onclick = askTaskTip;
+  $("btn_tip_ok").onclick = function () {
+    if ($("tip_nomore").checked) { try { localStorage.setItem(LS_TIP, "1"); } catch (e) {} }
+    closeTaskTip(); runTasks();
+  };
+  $("btn_tip_cancel").onclick = closeTaskTip;
+  $("maskTaskTip").addEventListener("click", function (e) { if (e.target === $("maskTaskTip")) closeTaskTip(); });
   $("btn_list").onclick = fetchTaskList;
   $("btn_receive").onclick = function () { runReceive("", $("btn_receive")); };
   $("btn_status").onclick = runStatus;
