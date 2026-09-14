@@ -20,7 +20,7 @@ async function getJwt() {
       if (String(j.code) !== "0") throw new Error("code=" + j.code);
       const inner = j.data && j.data.result && j.data.result.resultCode;
       if (inner !== undefined && String(inner) !== "0") throw new Error("业务码=" + inner);
-      const sso = j.data && j.data.token; if (!sso) throw new Error("无ssoToken");
+      const sso = j.data && j.data.token; if (!sso) throw new Error("无sso");
       const r2 = await fetch(`${CY7071}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(sso)}`, { headers: { "Host": "caiyun.feixin.10086.cn:7071", "Accept": "*/*" }, signal: AbortSignal.timeout(25000) });
       const j2 = await r2.json();
       if (!j2 || !j2.result || !j2.result.token) throw new Error("无jwt");
@@ -39,16 +39,6 @@ async function G(p, tries) {
   }
   return { status: 0, j: null, raw: "失败" };
 }
-async function POST(p, body, tries, extra) {
-  let last;
-  for (let i = 0; i < (tries || 3); i++) {
-    try { const r = await fetch(MM + p, { method: "POST", headers: { ...hJ(), ...(extra || {}), "Content-Type": "application/json;charset=UTF-8" }, body: JSON.stringify(body), signal: AbortSignal.timeout(20000) });
-      const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
-      return { status: r.status, j, raw: t.slice(0, 200) };
-    } catch (e) { last = e; await sleep(1200); }
-  }
-  return { status: 0, j: null, raw: "失败" };
-}
 async function snap() {
   const a = await G("/ycloud/signin/page/getCloudNum", 2);
   const b = await G("/ycloud/signin/page/infoV3?client=app", 2);
@@ -60,31 +50,48 @@ async function main() {
   let s = await snap();
   const START = { total: s.total, toReceive: s.toReceive };
   log("⓪ 基线", { total: s.total, toReceive: s.toReceive, list: s.list });
-  // ★ 正确参数：{client, cloudId, cloudType} → POST receiveV3
-  const DEV = { isDeviceId: "true", showLoading: "true" };
-  const plans = [
-    ["★ A1 +isDeviceId app 2343307559/0", { client: "app", cloudId: "2343307559", cloudType: 0 }, DEV],
-    ["★ A2 +isDeviceId app 2343307413/0", { client: "app", cloudId: "2343307413", cloudType: 0 }, DEV],
-    ["★ A3 +isDeviceId app ''/2", { client: "app", cloudId: "", cloudType: 2 }, DEV],
-    ["   A4 +isDeviceId mini 2343307559/0", { client: "mini", cloudId: "2343307559", cloudType: 0 }, DEV],
-    ["   A5 +isDeviceId 数字cloudType0 '0'", { client: "app", cloudId: "2343307559", cloudType: "0" }, DEV],
-  ];
-  let win = null;
-  for (const [name, body, extra] of plans) {
-    const r = await POST("/ycloud/signin/page/receiveV3", body, 2, extra);
+  // ① 拿任务列表，找所有 FINISH 任务的 cloudId
+  const tl = await G("/market/signin/task/taskList?marketname=sign_in_3", 3);
+  const flat = [];
+  for (const v of Object.values((tl.j && tl.j.result) || {})) if (Array.isArray(v)) for (const t of v) flat.push(t);
+  const fin = flat.filter(t => t.state === "FINISH");
+  log("① FINISH 任务", fin.map(t => ({ id: t.id, cloudId: t.cloudId, cloudType: t.cloudType,
+    name: String(t.name || "").replace(/<[^>]*>/g, "").slice(0, 14) })));
+  // ② 用任务的 cloudId + cloudType 领（receiveV3）
+  for (const t of fin.slice(0, 4)) {
+    if (!t.cloudId) continue;
+    const body = { client: "app", cloudId: String(t.cloudId), cloudType: t.cloudType !== undefined ? t.cloudType : 0 };
+    let r;
+    for (let i = 0; i < 2; i++) {
+      try { r = await fetch(MM + "/ycloud/signin/page/receiveV3", { method: "POST",
+        headers: { ...hJ(), "Content-Type": "application/json;charset=UTF-8", "isDeviceId": "true" },
+        body: JSON.stringify(body), signal: AbortSignal.timeout(20000) });
+        const t2 = await r.text(); let j = null; try { j = JSON.parse(t2); } catch {}
+        r = { status: r.status, j, raw: t2.slice(0, 160) }; break;
+      } catch (e) { r = { status: 0, j: null, raw: String(e.message) }; await sleep(1000); }
+    }
     const s2 = await snap();
     const changed = (s2.total !== s.total) || (s2.toReceive !== s.toReceive);
-    log((changed ? "★★★成功 " : "") + name, {
-      code: r.j && r.j.code, msg: r.j && r.j.msg,
-      result: r.j && r.j.result !== undefined ? JSON.stringify(r.j.result).slice(0, 60) : null,
-      raw: r.raw.slice(0, 110),
+    log((changed ? "★★★成功 " : "") + "② 任务" + t.id + " cloudId=" + t.cloudId, {
+      code: r.j && r.j.code, msg: r.j && r.j.msg, raw: r.raw.slice(0, 100),
       总豆: s.total + "→" + s2.total, 待领: s.toReceive + "→" + s2.toReceive });
-    if (changed) { win = name; s = s2; log("★确认到账", { 方案: name.trim(), 豆增加: (s2.total || 0) - (START.total || 0) }); }
-    await sleep(700);
+    if (changed) { s = s2; }
+    await sleep(600);
+  }
+  // ③ receiveTask 逐个 FINISH 任务 id
+  for (const t of fin.slice(0, 5)) {
+    const r = await G(`/ycloud/signin/page/receiveTask?taskId=${t.id}`, 2);
+    const s2 = await snap();
+    const changed = (s2.total !== s.total) || (s2.toReceive !== s.toReceive);
+    log((changed ? "★★★成功 " : "") + "③ receiveTask id=" + t.id, {
+      code: r.j && r.j.code, result: r.j && r.j.result, raw: r.raw.slice(0, 90),
+      总豆: s.total + "→" + s2.total, 待领: s.toReceive + "→" + s2.toReceive });
+    if (changed) s = s2;
+    await sleep(500);
   }
   const sEnd = await snap();
   log("最终", { 起始: START, 现在: { total: sEnd.total, toReceive: sEnd.toReceive },
-    list: sEnd.list, 成功方案: win || "无", 总增豆: (sEnd.total || 0) - (START.total || 0) });
+    总增豆: (sEnd.total || 0) - (START.total || 0) });
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
   .finally(async () => { const fs = await import("fs");
