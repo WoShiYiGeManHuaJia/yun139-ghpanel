@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云盘令牌管家 · GitHub Actions 版</title>
+<style>
+  :root { --bg:#0f172a; --card:#1e293b; --line:#334155; --txt:#e2e8f0; --mut:#94a3b8; --acc:#38bdf8; --ok:#34d399; --err:#f87171; --warn:#fbbf24; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--bg); color:var(--txt); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif; padding:16px; line-height:1.5; }
+  h1 { font-size:18px; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
+  h1 .dot { width:10px; height:10px; border-radius:50%; background:var(--ok); display:inline-block; }
+  .sub { color:var(--mut); font-size:12px; margin-bottom:16px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:14px; }
+  .card h2 { font-size:14px; color:var(--acc); margin-bottom:12px; }
+  label { display:block; font-size:12px; color:var(--mut); margin:10px 0 4px; }
+  input, select, button { width:100%; background:#0b1220; color:var(--txt); border:1px solid var(--line); border-radius:8px; padding:10px 12px; font-size:14px; }
+  input:focus { outline:none; border-color:var(--acc); }
+  input.reveal { -webkit-text-security:none; }
+  .row { display:flex; gap:8px; align-items:center; }
+  .row > * { flex:1; }
+  .btn { border:none; cursor:pointer; background:var(--acc); color:#06222e; font-weight:600; margin-top:12px; }
+  .btn:disabled { opacity:.45; cursor:not-allowed; }
+  .btn.warn { background:var(--warn); color:#3a2400; }
+  .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--txt); font-weight:400; }
+  .btn.sm { padding:6px 10px; font-size:12px; margin-top:0; width:auto; }
+  .btn.danger { background:transparent; border:1px solid var(--err); color:var(--err); }
+  .accounts { margin-top:8px; }
+  .acc { background:#0b1220; border:1px solid var(--line); border-radius:8px; padding:10px; margin-bottom:8px; }
+  .acc .top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+  .acc .phone { font-weight:600; }
+  .acc .meta { color:var(--mut); font-size:12px; margin-top:4px; }
+  .acc .badge { font-size:11px; padding:2px 8px; border-radius:20px; }
+  .badge.ok { background:rgba(52,211,153,.15); color:var(--ok); }
+  .badge.exp { background:rgba(251,191,36,.15); color:var(--warn); }
+  .badge.err { background:rgba(248,113,113,.15); color:var(--err); }
+  .ops { display:flex; gap:8px; margin-top:12px; }
+  #log { background:#0b1220; border:1px solid var(--line); border-radius:8px; padding:10px; font-size:12px; font-family:ui-monospace,Menlo,Consolas,monospace; color:var(--mut); max-height:180px; overflow-y:auto; white-space:pre-wrap; word-break:break-all; }
+  #log .l-ok { color:var(--ok); } #log .l-err { color:var(--err); } #log .l-warn { color:var(--warn); }
+  .loading { color:var(--acc); animation:blink 1s infinite; }
+  @keyframes blink { 50% { opacity:.3; } }
+  .empty { color:var(--mut); font-size:13px; text-align:center; padding:20px 0; }
+  details > summary { cursor:pointer; color:var(--mut); font-size:12px; margin-top:8px; }
+  .hint { font-size:12px; color:var(--mut); margin-top:6px; }
+  .hint code { background:#0b1220; padding:1px 5px; border-radius:4px; border:1px solid var(--line); }
+</style>
+</head>
+<body>
+  <h1><span class="dot"></span>云盘令牌管家</h1>
+  <div class="sub">GitHub Actions 后台执行 · 数据仅存本机浏览器 localStorage</div>
+
+  <div class="card">
+    <h2>① 连接配置</h2>
+    <label>GitHub 仓库 (owner/name，默认私有 yun139-panel)</label>
+    <input id="cfg_repo" placeholder="WoShiYiGeManHuaJia/yun139-panel">
+    <label>PAT 令牌（仅触发 workflow 用，权限最小化建议）</label>
+    <input id="cfg_token" type="password" placeholder="ghp_...">
+    <label>DATA_KEY（数据加密密钥，须与仓库 Secret PANEL_DATA_KEY 一致）</label>
+    <input id="cfg_key" type="password" placeholder="留空则自动生成">
+    <div class="row">
+      <button class="btn ghost" id="btn_save_cfg">保存配置</button>
+      <button class="btn ghost" id="btn_gen_key">生成 DATA_KEY</button>
+    </div>
+    <div class="hint">PAT 与 DATA_KEY 通过 <code>localStorage</code> 保存在本浏览器，不上传任何服务器。</div>
+  </div>
+
+  <div class="card">
+    <h2>② 账号</h2>
+    <div class="accounts" id="accounts"></div>
+    <button class="btn ghost" style="margin-top:0" id="btn_paste">+ 粘贴 authorization 添加</button>
+    <div class="ops">
+      <input id="inp_phone" placeholder="手机号 (发验证码/登录用)" style="flex:1.6">
+    </div>
+    <div class="ops">
+      <button class="btn warn" id="btn_send">发验证码</button>
+      <input id="inp_code" placeholder="验证码" style="flex:0.9">
+    </div>
+    <button class="btn" id="btn_login">登录并抓令牌</button>
+  </div>
+
+  <div class="card">
+    <h2>③ 一键操作</h2>
+    <div class="ops">
+      <button class="btn" id="btn_sign">全部签到</button>
+      <button class="btn" id="btn_refresh">全部续期</button>
+    </div>
+    <div class="hint">点击后通过 PAT 触发仓库 Actions 任务，结果回写 <code>data/result.json</code>，页面自动轮询读取（约每 4s）。</div>
+  </div>
+
+  <div class="card">
+    <h2>④ 结果日志</h2>
+    <div id="log">等待操作…</div>
+  </div>
+
+  <details>
+    <summary>使用说明 / 首次配置 5 步</summary>
+    <div class="hint" style="margin-top:8px">
+      1. 私有仓库 yun139-panel 已含 Actions（panel.yaml + actions/run.mjs）。<br>
+      2. 在仓库 Settings → Secrets and variables → Actions 新建 Secret 名 <b>PANEL_DATA_KEY</b>，值填本页第二步自动生成的 DATA_KEY（或手动随机串）。<br>
+      3. 本页填 PAT（权限含仓库读写 + Actions:workflow，或直接用你的全权限经典 PAT）。<br>
+      4. 保存配置后，先“粘贴 authorization 添加”已有账号，或用手机号+验证码抓取新令牌。<br>
+      5. 点“全部签到/全部续期”，等日志出现结果。刷新页面可从本地恢复账号。
+  </div>
+  </details>
+
+<script>
+(function(){
+  const REPO_DEFAULT = "WoShiYiGeManHuaJia/yun139-panel";
+  const LS_REPO = "gh139_repo", LS_TOKEN = "gh139_token", LS_KEY = "gh139_key", LS_ACC = "gh139_acc";
+
+  const $ = id => document.getElementById(id);
+  const log = (msg, cls) => { const box = $("log"); const line = document.createElement("div"); line.className = "l-" + (cls || ""); line.textContent = "[" + new Date().toLocaleTimeString() + "] " + msg; box.prepend(line); };
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  // ---- 本地配置 ----
+  function loadCfg() {
+    $("cfg_repo").value = localStorage.getItem(LS_REPO) || REPO_DEFAULT;
+    $("cfg_token").value = localStorage.getItem(LS_TOKEN) || "";
+    $("cfg_key").value = localStorage.getItem(LS_KEY) || "";
+  }
+  function saveCfg() {
+    localStorage.setItem(LS_REPO, $("cfg_repo").value.trim() || REPO_DEFAULT);
+    localStorage.setItem(LS_TOKEN, $("cfg_token").value.trim());
+    localStorage.setItem(LS_KEY, $("cfg_key").value.trim());
+    log("配置已保存");
+  }
+  function genKey() {
+    const arr = new Uint8Array(24); crypto.getRandomValues(arr);
+    const k = Array.from(arr).map(b => b.toString(16).padStart(2, "0")).join("");
+    $("cfg_key").value = k; saveCfg(); log("已生成新 DATA_KEY，请同步填入仓库 Secret PANEL_DATA_KEY", "warn");
+  }
+
+  // ---- 加解密（与 Node 端一致：AES-256-GCM, key=SHA256(DATA_KEY)）----
+  async function kdf() {
+    const dk = localStorage.getItem(LS_KEY);
+    if (!dk) throw new Error("未设置 DATA_KEY");
+    const raw = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(dk));
+    return crypto.subtle.importKey("raw", raw, { name: "AES-GCM" }, false, ["encrypt", "decrypt"]);
+  }
+  async function encText(plain) {
+    const key = await kdf(); const iv = crypto.getRandomValues(new Uint8Array(12));
+    const enc = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(plain));
+    const all = new Uint8Array(iv.length + enc.byteLength);
+    all.set(iv); all.set(new Uint8Array(enc), 12);
+    return btoa(String.fromCharCode(...all));
+  }
+  async function decText(b64) {
+    const key = await kdf(); const raw = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const dec = await crypto.subtle.decrypt({ name: "AES-GCM", iv: raw.slice(0, 12) }, key, raw.slice(12));
+    return new TextDecoder().decode(dec);
+  }
+  async function loadAccounts() {
+    const s = localStorage.getItem(LS_ACC);
+    if (!s) return [];
+    try { return JSON.parse(await decText(s)); } catch (e) { log("本地账号解密失败（DATA_KEY 可能已变更）", "err"); return []; }
+  }
+  async function saveAccounts(list) { localStorage.setItem(LS_ACC, await encText(JSON.stringify(list))); }
+
+  // ---- GitHub API ----
+  function owner() { return ($("cfg_repo").value.trim() || REPO_DEFAULT).split("/")[0]; }
+  function repo() { return ($("cfg_repo").value.trim() || REPO_DEFAULT).split("/")[1]; }
+  async function api(url, opts) {
+    const token = localStorage.getItem(LS_TOKEN);
+    if (!token) throw new Error("未设置 PAT");
+    opts = opts || {}; opts.headers = Object.assign({ Authorization: "token " + token, Accept: "application/vnd.github+json" }, opts.headers || {});
+    const r = await fetch(url, opts);
+    if (r.status === 401 || r.status === 403) { try { const e = await r.json(); throw new Error("API " + r.status + ": " + (e.message || "权限不足/被限流")); } catch (er) { if (er.message) throw er; throw new Error("API " + r.status); } }
+    if (!r.ok) throw new Error("API " + r.status);
+    return r;
+  }
+  function dispatch(type, payload) {
+    return api(`https://api.github.com/repos/${owner()}/${repo()}/dispatches`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event_type: type, client_payload: payload || {} }),
+    });
+  }
+
+  // ---- 账号渲染 ----
+  async function renderAccounts() {
+    const list = await loadAccounts();
+    const box = $("accounts");
+    if (!list.length) { box.innerHTML = '<div class="empty">暂无账号，先粘贴授权串或手机号登录添加</div>'; return; }
+    box.innerHTML = "";
+    list.forEach(function (a, i) {
+      const el = document.createElement("div"); el.className = "acc";
+      const days = a.remaining_days;
+      const badge = a.status === "error" ? '<span class="badge err">异常</span>'
+        : (days != null && days < 7 ? '<span class="badge exp">' + days + '天</span>' : '<span class="badge ok">正常</span>');
+      el.innerHTML =
+        '<div class="top"><span class="phone">' + (a.name || "139-" + a.phone.slice(-4)) + '</span>' + badge + '</div>' +
+        '<div class="meta">' + String(a.phone).replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2") + (a.expires_at ? " · 到期 " + a.expires_at : "") + '</div>' +
+        '<div class="ops" style="margin-top:6px"><button class="btn sm danger" data-idx="' + i + '">删除</button></div>';
+      box.appendChild(el);
+    });
+    box.querySelectorAll("[data-idx]").forEach(function (b) {
+      b.onclick = async function () { const lst = await loadAccounts(); lst.splice(+b.dataset.idx, 1); await saveAccounts(lst); renderAccounts(); log("已删除账号"); };
+    });
+  }
+
+  // ---- 粘贴 authorization ----
+  async function pasteAccount() {
+    const raw = prompt("粘贴 authorization（形如 pc:手机号:token，可通过移动云盘抓包获得）");
+    if (!raw) return;
+    try {
+      const parts = atob(raw.split(" ").pop()).split(":");
+      if (parts.length < 3) throw new Error("格式错误");
+      const phone = parts[1], tok = parts.slice(2).join(":");
+      const str = tok.split("|");
+      const expMs = str.length >= 4 ? parseInt(str[3], 10) : 0;
+      const list = await loadAccounts();
+      const idx = list.findIndex(a => a.phone === phone);
+      const acc = {
+        id: String(idx >= 0 ? list[idx].id : Date.now() % 1000000),
+        name: "139-" + phone.slice(-4), phone, authorization: raw.trim(),
+        expires_at: expMs ? fmt(expMs) : null, remaining_days: expMs ? Math.round((expMs - Date.now()) / 86400000 * 10) / 10 : null,
+        created_at: new Date().toISOString(),
+      };
+      if (idx >= 0) list[idx] = acc; else list.push(acc);
+      await saveAccounts(list); renderAccounts(); log("已添加账号 " + phone.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2"));
+    } catch (e) { log("解析失败: " + e.message, "err"); }
+  }
+  function fmt(ms) { const d = new Date(ms); const p = n => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes()); }
+
+  // ---- 结果轮询 ----
+  let lastETag = "", lastTs = "";
+  let watching = false;
+  async function pollResult() {
+    try {
+      const r = await fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`, {
+        headers: { Authorization: "token " + localStorage.getItem(LS_TOKEN), Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag },
+      });
+      if (r.status === 304) return;
+      if (!r.ok) { log("读取结果失败 " + r.status, "err"); return; }
+      lastETag = r.headers.get("etag") || "";
+      const j = await r.json();
+      if (!j || j.ts === lastTs) return;
+      lastTs = j.ts;
+      if (j.enc_accounts) {
+        const list = JSON.parse(await decText(j.enc_accounts));
+        await saveAccounts(list); renderAccounts(); log("账号数据已回写本地（含最新令牌/到期时间）", "ok");
+      }
+      if (j.results) {
+        j.results.forEach(function (x) {
+          const cls = x.ok ? "ok" : "err";
+          log((x.name ? x.name + " " : "") + x.masked + " → " + x.message, cls);
+        });
+      }
+      log("[" + j.type + "] " + j.msg + (j.ok ? "" : " ❌"), j.ok ? "ok" : "err");
+    } catch (e) { /* 静默，继续轮询 */ }
+  }
+  function startWatch() { if (watching) return; watching = true; setInterval(pollResult, 4000); }
+
+  // ---- 触发 Actions ----
+  function busy(b, on) { b.disabled = on; }
+  async function runSign() { const b = $("btn_sign"); busy(b, true); try { const list = await loadAccounts(); if (!list.length) throw new Error("无账号"); await dispatch("sign", { cipher: await encText(JSON.stringify(list)) }); log("签到任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
+  async function runRefresh() { const b = $("btn_refresh"); busy(b, true); try { const list = await loadAccounts(); if (!list.length) throw new Error("无账号"); await dispatch("refresh", { cipher: await encText(JSON.stringify(list)) }); log("续期任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
+  async function runSend() { const b = $("btn_send"); const phone = $("inp_phone").value.trim(); if (!/^1\d{10}$/.test(phone)) { log("请输入正确手机号", "err"); return; } busy(b, true); try { await dispatch("send_code", { phone }); log("验证码请求已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
+  async function runLogin() { const b = $("btn_login"); const phone = $("inp_phone").value.trim(), code = $("inp_code").value.trim(); if (!/^1\d{10}$/.test(phone) || !code) { log("请填写手机号和验证码", "err"); return; } busy(b, true); try { const list = await loadAccounts(); await dispatch("do_login", { phone, code, cipher: await encText(JSON.stringify(list)) }); log("登录任务已触发，新令牌将回写本地…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
+
+  // ---- init ----
+  $("btn_save_cfg").onclick = saveCfg;
+  $("btn_gen_key").onclick = genKey;
+  $("btn_paste").onclick = pasteAccount;
+  $("btn_sign").onclick = runSign;
+  $("btn_refresh").onclick = runRefresh;
+  $("btn_send").onclick = runSend;
+  $("btn_login").onclick = runLogin;
+  loadCfg(); renderAccounts(); startWatch();
+})();
+</script>
+</body>
+</html>
