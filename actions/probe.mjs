@@ -4,69 +4,81 @@ const out = { ts: new Date().toISOString(), steps: [] };
 const A = String(AUTH).trim().replace(/^basic /i, "").replace(/^Basic /i, "");
 const UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
 const CY7071 = "https://caiyun.feixin.10086.cn:7071";
-const CY = "https://caiyun.feixin.10086.cn";   // ← 不带端口！market 接口用这个
-const HOST7071 = "caiyun.feixin.10086.cn:7071";
-const HOST = "caiyun.feixin.10086.cn";
+const CY = "https://caiyun.feixin.10086.cn";
+const H7071 = "caiyun.feixin.10086.cn:7071", HN = "caiyun.feixin.10086.cn";
 let JWT = "";
-function hJwt(host, withCookie) {
-  const h = { "User-Agent": UA, "Host": host, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest", "jwtToken": JWT };
-  if (withCookie) h["Cookie"] = "jwtToken=" + JWT;
-  return h;
-}
+const hJ = (host) => ({ "User-Agent": UA, "Host": host, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest", "jwtToken": JWT, "Cookie": "jwtToken=" + JWT });
+const log = (k, v) => out.steps.push({ k, v });
 async function getJwt() {
   const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
     method: "POST", headers: { "Authorization": "Basic " + A, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
     body: JSON.stringify({ account: PHONE, toSourceId: "001005" }) });
   const j = await r.json();
   if (String(j.code) !== "0") throw new Error("querySpecToken 失败 " + j.code);
-  const r2 = await fetch(`${CY7071}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(j.data.token)}`, { headers: { "Host": HOST7071, "Accept": "*/*" }, signal: AbortSignal.timeout(20000) });
+  const r2 = await fetch(`${CY7071}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(j.data.token)}`, { headers: { "Host": H7071, "Accept": "*/*" }, signal: AbortSignal.timeout(20000) });
   const j2 = await r2.json();
   if (!j2 || !j2.result || !j2.result.token) throw new Error("tyrzLogin 失败");
   JWT = j2.result.token;
 }
-async function get(p, host) {
-  const url = (host === HOST7071 ? CY7071 : CY) + p;
+async function req(p, host, method, body) {
   try {
-    const r = await fetch(url, { headers: hJwt(host, true), signal: AbortSignal.timeout(20000) });
-    const t = await r.text();
-    let j = null; try { j = JSON.parse(t); } catch {}
+    const r = await fetch((host === H7071 ? CY7071 : CY) + p, { method: method || "GET", headers: hJ(host), body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(20000) });
+    const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
     return { status: r.status, j, raw: t.slice(0, 300) };
   } catch (e) { return { status: 0, raw: String(e.message || e) }; }
 }
-const log = (k, v) => out.steps.push({ k, v });
 async function main() {
   await getJwt(); log("jwt", "ok");
-  // ① 领取前：查余额
-  const before = await get("/market/signin/page/info?client=app", HOST);
-  log("① page/info 领取前", { status: before.status,
-    todaySignIn: before.j && before.j.result ? before.j.result.todaySignIn : null,
-    receive: before.j && before.j.result ? before.j.result.receive : null,
-    total: before.j && before.j.result ? before.j.result.total : null,
-    keys: before.j && before.j.result ? Object.keys(before.j.result).slice(0, 25) : null,
-    raw: before.raw.slice(0, 250) });
-  // ② 签到（若未签）
-  if (before.j && before.j.result && before.j.result.todaySignIn === false) {
-    const sg = await get("/market/manager/commonMarketconfig/getByMarketRuleName?marketName=sign_in_3", HOST);
-    log("② 签到动作", { status: sg.status, msg: sg.j ? sg.j.msg : null, raw: sg.raw.slice(0, 160) });
-  } else log("② 签到动作", "今日已签到，跳过");
-  // ③ 领取云豆（核心！）
-  const rc = await get("/market/signin/page/receive", HOST);
-  log("③ page/receive 领取", { status: rc.status, msg: rc.j ? rc.j.msg : null,
-    receive: rc.j && rc.j.result ? rc.j.result.receive : null,
-    total: rc.j && rc.j.result ? rc.j.result.total : null,
-    raw: rc.raw.slice(0, 250) });
-  // ④ 领取后：再查余额，对比
-  const after = await get("/market/signin/page/info?client=app", HOST);
-  log("④ page/info 领取后", { status: after.status,
-    receive: after.j && after.j.result ? after.j.result.receive : null,
-    total: after.j && after.j.result ? after.j.result.total : null });
-  // ⑤ 其它领取类接口
-  for (const [name, p] of [["备份礼 info", "/market/backupgift/info"],
-                            ["通知任务 status", "/market/msgPushOn/task/status"],
-                            ["任务扩展 taskExpansion", "/market/signin/page/taskExpansion"]]) {
-    const r = await get(p, HOST);
-    log("⑤ " + name, { status: r.status, msg: r.j ? r.j.msg : null, raw: r.raw.slice(0, 200) });
+  // ★ 实领 1：膨胀云朵（你的账号 preMonthBackup=true 且未领，可领 20）
+  const ex = await req("/market/signin/page/taskExpansion", HN);
+  log("膨胀-查询", { raw: ex.raw.slice(0, 200) });
+  const exr = ex.j && ex.j.result || {};
+  if (exr.preMonthBackup && !exr.curMonthBackupTaskAccept) {
+    const r = await req(`/market/signin/page/receiveTaskExpansion?acceptDate=${exr.acceptDate}`, HN);
+    log("★膨胀-领取", { status: r.status, code: r.j ? r.j.code : null, msg: r.j ? r.j.msg : null,
+      cloudCount: r.j && r.j.result ? r.j.result.cloudCount : null, raw: r.raw.slice(0, 200) });
+  } else log("★膨胀-领取", "不满足条件(已领或未备份) " + JSON.stringify(exr).slice(0,150));
+  // ★ 实领 2：通知云朵
+  const ms = await req("/market/msgPushOn/task/status", HN);
+  const msr = ms.j && ms.j.result || {};
+  log("通知-状态", { pushOn: msr.pushOn, first: msr.firstTaskStatus, second: msr.secondTaskStatus });
+  if (msr.pushOn === 1) {
+    if (msr.firstTaskStatus !== 3) {
+      const r = await req("/market/msgPushOn/task/obtain", HN, "POST", { type: 1 });
+      log("★通知-领任务1", { status: r.status, raw: r.raw.slice(0, 200) });
+    } else log("通知-任务1", "已领取，跳过");
+    if (msr.secondTaskStatus === 2 || msr.secondTaskStatus === 1) {
+      const r = await req("/market/msgPushOn/task/obtain", HN, "POST", { type: 2 });
+      log("★通知-领任务2", { status: r.status, raw: r.raw.slice(0, 200) });
+    }
   }
+  // ★ 实领 3：备份礼
+  const bg = await req("/market/backupgift/info", HN);
+  const bgr = bg.j && bg.j.result || {};
+  log("备份-状态", { state: bgr.state, curMonth: bgr.curMonth });
+  if (bgr.state === 0) {
+    const r = await req("/market/backupgift/receive", HN);
+    log("★备份-领取", { status: r.status, raw: r.raw.slice(0, 200) });
+  } else log("备份-领取", "state=" + bgr.state + "（0=可领 1=已领 -1=未备份）");
+  // ★ 爆破余额接口（找 200 的）
+  const cands = [
+    "/market/signin/page/cloudInfo", "/market/signin/cloud/info", "/market/signin/user/cloudCount",
+    "/market/signin/page/cloud", "/market/signin/totalCloud", "/market/signin/cloud/total",
+    "/market/signin/page/init", "/market/signin/index", "/market/signin/home",
+    "/market/signin/page/home", "/market/signin/page/main", "/market/signin/user/total",
+    "/market/signin/cloud/count", "/market/signin/bean", "/market/signin/page/bean",
+    "/market/signin/page/signInInfo", "/market/signin/sign/info", "/market/signin/user/info",
+    "/market/signin/task/myCloud", "/market/signin/cloud/myCloud", "/market/signin/cloudNum",
+  ];
+  const hits = [];
+  for (const p of cands) {
+    const r = await req(p, HN);
+    if (r.status === 200) hits.push({ p, raw: r.raw.slice(0, 250) });
+  }
+  log("★余额接口命中", hits.length ? hits : "全部404（未找到）");
+  // 云朵大作战
+  const cg = await req("/market/signin/hecheng1T/info?op=info", HN);
+  log("云朵大作战", { status: cg.status, raw: cg.raw.slice(0, 200) });
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
   .finally(async () => { const fs = await import("fs");
