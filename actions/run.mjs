@@ -385,6 +385,35 @@ function stableJsonStringify(obj) {
 }
 
 // ---------------- 主流程 ----------------
+
+// ---------------- 云朵真实任务引擎（2026-09 新增，已实测可用） ----------------
+const UA_CLOUD = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
+const CY = "https://caiyun.feixin.10086.cn:7071";
+function cyHeaders(jwt) {
+  return { "User-Agent": UA_CLOUD, "Host": "caiyun.feixin.10086.cn:7071", "jwtToken": jwt, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest" };
+}
+async function fetchTaskList(jwt) {
+  const r = await fetch(CY + "/market/signin/task/taskList?marketname=sign_in_3", { headers: cyHeaders(jwt) });
+  const j = await r.json();
+  if (String(j.code) !== "0") throw new Error("任务列表获取失败: " + j.msg);
+  const list = [];
+  for (const arr of Object.values(j.result || {})) {
+    if (!Array.isArray(arr)) continue;
+    for (const t of arr) list.push({
+      id: t.id, group: t.groupid, name: String(t.name || "").replace(/<[^>]*>/g, ""),
+      reward: t.content_display2 || "", state: t.state, limit: t.limitType,
+      steps: t.stepTypeSet || [], process: t.process || 0, currDay: t.currDay || 0, currstep: t.currstep || 0,
+    });
+  }
+  return list;
+}
+async function clickTask(jwt, id) {
+  const r = await fetch(CY + "/market/signin/task/click?key=task&id=" + id, { headers: cyHeaders(jwt) });
+  const txt = await r.text();
+  let j = {}; try { j = JSON.parse(txt); } catch { j = { msg: txt.slice(0, 120) }; }
+  return { ok: String(j.code) === "0", code: j.code, msg: j.msg || "" };
+}
+
 async function main() {
   const type = process.env.EVENT_TYPE || "";
   let payload = {};
@@ -400,6 +429,14 @@ async function main() {
     const arr = JSON.parse(plain);
     if (!Array.isArray(arr)) throw new Error("解密结果不是账号列表");
     return arr;
+  }
+  // 定时运行时没有前端 cipher，回退读仓库 Secret
+  async function pickCreds() {
+    const ea = process.env.YUN139_AUTHORIZATION, ep = process.env.YUN139_PHONE;
+    if (ea && ep) return { authorization: ea, phone: ep };
+    const accounts = await decryptAccounts();
+    if (!accounts.length) throw new Error("无可用的账号令牌");
+    return { authorization: accounts[0].authorization, phone: accounts[0].phone };
   }
 
   try {
@@ -500,6 +537,43 @@ async function main() {
       }
       out.results = results;
       out.msg = "云朵任务执行完成";
+      out.ok = true;
+    } else if (type === "list") {
+      const c = await pickCreds();
+      const jwt = await getJwt(c.authorization, c.phone);
+      out.tasks = await fetchTaskList(jwt);
+      out.msg = "已获取 " + out.tasks.length + " 个真实任务";
+      out.ok = true;
+    } else if (type === "srefresh") {
+      const c = await pickCreds();
+      const rr = await refreshToken(c.phone, decodeAuth(c.authorization).token);
+      out.ok = !!rr.ok;
+      out.msg = rr.ok ? ("续期成功，剩余 " + rr.data.remaining_days + " 天") : (rr.error || "续期失败");
+      if (rr.ok) out.new_expires_at = rr.data.new_expires_at;
+    } else if (type === "rtask" || type === "daily") {
+      const c = await pickCreds();
+      if (type === "daily") {
+        const rr = await refreshToken(c.phone, decodeAuth(c.authorization).token);
+        out.refresh = rr.ok ? ("成功，剩余 " + rr.data.remaining_days + " 天") : (rr.error || "失败");
+        if (rr.ok) out.new_expires_at = rr.data.new_expires_at;
+      }
+      const jwt = await getJwt(c.authorization, c.phone);
+      const before = await fetchTaskList(jwt);
+      const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks.map(String) : [];
+      const results = [];
+      for (const t of before) {
+        if (wanted.length && !wanted.includes(String(t.id))) continue;
+        if (t.state === "FINISH") { results.push({ id: t.id, name: t.name, reward: t.reward, ok: true, msg: "已完成" }); continue; }
+        if (t.steps.indexOf("click") < 0) { results.push({ id: t.id, name: t.name, reward: t.reward, ok: false, msg: "需真实操作(" + t.steps.join("/") + ")" }); continue; }
+        const r = await clickTask(jwt, t.id);
+        results.push({ id: t.id, name: t.name, reward: t.reward, ok: r.ok, msg: r.msg });
+        await new Promise(x => setTimeout(x, 600));
+      }
+      const after = await fetchTaskList(jwt);
+      const map = {}; for (const t of after) map[t.id] = t;
+      for (const r of results) { const a = map[r.id]; if (a) { r.afterProcess = a.process; r.afterState = a.state; } }
+      out.results = results; out.tasks = after;
+      out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务";
       out.ok = true;
     } else {
       throw new Error("未知命令: " + type);

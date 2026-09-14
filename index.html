@@ -150,6 +150,7 @@
   <div class="card">
     <h2>③ 云朵活动任务</h2>
     <div class="tasklist" id="tasklist"></div>
+    <button class="btn" id="btn_list">拉取真实任务</button>
     <button class="btn" id="btn_tasks">一键执行勾选任务</button>
     <div class="hint">每日签到可后台自动完成；AI相机 / AI对话 / 图书馆阅读 / 备份等需 App 内操作的任务，后端会尝试接入并逐条反馈结果。</div>
   </div>
@@ -443,6 +444,22 @@
       box.appendChild(lb);
     });
   }
+  let REAL_TASKS = [];
+  function renderReal(tasks) {
+    REAL_TASKS = tasks;
+    const box = $("tasklist"); box.innerHTML = "";
+    tasks.forEach(function (t) {
+      const lb = document.createElement("label"); lb.className = "tsk";
+      const per = (t.limit === "DAY" ? "每日" : t.limit === "MONTH" ? "每月" : "一次性");
+      const st = (t.state === "FINISH" ? "已完成" : "待完成");
+      const auto = t.steps.indexOf("click") >= 0;
+      lb.innerHTML = '<input type="checkbox" data-id="' + t.id + '"' + (auto && t.state !== "FINISH" ? " checked" : "") + '> '
+        + t.name + (t.reward ? ' <i>' + t.reward + '</i>' : '')
+        + ' <span style="opacity:.55;font-size:12px">[' + per + ' · ' + st
+        + (t.process ? ' · 进度 ' + t.process : '') + ' · ' + (auto ? '可自动' : '需手动') + ']</span>';
+      box.appendChild(lb);
+    });
+  }
   function selectedTasks() {
     return Array.prototype.map.call(document.querySelectorAll("#tasklist input:checked"), function (c) { return c.dataset.id; });
   }
@@ -457,6 +474,7 @@
     return msg;
   }
   function resolvePending(j) {
+    if (j.tasks && j.tasks.length) renderReal(j.tasks);
     if (!pending) return;
     if (j.type !== pending.type) return;
     const kind = pending.kind;
@@ -561,8 +579,16 @@
     if (!list.length) { log("无账号，请先在上方添加", "err"); toast("无账号", "err"); return; }
     setBusy($("btn_tasks"), true, "任务执行中…");
     pending = { type: "task", kind: "task" };
-    try { await dispatch("task", { tasks, cipher: await encText(JSON.stringify(list)) }); log("云朵任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); }
+    try { await dispatch("rtask", { tasks, cipher: await encText(JSON.stringify(list)) }); log("云朵任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); }
     catch (e) { setBusy($("btn_tasks"), false); pending = null; log(e.message, "err"); toast(e.message, "err"); }
+  }
+
+  async function fetchTaskList() {
+    const list = await loadAccounts();
+    setBusy($("btn_list"), true, "拉取中…");
+    pending = { type: "list", kind: "task" };
+    try { await dispatch("list", { cipher: await encText(JSON.stringify(list)) }); log("已触发拉取…", "warn"); lastTs = ""; startWatch(); }
+    catch (e) { setBusy($("btn_list"), false); pending = null; log(e.message, "err"); toast(e.message, "err"); }
   }
 
   // ---- init ----
@@ -595,6 +621,7 @@
   $("btn_send").onclick = runSend;
   $("btn_login").onclick = runLogin;
   $("btn_tasks").onclick = runTasks;
+  $("btn_list").onclick = fetchTaskList;
   loadCfg(); applyUrlCfg(); renderAccounts(); renderTasks(); startWatch();
 })();
 </script>
