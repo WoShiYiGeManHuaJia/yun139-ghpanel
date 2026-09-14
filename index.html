@@ -817,6 +817,7 @@
       } else {
         log(tag + " 领取失败：" + em, "err");
       }
+      (r.steps || []).forEach(function (x) { log("   · " + x, /⚠|失败|错误|err=/.test(x) ? "err" : ""); });
       return;
       applyCloudCache(r.phone, { total: r.after });
       log(tag + " 云豆 " + r.before + " → " + r.after + (r.got > 0 ? "（+" + r.got + "）" : "（无可领）"), r.got > 0 ? "ok" : "");

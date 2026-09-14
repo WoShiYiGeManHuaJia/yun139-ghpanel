@@ -592,6 +592,13 @@ async function receiveBubbles(authorization, phone, dev) {
     await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 120000 });
     await sleep(11000);
     before = await readCloudNum(page);
+    if (before === null) {
+      // 首次未渲染出来，重载一次再试（偶发白屏/接口慢）
+      steps.push("首次未读到云豆，重载页面重试…");
+      try { await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 }); } catch (e) {}
+      await sleep(9000);
+      before = await readCloudNum(page);
+    }
     steps.push("初始云豆 " + before);
     if (before === null) {
       const d = await diagPage(page);
