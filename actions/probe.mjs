@@ -45,9 +45,9 @@ async function main() {
   const recvCalls = [];
   page.on("response", async r => {
     const u = r.url();
-    if (u.includes("receive") || u.includes("startSignIn")) {
+    if (/receive|receiveV3|receiveTask/.test(u)) {
       let body = ""; try { body = (await r.text()).slice(0, 200); } catch (e) {}
-      recvCalls.push({ api: u.replace("https://m.mcloud.139.com","").slice(0,110), status: r.status(), body });
+      recvCalls.push({ api: u.replace("https://m.mcloud.139.com","").slice(0,120), status: r.status(), body });
     }
   });
   await page.goto(PAGE, { waitUntil: "domcontentloaded", timeout: 120000 });
@@ -57,52 +57,33 @@ async function main() {
     catch (e) { return null; }
   };
   const N0 = await readNum(); log("① 初始云豆", N0);
-  // 找出所有"可领取"气泡元素
-  const bubbles = await page.evaluate(() => {
-    const res = [];
-    document.querySelectorAll("*").forEach(el => {
-      if (el.children.length === 0 || el.className) {
-        const t = (el.innerText || "").trim();
-        if (t === "可领取" || /^\+\d+$/.test(t)) {
-          let p = el, path = [];
-          for (let i = 0; i < 4 && p; i++) {
-            path.push(p.tagName.toLowerCase() + (p.className && typeof p.className === "string" ? "." + p.className.trim().split(/\s+/).join(".") : ""));
-            p = p.parentElement;
-          }
-          res.push({ text: t, path: path.join(" < ") });
-        }
-      }
-    });
-    return res.slice(0, 20);
-  });
-  log("② 气泡元素", bubbles);
-  // 点击策略：依次尝试点击"可领取"文本所在的可点区域
-  const clickAttempts = [];
-  for (let round = 1; round <= 4; round++) {
-    let clicked = false;
-    try {
-      const loc = page.locator("text=可领取").first();
-      const cnt = await page.locator("text=可领取").count();
-      clickAttempts.push({ round, 可领取数量: cnt });
-      if (cnt > 0) {
-        // 点父级容器（气泡本身可点）
-        await loc.locator("xpath=ancestor::div[contains(@class,'cloud') or contains(@class,'cloudIcon') or contains(@class,'AI')][1]").first().click({ timeout: 8000 });
-        clicked = true;
-      }
-    } catch (e) {
-      try { await page.locator("text=可领取").first().click({ timeout: 6000 }); clicked = true; }
-      catch (e2) { clickAttempts.push({ round, 错误: String(e2.message).slice(0, 80) }); }
+  // 列出气泡状态
+  const st = await page.evaluate(() => [...document.querySelectorAll(".AIPoints")].map(e => ({
+    cls: e.className, txt: (e.innerText||"").replace(/\s+/g," ").trim().slice(0,30) })));
+  log("② 气泡状态", st);
+  const results = [];
+  for (const sel of [".AIPoints.two", ".AIPoints.three"]) {
+    const before = await readNum();
+    let ok = false, err = "";
+    // 方式A：Playwright force click
+    try { await page.locator(sel).click({ force: true, timeout: 8000 }); ok = true; }
+    catch (e) { err = "force点击失败: " + String(e.message).slice(0, 60);
+      // 方式B：JS 原生 click
+      try { await page.evaluate(s => { const el = document.querySelector(s); if (el) el.click(); }, sel); ok = true; err += " | 已用JS点击"; }
+      catch (e2) { err += " | JS点击也失败"; }
     }
-    if (!clicked) break;
-    await sleep(3500);
-    const N = await readNum();
-    clickAttempts.push({ round, 点击后云豆: N, 变化: N !== null && N0 !== null ? N - N0 : null });
-    if (N !== null && N0 !== null && N > N0) { log("★★★ 领取成功", { 云豆: N0 + " → " + N, 增加: N - N0 }); break; }
+    await sleep(4000);
+    const after = await readNum();
+    results.push({ 气泡: sel, 点击: ok ? "成功" : "失败", 云豆: before + " → " + after, 变化: (before!==null&&after!==null)? after-before : null, 备注: err });
+    if (ok && after !== null && before !== null && after > before) log("★★★ " + sel + " 领取成功", { "增加": after - before });
   }
-  log("③ 点击过程", clickAttempts);
-  log("④ 领取接口调用", recvCalls.slice(0, 10));
+  log("③ 逐个结果", results);
+  log("④ receive 接口", recvCalls.slice(0, 8));
+  const st2 = await page.evaluate(() => [...document.querySelectorAll(".AIPoints")].map(e => ({
+    cls: e.className, txt: (e.innerText||"").replace(/\s+/g," ").trim().slice(0,30) })));
+  log("⑤ 点击后气泡状态", st2);
   const N1 = await readNum();
-  log("⑤ 最终云豆", { 起始: N0, 现在: N1, 净增: (N1 !== null && N0 !== null) ? N1 - N0 : null });
+  log("⑥ 最终", { 起始: N0, 现在: N1, 净增: (N1!==null&&N0!==null)? N1-N0 : null });
   await browser.close();
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
