@@ -1,92 +1,81 @@
 {
- "ts": "2026-09-14T15:17:24.232Z",
+ "ts": "2026-09-14T15:20:10.245Z",
  "steps": [
   {
    "k": "jwt",
    "v": "ok"
   },
   {
-   "k": "① getCloudNum[m.mcloud]",
+   "k": "① 余额 BEFORE",
    "v": {
-    "status": 200,
-    "code": 0,
+    "num": 919,
     "raw": "{\"code\":0,\"msg\":\"success\",\"result\":919}"
    }
   },
   {
-   "k": "② infoV3[m.mcloud]",
+   "k": "② infoV3 关键字段",
+   "v": {
+    "keys": [
+     "curMonthBackup",
+     "cardInfo",
+     "beforeTotal",
+     "signInPoints",
+     "signCount",
+     "provinceCode",
+     "monthDays",
+     "curMonthBackupSignAccept",
+     "maxType",
+     "cal",
+     "remind",
+     "total",
+     "canExchangeText",
+     "showHistory",
+     "showTaskExpansion",
+     "toReceive",
+     "isGuide",
+     "time",
+     "isCloudEnough",
+     "lackCloudNum",
+     "receiveList"
+    ],
+    "toReceive": 12,
+    "beforeTotal": 30,
+    "signInPoints": 3,
+    "signCount": 1,
+    "maxType": "完成任务",
+    "total": 919
+   }
+  },
+  {
+   "k": "③ taskListV3(POST)",
+   "v": {
+    "n": 0,
+    "fin": []
+   }
+  },
+  {
+   "k": "④ ★receiveTask[106]",
    "v": {
     "status": 200,
     "code": 0,
-    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":2,\"curMonthBackupSignAccept\":true,\"maxType\":\"完成任务\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\""
+    "msg": "success",
+    "res": "0"
    }
   },
   {
-   "k": "③ taskListV3[m.mcloud]",
+   "k": "⑤ 余额 AFTER",
    "v": {
-    "status": 405,
-    "code": null,
-    "raw": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body"
-   }
-  },
-  {
-   "k": "③ taskListV3[caiyun]",
-   "v": {
-    "status": 405,
-    "code": 502,
-    "raw": "{\"code\":502,\"msg\":\"请求方法异常\"}"
-   }
-  },
-  {
-   "k": "③ 可领任务(FINISH)",
-   "v": []
-  },
-  {
-   "k": "⑤ 领取后 getCloudNum[m.mcloud]",
-   "v": {
-    "status": 200,
+    "num": 919,
     "raw": "{\"code\":0,\"msg\":\"success\",\"result\":919}"
    }
   },
   {
-   "k": "⑥ receiveV3",
+   "k": "⑥ ★结论",
    "v": {
-    "status": 405,
-    "code": 502,
-    "raw": "{\"code\":502,\"msg\":\"请求方法异常\"}"
-   }
-  },
-  {
-   "k": "⑥ popup",
-   "v": {
-    "status": 200,
-    "code": 0,
-    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":false}"
-   }
-  },
-  {
-   "k": "⑥ getPopInfo",
-   "v": {
-    "status": 405,
-    "code": 502,
-    "raw": "{\"code\":502,\"msg\":\"请求方法异常\"}"
-   }
-  },
-  {
-   "k": "⑥ multiple",
-   "v": {
-    "status": 200,
-    "code": 500,
-    "raw": "{\"code\":500,\"msg\":\"当月已领取签到翻倍AI豆\"}"
+    "before": 919,
+    "after": 919,
+    "变化": 0
    }
   }
- ],
- "defs": {
-  "receiveTaskData": "receiveTaskData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTask\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},updateRemindData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/updateRemaind\",{params:e,headers:{showLo",
-  "getCloudNum": "(引用) CloudNum:function(e){return c[\"a\"].get(\"/ycloud/signin/page/getCloudNum\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getFloatData:function(e){return c[\"a\"].get(\"/ycloud/signin/public/text/newsign_139mail/floatWin",
-  "receiveV3": "(引用) oudData:function(e){return c[\"a\"].post(\"/ycloud/signin/page/receiveV3\",JSON.stringify(e),{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},receiveTaskData:function(e){return c[\"a\"].get(\"/ycloud/signi",
-  "getPopInfo": "getPopInfo:function(e){return c[\"a\"].post(\"/ycloud/signin/public/getPopInfo\",JSON.stringify(e),{headers:{showLoading:!0,\"content-Type\":\"application/json;charset=UTF-8\"}})},AdvShowReport:function(e){return c[\"a\"].post(\"/ycloud/advert/show/report\",JSON.stringify",
-  "infoV3": "(引用) UserInfo:function(e){return c[\"a\"].get(\"/ycloud/signin/page/infoV3\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getOutCloudNum:function(e){return c[\"a\"].get(\"/ycloud/signin/page/getCloudNum\",{params:e,headers:{sh",
-  "startSignIn": "(引用) rtSignIn:function(e){return c[\"a\"].get(\"/ycloud/signin/page/startSignIn\",{params:e,headers:{showLoading:!1,isDeviceId:!0,\"content-Type\":\"application/json\"}})},getUserInfo:function(e){return c[\"a\"].get(\"/ycloud/signin/page/infoV3\",{params:e,"
- }
+ ]
 }
