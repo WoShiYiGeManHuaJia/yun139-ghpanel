@@ -1,5 +1,49 @@
 {
- "ts": "2026-09-14T15:09:24.676Z",
- "steps": [],
- "fatal": "fetch failed"
+ "ts": "2026-09-14T15:11:38.444Z",
+ "steps": [
+  {
+   "k": "jwt",
+   "v": "ok"
+  },
+  {
+   "k": "★ m.mcloud taskList",
+   "v": {
+    "status": 200,
+    "code": 0,
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"cloudEmail\":[{\"id\":431,\"marketname\":\"sign_in_3\",\"groupid\":\"cloudEmail\",\"enable\":1,\"name\":\"去使用移动云手机\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com/"
+   }
+  },
+  {
+   "k": "★ m.mcloud page/info",
+   "v": {
+    "status": 404,
+    "code": null,
+    "raw": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page y"
+   }
+  },
+  {
+   "k": "★ m.mcloud page/receive",
+   "v": {
+    "status": 404,
+    "code": null,
+    "raw": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page y"
+   }
+  },
+  {
+   "k": "prizeApi 奖品记录",
+   "v": {
+    "status": 200,
+    "code": 0,
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"pageNum\":1,\"pageSize\":15,\"totalCount\":50,\"totalPages\":4,\"result\":[{\"oId\":1263425903,\"servNumber\":\"172****9953\",\"prizeId\":260723006,\"prizeName\":\"移动云盘白银AI会员月卡\",\"flag\":2,\"insertTime\":\"2026.08.20\",\"updateTime\":\"2026.08.20\",\"linkUrl\":null,\"type\":1057,\"uorder\":null,\"re"
+   }
+  },
+  {
+   "k": "★ 余额接口(m.mcloud)",
+   "v": "全部404"
+  },
+  {
+   "k": "★ 余额接口(caiyun变体)",
+   "v": "全部404"
+  }
+ ]
 }
