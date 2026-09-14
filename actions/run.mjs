@@ -223,7 +223,7 @@ async function loginBySms(phone, smsCode) {
 }
 
 // ---------------- 签到 / 续期 ----------------
-async function getJwt(authorization, phone) {
+async function getJwtOnce(authorization, phone) {
   const auth = "Basic " + cleanAuth(authorization);
   const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
     method: "POST",
@@ -238,6 +238,14 @@ async function getJwt(authorization, phone) {
   });
   const j2 = await r2.json();
   return j2.result.token;
+}
+async function getJwt(authorization, phone) {
+  let last;
+  for (let i = 0; i < 4; i++) {
+    try { return await getJwtOnce(authorization, phone); }
+    catch (e) { last = e; await new Promise(r => setTimeout(r, 1500 * (i + 1))); }
+  }
+  throw last;
 }
 async function signOne(authorization, phone) {
   try {
@@ -392,7 +400,7 @@ const CY = "https://caiyun.feixin.10086.cn:7071";
 function cyHeaders(jwt) {
   return { "User-Agent": UA_CLOUD, "Host": "caiyun.feixin.10086.cn:7071", "jwtToken": jwt, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest" };
 }
-async function fetchTaskList(jwt) {
+async function fetchTaskListOnce(jwt) {
   const r = await fetch(CY + "/market/signin/task/taskList?marketname=sign_in_3", { headers: cyHeaders(jwt) });
   const j = await r.json();
   if (String(j.code) !== "0") throw new Error("任务列表获取失败: " + j.msg);
@@ -406,6 +414,14 @@ async function fetchTaskList(jwt) {
     });
   }
   return list;
+}
+async function fetchTaskList(jwt) {
+  let last;
+  for (let i = 0; i < 3; i++) {
+    try { return await fetchTaskListOnce(jwt); }
+    catch (e) { last = e; await new Promise(r => setTimeout(r, 1200 * (i + 1))); }
+  }
+  throw last;
 }
 async function clickTask(jwt, id) {
   const r = await fetch(CY + "/market/signin/task/click?key=task&id=" + id, { headers: cyHeaders(jwt) });
