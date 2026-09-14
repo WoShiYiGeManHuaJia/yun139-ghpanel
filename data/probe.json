@@ -1,170 +1,77 @@
 {
- "ts": "2026-09-14T15:53:47.264Z",
- "hits": [
+ "ts": "2026-09-14T15:56:28.047Z",
+ "steps": [
   {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveTask",
-   "ctx": "loudNum),1===t.cloudType?A(\"2\",t.acceptDate,e):2===t.cloudType?s.$toast(\"下月可领取\"):n(\"receivePoints\",t,\"\",(function(){v.value.add(e)}))}}function A(e,t,c){z[\"a\"].receiveTaskExpansion({acceptDate:t}).then((function(e){0==e.data.code?(void 0!==c&&v.value.add(c),s.$toast(\"领取成功～\"),n(\"initUserData\",1)):1302==e.data.code?s.$toast(\"开启自动备份按钮才可领取哦～\"):500==e.data.code?("
+   "k": "jwt",
+   "v": "ok"
   },
   {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveTask",
-   "ctx": "+\"_task_\".concat(e.id),O.value,N);var t=e.buttonInfo.action;if(\"popReceive\"===t)n(\"handleClickPop\",1);else if(\"receiveCloud\"===t)n(\"handleregister\",1);else if(\"receiveTaskAiDou\"===t){var c={recordId:e.cloudId,cloudType:e.cloudType};n(\"receivePoints\",c,\"receivePop\")}else if(\"popjump\"===t){if(107===e.id)return p.$toast(\"成功创建并保存云笔记，才可获得AI豆奖励哦\"),void setTimeout("
+   "k": "⓪ 基线",
+   "v": {
+    "total": 919,
+    "toReceive": 12,
+    "list": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]"
+   }
   },
   {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveTask",
-   "ctx": "return c[\"a\"].post(\"/ycloud/signin/page/receiveV3\",JSON.stringify(e),{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},receiveTaskData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTask\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},updateRemindData:function(e){return c[\"a\"].get(\""
+   "k": "★ A client=app cloudId=2343307559 cloudType=0",
+   "v": {
+    "code": 615,
+    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
+    "result": null,
+    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
   },
   {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveTask",
-   "ctx": "),{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},receiveTaskData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTask\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},updateRemindData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/updateRemaind\",{params:e,headers:{showLoading:!"
+   "k": "★ B client=app cloudId=2343307413 cloudType=0",
+   "v": {
+    "code": 615,
+    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
+    "result": null,
+    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
   },
   {
-   "file": "newsignin.336f18c3.js",
-   "kw": "recordId",
-   "ctx": ",N);var t=e.buttonInfo.action;if(\"popReceive\"===t)n(\"handleClickPop\",1);else if(\"receiveCloud\"===t)n(\"handleregister\",1);else if(\"receiveTaskAiDou\"===t){var c={recordId:e.cloudId,cloudType:e.cloudType};n(\"receivePoints\",c,\"receivePop\")}else if(\"popjump\"===t){if(107===e.id)return p.$toast(\"成功创建并保存云笔记，才可获得AI豆奖励哦\"),void setTimeout((function(){n(\"handleregister\""
+   "k": "★ C client=app cloudId='' cloudType=2",
+   "v": {
+    "code": 615,
+    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
+    "result": null,
+    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
   },
   {
-   "file": "newsignin.336f18c3.js",
-   "kw": "recordId",
-   "ctx": "alue=t.length?t[0]:{}}})).catch((function(e){console.log(\"获取广告失败\")}))}function Tt(e,t){var n,c,a={client:h.value?\"mini\":w.value?\"app\":\"out\",cloudId:null!==(n=e.recordId)&&void 0!==n?n:\"\",cloudType:null!==(c=e.cloudType)&&void 0!==c?c:\"\"};z[\"a\"].receiveCloudData(a).then((function(e){if(0===e.data.code){var n=e.data.result,c=parseInt(be.value.isGuide/10%10);if"
+   "k": "   D client=out cloudId=2343307559 cloudType=0",
+   "v": {
+    "code": 615,
+    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
+    "result": null,
+    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
   },
   {
-   "file": "newsignin.336f18c3.js",
-   "kw": "cloudType",
-   "ctx": "oid 0===e?void 0:e.receiveList)||[];return t.length>6}));function h(e){if(E()){var t=g.value[e];Object(L[\"a\"])(j+\"_receive_type\",d.value,O),f(t.cloudNum),1===t.cloudType?A(\"2\",t.acceptDate,e):2===t.cloudType?s.$toast(\"下月可领取\"):n(\"receivePoints\",t,\"\",(function(){v.value.add(e)}))}}function A(e,t,c){z[\"a\"].receiveTaskExpansion({acceptDate:t}).then((function(e){"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "cloudType",
-   "ctx": "turn t.length>6}));function h(e){if(E()){var t=g.value[e];Object(L[\"a\"])(j+\"_receive_type\",d.value,O),f(t.cloudNum),1===t.cloudType?A(\"2\",t.acceptDate,e):2===t.cloudType?s.$toast(\"下月可领取\"):n(\"receivePoints\",t,\"\",(function(){v.value.add(e)}))}}function A(e,t,c){z[\"a\"].receiveTaskExpansion({acceptDate:t}).then((function(e){0==e.data.code?(void 0!==c&&v.value.ad"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "cloudType",
-   "ctx": "teElementBlock\"])(\"div\",{key:0,class:Object(r[\"normalizeClass\"])([\"AIPoints one\",{\"is-next-month\":2===(null===(n=Object(r[\"unref\"])(g)[0])||void 0===n?void 0:n.cloudType),\"fade-out\":v.value.has(0)}]),onClick:t[0]||(t[0]=function(e){return h(0)})},[Object(r[\"createElementVNode\"])(\"p\",Wn,[Object(r[\"createElementVNode\"])(\"span\",null,\"+\"+Object(r[\"toDisplayStrin"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "cloudType",
-   "ctx": "ef\"])(g)[0].cloudNum),1),Object(r[\"createElementVNode\"])(\"span\",null,Object(r[\"toDisplayString\"])(2===(null===(c=Object(r[\"unref\"])(g)[0])||void 0===c?void 0:c.cloudType)?\"\":\"可领取\"),1)])],2)):Object(r[\"createCommentVNode\"])(\"\",!0),Object(r[\"unref\"])(g).length>=2?(Object(r[\"openBlock\"])(),Object(r[\"createElementBlock\"])(\"div\",{key:1,class:Object(r[\"normalizeCl"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveList",
-   "ctx": "lickEvent,j=\"newsignin_index\",O=\"sign_in_3\",v=Object(r[\"ref\"])(new Set),g=Object(r[\"computed\"])((function(){var e,t=(null===(e=c.userInfo)||void 0===e?void 0:e.receiveList)||[];return t.slice(0,6)}));Object(r[\"watch\"])((function(){var e;return null===(e=c.userInfo)||void 0===e?void 0:e.receiveList}),(function(){v.value.clear()}),{deep:!0});var k=Object(r[\"co"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveList",
-   "ctx": "c.userInfo)||void 0===e?void 0:e.receiveList)||[];return t.slice(0,6)}));Object(r[\"watch\"])((function(){var e;return null===(e=c.userInfo)||void 0===e?void 0:e.receiveList}),(function(){v.value.clear()}),{deep:!0});var k=Object(r[\"computed\"])((function(){var e,t=(null===(e=c.userInfo)||void 0===e?void 0:e.receiveList)||[];return t.length>6}));function h(e){i"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveList",
-   "ctx": "==e?void 0:e.receiveList}),(function(){v.value.clear()}),{deep:!0});var k=Object(r[\"computed\"])((function(){var e,t=(null===(e=c.userInfo)||void 0===e?void 0:e.receiveList)||[];return t.length>6}));function h(e){if(E()){var t=g.value[e];Object(L[\"a\"])(j+\"_receive_type\",d.value,O),f(t.cloudNum),1===t.cloudType?A(\"2\",t.acceptDate,e):2===t.cloudType?s.$toast(\"下"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "getCloudNum",
-   "ctx": "d/signin/page/infoV3\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getOutCloudNum:function(e){return c[\"a\"].get(\"/ycloud/signin/page/getCloudNum\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getFloatData:function(e){return c[\"a\"].get(\"/ycloud/signin/public/text/newsign_139mail/floatWindow.json\",{params:e,"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "getCloudNum",
-   "ctx": "d/signin/page/infoV3\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getOutCloudNum:function(e){return c[\"a\"].get(\"/ycloud/signin/page/getCloudNum\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getFloatData:function(e){return c[\"a\"].get(\"/ycloud/signin/public/text/sign_in_3/floatWindow.json\",{params:e,header"
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveV3",
-   "ctx": "_in_3/dialog.json\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},receiveCloudData:function(e){return c[\"a\"].post(\"/ycloud/signin/page/receiveV3\",JSON.stringify(e),{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},receiveTaskData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTask\","
-  },
-  {
-   "file": "newsignin.336f18c3.js",
-   "kw": "receiveV3",
-   "ctx": "{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},receiveCloudData:function(e){return c[\"a\"].post(\"/ycloud/signin/page/receiveV3\",JSON.stringify(e),{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},getUnloadData:function(e){return c[\"a\"].post(\"/ycloud/redeposit/getLinkInfoList\""
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "receiveTask",
-   "ctx": "return c[\"a\"].post(\"/ycloud/signin/page/receiveV3\",JSON.stringify(e),{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},receiveTaskData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTask\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},updateRemindData:function(e){return c[\"a\"].get(\""
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "receiveTask",
-   "ctx": "),{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},receiveTaskData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTask\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},updateRemindData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/updateRemaind\",{params:e,headers:{showLoading:!"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "receiveTask",
-   "ctx": "ation/json\"}})},registerData:function(e,t){return c[\"a\"].get(\"/ycloud/signin/task/click\",{params:e,headers:{showLoading:t,\"content-Type\":\"application/json\"}})},receiveTaskExpansion:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTaskExpansion\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},initTaskStatus:function(e){return "
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "receiveTask",
-   "ctx": "gnin/task/click\",{params:e,headers:{showLoading:t,\"content-Type\":\"application/json\"}})},receiveTaskExpansion:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTaskExpansion\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},initTaskStatus:function(e){return c[\"a\"].post(\"/ycloud/signin/page/doTaskPost\",JSON.stringify(e),{headers:"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "recordId",
-   "ctx": "ve){var t=e.buttonInfo.action;if(\"popReceive\"===t)n(\"handleClickPop\",1);else if(\"receiveCloud\"===t)n(\"handleregister\",1);else if(\"receiveTaskAiDou\"===t){var c={recordId:e.cloudId,cloudType:e.cloudType};n(\"receivePoints\",c,\"receivePop\")}else if(\"popjump\"===t){if(1005===e.id)return void n(\"handleregister\",4);if(1007===e.id)return void n(\"handleClickPop\",2);if("
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "recordId",
-   "ctx": "d\":return e.stop()}}),e)}))),rt.apply(this,arguments)}function lt(){_.signinShow=1}function it(e,t){var n,c,a={client:y.value?\"email\":\"out\",cloudId:null!==(n=e.recordId)&&void 0!==n?n:\"\",cloudType:null!==(c=e.cloudType)&&void 0!==c?c:\"\"};Ge[\"a\"].receiveCloudData(a).then((function(e){if(0===e.data.code){var n=e.data.result,c=parseInt(ce.value.isGuide/10%10);i"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "cloudType",
-   "ctx": "nfo.action;if(\"popReceive\"===t)n(\"handleClickPop\",1);else if(\"receiveCloud\"===t)n(\"handleregister\",1);else if(\"receiveTaskAiDou\"===t){var c={recordId:e.cloudId,cloudType:e.cloudType};n(\"receivePoints\",c,\"receivePop\")}else if(\"popjump\"===t){if(1005===e.id)return void n(\"handleregister\",4);if(1007===e.id)return void n(\"handleClickPop\",2);if(1014===e.id)return "
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "cloudType",
-   "ctx": "f(\"popReceive\"===t)n(\"handleClickPop\",1);else if(\"receiveCloud\"===t)n(\"handleregister\",1);else if(\"receiveTaskAiDou\"===t){var c={recordId:e.cloudId,cloudType:e.cloudType};n(\"receivePoints\",c,\"receivePop\")}else if(\"popjump\"===t){if(1005===e.id)return void n(\"handleregister\",4);if(1007===e.id)return void n(\"handleClickPop\",2);if(1014===e.id)return void n(\"hand"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "cloudType",
-   "ctx": "),rt.apply(this,arguments)}function lt(){_.signinShow=1}function it(e,t){var n,c,a={client:y.value?\"email\":\"out\",cloudId:null!==(n=e.recordId)&&void 0!==n?n:\"\",cloudType:null!==(c=e.cloudType)&&void 0!==c?c:\"\"};Ge[\"a\"].receiveCloudData(a).then((function(e){if(0===e.data.code){var n=e.data.result,c=parseInt(ce.value.isGuide/10%10);if(0==c&&ft(\"11\"),\"receivePo"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "cloudType",
-   "ctx": "nts)}function lt(){_.signinShow=1}function it(e,t){var n,c,a={client:y.value?\"email\":\"out\",cloudId:null!==(n=e.recordId)&&void 0!==n?n:\"\",cloudType:null!==(c=e.cloudType)&&void 0!==c?c:\"\"};Ge[\"a\"].receiveCloudData(a).then((function(e){if(0===e.data.code){var n=e.data.result,c=parseInt(ce.value.isGuide/10%10);if(0==c&&ft(\"11\"),\"receivePop\"==t)return Z.receive"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "toReceive",
-   "ctx": "\"活动太火爆了，请稍后再试\")})).catch((function(e){m.$toast(\"网络异常，请稍后再试\")}))}function st(e){Ge[\"a\"].receiveTaskData({taskId:e}).then((function(e){0===e.data.code&&(ce.value.toReceive-=e.data.result,se.value.receive=e.data.result,_.receiveShow=1,i(\"其他弹窗\",\"\"))}))}function ut(e){fe.value.isReloadTask=!1,Object(r[\"nextTick\"])((function(){fe.value.isReloadTask=!0,fe.value.isS"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "receiveList",
-   "ctx": ",f=\"139newsignin_index\",v=\"newsign_139mail\",j=Object(r[\"ref\"])(new Set),O=Object(r[\"computed\"])((function(){var e,t=(null===(e=c.userInfo)||void 0===e?void 0:e.receiveList)||[];return t.slice(0,6)}));Object(r[\"watch\"])((function(){var e;return null===(e=c.userInfo)||void 0===e?void 0:e.receiveList}),(function(){j.value.clear()}),{deep:!0});var g=Object(r[\"co"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "receiveList",
-   "ctx": "c.userInfo)||void 0===e?void 0:e.receiveList)||[];return t.slice(0,6)}));Object(r[\"watch\"])((function(){var e;return null===(e=c.userInfo)||void 0===e?void 0:e.receiveList}),(function(){j.value.clear()}),{deep:!0});var g=Object(r[\"computed\"])((function(){var e,t=(null===(e=c.userInfo)||void 0===e?void 0:e.receiveList)||[];return t.length>6}));function h(e){i"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "receiveList",
-   "ctx": "==e?void 0:e.receiveList}),(function(){j.value.clear()}),{deep:!0});var g=Object(r[\"computed\"])((function(){var e,t=(null===(e=c.userInfo)||void 0===e?void 0:e.receiveList)||[];return t.length>6}));function h(e){if(A()){var t=O.value[e];Object(D[\"a\"])(f+\"_receive_type\",b.value,v),p(t.cloudNum),n(\"receivePoints\",t,\"\",(function(){j.value.add(e)}))}}function A("
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "getCloudNum",
-   "ctx": "d/signin/page/infoV3\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getOutCloudNum:function(e){return c[\"a\"].get(\"/ycloud/signin/page/getCloudNum\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getFloatData:function(e){return c[\"a\"].get(\"/ycloud/signin/public/text/newsign_139mail/floatWindow.json\",{params:e,"
-  },
-  {
-   "file": "139newsignin.cc383f1b.js",
-   "kw": "receiveV3",
-   "ctx": "_in_3/dialog.json\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},receiveCloudData:function(e){return c[\"a\"].post(\"/ycloud/signin/page/receiveV3\",JSON.stringify(e),{headers:{showLoading:!0,isDeviceId:!0,\"Content-Type\":\"application/json;charset=UTF-8\"}})},receiveTaskData:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receiveTask\","
+   "k": "最终",
+   "v": {
+    "起始": {
+     "total": 919,
+     "toReceive": 12
+    },
+    "现在": {
+     "total": 919,
+     "toReceive": 12
+    },
+    "list": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]",
+    "成功方案": "无",
+    "总增豆": 0
+   }
   }
  ]
 }
