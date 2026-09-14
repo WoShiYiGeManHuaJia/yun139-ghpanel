@@ -79,10 +79,31 @@
   .tab { flex:1; background:#0b1220; color:var(--mut); border:1px solid var(--line); cursor:pointer; font-size:13px; padding:11px 6px; }
   .tab.active { border-color:var(--acc); color:var(--acc); background:rgba(56,189,248,.08); font-weight:600; }
   .pane { margin-top:2px; }
-  .tasklist { display:flex; flex-direction:column; gap:2px; }
-  .tasklist .tsk { display:flex; align-items:center; gap:8px; background:#0b1220; border:1px solid var(--line); border-radius:8px; padding:9px 12px; color:var(--txt); font-size:13px; }
-  .tasklist .tsk input { width:auto; height:16px; }
-  .tasklist .tsk i { color:var(--warn); font-style:normal; font-size:11px; margin-left:auto; }
+  .tasklist { display:flex; flex-direction:column; gap:6px; }
+  .tasklist .tsk { display:flex; align-items:center; gap:10px; background:#0b1220; border:1px solid var(--line); border-radius:10px; padding:10px 12px; color:var(--txt); font-size:13px; }
+  .tasklist .tsk input { width:auto; height:16px; accent-color:var(--acc); flex:none; }
+  .tasklist .tsk input:disabled { opacity:.35; }
+  .tasklist .tsk i { color:var(--warn); font-style:normal; font-size:11px; margin-left:auto; flex:none; }
+  .tasklist .tsk .tn { flex:1; line-height:1.35; }
+  .tasklist .tsk .tn small { display:block; opacity:.6; font-size:11px; margin-top:2px; }
+  .tasklist .tsk.done { opacity:.55; }
+  .tasklist .tsk.manual { border-style:dashed; }
+  .pill { font-size:10px; padding:2px 7px; border-radius:20px; flex:none; font-weight:600; }
+  .pill.auto { background:rgba(52,211,153,.15); color:var(--ok); }
+  .pill.manual { background:rgba(148,163,184,.15); color:var(--mut); }
+  .pill.fin { background:rgba(56,189,248,.15); color:var(--acc); }
+  .pill.day { background:rgba(251,191,36,.14); color:var(--warn); }
+  .pill.mon { background:rgba(167,139,250,.16); color:#c4b5fd; }
+  .bar { height:4px; background:#0b1220; border-radius:4px; overflow:hidden; margin-top:6px; border:1px solid var(--line); }
+  .bar > span { display:block; height:100%; background:linear-gradient(90deg,var(--acc),var(--ok)); border-radius:4px; }
+  .grp-title { font-size:11px; color:var(--mut); margin:10px 0 2px; letter-spacing:.5px; }
+  .btn.gold { background:linear-gradient(135deg,#fbbf24,#f59e0b); color:#3a2400; font-weight:700; }
+  .hero { background:linear-gradient(135deg,rgba(56,189,248,.14),rgba(52,211,153,.10)); border:1px solid rgba(56,189,248,.3); }
+  .hero h2 { color:var(--acc); }
+  .stat { display:flex; gap:8px; margin:10px 0 2px; }
+  .stat > div { flex:1; background:#0b1220; border:1px solid var(--line); border-radius:10px; padding:9px 6px; text-align:center; }
+  .stat b { display:block; font-size:17px; color:var(--acc); }
+  .stat span { font-size:11px; color:var(--mut); }
 </style>
 </head>
 <body>
@@ -147,16 +168,27 @@
     <div class="hint">点击后按钮进入执行状态，直到成功或失败自动恢复，防止重复点击。结果自动回写并刷新本页账号数据（约每 4s 轮询）。</div>
   </div>
 
-  <div class="card">
-    <h2>③ 云朵活动任务</h2>
-    <div class="tasklist" id="tasklist"></div>
-    <button class="btn" id="btn_list">拉取真实任务</button>
-    <button class="btn" id="btn_tasks">一键执行勾选任务</button>
-    <div class="hint">每日签到可后台自动完成；AI相机 / AI对话 / 图书馆阅读 / 备份等需 App 内操作的任务，后端会尝试接入并逐条反馈结果。</div>
+  <div class="card hero">
+    <h2>🎁 云朵气泡领取</h2>
+    <div class="stat">
+      <div><b id="st_bean">—</b><span>云豆总数</span></div>
+      <div><b id="st_got">—</b><span>本次领取</span></div>
+      <div><b id="st_time">—</b><span>上次执行</span></div>
+    </div>
+    <button class="btn gold" id="btn_receive">领取可领气泡</button>
+    <div class="hint">气泡必须用真实浏览器环境才能领（服务端校验设备指纹），后台会自动开一个手机浏览器点掉所有可领气泡。<b>下月才能领的会自动跳过</b>。每天 09:05 定时任务也会自动领一次。</div>
   </div>
 
   <div class="card">
-    <h2>④ 结果日志</h2>
+    <h2>④ 云朵活动任务</h2>
+    <div class="tasklist" id="tasklist"></div>
+    <button class="btn" id="btn_list">拉取真实任务</button>
+    <button class="btn" id="btn_tasks">一键执行勾选任务</button>
+    <div class="hint">列表来自官方接口实时返回。<b>可自动</b>的任务后台能直接推进（已默认勾选）；<b>需手动</b>的要在 App 里真实操作，这里只做展示和进度跟踪。</div>
+  </div>
+
+  <div class="card">
+    <h2>⑤ 结果日志</h2>
     <div id="log">等待操作…</div>
   </div>
 
@@ -195,11 +227,10 @@
     <div class="dialog">
       <h3>如何获取 authorization（图文教程）</h3>
       <div class="tip">不需要抓包工具，用支持 Chrome 扩展的浏览器装一个小扩展，一键就能导出。推荐浏览器：<b>Kiwi Browser（安卓手机）</b>、<b>Microsoft Edge / Google Chrome（电脑）</b>。</div>
-      <div class="tut-step"><b>① 安装 EditThisCookie 扩展</b></div>
-      <div class="tut-step">安卓 Kiwi Browser / 电脑 Chromium 系：菜单 → <code>扩展程序</code> → 开启「开发者模式」→ 「+ 从 .zip/.crx 文件安装」，选择刚下载的压缩包即可。</div>
-      <div class="tut-step">↳ 点击即可下载安装包：<br><a href="https://WoShiYiGeManHuaJia.github.io/yun139-ghpanel/EditThisCookie.zip" target="_blank" rel="noopener">下载 EditThisCookie.zip（点击安装）</a></div>
-      <div class="tut-step">（电脑也可走官方商店安装：<a href="https://chromewebstore.google.com/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg" target="_blank" rel="noopener">EditThisCookie · Chrome 网上应用店</a>）</div>
-      <div class="tut-step"><b>② 登录移动云盘</b></div>
+            <div class="tut-step"><b>① 安装 EditThisCookie 扩展</b></div>
+      <div class="tut-step">电脑 Chrome / Edge：打开下方官方商店链接，点「添加至浏览器」即可。手机端请用 <b>Kiwi Browser</b>（安卓，支持扩展），同样从商店安装。</div>
+      <div class="tut-step">↳ <a href="https://chromewebstore.google.com/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg" target="_blank" rel="noopener">EditThisCookie 官方商店地址（点此安装）</a></div>
+<div class="tut-step"><b>② 登录移动云盘</b></div>
       <div class="tut-step">打开 <a href="https://yun.139.com/" target="_blank" rel="noopener">https://yun.139.com/</a>，用手机号 + 验证码登录。</div>
       <div class="tut-step"><b>③ 一键导出 Cookie</b></div>
       <div class="tut-step">点浏览器右上角的扩展图标（EditThisCookie），在弹出的面板里点中间那个「下载 / 导出」箭头按钮（如下图）：</div>
@@ -227,16 +258,6 @@
   const REPO_DEFAULT = "WoShiYiGeManHuaJia/yun139-ghpanel";
   const LS_REPO = "gh139_repo", LS_TOKEN = "gh139_token", LS_KEY = "gh139_key", LS_ACC = "gh139_acc";
 
-  const TASKS = [
-    { id: "sign",        label: "每日签到",           beans: "自动累计豆" },
-    { id: "backup",      label: "开启云盘备份",       beans: "+200豆" },
-    { id: "notify31",    label: "连续31天消息通知",   beans: "+200豆" },
-    { id: "upload100",   label: "上传满100个文件",    beans: "" },
-    { id: "manual_upload", label: "手动上传",          beans: "+6豆" },
-    { id: "ai_camera",   label: "AI相机体验",         beans: "" },
-    { id: "ai_chat",     label: "AI对话",             beans: "+20豆" },
-    { id: "lib_read",    label: "图书馆阅读",         beans: "+10豆" },
-  ];
 
   const $ = id => document.getElementById(id);
   const log = (msg, cls) => { const box = $("log"); const line = document.createElement("div"); line.className = "l-" + (cls || ""); line.textContent = "[" + new Date().toLocaleTimeString() + "] " + msg; box.prepend(line); };
@@ -453,30 +474,67 @@
   function fmt(ms) { const d = new Date(ms); const p = n => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes()); }
 
   // ---- 云朵任务列表渲染 ----
-  function renderTasks() {
+  function renderTaskPlaceholder(text) {
+    const box = $("tasklist");
+    box.innerHTML = '<div class="empty">' + (text || '点「拉取真实任务」从官方接口获取') + '</div>';
+  }
+
+  let REAL_TASKS = [];
+  function progOf(t) {
+    // 进度文本 "17/100" → 百分比
+    const m = String(t.process || "").match(/(\d+)\s*\/\s*(\d+)/);
+    return m ? Math.min(100, Math.round(+m[1] / +m[2] * 100)) : null;
+  }
+  function taskRow(t) {
+    const auto = t.steps && t.steps.indexOf("click") >= 0;
+    const done = t.state === "FINISH";
+    const per = (t.limit === "DAY" ? "每日" : t.limit === "MONTH" ? "每月" : "一次性");
+    const lb = document.createElement("label");
+    lb.className = "tsk" + (done ? " done" : "") + (auto ? "" : " manual");
+    const pct = progOf(t);
+    let sub = per;
+    if (t.process) sub += " · 进度 " + t.process;
+    if (!auto) sub += " · 需在 App 内操作";
+    lb.innerHTML =
+      '<input type="checkbox" data-id="' + t.id + '"' + (auto && !done ? " checked" : "") + (auto && !done ? "" : " disabled") + '>'
+      + '<span class="tn">' + (t.name || ("任务" + t.id))
+      + '<small>' + sub + '</small>'
+      + (pct !== null && !done ? '<div class="bar"><span style="width:' + pct + '%"></span></div>' : '')
+      + '</span>'
+      + (done ? '<span class="pill fin">已完成</span>' : (auto ? '<span class="pill auto">可自动</span>' : '<span class="pill manual">需手动</span>'))
+      + (t.limit === "DAY" ? '<span class="pill day">日</span>' : t.limit === "MONTH" ? '<span class="pill mon">月</span>' : '')
+      + (t.reward ? '<i>' + t.reward + '</i>' : '');
+    return lb;
+  }
+  function renderReal(tasks) {
+    REAL_TASKS = tasks || [];
     const box = $("tasklist");
     box.innerHTML = "";
-    TASKS.forEach(function (t) {
-      const lb = document.createElement("label"); lb.className = "tsk";
-      lb.innerHTML = '<input type="checkbox" data-id="' + t.id + '"' + (t.id === "sign" ? " checked" : "") + '> ' + t.label + (t.beans ? ' <i>' + t.beans + '</i>' : '');
-      box.appendChild(lb);
-    });
-  }
-  let REAL_TASKS = [];
-  function renderReal(tasks) {
-    REAL_TASKS = tasks;
-    const box = $("tasklist"); box.innerHTML = "";
-    tasks.forEach(function (t) {
-      const lb = document.createElement("label"); lb.className = "tsk";
-      const per = (t.limit === "DAY" ? "每日" : t.limit === "MONTH" ? "每月" : "一次性");
-      const st = (t.state === "FINISH" ? "已完成" : "待完成");
-      const auto = t.steps.indexOf("click") >= 0;
-      lb.innerHTML = '<input type="checkbox" data-id="' + t.id + '"' + (auto && t.state !== "FINISH" ? " checked" : "") + '> '
-        + t.name + (t.reward ? ' <i>' + t.reward + '</i>' : '')
-        + ' <span style="opacity:.55;font-size:12px">[' + per + ' · ' + st
-        + (t.process ? ' · 进度 ' + t.process : '') + ' · ' + (auto ? '可自动' : '需手动') + ']</span>';
-      box.appendChild(lb);
-    });
+    if (!REAL_TASKS.length) { renderTaskPlaceholder("本次未返回任务，可稍后重试"); return; }
+    const auto = REAL_TASKS.filter(t => t.steps && t.steps.indexOf("click") >= 0 && t.state !== "FINISH");
+    const done = REAL_TASKS.filter(t => t.state === "FINISH");
+    const manual = REAL_TASKS.filter(t => !(t.steps && t.steps.indexOf("click") >= 0) && t.state !== "FINISH");
+    if (auto.length) {
+      const h = document.createElement("div");
+      h.className = "grp-title"; h.textContent = "可自动执行（已默认勾选）";
+      box.appendChild(h); auto.forEach(t => box.appendChild(taskRow(t)));
+    }
+    if (manual.length) {
+      const d = document.createElement("details");
+      d.innerHTML = '<summary>需在 App 内手动完成（' + manual.length + ' 个，点击展开看进度）</summary>';
+      const wrap = document.createElement("div");
+      wrap.className = "tasklist"; wrap.style.marginTop = "6px";
+      manual.forEach(t => wrap.appendChild(taskRow(t)));
+      d.appendChild(wrap); box.appendChild(d);
+    }
+    if (done.length) {
+      const d = document.createElement("details");
+      d.innerHTML = '<summary>已完成（' + done.length + ' 个）</summary>';
+      const wrap = document.createElement("div");
+      wrap.className = "tasklist"; wrap.style.marginTop = "6px";
+      done.forEach(t => wrap.appendChild(taskRow(t)));
+      d.appendChild(wrap); box.appendChild(d);
+    }
   }
   function selectedTasks() {
     return Array.prototype.map.call(document.querySelectorAll("#tasklist input:checked"), function (c) { return c.dataset.id; });
@@ -510,6 +568,10 @@
     } else if (kind === "task") {
       setBusy($("btn_tasks"), false);
       toast("云朵任务执行完成", j.ok ? "" : "err");
+    } else if (kind === "receive") {
+      setBusy($("btn_receive"), false);
+      renderReceive(j.receive);
+      toast(j.ok ? ("领取完成 +" + ((j.receive && j.receive.got) || 0)) : "本次无可领气泡", j.ok ? "" : "err");
     }
     pending = null;
   }
@@ -590,6 +652,28 @@
       log(e.message, "err"); toast(e.message, "err");
     }
   }
+  async function runReceive() {
+    const list = await loadAccounts();
+    if (!list.length) { toast("无账号，请先添加", "err"); return; }
+    setBusy($("btn_receive"), true, "领取中…（约 3 分钟）");
+    pending = { type: "receive", kind: "receive" };
+    try {
+      await dispatch("receive", { cipher: await encText(JSON.stringify(list)) });
+      log("气泡领取已触发，后台需要启动真实浏览器，约 2-3 分钟…", "warn");
+      lastTs = ""; startWatch();
+    } catch (e) {
+      setBusy($("btn_receive"), false); pending = null;
+      log(e.message, "err"); toast(e.message, "err");
+    }
+  }
+  function renderReceive(rb) {
+    if (!rb) return;
+    if (rb.after !== undefined && rb.after !== null) $("st_bean").textContent = rb.after;
+    $("st_got").textContent = (rb.got > 0 ? "+" : "") + (rb.got || 0);
+    $("st_time").textContent = new Date().toTimeString().slice(0, 5);
+    (rb.steps || []).forEach(function (x) { log("· " + x, x.indexOf("+") >= 0 ? "ok" : ""); });
+  }
+
   async function runTasks() {
     const tasks = selectedTasks();
     if (!tasks.length) { toast("请至少勾选一个任务", "err"); return; }
@@ -640,7 +724,13 @@
   $("btn_login").onclick = runLogin;
   $("btn_tasks").onclick = runTasks;
   $("btn_list").onclick = fetchTaskList;
-  loadCfg(); applyUrlCfg(); renderAccounts(); renderTasks(); startWatch();
+  $("btn_receive").onclick = runReceive;
+  loadCfg(); applyUrlCfg(); renderAccounts(); renderTaskPlaceholder(); startWatch();
+  pollResult().then(function () {
+    fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`,
+      { headers: { Authorization: "token " + (sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json" } })
+      .then(r => r.ok ? r.json() : null).then(j => { if (j && j.receive) renderReceive(j.receive); }).catch(function () {});
+  });
 })();
 </script>
 </body>
