@@ -3,6 +3,16 @@ name: yun139-panel-task
 on:
   repository_dispatch:
     types: [sign, refresh, send_code, do_login, task]
+  workflow_dispatch:
+    inputs:
+      event_type:
+        description: 事件类型 sign/refresh/send_code/do_login/task
+        required: true
+        type: string
+      payload:
+        description: JSON payload 字符串
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -21,8 +31,8 @@ jobs:
 
       - name: Execute task
         env:
-          EVENT_TYPE: ${{ github.event.action }}
-          PAYLOAD: ${{ toJson(github.event.client_payload) }}
+          EVENT_TYPE: ${{ github.event.action || inputs.event_type }}
+          PAYLOAD: ${{ github.event.client_payload != null && toJson(github.event.client_payload) || inputs.payload || '' }}
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
         run: node actions/run.mjs
 
