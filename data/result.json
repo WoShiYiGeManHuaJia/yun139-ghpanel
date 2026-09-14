@@ -1,6 +1,23 @@
 {
-  "ts": "2026-09-14 11:28:51",
-  "type": "do_login",
-  "ok": false,
-  "msg": "登录被风控拦截(ec=S001)"
+  "ts": "2026-09-14 11:29:21",
+  "type": "sign",
+  "ok": true,
+  "msg": "签到完成",
+  "results": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "name": "139-4642",
+      "ok": false,
+      "message": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "name": "139-6553",
+      "ok": false,
+      "message": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+    }
+  ],
+  "enc_accounts": "yshZVGKsBvst6gG+N/bXw2v2IvKrnvFKnsg3dzL8F6wEGpsQTPB9NO8jRRzTM8H/foods+lhcPSY6k+Rgl5TjgmTW/hNmwkeFZQouZm4sBoIR8RhuVFx+h1kc36DDlsw23HLKzSVIlFWK/EzxhZEeBbYIC0qoacsRhioXUHZqQuClFb3ygx67DV13+Bhpy2vlH107BU3mjbuPWF/8EtQZe8fYoIbOuozxy0nwGYHOY9nx91RihnBqj3F1NP7jUgHErOIwrYxL/1XU/fSTB9+xBO1+pFwUO4Rgd3qEZoxeH3wjOF21c2Ky+k7N7lbggTYK2WLLulBd+3Lo0wqdRDgyPgRetJifHL0a3B6vmCTsvM2n156MmH5P6jjyCD2enJu2DdMvZJevzhew0NQ/oksr+K5r1rqgEol9/qwsNSwO08SLdrEQr2IQaWOxjfzuZPuklmdEFLAzByKF5QR1TmFSs/m7ct+cp70ciHMP5aAa/DP8ZvbKRSkLkX/Xn6zgZgdGmCDmuX6bL03/w+ej12PFRYCS1tQZ/xJ/yVz1+/ays+tlp4c44VTPkAkpkgeIfQ9ITv5gQdGL4UApKyViDDZKzUi0bRxWUyhhxeTcKjiEpDARW4TOoN7xVDK4x5X73DrQfP6It5qUk73qRBikSpIyRTMR/dGR7wW+pU3q2Nriyb3LZqetYglA335mAxL5oWgQRvwA3EUzsP+cg78i6xj35Ru07EQ4z7ao8MsfWTMiTPirBnJ/X7VwEYZWe2wQu2YZBa/j28f/DYY1a/Qil/Tn3gVeRtCKFprGouACKFjZiLMFfCsuJ1P+zv6RzdHXxNDmyGGCYSIuJ9bNj/oevYvpaFmXlxnILYlRb9WpJeAyv/3Q+hQyQM/YDPIXsOZ4iSgGvshGxKrzA5eXDxgeO818W6fFmkhRKco9Lz6uVKjr6nTUZPqCCT+/hdWFCAWoZr1YbarMyKItG/GoK1ijjw31sbs+zXgafKAaczMX0NZRsHWTGnTC+3V/Zo4C/XlDdaZRrIBcYQ74tB8qJOt2JqI2m30hLsoXHwj7t7CStmHquzZyUvxiJz/8/+GMg83JB6G0vO84NSw3r8QuqCA32jmRncK7Wfx9892Fd7evbOLTGNST04tkDti8ZtYNqwVBijZDiH1B/FsgwLZ9rNE1F9s8pG47kpmmqzQ7kn0dZ4gfo7byd9uHDXaof02siLTz8l/7gvP8G11KaySoxDCGwqb/n302W57AAM="
 }
