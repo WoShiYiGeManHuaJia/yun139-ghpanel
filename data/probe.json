@@ -1,64 +1,39 @@
 {
- "ts": "2026-09-14T16:49:21.583Z",
+ "ts": "2026-09-14T16:52:24.075Z",
  "steps": [
   {
-   "k": "jwt",
-   "v": "ok"
+   "k": "模块 6cac",
+   "v": "未找到"
   },
   {
-   "k": "⓪ 基线",
-   "v": {
-    "total": 919,
-    "toReceive": 12,
-    "list": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]"
-   }
+   "k": "模块 e9c4",
+   "v": "未找到"
   },
   {
-   "k": "★① 原样 B2 {cloudType:0,cloudNum:6,recordId}",
-   "v": {
-    "code": 615,
-    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
-    "result": null,
-    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
-    "总豆": "919→919",
-    "待领": "12→12",
-    "清单变化": "否"
-   }
+   "k": "搜索 localStorage.getItem",
+   "v": "rn Ct.apply(this,arguments)}function Ct(){return Ct=Object(o[\"a\"])(Object(a[\"a\"])().mark((function e(){var t,n,o,r,l,i,s,u;return Object(a[\"a\"])().wrap((function(e){while(1)switch(e.prev=e.next){case 0:if(t=j.value.slice(-6),n=\"cardInfo_\".concat(t),e.prev=2,o=localStorage.getItem(n),o){e.next=6;break}return e.abrupt(\"return\",!0);case 6:if(r=o.split(\"_\"),l=Object(c[\"a\"])(r,2),i=l[0],s=l[1],u=s===t,u&&Object(Qc[\"d\"])(i,\"month\")){e.next=10;break}return e.abrupt(\"return\",!0);case 10:return e.abrupt(\"return\",!1);case 13:return e.prev=13,e.t0=e[\"catch\"](2),e.a"
   },
   {
-   "k": "★② 原样 B3 {cloudType:0,cloudNum:6,recordId}",
-   "v": {
-    "code": 615,
-    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
-    "result": null,
-    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
-    "总豆": "919→919",
-    "待领": "12→12",
-    "清单变化": "否"
-   }
+   "k": "搜索 localStorage.getItem",
+   "v": "\"a\"].getPopInfo(t);case 9:if(l=e.sent,0===l.data.code){e.next=12;break}return e.abrupt(\"return\",!1);case 12:if(s=l.data.result,s.showPop){e.next=15;break}return e.abrupt(\"return\",!1);case 15:if(te.commPopInfo.popUrl=s.popUrl,te.commPopInfo.popLink=s.popLink,u=localStorage.getItem(o),u){e.next=23;break}return te.show=11,localStorage.setItem(o,\"\".concat(r,\"_\").concat(n)),i(\"提醒弹窗\",\"\"),e.abrupt(\"return\",!0);case 23:if(d=u.split(\"_\"),b=Object(c[\"a\"])(d,2),p=b[0],m=b[1],f=m===n,f&&Object(Qc[\"d\"])(p,s.popRate)){e.next=30;break}return te.show=11,localStorage.set"
   },
   {
-   "k": "  ③ 原样 B1 {cloudType:2,cloudNum:32}(应下月)",
-   "v": {
-    "code": 615,
-    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
-    "result": null,
-    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
-    "总豆": "919→919",
-    "待领": "12→12",
-    "清单变化": "否"
-   }
+   "k": "搜索 lock",
+   "v": "();case 2:Object(r[\"nextTick\"])((function(){document.querySelector(\".cloudRecord_list\").addEventListener(\"scroll\",$)}));case 3:case\"end\":return e.stop()}}),e)})))),function(e,t){return Object(r[\"openBlock\"])(),Object(r[\"createElementBlock\"])(\"div\",E,[Object(r[\"createElementVNode\"])(\"div\",N,[Object(r[\"createElementVNode\"])(\"div\",V,[y,Object(r[\"createElementVNode\"])(\"p\",w,Object(r[\"toDisplayString\"])(Object(r[\"unref\"])(i)?parseFloat(Objec"
   },
   {
-   "k": "最终",
-   "v": {
-    "起始总豆": 919,
-    "现在总豆": 919,
-    "净增": 0,
-    "待领": "12→12",
-    "清单": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]",
-    "成功": "无"
-   }
+   "k": "搜索 lock",
+   "v": "unction(){document.querySelector(\".cloudRecord_list\").addEventListener(\"scroll\",$)}));case 3:case\"end\":return e.stop()}}),e)})))),function(e,t){return Object(r[\"openBlock\"])(),Object(r[\"createElementBlock\"])(\"div\",E,[Object(r[\"createElementVNode\"])(\"div\",N,[Object(r[\"createElementVNode\"])(\"div\",V,[y,Object(r[\"createElementVNode\"])(\"p\",w,Object(r[\"toDisplayString\"])(Object(r[\"unref\"])(i)?parseFloat(Object(r[\"unref\"])(i).toString()):0),1)"
+  },
+  {
+   "k": "搜索 锁定",
+   "v": "okTaskPop\"},Rt={key:9,class:\"orderSigninPop\"},Ft={class:\"order_signin\"},Xt=gt((function(){return Object(r[\"createElementVNode\"])(\"p\",{class:\"order_signin_text\"},[Object(r[\"createTextVNode\"])(\"预定成功！已为您锁定次月签到专属福利，次月来云朵中心签到，即可领取\"),Object(r[\"createElementVNode\"])(\"span\",null,\"50豆\"),Object(r[\"createTextVNode\"])(\"奖励。\")],-1)})),_t={key:10,class:\"commTipPop\"},Yt={class:\"commTip_pop\"},qt=[\"src\"],Gt=Object(r[\"defineComponent\"])({__name:\"activityP"
+  }
+ ],
+ "note": [
+  {
+   "k": "文件",
+   "v": "342208 字符"
   }
  ]
 }
