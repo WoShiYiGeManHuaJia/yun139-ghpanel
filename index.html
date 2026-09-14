@@ -37,7 +37,18 @@
   .acc.flash { outline:2px solid var(--ok); border-radius:10px; animation:flash 2.5s ease; }
   @keyframes flash { 0% { box-shadow:0 0 0 0 rgba(52,211,153,.55); } 70% { box-shadow:0 0 0 12px rgba(52,211,153,0); } 100% { box-shadow:none; } }
   .ops { display:flex; gap:8px; margin-top:12px; }
-  .ops #inp_code { flex:1; padding:12px; font-size:16px; letter-spacing:4px; }
+  .vcode { margin-top:12px; }
+  #inp_code { padding:15px; font-size:20px; letter-spacing:10px; text-align:center; font-weight:700; color:var(--acc); caret-color:var(--acc); min-height:50px; }
+  .risk-tip { margin-top:10px; background:rgba(251,191,36,.09); border:1px solid rgba(251,191,36,.35); color:var(--warn); font-size:12px; padding:9px 11px; border-radius:8px; line-height:1.7; }
+  .tut-step { margin:8px 0; font-size:13px; line-height:1.75; }
+  .tut-step b { color:var(--acc); }
+  .tut a { color:var(--acc); word-break:break-all; }
+  .tut-img { width:100%; max-width:300px; display:block; margin:8px auto; border:1px solid var(--line); border-radius:8px; }
+  .card { transition:transform .15s ease, box-shadow .15s ease; }
+  .card:hover { transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.25); }
+  button { transition:filter .15s ease, opacity .15s ease; }
+  button:hover { filter:brightness(1.1); }
+  .tab, .btn, input, select { border-radius:8px; }
   .divider { text-align:center; color:var(--mut); font-size:11px; margin:14px 0 2px; border-bottom:1px dashed var(--line); padding-bottom:5px; }
   #log { background:#0b1220; border:1px solid var(--line); border-radius:8px; padding:10px; font-size:12px; font-family:ui-monospace,Menlo,Consolas,monospace; color:var(--mut); min-height:140px; max-height:340px; overflow-y:auto; white-space:pre-wrap; word-break:break-all; }
   #log .l-ok { color:var(--ok); } #log .l-err { color:var(--err); } #log .l-warn { color:var(--warn); }
@@ -110,16 +121,18 @@
         <input id="inp_phone" placeholder="手机号，如 138xxxx8888" style="flex:1.7">
         <button class="btn warn" id="btn_send" style="flex:0.55;margin:0">发验证码</button>
       </div>
-      <div class="ops">
+      <div class="vcode">
         <input id="inp_code" placeholder="输入短信中的 6 位验证码">
-        <button class="btn" id="btn_login" style="margin:0">登录并抓令牌</button>
       </div>
-      <div class="hint">登录成功后，令牌会自动保存到上方账号列表。<b>登录易被运营商风控拦截</b>，失败时建议直接切到方式二粘贴。</div>
+      <button class="btn" id="btn_login">登录并抓令牌</button>
+      <div class="risk-tip">提示：因网络波动或运营商风控，登录有概率失败；若失败请稍后重试，或直接切「方式二 粘贴 authorization」，成功率更高。</div>
+      <div class="hint">登录成功后，令牌会自动保存到上方账号列表。</div>
     </div>
 
     <div class="pane" id="pane_m2" style="display:none">
       <div style="margin-top:12px">
         <button class="btn ghost" id="btn_paste">＋ 粘贴 authorization 添加</button>
+        <button class="btn ghost" id="btn_tut" style="margin-top:8px">如何获取 authorization？点我看图文教程</button>
         <div class="hint">在 App 里抓包复制整段授权内容（浏览器扩展导出的 <code>Authorization: Basic …</code>、JSON 或 cURL 均可）粘贴到弹窗，点「识别并添加」自动解析为账号，无需验证码。登录总被风控拦截时请优先用这种方式。</div>
       </div>
     </div>
@@ -172,6 +185,28 @@
       <div class="row">
         <button class="btn ghost" id="btn_paste_ok" style="margin:0">识别并添加</button>
         <button class="btn ghost" id="btn_paste_cancel" style="margin:0">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 获取 authorization 图文教程弹窗 -->
+  <div class="mask" id="maskTut">
+    <div class="dialog">
+      <h3>如何获取 authorization（图文教程）</h3>
+      <div class="tip">不需要抓包工具，用支持 Chrome 扩展的浏览器装一个小扩展，一键就能导出。推荐浏览器：<b>Kiwi Browser（安卓手机）</b>、<b>Microsoft Edge / Google Chrome（电脑）</b>。</div>
+      <div class="tut-step"><b>① 安装 EditThisCookie 扩展</b></div>
+      <div class="tut-step">安卓 Kiwi Browser / 电脑 Chromium 系：菜单 → <code>扩展程序</code> → 开启「开发者模式」→ 「+ 从 .zip/.crx 文件安装」，选择刚下载的压缩包即可。</div>
+      <div class="tut-step">↳ 点击即可下载安装包：<br><a href="https://WoShiYiGeManHuaJia.github.io/yun139-ghpanel/EditThisCookie.zip" target="_blank" rel="noopener">下载 EditThisCookie.zip（点击安装）</a></div>
+      <div class="tut-step">（电脑也可走官方商店安装：<a href="https://chromewebstore.google.com/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg" target="_blank" rel="noopener">EditThisCookie · Chrome 网上应用店</a>）</div>
+      <div class="tut-step"><b>② 登录移动云盘</b></div>
+      <div class="tut-step">打开 <a href="https://yun.139.com/" target="_blank" rel="noopener">https://yun.139.com/</a>，用手机号 + 验证码登录。</div>
+      <div class="tut-step"><b>③ 一键导出 Cookie</b></div>
+      <div class="tut-step">点浏览器右上角的扩展图标（EditThisCookie），在弹出的面板里点中间那个「下载 / 导出」箭头按钮（如下图）：</div>
+      <img class="tut-img" src="https://raw.githubusercontent.com/WoShiYiGeManHuaJia/yun139-ghpanel/main/export-btn.png" alt="扩展导出按钮示例">
+      <div class="tut-step"><b>④ 粘贴回本页</b></div>
+      <div class="tut-step">导出内容会自动复制到剪贴板；回到本页「方式二」→「＋ 粘贴 authorization 添加」，整体粘贴 →「识别并添加」即可。</div>
+      <div class="row">
+        <button class="btn ghost" id="btn_tut_close" style="margin:0">我知道了</button>
       </div>
     </div>
   </div>
@@ -548,6 +583,9 @@
   $("tab_m1").onclick = function () { switchMethod(1); };
   $("tab_m2").onclick = function () { switchMethod(2); };
   $("btn_paste").onclick = function () { openPasteDialog(); };
+  $("btn_tut").onclick = function () { $("maskTut").classList.add("show"); };
+  $("btn_tut_close").onclick = function () { $("maskTut").classList.remove("show"); };
+  $("maskTut").addEventListener("click", function (e) { if (e.target === $("maskTut")) $("maskTut").classList.remove("show"); });
   $("btn_paste_ok").onclick = submitPaste;
   $("btn_paste_cancel").onclick = closePasteDialog;
   $("maskPaste").addEventListener("click", function (e) { if (e.target === $("maskPaste")) closePasteDialog(); });
