@@ -1,46 +1,36 @@
 {
-  "ts": "2026-09-14 18:50:05",
+  "ts": "2026-09-14 18:56:33",
   "type": "receive",
   "ok": true,
-  "msg": "137****6553 null→null +0",
+  "msg": "172****9953 960→960 +0",
   "badAccounts": [],
   "receiveList": [
     {
-      "phone": "13717306553",
-      "masked": "137****6553",
+      "phone": "17274079953",
+      "masked": "172****9953",
       "ok": true,
-      "before": null,
-      "after": null,
+      "before": 960,
+      "after": 960,
       "got": 0,
       "steps": [
-        "初始云豆 null",
-        "第1次无变化（null→null）",
-        "第2次无变化（null→null）",
-        "第3次无变化（null→null）",
-        "第4次无变化（null→null）",
-        "第5次无变化（null→null）",
-        "第6次无变化（null→null）",
-        "最终云豆 null"
+        "页面 token: 已获取",
+        "初始云豆 960",
+        "最终云豆 960"
       ],
       "error": ""
     }
   ],
   "receive": {
-    "phone": "13717306553",
-    "masked": "137****6553",
+    "phone": "17274079953",
+    "masked": "172****9953",
     "ok": true,
-    "before": null,
-    "after": null,
+    "before": 960,
+    "after": 960,
     "got": 0,
     "steps": [
-      "初始云豆 null",
-      "第1次无变化（null→null）",
-      "第2次无变化（null→null）",
-      "第3次无变化（null→null）",
-      "第4次无变化（null→null）",
-      "第5次无变化（null→null）",
-      "第6次无变化（null→null）",
-      "最终云豆 null"
+      "页面 token: 已获取",
+      "初始云豆 960",
+      "最终云豆 960"
     ],
     "error": ""
   }
