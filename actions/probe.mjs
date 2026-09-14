@@ -44,7 +44,17 @@ async function post(url, body) {
 }
 async function main() {
   // 1) 路由查询
-  out.route = await post("https://user-njs.yun.139.com/user/route/qryRoutePolicy", {});
+  const variants = [
+    { account: PHONE, accountType: 1 },
+    { commonAccountInfo: { account: PHONE, accountType: 1 } },
+    { account: PHONE },
+    { userName: PHONE, accountType: 1 },
+  ];
+  out.route = [];
+  for (const v of variants) {
+    const r = await post("https://user-njs.yun.139.com/user/route/qryRoutePolicy", v);
+    out.route.push({ req: JSON.stringify(v).slice(0, 60), status: r.status, body: r.body.slice(0, 400) });
+  }
   // 2) 直接试 yun.139.com 的 /file/create
   const png = Buffer.from("89504e470d0a1a0a0000000d4948445200000001000000010806000000" +
     "1f15c4890000000d4944415478da63f8cfc0f01f0005fb02fe3f3b7e6b0000000049454e44ae426082", "hex");
