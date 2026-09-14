@@ -1,22 +1,6 @@
 {
-  "ts": "2026-09-14 18:00:23",
-  "type": "receive",
-  "ok": true,
-  "msg": "气泡领取完成，云豆 934 → 960（+26）",
-  "receive": {
-    "ok": true,
-    "before": 934,
-    "after": 960,
-    "got": 26,
-    "recv": [
-      "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":20,\"total\":954,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_pr",
-      "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":6,\"total\":960,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_pro"
-    ],
-    "steps": [
-      "初始云豆 934",
-      "第1次领取 +20（934→954）",
-      "第2次领取 +6（954→960）",
-      "最终云豆 960"
-    ]
-  }
+  "ts": "2026-09-14 18:05:33",
+  "type": "status",
+  "ok": false,
+  "msg": "缺少加密数据或密钥"
 }
