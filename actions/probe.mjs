@@ -16,7 +16,6 @@ async function getJwt() {
   if (String(j.code) !== "0") throw new Error("querySpecToken 失败 " + j.code);
   const r2 = await fetch(`${CY7071}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(j.data.token)}`, { headers: { "Host": H7071, "Accept": "*/*" }, signal: AbortSignal.timeout(20000) });
   const j2 = await r2.json();
-  if (!j2 || !j2.result || !j2.result.token) throw new Error("tyrzLogin 失败");
   JWT = j2.result.token;
 }
 async function req(p, host, tries) {
@@ -24,44 +23,66 @@ async function req(p, host, tries) {
   for (let i = 0; i < (tries || 3); i++) {
     try { const r = await fetch((host === H7071 ? CY7071 : CY) + p, { headers: hJ(host), signal: AbortSignal.timeout(20000) });
       const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
-      return { status: r.status, j, raw: t.slice(0, 400) };
+      return { status: r.status, j, raw: t.slice(0, 600) };
     } catch (e) { last = e; await new Promise(r2 => setTimeout(r2, 1200 * (i + 1))); }
   }
   return { status: 0, raw: "失败:" + String((last && last.message) || last) };
 }
+const flat = (j) => { const a = []; for (const v of Object.values((j && j.result) || {})) if (Array.isArray(v)) for (const t of v) a.push(t); return a; };
+
 async function main() {
   await getJwt(); log("jwt", "ok");
-  // 不同 marketname 的任务列表
-  for (const mn of ["sign_in_3", "newsign_139mail", "sign_in_4", "sign_in"]) {
-    const r = await req(`/market/signin/task/taskList?marketname=${mn}`, HN, 2);
-    if (r.status === 200 && r.j && String(r.j.code) === "0") {
-      const res = r.j.result || {};
-      const groups = {};
-      for (const [k, v] of Object.entries(res)) {
-        if (Array.isArray(v)) groups[k] = v.map(t => ({ id: t.id, name: String(t.name||"").replace(/<[^>]*>/g,""), state: t.state, currstep: t.currstep, step: (t.stepTypeSet||[]).join("/"), reward: t.content_display2||"" }));
-        else groups[k] = { _type: typeof v, _val: JSON.stringify(v).slice(0, 150) };
-      }
-      log("marketname=" + mn, groups);
-    } else log("marketname=" + mn, { status: r.status, raw: r.raw.slice(0, 120) });
+  // ① 领取前快照：找出所有任务的 state 与可疑"待领取"字段
+  const before = await req("/market/signin/task/taskList?marketname=sign_in_3", HN, 3);
+  const list0 = flat(before.j);
+  log("① 任务数", list0.length);
+  // 打印 106（刚完成的上传任务）完整字段，以及所有 state 分布
+  const states = {};
+  for (const t of list0) states[t.state] = (states[t.state] || 0) + 1;
+  log("① state 分布", states);
+  const t106 = list0.find(t => String(t.id) === "106");
+  if (t106) { log("① 106(刚完成) 字段", { state: t106.state, currstep: t106.currstep, process: t106.process,
+    cloudId: t106.cloudId, limitCloud: t106.limitCloud, recordid: t106.recordid, taskType: t106.taskType,
+    hasNda: t106.hasNda, hasBak: t106.hasBak, stepTypeSet: JSON.stringify(t106.stepTypeSet),
+    button: JSON.stringify(t106.button).slice(0,300), rule: JSON.stringify(t106.rule).slice(0,250),
+    show: JSON.stringify(t106.show).slice(0,250) }); }
+  // 找所有非 WAIT/FINISH 的任务（可能是待领取态）
+  const odd = list0.filter(t => t.state !== "WAIT" && t.state !== "FINISH");
+  log("① 异常 state 任务", odd.map(t => ({ id: t.id, name: String(t.name||"").replace(/<[^>]*>/g,""), state: t.state })));
+  // ② 尝试一批领取接口（记录响应）
+  const cands = [
+    ["/market/signin/task/click?key=award&id=106", HN],
+    ["/market/signin/task/click?key=receive&id=106", HN],
+    ["/market/signin/task/click?key=cloud&id=106", HN],
+    ["/market/signin/task/click?key=task&id=106", HN],
+    ["/market/signin/page/receive", HN],
+    ["/market/signin/task/receive?id=106", HN],
+    ["/market/signin/task/award?id=106", HN],
+    ["/market/signin/cloud/receive?id=106", HN],
+    ["/market/signin/task/click?key=award&id=106", H7071],
+    ["/market/signin/page/receive", H7071],
+  ];
+  const res = [];
+  for (const [p, host] of cands) {
+    const r = await req(p, host, 2);
+    res.push({ p: p.slice(0, 60), host: host === H7071 ? ":7071" : "默认", status: r.status,
+      code: r.j ? r.j.code : null, msg: r.j ? r.j.msg : null, body: r.raw.slice(0, 150) });
   }
-  // 拿一个 FINISH 任务的完整 button 字段（找气泡 link）
-  const r = await req("/market/signin/task/taskList?marketname=sign_in_3", HN, 3);
-  const all = [];
-  for (const arr of Object.values((r.j && r.j.result) || {})) if (Array.isArray(arr)) for (const t of arr) all.push(t);
-  const fin = all.find(t => t.state === "FINISH" && t.content_display2);
-  if (fin) {
-    log("FINISH任务完整", { id: fin.id, name: String(fin.name||"").replace(/<[^>]*>/g,""), state: fin.state,
-      currstep: fin.currstep, process: fin.process, cloudId: fin.cloudId, limitCloud: fin.limitCloud,
-      recordid: fin.recordid, hasNda: fin.hasNda, hasBak: fin.hasBak, taskType: fin.taskType,
-      button: JSON.stringify(fin.button).slice(0, 400), rule: JSON.stringify(fin.rule).slice(0, 200),
-      show: JSON.stringify(fin.show).slice(0, 200) });
-  }
-  // 试 hecheng1T 在 7071
-  const hc = await req("/market/signin/hecheng1T/info?op=info", H7071, 2);
-  log("云朵大作战[:7071]", { status: hc.status, raw: hc.raw.slice(0, 200) });
-  // 试 prizeApi（待领取奖品）
-  const pz = await req("/market/prizeApi/checkPrize/getUserPrizeLogPage?currPage=1&pageSize=15", HN, 2);
-  log("待领取奖品", { status: pz.status, raw: pz.raw.slice(0, 300) });
+  log("② 领取接口尝试", res);
+  // ③ 领取后再查，看 state 是否变化
+  const after = await req("/market/signin/task/taskList?marketname=sign_in_3", HN, 3);
+  const list1 = flat(after.j);
+  const a106 = list1.find(t => String(t.id) === "106");
+  log("③ 106 领取后", a106 ? { state: a106.state, currstep: a106.currstep, cloudId: a106.cloudId } : "未找到");
+  const states1 = {};
+  for (const t of list1) states1[t.state] = (states1[t.state] || 0) + 1;
+  log("③ state 分布(后)", states1);
+  // 变化对比
+  const diff = [];
+  for (const t0 of list0) { const t1 = list1.find(x => String(x.id) === String(t0.id));
+    if (t1 && JSON.stringify({s:t0.state,c:t0.currstep}) !== JSON.stringify({s:t1.state,c:t1.currstep}))
+      diff.push({ id: t0.id, name: String(t0.name||"").replace(/<[^>]*>/g,""), from: t0.state+"/"+t0.currstep, to: t1.state+"/"+t1.currstep }); }
+  log("③ 前后变化", diff.length ? diff : "无变化");
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
   .finally(async () => { const fs = await import("fs");
