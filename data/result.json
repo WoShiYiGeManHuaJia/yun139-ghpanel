@@ -1,46 +1,25 @@
 {
-  "ts": "2026-09-14 18:32:08",
-  "type": "receive",
+  "ts": "2026-09-14 18:36:32",
+  "type": "status",
   "ok": true,
-  "msg": "137****6553 null→null +0",
-  "receiveList": [
+  "msg": "已查询 1 个账号",
+  "status": [
     {
-      "phone": "13717306553",
-      "masked": "137****6553",
+      "phone": "17274079953",
+      "masked": "172****9953",
       "ok": true,
-      "before": null,
-      "after": null,
-      "got": 0,
-      "steps": [
-        "初始云豆 null",
-        "第1次无变化（null→null）",
-        "第2次无变化（null→null）",
-        "第3次无变化（null→null）",
-        "第4次无变化（null→null）",
-        "第5次无变化（null→null）",
-        "第6次无变化（null→null）",
-        "最终云豆 null"
+      "total": 960,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 38,
+      "list": [
+        {
+          "cloudType": 2,
+          "cloudNum": 38,
+          "recordId": null
+        }
       ],
-      "error": ""
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
     }
-  ],
-  "receive": {
-    "phone": "13717306553",
-    "masked": "137****6553",
-    "ok": true,
-    "before": null,
-    "after": null,
-    "got": 0,
-    "steps": [
-      "初始云豆 null",
-      "第1次无变化（null→null）",
-      "第2次无变化（null→null）",
-      "第3次无变化（null→null）",
-      "第4次无变化（null→null）",
-      "第5次无变化（null→null）",
-      "第6次无变化（null→null）",
-      "最终云豆 null"
-    ],
-    "error": ""
-  }
+  ]
 }
