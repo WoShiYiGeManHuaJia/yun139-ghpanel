@@ -1,6 +1,25 @@
 {
-  "ts": "2026-09-14 18:05:33",
+  "ts": "2026-09-14 18:07:54",
   "type": "status",
-  "ok": false,
-  "msg": "缺少加密数据或密钥"
+  "ok": true,
+  "msg": "已查询 1 个账号",
+  "status": [
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "ok": true,
+      "total": 960,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 38,
+      "list": [
+        {
+          "cloudType": 2,
+          "cloudNum": 38,
+          "recordId": null
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
+    }
+  ]
 }
