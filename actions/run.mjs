@@ -244,6 +244,17 @@ async function getJwtOnce(authorization, phone) {
   }
   throw new Error("tyrzLogin 所有主机均失败");
 }
+async function getSsoToken(authorization, phone) {
+  const auth = "Basic " + cleanAuth(authorization);
+  const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
+    method: "POST",
+    headers: { "Authorization": auth, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
+    body: JSON.stringify({ account: phone, toSourceId: "001005" }),
+  });
+  const j = await r.json();
+  if (String(j.code) !== "0") throw new Error("querySpecToken 失败 code=" + j.code);
+  return j.data.token;
+}
 async function getJwt(authorization, phone) {
   let last;
   for (let i = 0; i < 4; i++) {
@@ -507,11 +518,34 @@ const MOBILE_UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.0
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 async function readCloudNum(page) {
+  // 优先：在页面上下文里直接调官方接口，避免文案变化导致读不到
+  try {
+    const v = await page.evaluate(async () => {
+      try {
+        const r = await fetch("/ycloud/signin/page/getCloudNum", { headers: { Accept: "application/json, text/plain, */*" }, credentials: "include" });
+        const j = await r.json();
+        const n = (j && j.result !== undefined && j.result !== null) ? j.result : (j && j.data && j.data.cloudNum);
+        return n === undefined || n === null ? null : Number(n);
+      } catch (e) { return null; }
+    });
+    if (v !== null && !isNaN(v)) return v;
+  } catch (e) {}
+  // 兜底：页面文案（兼容「云盘专属AI豆 / 云豆 / AI豆」多种写法）
   try {
     const t = await page.locator("body").innerText();
-    const m = String(t).match(/(\d{2,7})\s*云盘专属AI豆/);
-    return m ? parseInt(m[1], 10) : null;
-  } catch (e) { return null; }
+    const m = String(t).match(/([\d,]{2,9})\s*(?:云盘专属AI豆|云豆|AI豆)/);
+    if (m) { const n = parseInt(String(m[1]).replace(/,/g, ""), 10); return isNaN(n) ? null : n; }
+  } catch (e) {}
+  return null;
+}
+async function diagPage(page) {
+  try {
+    const u = page.url();
+    const t = String(await page.locator("body").innerText()).replace(/\s+/g, " ").slice(0, 260);
+    const all = await page.locator(".AIPoints").count();
+    const ok2 = await page.locator(".AIPoints:not(.is-next-month)").count();
+    return { url: u.slice(0, 160), text: t, all: all, clickable: ok2 };
+  } catch (e) { return { url: "", text: "诊断失败: " + String(e.message || e).slice(0, 80), all: -1, clickable: -1 }; }
 }
 
 async function receiveBubbles(authorization, phone, dev) {
@@ -525,6 +559,13 @@ async function receiveBubbles(authorization, phone, dev) {
   catch (e) { return { ok: false, error: "令牌失效或鉴权失败: " + String(e.message || e).slice(0, 80), got: 0, steps }; }
   const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
   let before = null, after = null, got = 0;
+  // 页面需要 token 参数才进入已登录态（用户原始链接里带 token=…）
+  let pageUrl = SIGNIN_PAGE;
+  try {
+    const sso = await getSsoToken(authorization, phone);
+    if (sso) pageUrl = SIGNIN_PAGE.replace("#/newsignin", "&token=" + encodeURIComponent(sso) + "#/newsignin");
+    steps.push("页面 token: " + (sso ? "已获取" : "未获取"));
+  } catch (e) { steps.push("页面 token 获取失败: " + String(e.message || e).slice(0, 60)); }
   try {
     const ctx = await browser.newContext({
       userAgent: MOBILE_UA, viewport: { width: 390, height: 844 },
@@ -548,10 +589,22 @@ async function receiveBubbles(authorization, phone, dev) {
         recv.push(b);
       }
     });
-    await page.goto(SIGNIN_PAGE, { waitUntil: "domcontentloaded", timeout: 120000 });
+    await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 120000 });
     await sleep(11000);
     before = await readCloudNum(page);
     steps.push("初始云豆 " + before);
+    if (before === null) {
+      const d = await diagPage(page);
+      steps.push("⚠ 页面未读到云豆，诊断：URL=" + d.url);
+      steps.push("   页面文本: " + d.text);
+      steps.push("   气泡元素: 共 " + d.all + " 个，可点击 " + d.clickable + " 个");
+      // 可能是登录态失效，尝试用 API 直接读取一次确认
+      try {
+        const st = await cloudStatus(jwt);
+        steps.push("   API 云豆: " + st.total + " / 可领 " + st.receivable + " / 下月 " + st.nextMonth);
+      } catch (e) { steps.push("   API 读取失败: " + String(e.message || e).slice(0, 60)); }
+    }
+    let noChange = 0;
     for (let round = 0; round < 6; round++) {
       const n = await page.locator(".AIPoints:not(.is-next-month)").count();
       if (!n) break;
@@ -566,11 +619,14 @@ async function receiveBubbles(authorization, phone, dev) {
       await sleep(3800);
       const b1 = await readCloudNum(page);
       const delta = (b0 !== null && b1 !== null) ? (b1 - b0) : 0;
-      if (delta > 0) { got += delta; steps.push("第" + (round + 1) + "次领取 +" + delta + "（" + b0 + "→" + b1 + "）"); }
-      else { steps.push("第" + (round + 1) + "次无变化（" + b0 + "→" + b1 + "）" + (err ? " err=" + err : "")); if (!clicked) break; }
+      if (delta > 0) { got += delta; steps.push("第" + (round + 1) + "次领取 +" + delta + "（" + b0 + "→" + b1 + "）"); noChange = 0; }
+      else { steps.push("第" + (round + 1) + "次无变化（" + b0 + "→" + b1 + "）" + (err ? " err=" + err : "")); noChange++; if (!clicked || noChange >= 2) break; }
     }
     after = await readCloudNum(page);
     steps.push("最终云豆 " + after);
+    if (before === null && after === null) {
+      return { ok: false, error: "页面未加载出云豆数据（登录态失效或页面改版）", got: 0, steps };
+    }
     return { ok: true, before, after, got, recv: recv.slice(0, 6), steps };
   } finally {
     try { await browser.close(); } catch (e) {}
