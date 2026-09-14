@@ -1,9 +1,37 @@
 {
-  "ts": "2026-09-14 18:36:32",
+  "ts": "2026-09-14 18:48:18",
   "type": "status",
   "ok": true,
-  "msg": "已查询 1 个账号",
+  "msg": "已查询 3 个账号",
   "status": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "ok": true,
+      "total": 253,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 0,
+      "list": [],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "ok": true,
+      "total": 3,
+      "toReceive": 0,
+      "receivable": 200,
+      "nextMonth": 0,
+      "list": [
+        {
+          "cloudType": 3,
+          "cloudNum": 200,
+          "recordId": 550
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"\",\"cal\""
+    },
     {
       "phone": "17274079953",
       "masked": "172****9953",
