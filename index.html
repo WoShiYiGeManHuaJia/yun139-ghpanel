@@ -79,21 +79,19 @@
   <div class="sub">签到 / 续期后台自动执行 · 数据仅存本机浏览器</div>
   <div class="toast" id="toast"></div>
 
-  <!-- 连接配置：默认折叠，分享给他人时完全看不到令牌输入区 -->
+  <!-- 连接配置：默认折叠，PAT 不再显示在页面上（随分享链接自动带入，仅存本次会话） -->
   <details class="cfg" id="cfgBox">
     <summary>⚙ 高级配置（已自动填充，一般无需修改）</summary>
     <div style="margin-top:6px">
       <label>GitHub 仓库 (owner/name)</label>
       <input id="cfg_repo" placeholder="WoShiYiGeManHuaJia/yun139-ghpanel">
-      <label>PAT 令牌（仅后台触发任务用）</label>
-      <input id="cfg_token" type="password" placeholder="ghp_...">
       <label>DATA_KEY（数据加密密钥）</label>
-      <input id="cfg_key" type="password" placeholder="留空则自动生成">
+      <input id="cfg_key" type="password" value="" placeholder="留空则自动生成">
       <div class="row">
         <button class="btn ghost" id="btn_save_cfg">保存配置</button>
         <button class="btn ghost" id="btn_gen_key">生成 DATA_KEY</button>
       </div>
-      <div class="hint">通常通过分享链接打开已自动填充，无需手动配置。PAT 与 DATA_KEY 仅存本浏览器 localStorage。</div>
+      <div class="hint">DATA_KEY 仅存本浏览器。连接令牌由分享链接自动带入、仅本次会话有效，页面上不展示也不落盘。</div>
     </div>
   </details>
 
@@ -219,12 +217,10 @@
   // ---- 本地配置 ----
   function loadCfg() {
     $("cfg_repo").value = localStorage.getItem(LS_REPO) || REPO_DEFAULT;
-    $("cfg_token").value = localStorage.getItem(LS_TOKEN) || "";
     $("cfg_key").value = localStorage.getItem(LS_KEY) || "";
   }
   function saveCfg() {
     localStorage.setItem(LS_REPO, $("cfg_repo").value.trim() || REPO_DEFAULT);
-    localStorage.setItem(LS_TOKEN, $("cfg_token").value.trim());
     localStorage.setItem(LS_KEY, $("cfg_key").value.trim());
     log("配置已保存");
   }
@@ -264,7 +260,7 @@
   function owner() { return ($("cfg_repo").value.trim() || REPO_DEFAULT).split("/")[0]; }
   function repo() { return ($("cfg_repo").value.trim() || REPO_DEFAULT).split("/")[1]; }
   async function api(url, opts) {
-    const token = localStorage.getItem(LS_TOKEN);
+    const token = sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || "";
     if (!token) throw new Error("未设置 PAT");
     opts = opts || {}; opts.headers = Object.assign({ Authorization: "token " + token, Accept: "application/vnd.github+json" }, opts.headers || {});
     const r = await fetch(url, opts);
@@ -449,7 +445,7 @@
   async function pollResult() {
     try {
       const r = await fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`, {
-        headers: { Authorization: "token " + localStorage.getItem(LS_TOKEN), Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag },
+        headers: { Authorization: "token " + (sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag },
       });
       if (r.status === 304) return;
       if (!r.ok) { log("读取结果失败 " + r.status, "err"); return; }
@@ -541,7 +537,7 @@
       const q = new URLSearchParams(location.hash.replace(/^#/, ""));
       const t = q.get("token"), k = q.get("key"), r = q.get("repo");
       let changed = false;
-      if (t) { localStorage.setItem(LS_TOKEN, t); changed = true; }
+      if (t) { sessionStorage.setItem(LS_TOKEN, t); localStorage.removeItem(LS_TOKEN); changed = true; }
       if (k) { localStorage.setItem(LS_KEY, k); changed = true; }
       if (r) { localStorage.setItem(LS_REPO, r); changed = true; }
       if (changed) { loadCfg(); log("已通过链接自动写入配置，可直接使用", "ok"); history.replaceState(null, "", location.pathname); }
