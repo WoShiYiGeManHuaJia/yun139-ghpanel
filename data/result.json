@@ -1,6 +1,7 @@
 {
-  "ts": "2026-09-14 10:59:21",
-  "type": "do_login",
-  "ok": false,
-  "msg": "登录被风控拦截(ec=S001)"
+  "ts": "2026-09-14 11:25:06",
+  "type": "send_code",
+  "ok": true,
+  "msg": "successed to process!",
+  "phone": "13787464642"
 }
