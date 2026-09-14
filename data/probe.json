@@ -1,56 +1,215 @@
 {
- "ts": "2026-09-14T13:41:21.870Z",
- "steps": [
-  {
-   "jwt_len": 912
+ "ts": "2026-09-14T13:43:17.082Z",
+ "lists": {
+  "sign_in_3": {
+   "cloudEmail": [
+    {
+     "id": 431,
+     "name": "去使用移动云手机",
+     "reward": "+20豆",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "sendcloud/processbindtask/click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    }
+   ],
+   "month": [
+    {
+     "id": 604,
+     "name": "去云盘图书馆阅读书籍",
+     "reward": "+10豆",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "sendcloud/click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 409,
+     "name": "从固定入口访问云朵中心",
+     "reward": "+6豆",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "sendcloud/click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 113,
+     "name": "使用PC客户端",
+     "reward": "+60豆",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "sendcloud/nda/click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 434,
+     "name": "分享文件领好礼<span id='share_title'>0/7</span>",
+     "reward": "",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "sendcloud/checktime/nda/click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 607,
+     "name": "下月签到领惊喜福利",
+     "reward": "+50豆",
+     "state": "FINISH",
+     "limit": "MONTH",
+     "steps": "reservationstep/finish/click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 3
+    }
+   ],
+   "hidden": [
+    {
+     "id": 118,
+     "name": "调查问卷",
+     "reward": "",
+     "state": "WAIT",
+     "limit": "EVER",
+     "steps": "click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    }
+   ],
+   "hiddenabc": [
+    {
+     "id": 319,
+     "name": "小云互动礼",
+     "reward": "",
+     "state": "WAIT",
+     "limit": "DAY",
+     "steps": "sendcloud/click",
+     "process": 1,
+     "currDay": 0,
+     "currstep": 0
+    }
+   ],
+   "time": [
+    {
+     "id": 548,
+     "name": "开启备份领好礼",
+     "reward": "首月+400豆",
+     "state": "WAIT",
+     "limit": "EVER",
+     "steps": "click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 549,
+     "name": "开启备份领好礼",
+     "reward": "+200豆",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 550,
+     "name": "开启云盘APP通知领好礼",
+     "reward": "+200豆",
+     "state": "WAIT",
+     "limit": "EVER",
+     "steps": "click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 551,
+     "name": "连续31天开启云盘APP通知",
+     "reward": "",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 522,
+     "name": "当月上传文件满100个",
+     "reward": "",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "sendcloud/sendsms/interfacecallback",
+     "process": 17,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 585,
+     "name": "去体验AI相机",
+     "reward": "",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "sendcloud/click/interfacecallback",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 609,
+     "name": "和AI助手对话",
+     "reward": "+20豆",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "cloudtasklogstep/sendcloud/processbindtask/click/interfacecallback",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    },
+    {
+     "id": 547,
+     "name": "加入一个知识库",
+     "reward": "+10豆",
+     "state": "WAIT",
+     "limit": "MONTH",
+     "steps": "sendcloud/click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    }
+   ],
+   "day": [
+    {
+     "id": 106,
+     "name": "手动上传一个文件",
+     "reward": "+6豆",
+     "state": "WAIT",
+     "limit": "DAY",
+     "steps": "sendcloud/nda/click",
+     "process": 0,
+     "currDay": 0,
+     "currstep": 0
+    }
+   ]
   },
-  {
-   "taskList:caiyun.feixin.10086.cn:7071:sign_in_3": {
-    "status": 200,
-    "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"cloudEmail\":[{\"id\":431,\"marketname\":\"sign_in_3\",\"groupid\":\"cloudEmail\",\"enable\":1,\"name\":\"去使用移动云手机\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/ff224788f70a4563b0d3f25a109fb3eb.png\",\"steps\":[],\"starttime\":\"2025-05-31T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":180,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001216\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+20豆\",\"stepTypeSet\":[\"sendcloud\",\"processbindtask\",\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1788746909219,\"recordid\":40207767457,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001216\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"}}}],\"month\":[{\"id\":604,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"去云盘图书馆阅读书籍\",\"description\":\"告别书荒，随时畅读\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6a64ce2ad1854c8f9d2c171336312fa6.png\",\"steps\":[],\"starttime\":\"2026-06-30T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":70,\"button\":{\"app\":{\"text\":\"去体验\",\"action\":\"popjump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"去完成\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+10豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1789358245004,\"recordid\":40391739029,\"cur"
-   }
+  "newsign_139mail": {
+   "err": "fetch failed"
   },
-  {
-   "taskList:caiyun.feixin.10086.cn:7071:newsign_139mail": {
-    "status": 200,
-    "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"month\":[{\"id\":1004,\"marketname\":\"newsign_139mail\",\"groupid\":\"month\",\"enable\":1,\"name\":\"给好友发邮件\",\"description\":\"AI写邮件，让办公更高效\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/4c11ced1210b450f852a80f39ca09723.png\",\"steps\":[],\"starttime\":\"2023-05-31T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":40,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"},\"out\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"},\"email\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+30豆\",\"stepTypeSet\":[\"sendcloud\",\"click\",\"email\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1788418192282,\"recordid\":40156582546,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"},\"out\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"},\"email\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"}}},{\"id\":1014,\"marketname\":\"newsign_139mail\",\"groupid\":\"month\",\"enable\":1,\"name\":\"体验“PDF转换”功能\",\"description\":\"多格式互转，办公文档随心处理\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/9b6a1c11c3bc49ff936bd96c540655a3.png\",\"steps\":[],\"starttime\":\"2023-10-12T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":50,\"button\":{\"out\":{\"text\":\"去完成\"},\"email\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"https://y.10086.cn/x/PDF1\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+10豆\",\"stepTypeSet\":[\"sendcloud\",\"click\",\"email\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1788418192292,\"recordid\":40156582547,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"out\":{\"text\":\"去完成\"},\"email\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"https://y.10086.cn/x/PDF1\"}}},{\"id\":1017,\"marketname\":\"newsign_139mail\",\"groupid\":\"month\",\"enable\":1,\"name\":\"登录移动云盘云朵中心\",\"description\":\"福利同步，探索更多任务\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/30040e26f11d4d81b07d2bc4cd12d94d.png\",\"steps\":[],\"starttime\":\"2023-09-25T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":70,\"button\":{\"out\":{\"text\":\"去完成\"},\"email\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1179&enableShare=1&targetSourceId=001005&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov"
-   }
+  "sign_in": {
+   "err": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
   },
-  {
-   "pageInfo:caiyun.feixin.10086.cn:7071": {
-    "status": 404,
-    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-   }
-  },
-  {
-   "click_probe:caiyun.feixin.10086.cn:7071": {
-    "status": 200,
-    "body": "{\"code\":500,\"msg\":\"TaskNotFound\"}"
-   }
-  },
-  {
-   "taskList:caiyun.feixin.10086.cn:sign_in_3": {
-    "status": 200,
-    "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"cloudEmail\":[{\"id\":431,\"marketname\":\"sign_in_3\",\"groupid\":\"cloudEmail\",\"enable\":1,\"name\":\"去使用移动云手机\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/ff224788f70a4563b0d3f25a109fb3eb.png\",\"steps\":[],\"starttime\":\"2025-05-31T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":180,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001216\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+20豆\",\"stepTypeSet\":[\"sendcloud\",\"processbindtask\",\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1788746909219,\"recordid\":40207767457,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001216\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"}}}],\"month\":[{\"id\":604,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"去云盘图书馆阅读书籍\",\"description\":\"告别书荒，随时畅读\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6a64ce2ad1854c8f9d2c171336312fa6.png\",\"steps\":[],\"starttime\":\"2026-06-30T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":70,\"button\":{\"app\":{\"text\":\"去体验\",\"action\":\"popjump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"去完成\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+10豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1789358245004,\"recordid\":40391739029,\"cur"
-   }
-  },
-  {
-   "taskList:caiyun.feixin.10086.cn:newsign_139mail": {
-    "status": 200,
-    "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"month\":[{\"id\":1004,\"marketname\":\"newsign_139mail\",\"groupid\":\"month\",\"enable\":1,\"name\":\"给好友发邮件\",\"description\":\"AI写邮件，让办公更高效\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/4c11ced1210b450f852a80f39ca09723.png\",\"steps\":[],\"starttime\":\"2023-05-31T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":40,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"},\"out\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"},\"email\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+30豆\",\"stepTypeSet\":[\"sendcloud\",\"click\",\"email\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1788418192282,\"recordid\":40156582546,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"},\"out\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"},\"email\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://y.10086.cn/x/xyjrw\"}}},{\"id\":1014,\"marketname\":\"newsign_139mail\",\"groupid\":\"month\",\"enable\":1,\"name\":\"体验“PDF转换”功能\",\"description\":\"多格式互转，办公文档随心处理\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/9b6a1c11c3bc49ff936bd96c540655a3.png\",\"steps\":[],\"starttime\":\"2023-10-12T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":50,\"button\":{\"out\":{\"text\":\"去完成\"},\"email\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"https://y.10086.cn/x/PDF1\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+10豆\",\"stepTypeSet\":[\"sendcloud\",\"click\",\"email\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1788418192292,\"recordid\":40156582547,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"out\":{\"text\":\"去完成\"},\"email\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"https://y.10086.cn/x/PDF1\"}}},{\"id\":1017,\"marketname\":\"newsign_139mail\",\"groupid\":\"month\",\"enable\":1,\"name\":\"登录移动云盘云朵中心\",\"description\":\"福利同步，探索更多任务\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/30040e26f11d4d81b07d2bc4cd12d94d.png\",\"steps\":[],\"starttime\":\"2023-09-25T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":70,\"button\":{\"out\":{\"text\":\"去完成\"},\"email\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1179&enableShare=1&targetSourceId=001005&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov"
-   }
-  },
-  {
-   "pageInfo:caiyun.feixin.10086.cn": {
-    "status": 404,
-    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-   }
-  },
-  {
-   "click_probe:caiyun.feixin.10086.cn": {
-    "status": 200,
-    "body": "{\"code\":500,\"msg\":\"TaskNotFound\"}"
-   }
+  "cloud_bean": {
+   "err": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
   }
- ]
+ }
 }
