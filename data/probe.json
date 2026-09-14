@@ -1,463 +1,176 @@
 {
- "ts": "2026-09-14T14:44:19.047Z",
+ "ts": "2026-09-14T14:47:35.669Z",
  "jwt": true,
- "balance": [
+ "host": "https://caiyun.feixin.10086.cn:7071",
+ "result_keys": [
+  "cloudEmail",
+  "month",
+  "hidden",
+  "hiddenabc",
+  "time",
+  "day"
+ ],
+ "groups": [
   {
-   "p": "/market/signin/user/cloud",
+   "key": "cloudEmail",
+   "type": "array",
+   "n": 1,
+   "sample": "去使用移动云手机"
+  },
+  {
+   "key": "month",
+   "type": "array",
+   "n": 5,
+   "sample": "从固定入口访问云朵中心"
+  },
+  {
+   "key": "hidden",
+   "type": "array",
+   "n": 1,
+   "sample": "调查问卷"
+  },
+  {
+   "key": "hiddenabc",
+   "type": "array",
+   "n": 1,
+   "sample": "小云互动礼"
+  },
+  {
+   "key": "time",
+   "type": "array",
+   "n": 8,
+   "sample": "开启备份领好礼"
+  },
+  {
+   "key": "day",
+   "type": "array",
+   "n": 1,
+   "sample": "手动上传一个文件"
+  }
+ ],
+ "finish_full": {
+  "id": "431",
+  "marketname": "sign_in_3",
+  "groupid": "cloudEmail",
+  "enable": "1",
+  "name": "去使用移动云手机",
+  "description": "备份后完成任务奖励翻倍",
+  "icon": "https://img.mcloud.139.com//uop_prod/20260730/ff224788f70a4563b0d3f25a109fb3eb.png",
+  "steps": "[]",
+  "starttime": "2025-05-31T16:00:00.000+00:00",
+  "endtime": "2026-12-31T16:00:00.000+00:00",
+  "sort": "180",
+  "button": "{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https:/",
+  "limitType": "MONTH",
+  "prov": "0",
+  "whiteList": "0",
+  "hasNda": "0",
+  "hasBak": "1",
+  "taskType": "0",
+  "limitCloud": "4",
+  "content_display2": "+20豆",
+  "stepTypeSet": "[\"sendcloud\",\"processbindtask\",\"click\"]",
+  "state": "FINISH",
+  "currstep": "3",
+  "process": "0",
+  "lastupdate": "1789395165897",
+  "recordid": "40207767457",
+  "currDay": "0",
+  "cloudId": "0",
+  "buttonProperty": "{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https:/"
+ },
+ "signin": [
+  {
+   "p": "/market/signin/signin/list",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "p": "/market/signin/cloud/balance",
+   "p": "/market/signin/signin/record",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "p": "/market/signin/user/balance",
+   "p": "/market/signin/sign/calendar",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "p": "/market/signin/account",
+   "p": "/market/signin/calendar",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "p": "/market/signin/user/account",
+   "p": "/market/signin/user/signin",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "p": "/market/signin/info",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/user/cloudinfo",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/cloud/get",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/total",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/user/cloudtotal",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/myCloud",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/user/myinfo",
+   "p": "/market/signin/signin/days",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   }
  ],
- "taskinfo": [
+ "cloud": [
   {
-   "id": 431,
-   "name": "去使用移动云手机",
-   "state": "FINISH",
-   "currstep": 3,
-   "recordid": 40207767457,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "sendcloud",
-    "processbindtask",
-    "click"
-   ]
+   "p": "/market/signin/cloudBean/list",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "id": 409,
-   "name": "从固定入口访问云朵中心",
-   "state": "WAIT",
-   "currstep": 1,
-   "recordid": 40207767452,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "sendcloud",
-    "click"
-   ]
+   "p": "/market/signin/bean/list",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "id": 113,
-   "name": "使用PC客户端",
-   "state": "WAIT",
-   "currstep": 1,
-   "recordid": 40218790916,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "sendcloud",
-    "nda",
-    "click"
-   ]
+   "p": "/market/signin/yundou/list",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "id": 434,
-   "name": "分享文件领好礼0/7",
-   "state": "WAIT",
-   "currstep": 2,
-   "recordid": 40146535525,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "sendcloud",
-    "checktime",
-    "nda",
-    "click"
-   ]
+   "p": "/market/signin/user/yunDou",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "id": 607,
-   "name": "下月签到领惊喜福利",
-   "state": "FINISH",
-   "currstep": 3,
-   "recordid": 40207767594,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "reservationstep",
-    "finish",
-    "click"
-   ]
+   "p": "/market/signin/task/cloudList",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "id": 604,
-   "name": "去云盘图书馆阅读书籍",
-   "state": "FINISH",
-   "currstep": 2,
-   "recordid": 40391739029,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "sendcloud",
-    "click"
-   ]
+   "p": "/market/signin/index/info",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "id": 118,
-   "name": "调查问卷",
-   "state": "FINISH",
-   "currstep": 1,
-   "recordid": 33778225470,
-   "cloudId": 0,
-   "limitCloud": 0,
-   "steps": [
-    "click"
-   ]
+   "p": "/market/signin/home",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "id": 319,
-   "name": "小云互动礼",
-   "state": "FINISH",
-   "currstep": 2,
-   "recordid": 40391739024,
-   "cloudId": 0,
-   "limitCloud": 3,
-   "steps": [
-    "sendcloud",
-    "click"
-   ]
+   "p": "/market/signin/page/init",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "id": 548,
-   "name": "开启备份领好礼",
-   "state": "WAIT",
-   "currstep": 0,
-   "recordid": 40391739025,
-   "cloudId": 0,
-   "limitCloud": 1,
-   "steps": [
-    "click"
-   ]
-  },
-  {
-   "id": 549,
-   "name": "开启备份领好礼",
-   "state": "WAIT",
-   "currstep": 0,
-   "recordid": 40391739026,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "click"
-   ]
-  },
-  {
-   "id": 550,
-   "name": "开启云盘APP通知领好礼",
-   "state": "WAIT",
-   "currstep": 0,
-   "recordid": 40391739027,
-   "cloudId": 0,
-   "limitCloud": 1,
-   "steps": [
-    "click"
-   ]
-  },
-  {
-   "id": 551,
-   "name": "连续31天开启云盘APP通知",
-   "state": "WAIT",
-   "currstep": 0,
-   "recordid": 40391739028,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "click"
-   ]
-  },
-  {
-   "id": 522,
-   "name": "当月上传文件满100个",
-   "state": "WAIT",
-   "currstep": 0,
-   "recordid": 40207767459,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "sendcloud",
-    "sendsms",
-    "interfacecallback"
-   ]
-  },
-  {
-   "id": 585,
-   "name": "去体验AI相机",
-   "state": "WAIT",
-   "currstep": 2,
-   "recordid": 40207767461,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "sendcloud",
-    "click",
-    "interfacecallback"
-   ]
-  },
-  {
-   "id": 609,
-   "name": "和AI助手对话",
-   "state": "WAIT",
-   "currstep": 3,
-   "recordid": 40146536422,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "cloudtasklogstep",
-    "sendcloud",
-    "processbindtask",
-    "click",
-    "interfacecallback"
-   ]
-  },
-  {
-   "id": 547,
-   "name": "加入一个知识库",
-   "state": "FINISH",
-   "currstep": 2,
-   "recordid": 40393958217,
-   "cloudId": 0,
-   "limitCloud": 4,
-   "steps": [
-    "sendcloud",
-    "click"
-   ]
-  },
-  {
-   "id": 106,
-   "name": "手动上传一个文件",
-   "state": "WAIT",
-   "currstep": 1,
-   "recordid": 40385498565,
-   "cloudId": 0,
-   "limitCloud": 2,
-   "steps": [
-    "sendcloud",
-    "nda",
-    "click"
-   ]
+   "p": "/market/signin/task/awardList",
+   "status": 404,
+   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   }
  ],
- "probe": [
+ "post": [
   {
-   "task": 431,
-   "state": "FINISH",
-   "p": "/market/signin/task/receive?recordid=40207767457&id=431",
+   "p": "/market/signin/task/receive",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "task": 431,
-   "state": "FINISH",
-   "p": "/market/signin/task/click?key=award&id=431&recordid=40207767457",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 431,
-   "state": "FINISH",
-   "p": "/market/signin/task/click?key=cloud&id=431",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 431,
-   "state": "FINISH",
-   "p": "/market/signin/task/click?key=task&id=431&step=award",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 431,
-   "state": "FINISH",
-   "p": "/market/signin/task/award?recordid=40207767457",
+   "p": "/market/signin/task/award",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   },
   {
-   "task": 431,
-   "state": "FINISH",
-   "p": "/market/signin/cloud/receive?recordid=40207767457&id=431",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 607,
-   "state": "FINISH",
-   "p": "/market/signin/task/receive?recordid=40207767594&id=607",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 607,
-   "state": "FINISH",
-   "p": "/market/signin/task/click?key=award&id=607&recordid=40207767594",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 607,
-   "state": "FINISH",
-   "p": "/market/signin/task/click?key=cloud&id=607",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 607,
-   "state": "FINISH",
-   "p": "/market/signin/task/click?key=task&id=607&step=award",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 607,
-   "state": "FINISH",
-   "p": "/market/signin/task/award?recordid=40207767594",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 607,
-   "state": "FINISH",
-   "p": "/market/signin/cloud/receive?recordid=40207767594&id=607",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 409,
-   "state": "WAIT",
-   "p": "/market/signin/task/receive?recordid=40207767452&id=409",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 409,
-   "state": "WAIT",
-   "p": "/market/signin/task/click?key=award&id=409&recordid=40207767452",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 409,
-   "state": "WAIT",
-   "p": "/market/signin/task/click?key=cloud&id=409",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 409,
-   "state": "WAIT",
-   "p": "/market/signin/task/click?key=task&id=409&step=award",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 409,
-   "state": "WAIT",
-   "p": "/market/signin/task/award?recordid=40207767452",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 409,
-   "state": "WAIT",
-   "p": "/market/signin/cloud/receive?recordid=40207767452&id=409",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 113,
-   "state": "WAIT",
-   "p": "/market/signin/task/receive?recordid=40218790916&id=113",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 113,
-   "state": "WAIT",
-   "p": "/market/signin/task/click?key=award&id=113&recordid=40218790916",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 113,
-   "state": "WAIT",
-   "p": "/market/signin/task/click?key=cloud&id=113",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 113,
-   "state": "WAIT",
-   "p": "/market/signin/task/click?key=task&id=113&step=award",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  {
-   "task": 113,
-   "state": "WAIT",
-   "p": "/market/signin/task/award?recordid=40218790916",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "task": 113,
-   "state": "WAIT",
-   "p": "/market/signin/cloud/receive?recordid=40218790916&id=113",
+   "p": "/market/signin/cloud/receive",
    "status": 404,
    "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
   }
