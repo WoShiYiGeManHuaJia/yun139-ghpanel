@@ -1,49 +1,144 @@
 {
- "ts": "2026-09-14T15:11:38.444Z",
- "steps": [
+ "ts": "2026-09-14T15:14:30.246Z",
+ "logs": [
   {
-   "k": "jwt",
-   "v": "ok"
+   "n": "newsignin.336f18c3.js",
+   "base": "m",
+   "status": 200,
+   "len": 342208,
+   "err": null
   },
   {
-   "k": "★ m.mcloud taskList",
-   "v": {
-    "status": 200,
-    "code": 0,
-    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"cloudEmail\":[{\"id\":431,\"marketname\":\"sign_in_3\",\"groupid\":\"cloudEmail\",\"enable\":1,\"name\":\"去使用移动云手机\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com/"
-   }
+   "n": "139newsignin.cc383f1b.js",
+   "base": "m",
+   "status": 200,
+   "len": 170502,
+   "err": null
   },
   {
-   "k": "★ m.mcloud page/info",
-   "v": {
-    "status": 404,
-    "code": null,
-    "raw": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page y"
-   }
+   "n": "139newsignin~newsignin~test.a6a6e5d7.js",
+   "base": "m",
+   "status": 200,
+   "len": 312384,
+   "err": null
   },
   {
-   "k": "★ m.mcloud page/receive",
-   "v": {
-    "status": 404,
-    "code": null,
-    "raw": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page y"
-   }
+   "n": "139newsignin~National_zero2025~newsignin.1",
+   "base": "m",
+   "status": 200,
+   "len": 102142,
+   "err": null
   },
   {
-   "k": "prizeApi 奖品记录",
-   "v": {
-    "status": 200,
-    "code": 0,
-    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"pageNum\":1,\"pageSize\":15,\"totalCount\":50,\"totalPages\":4,\"result\":[{\"oId\":1263425903,\"servNumber\":\"172****9953\",\"prizeId\":260723006,\"prizeName\":\"移动云盘白银AI会员月卡\",\"flag\":2,\"insertTime\":\"2026.08.20\",\"updateTime\":\"2026.08.20\",\"linkUrl\":null,\"type\":1057,\"uorder\":null,\"re"
-   }
+   "n": "National_zero2025.9ea4a91a.js",
+   "base": "m",
+   "status": 200,
+   "len": 21706,
+   "err": null
   },
   {
-   "k": "★ 余额接口(m.mcloud)",
-   "v": "全部404"
+   "n": "promotion.fa741431.js",
+   "base": "m",
+   "status": 200,
+   "len": 8982,
+   "err": null
   },
   {
-   "k": "★ 余额接口(caiyun变体)",
-   "v": "全部404"
+   "n": "test.5f77bd17.js",
+   "base": "m",
+   "status": 200,
+   "len": 288508,
+   "err": null
   }
+ ],
+ "paths": [
+  "/139exchangePrize",
+  "/139newsignin",
+  "/139prizeRecord",
+  "/exchangePrize",
+  "/market/signin/page/getUserClearCloudVo",
+  "/newsignin",
+  "/portal/ajax/common/caiYunSignIn.action",
+  "/portal/clientDL/index.html?v=mCloud_1331",
+  "/portal/cloudItem/index.html?path=getPrize&sourceid=1000&token=#ssoToken#&targetSourceId=001005",
+  "/portal/cloudItem/index.html?path=getPrize139&sourceid=1000&token=#ssoToken#&targetSourceId=001005",
+  "/portal/mobilecloud/",
+  "/portal/mobilecloud/index.html?path=139newsignin&sourceid=",
+  "/portal/mobilecloud/index.html?path=National_zero2025&sourceid=",
+  "/portal/mobilecloud/index.html?path=newsignin",
+  "/portal/mobilecloud/index.html?path=newsignin&sourceid=",
+  "/portal/mobilecloud/index.html?path=newsignin&sourceid=1095",
+  "/portal/mobilecloud/index.html?path=newsignin&sourceid=1095&tokenType=ssoToken&targetSourceId=001005",
+  "/portal/mobilecloud/index.html?path=newsignin&sourceid=1101&tab=2&enableShare=1&token=#ssoToken#&targetSourceId=001005",
+  "/portal/mobilecloud/index.html?path=newsignin&sourceid=1401&enableShare=1&token=#ssoToken#",
+  "/portal/mobilecloud/index.html?path=promotion&sourceid=",
+  "/portal/mobilecloud/index.html?path=promotion&sourceid=1059",
+  "/portal/mobilecloud/index.html?path=test&sourceid=",
+  "/portal/templateView/initve.html?id=143&marketName=hcy_yhxy&timestamp=1670478478367",
+  "/portal/templateView/initve.html?id=IcQE7Z&marketName=hcy_yhxy&timestamp=1670478488789",
+  "/prizeRecord",
+  "/ycloud/advert/click/report",
+  "/ycloud/advert/show/report",
+  "/ycloud/auth-service/slide/getSlide",
+  "/ycloud/manager/commonMarketconfig/getByMarketName",
+  "/ycloud/manager/publicParam/getValue",
+  "/ycloud/openemailsms-service/openEmailsms/openSmsSwitch",
+  "/ycloud/prizeApi/checkPrize/receivePrizeDetailsV2",
+  "/ycloud/redeposit/getLinkInfoList",
+  "/ycloud/redeposit/saveLinkFile",
+  "/ycloud/signin/emailStatus/currEmailStatus",
+  "/ycloud/signin/mobileApp/signInCallback",
+  "/ycloud/signin/page/doTaskPost",
+  "/ycloud/signin/page/exchangeList",
+  "/ycloud/signin/page/exchangeV3",
+  "/ycloud/signin/page/getCloudNum",
+  "/ycloud/signin/page/getCode",
+  "/ycloud/signin/page/infoV3",
+  "/ycloud/signin/page/multiple",
+  "/ycloud/signin/page/popup",
+  "/ycloud/signin/page/receivePrizeDetails",
+  "/ycloud/signin/page/receiveRevivalReward",
+  "/ycloud/signin/page/receiveTask",
+  "/ycloud/signin/page/receiveTaskExpansion",
+  "/ycloud/signin/page/receiveV3",
+  "/ycloud/signin/page/reportAppNoticeStatus",
+  "/ycloud/signin/page/sendMsg",
+  "/ycloud/signin/page/startSignIn",
+  "/ycloud/signin/page/updateRemaind",
+  "/ycloud/signin/public//cloudRecordV2",
+  "/ycloud/signin/public/cloudRecordV2",
+  "/ycloud/signin/public/doMiGuAppReport",
+  "/ycloud/signin/public/doMoveAppReport",
+  "/ycloud/signin/public/getPopInfo",
+  "/ycloud/signin/public/getUserExtInfo",
+  "/ycloud/signin/public/heBaoReport",
+  "/ycloud/signin/public/record",
+  "/ycloud/signin/public/text/newsign_139mail/floatWindow.json",
+  "/ycloud/signin/public/text/sign_in_3/dialog.json",
+  "/ycloud/signin/public/text/sign_in_3/floatWindow.json",
+  "/ycloud/signin/public/text/sign_in_3/prizeGroup.json",
+  "/ycloud/signin/public/text/sign_in_3/taskGroup.json",
+  "/ycloud/signin/public/weiBoTask",
+  "/ycloud/signin/redeposit/finishRedepositTask",
+  "/ycloud/signin/task/click",
+  "/ycloud/signin/task/taskListV3",
+  "https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html",
+  "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1095&tokenType=ssoToken&targetSourceId=001005"
+ ],
+ "ctx": [
+  "[newsignin.336f18c3.js] receive → …,{src:m.a,alt:\"\"},null,-1)})),Ne=z((function(){return Object(a[\"createElementVNode\"])(\"div\",{class:\"receive_desc\"},[Object(a[\"createElementVNode\"])(\"div\",{class:\"receive_tip\"},[Object(a[\"createTextVNode\"])(\"继续做任务赚取更多AI豆吧…",
+  "[newsignin.336f18c3.js] receive → …[\"createElementVNode\"])(\"div\",{class:\"receive_desc\"},[Object(a[\"createElementVNode\"])(\"div\",{class:\"receive_tip\"},[Object(a[\"createTextVNode\"])(\"继续做任务赚取更多AI豆吧\"),Object(a[\"createElementVNode\"])(\"br\"),Object(a[\"createTextV…",
+  "[newsignin.336f18c3.js] receive → …\"])(\"div\",Ae,[Ee,Object(a[\"createElementVNode\"])(\"p\",null,\"+\"+Object(a[\"toDisplayString\"])(e.popMsg.receivePoints)+\"豆\",1)]),Ne,Object(a[\"createElementVNode\"])(\"div\",{class:\"common_btn\",onClick:n[13]||(n[13]=function(e){r…",
+  "[newsignin.336f18c3.js] receive → …urn Object(r[\"pushScopeId\"])(\"data-v-53c7352c\"),e=e(),Object(r[\"popScopeId\"])(),e},Re={key:0,class:\"receive_cloud\"},Fe={class:\"receiveCloud_pop\"},Xe=Ue((function(){return Object(r[\"createElementVNode\"])(\"div\",{class:\"tit…",
+  "[newsignin.336f18c3.js] receive → …)(\"data-v-53c7352c\"),e=e(),Object(r[\"popScopeId\"])(),e},Re={key:0,class:\"receive_cloud\"},Fe={class:\"receiveCloud_pop\"},Xe=Ue((function(){return Object(r[\"createElementVNode\"])(\"div\",{class:\"title_area\"},[Object(r[\"create…",
+  "[newsignin.336f18c3.js] cloudCount → …){z[\"a\"].cloudMultiple({}).then((function(e){0==e.data.code?(i(\"奖励膨胀弹窗\",\"额外获得\".concat(e.data.result.cloudCount,\"豆，自动备份保持开启，任务奖励翻倍!\")),ee.doubleCloudNum=e.data.result.cloudCount,ee.show=10,Z.signinShow=0):m.$toast(e.data.…",
+  "[newsignin.336f18c3.js] cloudCount → …膨胀弹窗\",\"额外获得\".concat(e.data.result.cloudCount,\"豆，自动备份保持开启，任务奖励翻倍!\")),ee.doubleCloudNum=e.data.result.cloudCount,ee.show=10,Z.signinShow=0):m.$toast(e.data.msg||\"网络异常，请稍后再试\")})).catch((function(e){console.log(e)}))}functio…",
+  "[139newsignin.cc383f1b.] receive → …,{src:p.a,alt:\"\"},null,-1)})),we=L((function(){return Object(a[\"createElementVNode\"])(\"div\",{class:\"receive_desc\"},[Object(a[\"createElementVNode\"])(\"div\",{class:\"receive_tip\"},[Object(a[\"createTextVNode\"])(\"继续做任务赚取更多AI豆吧…",
+  "[139newsignin.cc383f1b.] receive → …[\"createElementVNode\"])(\"div\",{class:\"receive_desc\"},[Object(a[\"createElementVNode\"])(\"div\",{class:\"receive_tip\"},[Object(a[\"createTextVNode\"])(\"继续做任务赚取更多AI豆吧\"),Object(a[\"createElementVNode\"])(\"br\"),Object(a[\"createTextV…",
+  "[139newsignin.cc383f1b.] receive → …\"])(\"div\",ke,[Ee,Object(a[\"createElementVNode\"])(\"p\",null,\"+\"+Object(a[\"toDisplayString\"])(e.popMsg.receivePoints)+\"豆\",1)]),we,Object(a[\"createElementVNode\"])(\"div\",{class:\"common_btn\",onClick:n[13]||(n[13]=function(e){r…",
+  "[139newsignin.cc383f1b.] receive → …application/json\"}})},getPrizeDetailData:function(e){return c[\"a\"].get(\"/ycloud/prizeApi/checkPrize/receivePrizeDetailsV2\",{params:e,headers:{showLoading:!0}})},getSlidePuzzle:function(e){return c[\"a\"].post(\"/ycloud/auth…",
+  "[139newsignin.cc383f1b.] receive → …n/json;charset=UTF-8\"}})},getExchangePrizeDetail:function(e){return c[\"a\"].get(\"/ycloud/signin/page/receivePrizeDetails\",{params:e,headers:{showLoading:!0,\"content-Type\":\"application/json\"}})},getAnimText:function(e){ret…",
+  "[139newsignin.cc383f1b.] toReceive → …}))}function st(e){Ge[\"a\"].receiveTaskData({taskId:e}).then((function(e){0===e.data.code&&(ce.value.toReceive-=e.data.result,se.value.receive=e.data.result,_.receiveShow=1,i(\"其他弹窗\",\"\"))}))}function ut(e){fe.value.isReloa…",
+  "[139newsignin~National_] bubble → …let s=0;s<this.length;s+=1){const n=this[s];if(t.CustomEvent){const s=new t.CustomEvent(a,{detail:i,bubbles:!0,cancelable:!0});n.dom7EventData=e.filter((e,t)=>t>0),n.dispatchEvent(s),n.dom7EventData=[],delete n.dom7Event…"
  ]
 }
