@@ -1,0 +1,21 @@
+name: yun139-probe
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run probe
+        env:
+          YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
+          YUN139_PHONE: ${{ secrets.YUN139_PHONE }}
+        run: node actions/probe.mjs
