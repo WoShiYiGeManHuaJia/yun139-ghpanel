@@ -1,16 +1,8 @@
 {
-  "ts": "2026-09-14 12:06:28",
-  "type": "task",
-  "ok": true,
-  "msg": "云朵任务执行完成",
-  "results": [
-    {
-      "phone": "13800138000",
-      "masked": "138****8000",
-      "name": "验证号",
-      "task": "sign",
-      "ok": false,
-      "message": "每日签到: querySpecToken 失败 code=1010010015 msg=鉴权失效"
-    }
-  ]
+  "ts": "2026-09-14 14:07:29",
+  "type": "daily",
+  "ok": false,
+  "msg": "fetch failed",
+  "refresh": "成功，剩余 30 天",
+  "new_expires_at": "2026-10-14 14:07:30"
 }
