@@ -1,9 +1,63 @@
 {
-  "ts": "2026-09-14 18:07:54",
+  "ts": "2026-09-14 18:23:16",
   "type": "status",
   "ok": true,
-  "msg": "已查询 1 个账号",
+  "msg": "已查询 3 个账号",
   "status": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "ok": true,
+      "total": 0,
+      "toReceive": 50,
+      "receivable": 250,
+      "nextMonth": 0,
+      "list": [
+        {
+          "cloudType": 3,
+          "cloudNum": 200,
+          "recordId": 1078
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 10,
+          "recordId": 2343297183
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 10,
+          "recordId": 2343297165
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 10,
+          "recordId": 2343297080
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 20,
+          "recordId": 2343297072
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":0,\"maxType\":\"完成任务\","
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "ok": true,
+      "total": 0,
+      "toReceive": 0,
+      "receivable": 200,
+      "nextMonth": 0,
+      "list": [
+        {
+          "cloudType": 3,
+          "cloudNum": 200,
+          "recordId": 550
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":0,\"maxType\":\"\",\"cal\""
+    },
     {
       "phone": "17274079953",
       "masked": "172****9953",
