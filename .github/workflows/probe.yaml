@@ -9,11 +9,16 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      - name: Install playwright
+        run: |
+          npm i playwright@1.49.1
+          npx playwright install chromium
       - name: Run probe
         env:
           YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
