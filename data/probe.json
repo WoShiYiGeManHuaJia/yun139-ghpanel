@@ -1,178 +1,66 @@
 {
- "ts": "2026-09-14T14:47:35.669Z",
- "jwt": true,
- "host": "https://caiyun.feixin.10086.cn:7071",
- "result_keys": [
-  "cloudEmail",
-  "month",
-  "hidden",
-  "hiddenabc",
-  "time",
-  "day"
- ],
- "groups": [
+ "ts": "2026-09-14T14:49:40.348Z",
+ "steps": [
   {
-   "key": "cloudEmail",
-   "type": "array",
-   "n": 1,
-   "sample": "去使用移动云手机"
+   "k": "jwt",
+   "v": "ok"
   },
   {
-   "key": "month",
-   "type": "array",
-   "n": 5,
-   "sample": "从固定入口访问云朵中心"
+   "k": "① page/info 领取前",
+   "v": {
+    "status": 404,
+    "todaySignIn": null,
+    "receive": null,
+    "total": null,
+    "keys": null,
+    "raw": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
+   }
   },
   {
-   "key": "hidden",
-   "type": "array",
-   "n": 1,
-   "sample": "调查问卷"
+   "k": "② 签到动作",
+   "v": "今日已签到，跳过"
   },
   {
-   "key": "hiddenabc",
-   "type": "array",
-   "n": 1,
-   "sample": "小云互动礼"
+   "k": "③ page/receive 领取",
+   "v": {
+    "status": 404,
+    "msg": "访问资源不存在",
+    "receive": null,
+    "total": null,
+    "raw": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
+   }
   },
   {
-   "key": "time",
-   "type": "array",
-   "n": 8,
-   "sample": "开启备份领好礼"
+   "k": "④ page/info 领取后",
+   "v": {
+    "status": 404,
+    "receive": null,
+    "total": null
+   }
   },
   {
-   "key": "day",
-   "type": "array",
-   "n": 1,
-   "sample": "手动上传一个文件"
-  }
- ],
- "finish_full": {
-  "id": "431",
-  "marketname": "sign_in_3",
-  "groupid": "cloudEmail",
-  "enable": "1",
-  "name": "去使用移动云手机",
-  "description": "备份后完成任务奖励翻倍",
-  "icon": "https://img.mcloud.139.com//uop_prod/20260730/ff224788f70a4563b0d3f25a109fb3eb.png",
-  "steps": "[]",
-  "starttime": "2025-05-31T16:00:00.000+00:00",
-  "endtime": "2026-12-31T16:00:00.000+00:00",
-  "sort": "180",
-  "button": "{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https:/",
-  "limitType": "MONTH",
-  "prov": "0",
-  "whiteList": "0",
-  "hasNda": "0",
-  "hasBak": "1",
-  "taskType": "0",
-  "limitCloud": "4",
-  "content_display2": "+20豆",
-  "stepTypeSet": "[\"sendcloud\",\"processbindtask\",\"click\"]",
-  "state": "FINISH",
-  "currstep": "3",
-  "process": "0",
-  "lastupdate": "1789395165897",
-  "recordid": "40207767457",
-  "currDay": "0",
-  "cloudId": "0",
-  "buttonProperty": "{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https:/"
- },
- "signin": [
-  {
-   "p": "/market/signin/signin/list",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
+   "k": "⑤ 备份礼 info",
+   "v": {
+    "status": 200,
+    "msg": "success",
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"nextMonth\":200,\"curMonth\":200,\"state\":1}}"
+   }
   },
   {
-   "p": "/market/signin/signin/record",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
+   "k": "⑤ 通知任务 status",
+   "v": {
+    "status": 200,
+    "msg": "success",
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"pushOn\":1,\"firstTaskStatus\":3,\"secondTaskStatus\":1,\"pushTaskStatus\":0,\"onDuaration\":1,\"total\":31}}"
+   }
   },
   {
-   "p": "/market/signin/sign/calendar",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/calendar",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/user/signin",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/signin/days",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  }
- ],
- "cloud": [
-  {
-   "p": "/market/signin/cloudBean/list",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/bean/list",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/yundou/list",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/user/yunDou",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/task/cloudList",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/index/info",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/home",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/page/init",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/task/awardList",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  }
- ],
- "post": [
-  {
-   "p": "/market/signin/task/receive",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/task/award",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-  },
-  {
-   "p": "/market/signin/cloud/receive",
-   "status": 404,
-   "body": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
+   "k": "⑤ 任务扩展 taskExpansion",
+   "v": {
+    "status": 200,
+    "msg": "success",
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"preMonthBackup\":true,\"curMonthTaskRecordCount\":0,\"curMonthBackupTaskAccept\":false,\"nextMonthTaskRecordCount\":20,\"acceptDate\":\"202609\"}}"
+   }
   }
  ]
 }
