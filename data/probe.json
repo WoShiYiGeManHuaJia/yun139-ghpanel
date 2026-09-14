@@ -1,49 +1,80 @@
 {
- "ts": "2026-09-14T13:53:48.440Z",
- "refresh": {
-  "ok": true,
-  "ret": "0",
-  "desc": "请求成功",
-  "hasNew": true
- },
- "refresh_new_expire": "2026-10-14T13:53:50.048Z",
- "refresh_raw_sample": "<root>\n<return>0</return>\n<desc>请求成功</desc>\n<token>76F0GdZB|1|RCS|1791986030048|SbNZcuV4OHNLiBPwNMpGzIA.9h2TszExyzMvch9L",
- "web_err": "fetch failed",
- "upload_paths": [],
- "upload_probe": [
+ "ts": "2026-09-14T13:56:58.162Z",
+ "probes": [
   {
    "m": "GET",
-   "u": "/orchestration/personalCloud/user/v1.0/getDiskInfo",
+   "p": "/orchestration/personalCloud/hcy/file/list",
    "status": 200,
-   "body": "{\"success\":false,\"code\":\"1010000500\",\"message\":\"系统服务不可用\",\"data\":null}"
+   "body": "{\"success\":false,\"code\":\"1010010005\",\"message\":\"资源不存在\",\"data\":null}"
   },
   {
    "m": "GET",
-   "u": "/orchestration/personalCloud/catalog/v1.0/getUserCatalog",
+   "p": "/hcy/file/list",
+   "err": "fetch failed"
+  },
+  {
+   "m": "GET",
+   "p": "/orchestration/hcy/file/list",
+   "status": 404,
+   "body": "<!doctype html><html lang=\"en\"><head><title>HTTP Status 404 – Not Found</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;background-color:#525D76;} h1 {font-size:22px;}"
+  },
+  {
+   "m": "GET",
+   "p": "/orchestration/personalCloud/new/file/list",
+   "status": 200,
+   "body": "{\"success\":false,\"code\":\"1010010005\",\"message\":\"资源不存在\",\"data\":null}"
+  },
+  {
+   "m": "GET",
+   "p": "/orchestration/personalCloud/file/v1.0/list",
+   "err": "fetch failed"
+  },
+  {
+   "m": "GET",
+   "p": "/orchestration/personalCloud/user/v1.0/getDisk",
+   "status": 200,
+   "body": "{\"success\":false,\"code\":\"1010010005\",\"message\":\"资源不存在\",\"data\":null}"
+  },
+  {
+   "m": "GET",
+   "p": "/orchestration/personalCloud/catalog/v1.0/getDisk",
    "err": "fetch failed"
   },
   {
    "m": "POST",
-   "u": "/orchestration/file-upload/uploadFile",
-   "status": 404,
-   "body": "<!doctype html><html lang=\"en\"><head><title>HTTP Status 404 – Not Found</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;backgro"
-  },
-  {
-   "m": "POST",
-   "u": "/orchestration/file-upload/v1.0/uploadFile",
-   "status": 404,
-   "body": "<!doctype html><html lang=\"en\"><head><title>HTTP Status 404 – Not Found</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;backgro"
-  },
-  {
-   "m": "POST",
-   "u": "/orchestration/personalCloud/file/v1.0/upload",
+   "p": "/orchestration/personalCloud/hcy/file/list",
    "status": 200,
    "body": "{\"success\":false,\"code\":\"1010010005\",\"message\":\"资源不存在\",\"data\":null}"
   },
   {
    "m": "POST",
-   "u": "/orchestration/upload/uploadFile",
-   "err": "fetch failed"
+   "p": "/hcy/file/list",
+   "status": 200,
+   "body": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"force-rendering\" content=\"webkit\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"><meta http-"
+  },
+  {
+   "m": "POST",
+   "p": "/orchestration/personalCloud/upload/v1.0/getUploadUrl",
+   "status": 200,
+   "body": "{\"success\":false,\"code\":\"1010010005\",\"message\":\"资源不存在\",\"data\":null}"
+  },
+  {
+   "m": "POST",
+   "p": "/orchestration/personalCloud/upload/v1.0/createUploadTask",
+   "status": 200,
+   "body": "{\"success\":false,\"code\":\"1010010005\",\"message\":\"资源不存在\",\"data\":null}"
+  },
+  {
+   "m": "POST",
+   "p": "/hcy/file/upload",
+   "status": 200,
+   "body": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"force-rendering\" content=\"webkit\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\"><meta http-"
+  },
+  {
+   "m": "GET",
+   "p": "/orchestration/personalCloud/v1.0/getDiskInfo",
+   "status": 200,
+   "body": "{\"success\":false,\"code\":\"1010010005\",\"message\":\"资源不存在\",\"data\":null}"
   }
  ]
 }
