@@ -1,255 +1,46 @@
 {
- "ts": "2026-09-14T13:46:27.573Z",
- "before": {
+ "ts": "2026-09-14T13:48:11.727Z",
+ "click106": "{\"code\":0,\"msg\":\"success\"}",
+ "changed": {
   "106": {
    "name": "手动上传一个文件",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+6豆"
-  },
-  "113": {
-   "name": "使用PC客户端",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+60豆"
-  },
-  "118": {
-   "name": "调查问卷",
-   "state": "WAIT",
-   "process": 0,
-   "reward": ""
-  },
-  "319": {
-   "name": "小云互动礼",
-   "state": "WAIT",
-   "process": 1,
-   "reward": ""
-  },
-  "409": {
-   "name": "从固定入口访问云朵中心",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+6豆"
-  },
-  "431": {
-   "name": "去使用移动云手机",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+20豆"
-  },
-  "434": {
-   "name": "分享文件领好礼<span id='share_title'>0/7</span>",
-   "state": "WAIT",
-   "process": 0,
-   "reward": ""
-  },
-  "522": {
-   "name": "当月上传文件满100个",
-   "state": "WAIT",
-   "process": 17,
-   "reward": ""
-  },
-  "547": {
-   "name": "加入一个知识库",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+10豆"
-  },
-  "548": {
-   "name": "开启备份领好礼",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "首月+400豆"
-  },
-  "549": {
-   "name": "开启备份领好礼",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+200豆"
-  },
-  "550": {
-   "name": "开启云盘APP通知领好礼",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+200豆"
-  },
-  "551": {
-   "name": "连续31天开启云盘APP通知",
-   "state": "WAIT",
-   "process": 0,
-   "reward": ""
-  },
-  "585": {
-   "name": "去体验AI相机",
-   "state": "WAIT",
-   "process": 0,
-   "reward": ""
-  },
-  "604": {
-   "name": "去云盘图书馆阅读书籍",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+10豆"
-  },
-  "607": {
-   "name": "下月签到领惊喜福利",
-   "state": "FINISH",
-   "process": 0,
-   "reward": "+50豆"
-  },
-  "609": {
-   "name": "和AI助手对话",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+20豆"
+   "lastupdate": {
+    "before": 1789393599701,
+    "after": 1789393695264
+   }
   }
  },
- "clicks": {
-  "106": {
-   "task": "手动上传一个文件",
-   "reward": "+6豆",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  "113": {
-   "task": "使用PC客户端",
-   "reward": "+60豆",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  "319": {
-   "task": "小云互动礼",
-   "reward": "",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  "409": {
-   "task": "从固定入口访问云朵中心",
-   "reward": "+6豆",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  "434": {
-   "task": "分享文件领好礼<span id='share_title'>0/7</span>",
-   "reward": "",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  "547": {
-   "task": "加入一个知识库",
-   "reward": "+10豆",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  },
-  "604": {
-   "task": "去云盘图书馆阅读书籍",
-   "reward": "+10豆",
-   "status": 200,
-   "body": "{\"code\":0,\"msg\":\"success\"}"
-  }
- },
- "after": {
-  "106": {
-   "name": "手动上传一个文件",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+6豆"
-  },
-  "113": {
-   "name": "使用PC客户端",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+60豆"
-  },
-  "118": {
-   "name": "调查问卷",
-   "state": "WAIT",
-   "process": 0,
-   "reward": ""
-  },
-  "319": {
-   "name": "小云互动礼",
-   "state": "WAIT",
-   "process": 2,
-   "reward": ""
-  },
-  "409": {
-   "name": "从固定入口访问云朵中心",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+6豆"
-  },
-  "431": {
-   "name": "去使用移动云手机",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+20豆"
-  },
-  "434": {
-   "name": "分享文件领好礼<span id='share_title'>0/7</span>",
-   "state": "WAIT",
-   "process": 0,
-   "reward": ""
-  },
-  "522": {
-   "name": "当月上传文件满100个",
-   "state": "WAIT",
-   "process": 17,
-   "reward": ""
-  },
-  "547": {
-   "name": "加入一个知识库",
-   "state": "FINISH",
-   "process": 0,
-   "reward": "+10豆"
-  },
-  "548": {
-   "name": "开启备份领好礼",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "首月+400豆"
-  },
-  "549": {
-   "name": "开启备份领好礼",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+200豆"
-  },
-  "550": {
-   "name": "开启云盘APP通知领好礼",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+200豆"
-  },
-  "551": {
-   "name": "连续31天开启云盘APP通知",
-   "state": "WAIT",
-   "process": 0,
-   "reward": ""
-  },
-  "585": {
-   "name": "去体验AI相机",
-   "state": "WAIT",
-   "process": 0,
-   "reward": ""
-  },
-  "604": {
-   "name": "去云盘图书馆阅读书籍",
-   "state": "FINISH",
-   "process": 0,
-   "reward": "+10豆"
-  },
-  "607": {
-   "name": "下月签到领惊喜福利",
-   "state": "FINISH",
-   "process": 0,
-   "reward": "+50豆"
-  },
-  "609": {
-   "name": "和AI助手对话",
-   "state": "WAIT",
-   "process": 0,
-   "reward": "+20豆"
-  }
+ "sample_106": {
+  "id": 106,
+  "marketname": "sign_in_3",
+  "groupid": "day",
+  "enable": 1,
+  "name": "手动上传一个文件",
+  "description": "备份后完成任务奖励翻倍",
+  "rule": "<h5 class=\"f30 c333 guide_icon1\">操作指引</h5> <div class=\"text\">1.点击下方按钮【去上传】；<br>2.点击【图片】【视频】【文件】，选择要上传的图片；<br>3.点击右下角【上传】按钮，完成上传。</div> <h5 class=\"f30 c333 guide_icon2\">奖品领取</h5> <div class=\"text\">完成任务后，点击云朵中心顶部云朵小气泡即可领取奖励。</div>",
+  "steps": [],
+  "starttime": "2021-11-16T16:00:00.000+00:00",
+  "endtime": "2026-12-31T16:00:00.000+00:00",
+  "sort": 40,
+  "limitType": "DAY",
+  "prov": "0",
+  "whiteList": 0,
+  "hasNda": 1,
+  "hasBak": 1,
+  "taskType": 0,
+  "limitCloud": 2,
+  "content_display2": "+6豆",
+  "stepTypeSet": [
+   "sendcloud",
+   "nda",
+   "click"
+  ],
+  "state": "WAIT",
+  "currstep": 1,
+  "process": 0,
+  "lastupdate": 1789393695264,
+  "recordid": 40385498565,
+  "currDay": 0,
+  "cloudId": 0
  }
 }
