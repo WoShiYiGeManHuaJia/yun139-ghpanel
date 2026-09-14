@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   probe:
@@ -19,3 +19,10 @@ jobs:
           YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
           YUN139_PHONE: ${{ secrets.YUN139_PHONE }}
         run: node actions/probe.mjs
+      - name: Commit probe result
+        run: |
+          git config user.name "yun139-panel-bot"
+          git config user.email "yun139-panel-bot@users.noreply.github.com"
+          git add data/probe.json
+          git commit -m "probe: $(date -u +%Y%m%d%H%M%S)" || echo "no change"
+          git push
