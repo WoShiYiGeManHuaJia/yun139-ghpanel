@@ -1,5 +1,5 @@
 {
- "ts": "2026-09-14T15:20:10.245Z",
+ "ts": "2026-09-14T15:22:53.902Z",
  "steps": [
   {
    "k": "jwt",
@@ -7,74 +7,78 @@
   },
   {
    "k": "① 余额 BEFORE",
-   "v": {
-    "num": 919,
-    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":919}"
-   }
+   "v": 919
   },
   {
-   "k": "② infoV3 关键字段",
-   "v": {
-    "keys": [
-     "curMonthBackup",
-     "cardInfo",
-     "beforeTotal",
-     "signInPoints",
-     "signCount",
-     "provinceCode",
-     "monthDays",
-     "curMonthBackupSignAccept",
-     "maxType",
-     "cal",
-     "remind",
-     "total",
-     "canExchangeText",
-     "showHistory",
-     "showTaskExpansion",
-     "toReceive",
-     "isGuide",
-     "time",
-     "isCloudEnough",
-     "lackCloudNum",
-     "receiveList"
-    ],
-    "toReceive": 12,
-    "beforeTotal": 30,
-    "signInPoints": 3,
-    "signCount": 1,
-    "maxType": "完成任务",
-    "total": 919
-   }
+   "k": "② toReceive",
+   "v": 12
   },
   {
-   "k": "③ taskListV3(POST)",
-   "v": {
-    "n": 0,
-    "fin": []
-   }
+   "k": "② ★receiveList 原始",
+   "v": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]"
   },
   {
-   "k": "④ ★receiveTask[106]",
-   "v": {
-    "status": 200,
-    "code": 0,
-    "msg": "success",
-    "res": "0"
-   }
+   "k": "② receiveList 类型",
+   "v": "数组 len=3"
   },
   {
-   "k": "⑤ 余额 AFTER",
-   "v": {
-    "num": 919,
-    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":919}"
-   }
+   "k": "③ ★按 receiveList 领取",
+   "v": [
+    {
+     "item": {
+      "cloudType": 2,
+      "cloudNum": 32
+     },
+     "skip": "无 id 字段",
+     "keys": [
+      "cloudType",
+      "cloudNum"
+     ]
+    },
+    {
+     "item": {
+      "cloudType": 0,
+      "cloudNum": 6,
+      "recordId": 2343307559
+     },
+     "skip": "无 id 字段",
+     "keys": [
+      "cloudType",
+      "cloudNum",
+      "recordId"
+     ]
+    },
+    {
+     "item": {
+      "cloudType": 0,
+      "cloudNum": 6,
+      "recordId": 2343307413
+     },
+     "skip": "无 id 字段",
+     "keys": [
+      "cloudType",
+      "cloudNum",
+      "recordId"
+     ]
+    }
+   ]
+  },
+  {
+   "k": "④ 余额 AFTER",
+   "v": 919
+  },
+  {
+   "k": "⑤ 领取后 toReceive",
+   "v": 12
   },
   {
    "k": "⑥ ★结论",
    "v": {
     "before": 919,
     "after": 919,
-    "变化": 0
+    "变化": 0,
+    "toReceive前": 12,
+    "toReceive后": 12
    }
   }
  ]
