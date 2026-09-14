@@ -15,8 +15,8 @@ const SMS_RSA_E = 65537;
 function b64encode(bytes) { return Buffer.from(bytes).toString("base64"); }
 function utf8B64(str) { return Buffer.from(str, "utf8").toString("base64"); }
 function cleanAuth(raw) {
-  raw = String(raw || "").trim();
-  if (raw.toLowerCase().startsWith("basic ")) raw = raw.slice(6).trim();
+  raw = String(raw || "").replace(/\s+/g, "");
+  raw = raw.replace(/^basic/i, "");
   return raw;
 }
 function decodeAuth(raw) {

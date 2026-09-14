@@ -386,17 +386,35 @@
 
   // 把抓包复制的五花八门内容归一化成 "pc:手机号:token" 整段
   function normalizeAuthText(t) {
-    t = (t || "").replace(/\s+/g, " ").trim();
+    t = String(t || "").trim();
     if (!t) return null;
-    var m;
-    if (/^Basic\s+/i.test(t)) return t;                                        // 已是整段
-    m = t.match(/authorization"?\s*[:=]\s*(["']?)(Basic[^"',\s}]*)\1/i);       // JSON / 请求头
-    if (m) return m[2];
-    m = t.match(/authorization\s*:\s*(Basic[^\s'"]*)/i);                        // cURL / 纯文本兜底
-    if (m) return m[1];
-    if (/^pc:\d{6,}/i.test(t)) return "Basic " + t;                           // 只有解码后的 pc:手机号:token
-    if (/^[A-Za-z0-9+/=]+$/.test(t)) return "Basic " + t;                     // 裸 base64
-    return "Basic " + t;                                                       // 最后兜底交给 atob 判断
+    var m, v;
+    // 1) 全文搜 "Basic <base64>" —— 覆盖 JSON / 请求头 / cURL / 折行文本
+    m = t.match(/Basic\s+([A-Za-z0-9+/=\s]{16,})/i);
+    if (m) return "Basic " + m[1].replace(/\s+/g, "");
+    // 2) JSON 里 name/value 相邻
+    m = t.match(/"name"\s*:\s*"authorization"\s*,\s*"value"\s*:\s*"([^"]+)"/i);
+    if (m) return /^Basic/i.test(m[1]) ? m[1] : "Basic " + m[1].replace(/\s+/g, "");
+    // 3) JSON 里 authorization 作 key
+    m = t.match(/"?authorization"?\s*[:=]\s*"?([A-Za-z0-9+/=_|\-.\s]{16,})"?/i);
+    if (m) { v = m[1].replace(/\s+/g, ""); return /^Basic/i.test(v) ? v : "Basic " + v; }
+    // 4) 含 authorization 的 JSON，但 name/value 不相邻（EditThisCookie 导出格式）
+    if (/authorization/i.test(t)) {
+      var vs = t.match(/"value"\s*:\s*"([^"]{20,})"/gi) || [];
+      for (var i = 0; i < vs.length; i++) {
+        var s = vs[i].replace(/^"value"\s*:\s*"/i, "").replace(/"$/, "").replace(/\s+/g, "");
+        if (/^Basic/i.test(s)) return s;
+        if (/^[A-Za-z0-9+/=_|\-.]{40,}$/.test(s)) return "Basic " + s;
+      }
+    }
+    // 5) 裸长 base64
+    m = t.match(/[A-Za-z0-9+/=]{40,}/);
+    if (m) { var dec = ""; try { dec = atob(m[0]); } catch (e) { dec = ""; }
+      if (/^pc:\d{6,}:/.test(dec)) return "Basic " + m[0]; }
+    // 6) 已解码的 pc:手机号:token
+    if (/^pc:\d{6,}:/i.test(t)) return "Basic " + btoa(t);
+    // 7) 原样兜底
+    return /^Basic/i.test(t) ? t : "Basic " + t;
   }
 
   async function submitPaste() {
@@ -404,10 +422,10 @@
     if (!rawTxt.trim()) { $("pasteStatus").textContent = "内容为空，请粘贴抓包复制的授权内容"; $("pasteStatus").className = "status err"; return; }
     const auth = normalizeAuthText(rawTxt);
     try {
-      const b64 = auth.split(" ").pop();
+      const b64 = auth.replace(/^Basic\s*/i, "").replace(/\s+/g, "");
       let parts;
-      try { parts = atob(b64).split(":"); } catch (er) { throw new Error("不是有效的 Base64 授权码"); }
-      if (parts.length < 3) throw new Error("缺少手机号/令牌段");
+      try { parts = atob(b64).split(":"); } catch (er) { throw new Error("不是有效的 Base64 授权码（长度 " + b64.length + "，开头 " + b64.slice(0, 12) + "）"); }
+      if (parts.length < 3) throw new Error("缺少手机号/令牌段（解析到: " + parts.join(":").slice(0, 30) + "）");
       const phone = parts[1];
       if (!/^\d{6,}$/.test(phone)) throw new Error("手机号段异常: " + phone);
       const tok = parts.slice(2).join(":");
