@@ -697,7 +697,9 @@ async function main() {
       out.msg = "云朵任务执行完成";
       out.ok = true;
     } else if (type === "status") {
-      const accounts = await decryptAccounts();
+      let accounts = [];
+      try { accounts = await decryptAccounts(); } catch (e) { accounts = []; }
+      if (!accounts.length) { const c = await pickCreds(); accounts = [c]; }
       const rows = [];
       for (const a of accounts) {
         const row = { phone: a.phone, masked: maskPhone(a.phone) };
@@ -720,7 +722,9 @@ async function main() {
       out.ok = rows.some(r => r.ok);
       out.msg = "已查询 " + rows.length + " 个账号";
     } else if (type === "receive") {
-      const accounts = await decryptAccounts();
+      let accounts = [];
+      try { accounts = await decryptAccounts(); } catch (e) { accounts = []; }
+      if (!accounts.length) { const c = await pickCreds(); accounts = [c]; }
       const only = String(payload.phone || "").trim();
       const targets = only ? accounts.filter(a => String(a.phone) === only) : accounts;
       if (!targets.length) throw new Error("未找到目标账号");
