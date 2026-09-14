@@ -18,8 +18,12 @@ async function getJwt() {
         body: JSON.stringify({ account: PHONE, toSourceId: "001005" }), signal: AbortSignal.timeout(25000) });
       const j = await r.json();
       if (String(j.code) !== "0") throw new Error("外层code=" + j.code);
-      const rc = j.data && (j.data.resultCode || (j.data.result && j.data.result.resultCode));
-      if (String(rc) !== "0") throw new Error("★业务码异常 resultCode=" + rc);
+      // 注意：真实业务码在 data.result.resultCode；data.resultCode 是另一回事(常为104000)
+      const inner = j.data && j.data.result && j.data.result.resultCode;
+      const outer = j.data && j.data.resultCode;
+      out.rcLog = { inner, outer };
+      if (inner !== undefined && String(inner) !== "0") throw new Error("★内层业务码异常 " + inner);
+      if (inner === undefined && String(outer) !== "0") throw new Error("★业务码异常 " + outer);
       const sso = j.data && j.data.token;
       if (!sso) throw new Error("无ssoToken");
       const r2 = await fetch(`${CY7071}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(sso)}`, { headers: { "Host": "caiyun.feixin.10086.cn:7071", "Accept": "*/*" }, signal: AbortSignal.timeout(25000) });
