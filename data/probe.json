@@ -1,5 +1,5 @@
 {
- "ts": "2026-09-14T16:01:21.741Z",
+ "ts": "2026-09-14T16:04:34.336Z",
  "steps": [
   {
    "k": "jwt",
@@ -8,62 +8,92 @@
   {
    "k": "⓪ 基线",
    "v": {
-    "total": 919,
+    "total": null,
     "toReceive": 12,
     "list": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]"
    }
   },
   {
-   "k": "★ A1 +isDeviceId app 2343307559/0",
+   "k": "① FINISH 任务",
+   "v": [
+    {
+     "id": 431,
+     "cloudId": 0,
+     "name": "去使用移动云手机"
+    },
+    {
+     "id": 607,
+     "cloudId": 0,
+     "name": "下月签到领惊喜福利"
+    },
+    {
+     "id": 604,
+     "cloudId": 0,
+     "name": "去云盘图书馆阅读书籍"
+    },
+    {
+     "id": 409,
+     "cloudId": 0,
+     "name": "从固定入口访问云朵中心"
+    },
+    {
+     "id": 118,
+     "cloudId": 0,
+     "name": "调查问卷"
+    },
+    {
+     "id": 547,
+     "cloudId": 0,
+     "name": "加入一个知识库"
+    }
+   ]
+  },
+  {
+   "k": "★★★成功 ③ receiveTask id=431",
    "v": {
-    "code": 615,
-    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
-    "result": null,
-    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "code": 0,
+    "result": 0,
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":0}",
+    "总豆": "null→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "③ receiveTask id=607",
+   "v": {
+    "code": 0,
+    "result": 0,
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":0}",
     "总豆": "919→919",
     "待领": "12→12"
    }
   },
   {
-   "k": "★ A2 +isDeviceId app 2343307413/0",
+   "k": "③ receiveTask id=604",
    "v": {
-    "code": 615,
-    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
-    "result": null,
-    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "code": 0,
+    "result": 0,
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":0}",
     "总豆": "919→919",
     "待领": "12→12"
    }
   },
   {
-   "k": "★ A3 +isDeviceId app ''/2",
+   "k": "③ receiveTask id=409",
    "v": {
-    "code": 615,
-    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
-    "result": null,
-    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "code": 0,
+    "result": 0,
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":0}",
     "总豆": "919→919",
     "待领": "12→12"
    }
   },
   {
-   "k": "   A4 +isDeviceId mini 2343307559/0",
+   "k": "③ receiveTask id=118",
    "v": {
-    "code": 615,
-    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
-    "result": null,
-    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
-    "总豆": "919→919",
-    "待领": "12→12"
-   }
-  },
-  {
-   "k": "   A5 +isDeviceId 数字cloudType0 '0'",
-   "v": {
-    "code": 615,
-    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
-    "result": null,
-    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "code": 0,
+    "result": 0,
+    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":0}",
     "总豆": "919→919",
     "待领": "12→12"
    }
@@ -72,16 +102,14 @@
    "k": "最终",
    "v": {
     "起始": {
-     "total": 919,
+     "total": null,
      "toReceive": 12
     },
     "现在": {
      "total": 919,
      "toReceive": 12
     },
-    "list": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]",
-    "成功方案": "无",
-    "总增豆": 0
+    "总增豆": 919
    }
   }
  ]
