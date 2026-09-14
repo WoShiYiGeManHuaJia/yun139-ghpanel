@@ -17,56 +17,55 @@ async function getJwt() {
   }
   throw new Error("tyrzLogin 失败");
 }
-async function cyGet(jwt, p) {
-  for (const h of CY) {
+async function cyGet(jwt, p, host) {
+  const hosts = host ? [host] : CY;
+  for (const h of hosts) {
     try { const r = await fetch(h + p, { headers: H(jwt, h), signal: AbortSignal.timeout(15000) });
-      const t = await r.text(); return { h, status: r.status, body: t.slice(0, 400) }; } catch (e) {}
+      const t = await r.text(); return { h, status: r.status, body: t.slice(0, 500) }; } catch (e) {}
   }
   return { status: 0, body: "all-hosts-failed" };
 }
 async function main() {
   const jwt = await getJwt(); out.jwt = true;
-  // 1) 找云豆余额接口（关键：验证是否到账）
-  const balPaths = [
-    "/market/signin/user/cloud", "/market/signin/cloud/balance", "/market/signin/user/balance",
-    "/market/signin/account", "/market/signin/user/account", "/market/signin/info",
-    "/market/signin/user/cloudinfo", "/market/signin/cloud/get", "/market/signin/total",
-    "/market/signin/user/cloudtotal", "/market/signin/myCloud", "/market/signin/user/myinfo",
-  ];
-  out.balance = [];
-  for (const p of balPaths) {
-    const r = await cyGet(jwt, p);
-    out.balance.push({ p, status: r.status, body: r.body.slice(0, 200) });
-  }
-  // 2) 拿任务列表，取 recordid
-  let raw = null;
+  // 1) taskList 完整结构：打印 result 的每个 key + 任务名
+  let raw = null, host = null;
   for (const h of CY) {
     try { const r = await fetch(h + "/market/signin/task/taskList?marketname=sign_in_3", { headers: H(jwt, h), signal: AbortSignal.timeout(20000) });
-      const j = await r.json(); if (String(j.code) === "0") { raw = j; break; } } catch (e) {}
+      const j = await r.json(); if (String(j.code) === "0") { raw = j; host = h; break; } } catch (e) {}
   }
-  const list = [];
-  for (const arr of Object.values((raw && raw.result) || {})) {
-    if (Array.isArray(arr)) for (const t of arr) list.push(t);
+  out.host = host;
+  out.result_keys = Object.keys(raw.result || {});
+  out.groups = [];
+  for (const [k, v] of Object.entries(raw.result || {})) {
+    out.groups.push({ key: k, type: Array.isArray(v) ? "array" : typeof v, n: Array.isArray(v) ? v.length : 0,
+      sample: Array.isArray(v) && v[0] ? String(v[0].name || "").replace(/<[^>]*>/g, "") : JSON.stringify(v).slice(0,120) });
   }
-  out.taskinfo = list.map(t => ({ id: t.id, name: String(t.name||"").replace(/<[^>]*>/g,""), state: t.state,
-    currstep: t.currstep, recordid: t.recordid, cloudId: t.cloudId, limitCloud: t.limitCloud, steps: t.stepTypeSet }));
-  // 3) 用 recordid 试领取
-  const fin = list.filter(t => t.state === "FINISH");
-  const wait = list.filter(t => t.state === "WAIT");
-  out.probe = [];
-  const mk = (t) => [
-    `/market/signin/task/receive?recordid=${t.recordid||""}&id=${t.id}`,
-    `/market/signin/task/click?key=award&id=${t.id}&recordid=${t.recordid||""}`,
-    `/market/signin/task/click?key=cloud&id=${t.id}`,
-    `/market/signin/task/click?key=task&id=${t.id}&step=award`,
-    `/market/signin/task/award?recordid=${t.recordid||""}`,
-    `/market/signin/cloud/receive?recordid=${t.recordid||""}&id=${t.id}`,
-  ];
-  for (const t of [...fin.slice(0,2), ...wait.slice(0,2)]) {
-    for (const p of mk(t)) {
-      const r = await cyGet(jwt, p);
-      out.probe.push({ task: t.id, state: t.state, p, status: r.status, body: r.body.slice(0,180) });
-    }
+  // 完整 dump 一个 FINISH 任务的全部字段值
+  const all = [];
+  for (const arr of Object.values(raw.result || {})) if (Array.isArray(arr)) for (const t of arr) all.push(t);
+  const fin = all.find(t => t.state === "FINISH");
+  if (fin) { out.finish_full = {}; for (const [k,v] of Object.entries(fin)) out.finish_full[k] = (typeof v === "object" ? JSON.stringify(v).slice(0,200) : String(v).slice(0,200)); }
+  // 2) 签到状态 / 日历（气泡可能来自签到日历）
+  out.signin = [];
+  for (const p of ["/market/signin/signin/list", "/market/signin/signin/record", "/market/signin/sign/calendar",
+                   "/market/signin/calendar", "/market/signin/user/signin", "/market/signin/signin/days"]) {
+    const r = await cyGet(jwt, p); out.signin.push({ p, status: r.status, body: r.body.slice(0,250) });
+  }
+  // 3) 云豆/云朵 体系接口（换关键词）
+  out.cloud = [];
+  for (const p of ["/market/signin/cloudBean/list", "/market/signin/bean/list", "/market/signin/yundou/list",
+                   "/market/signin/user/yunDou", "/market/signin/task/cloudList", "/market/signin/index/info",
+                   "/market/signin/home", "/market/signin/page/init", "/market/signin/task/awardList"]) {
+    const r = await cyGet(jwt, p); out.cloud.push({ p, status: r.status, body: r.body.slice(0,250) });
+  }
+  // 4) 用 POST 试领取（之前都是 GET）
+  out.post = [];
+  for (const p of ["/market/signin/task/receive", "/market/signin/task/award", "/market/signin/cloud/receive"]) {
+    try {
+      const r = await fetch((host||CY[0]) + p, { method: "POST", headers: { ...H(jwt, host||CY[0]), "Content-Type": "application/json" },
+        body: JSON.stringify({ id: fin ? fin.id : "", recordid: fin ? fin.recordid : "", marketname: "sign_in_3" }), signal: AbortSignal.timeout(15000) });
+      out.post.push({ p, status: r.status, body: (await r.text()).slice(0,250) });
+    } catch (e) { out.post.push({ p, err: String(e.message||e) }); }
   }
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
