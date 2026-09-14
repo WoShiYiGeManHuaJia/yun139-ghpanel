@@ -1,46 +1,49 @@
 {
- "ts": "2026-09-14T13:48:11.727Z",
- "click106": "{\"code\":0,\"msg\":\"success\"}",
- "changed": {
-  "106": {
-   "name": "手动上传一个文件",
-   "lastupdate": {
-    "before": 1789393599701,
-    "after": 1789393695264
-   }
-  }
+ "ts": "2026-09-14T13:53:48.440Z",
+ "refresh": {
+  "ok": true,
+  "ret": "0",
+  "desc": "请求成功",
+  "hasNew": true
  },
- "sample_106": {
-  "id": 106,
-  "marketname": "sign_in_3",
-  "groupid": "day",
-  "enable": 1,
-  "name": "手动上传一个文件",
-  "description": "备份后完成任务奖励翻倍",
-  "rule": "<h5 class=\"f30 c333 guide_icon1\">操作指引</h5> <div class=\"text\">1.点击下方按钮【去上传】；<br>2.点击【图片】【视频】【文件】，选择要上传的图片；<br>3.点击右下角【上传】按钮，完成上传。</div> <h5 class=\"f30 c333 guide_icon2\">奖品领取</h5> <div class=\"text\">完成任务后，点击云朵中心顶部云朵小气泡即可领取奖励。</div>",
-  "steps": [],
-  "starttime": "2021-11-16T16:00:00.000+00:00",
-  "endtime": "2026-12-31T16:00:00.000+00:00",
-  "sort": 40,
-  "limitType": "DAY",
-  "prov": "0",
-  "whiteList": 0,
-  "hasNda": 1,
-  "hasBak": 1,
-  "taskType": 0,
-  "limitCloud": 2,
-  "content_display2": "+6豆",
-  "stepTypeSet": [
-   "sendcloud",
-   "nda",
-   "click"
-  ],
-  "state": "WAIT",
-  "currstep": 1,
-  "process": 0,
-  "lastupdate": 1789393695264,
-  "recordid": 40385498565,
-  "currDay": 0,
-  "cloudId": 0
- }
+ "refresh_new_expire": "2026-10-14T13:53:50.048Z",
+ "refresh_raw_sample": "<root>\n<return>0</return>\n<desc>请求成功</desc>\n<token>76F0GdZB|1|RCS|1791986030048|SbNZcuV4OHNLiBPwNMpGzIA.9h2TszExyzMvch9L",
+ "web_err": "fetch failed",
+ "upload_paths": [],
+ "upload_probe": [
+  {
+   "m": "GET",
+   "u": "/orchestration/personalCloud/user/v1.0/getDiskInfo",
+   "status": 200,
+   "body": "{\"success\":false,\"code\":\"1010000500\",\"message\":\"系统服务不可用\",\"data\":null}"
+  },
+  {
+   "m": "GET",
+   "u": "/orchestration/personalCloud/catalog/v1.0/getUserCatalog",
+   "err": "fetch failed"
+  },
+  {
+   "m": "POST",
+   "u": "/orchestration/file-upload/uploadFile",
+   "status": 404,
+   "body": "<!doctype html><html lang=\"en\"><head><title>HTTP Status 404 – Not Found</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;backgro"
+  },
+  {
+   "m": "POST",
+   "u": "/orchestration/file-upload/v1.0/uploadFile",
+   "status": 404,
+   "body": "<!doctype html><html lang=\"en\"><head><title>HTTP Status 404 – Not Found</title><style type=\"text/css\">body {font-family:Tahoma,Arial,sans-serif;} h1, h2, h3, b {color:white;backgro"
+  },
+  {
+   "m": "POST",
+   "u": "/orchestration/personalCloud/file/v1.0/upload",
+   "status": 200,
+   "body": "{\"success\":false,\"code\":\"1010010005\",\"message\":\"资源不存在\",\"data\":null}"
+  },
+  {
+   "m": "POST",
+   "u": "/orchestration/upload/uploadFile",
+   "err": "fetch failed"
+  }
+ ]
 }
