@@ -1,48 +1,5 @@
 {
- "ts": "2026-09-14T15:36:38.316Z",
- "steps": [
-  {
-   "k": "querySpecToken(001005) 第1次",
-   "v": {
-    "status": 200,
-    "raw": "{\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidssolg79cb5100da6601d260552787e2191854\"}}"
-   }
-  },
-  {
-   "k": "querySpecToken(无toSourceId) 第1次",
-   "v": {
-    "status": 200,
-    "raw": "{\"success\":false,\"code\":\"1010010001\",\"message\":\"must not be null\",\"data\":null}"
-   }
-  },
-  {
-   "k": "tyrzLogin 连通性(假token)",
-   "v": {
-    "status": 200,
-    "raw": "{\"code\":\"200050409\",\"msg\":\"token 已失效\"}"
-   }
-  }
- ],
- "note": [
-  {
-   "k": "解码长度",
-   "v": 216
-  },
-  {
-   "k": "段数",
-   "v": 5
-  },
-  {
-   "k": "令牌内时间戳",
-   "v": "1791949818157 → 2026-10-14T03:50:18.157Z (UTC)"
-  },
-  {
-   "k": "是否过期",
-   "v": "未过期，剩余 30 天"
-  },
-  {
-   "k": "解码打码",
-   "v": "pc:172****9953:Yc1yD0cW|1|RCS|179****8157|aqMufX5ShQeaMeT2T3agx0ziP5731vZM51iOUUAoAKFCZwA6se.2_AcAp1bZYJfcy7KbGxNHFaYJ2Q"
-  }
- ]
+ "ts": "2026-09-14T15:48:34.410Z",
+ "steps": [],
+ "fatal": "getJwt 失败: ★业务码异常 resultCode=104000"
 }
