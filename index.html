@@ -259,6 +259,19 @@
   async function runLogin() { const b = $("btn_login"); const phone = $("inp_phone").value.trim(), code = $("inp_code").value.trim(); if (!/^1\d{10}$/.test(phone) || !code) { log("请填写手机号和验证码", "err"); return; } busy(b, true); try { const list = await loadAccounts(); await dispatch("do_login", { phone, code, cipher: await encText(JSON.stringify(list)) }); log("登录任务已触发，新令牌将回写本地…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
 
   // ---- init ----
+  // 支持 URL 自动配置：#token=ghp_xxx&key=DATA_KEY&repo=owner/name
+  // 打开后自动写入 localStorage 并保存，无需手动填写
+  function applyUrlCfg() {
+    try {
+      const q = new URLSearchParams(location.hash.replace(/^#/, ""));
+      const t = q.get("token"), k = q.get("key"), r = q.get("repo");
+      let changed = false;
+      if (t) { localStorage.setItem(LS_TOKEN, t); changed = true; }
+      if (k) { localStorage.setItem(LS_KEY, k); changed = true; }
+      if (r) { localStorage.setItem(LS_REPO, r); changed = true; }
+      if (changed) { loadCfg(); log("已通过链接自动写入配置，可直接使用", "ok"); history.replaceState(null, "", location.pathname); }
+    } catch (e) { /* 忽略 */ }
+  }
   $("btn_save_cfg").onclick = saveCfg;
   $("btn_gen_key").onclick = genKey;
   $("btn_paste").onclick = pasteAccount;
@@ -266,7 +279,7 @@
   $("btn_refresh").onclick = runRefresh;
   $("btn_send").onclick = runSend;
   $("btn_login").onclick = runLogin;
-  loadCfg(); renderAccounts(); startWatch();
+  loadCfg(); applyUrlCfg(); renderAccounts(); startWatch();
 })();
 </script>
 </body>
