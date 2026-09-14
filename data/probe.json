@@ -1,5 +1,5 @@
 {
- "ts": "2026-09-14T17:11:54.439Z",
+ "ts": "2026-09-14T17:14:52.127Z",
  "steps": [
   {
    "k": "jwt",
@@ -47,7 +47,7 @@
    "v": [
     {
      "round": 1,
-     "可领取数量": 2
+     "可领取数量": 3
     },
     {
      "round": 1,
@@ -59,9 +59,9 @@
    "k": "④ 领取接口调用",
    "v": [
     {
-     "api": "/ycloud/signin/page/startSignIn?client=app&deviceId=BZ5h1nzP…(打码)",
+     "api": "/ycloud/signin/page/startSignIn?client=app&deviceId=BAukgTdR…(打码)",
      "status": 200,
-     "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"todaySignIn\":true,\"signInPoints\":3,\"signCount\":2,\"time\":1789405923413,\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0"
+     "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"todaySignIn\":true,\"signInPoints\":3,\"signCount\":2,\"time\":1789406101742,\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0"
     }
    ]
   },
