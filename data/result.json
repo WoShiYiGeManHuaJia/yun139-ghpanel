@@ -1,6 +1,7 @@
 {
-  "ts": "2026-09-14 10:36:12",
-  "type": "sign",
-  "ok": false,
-  "msg": "缺少加密数据或密钥"
+  "ts": "2026-09-14 10:58:50",
+  "type": "send_code",
+  "ok": true,
+  "msg": "successed to process!",
+  "phone": "13787464642"
 }
