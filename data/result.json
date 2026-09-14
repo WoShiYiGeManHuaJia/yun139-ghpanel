@@ -1,172 +1,15 @@
 {
-  "ts": "2026-09-14 14:12:25",
-  "type": "daily",
+  "ts": "2026-09-14 14:40:04",
+  "type": "list",
   "ok": true,
-  "msg": "续期成功，剩余 30 天；处理 17 个任务",
-  "refresh": "成功，剩余 30 天",
-  "new_expires_at": "2026-10-14 14:12:27",
-  "results": [
-    {
-      "id": 431,
-      "name": "去使用移动云手机",
-      "reward": "+20豆",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "FINISH"
-    },
-    {
-      "id": 409,
-      "name": "从固定入口访问云朵中心",
-      "reward": "+6豆",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 113,
-      "name": "使用PC客户端",
-      "reward": "+60豆",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 434,
-      "name": "分享文件领好礼0/7",
-      "reward": "",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 607,
-      "name": "下月签到领惊喜福利",
-      "reward": "+50豆",
-      "ok": true,
-      "msg": "已完成",
-      "afterProcess": 0,
-      "afterState": "FINISH"
-    },
-    {
-      "id": 604,
-      "name": "去云盘图书馆阅读书籍",
-      "reward": "+10豆",
-      "ok": true,
-      "msg": "已完成",
-      "afterProcess": 0,
-      "afterState": "FINISH"
-    },
-    {
-      "id": 118,
-      "name": "调查问卷",
-      "reward": "",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "FINISH"
-    },
-    {
-      "id": 319,
-      "name": "小云互动礼",
-      "reward": "",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "FINISH"
-    },
-    {
-      "id": 548,
-      "name": "开启备份领好礼",
-      "reward": "首月+400豆",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 549,
-      "name": "开启备份领好礼",
-      "reward": "+200豆",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 550,
-      "name": "开启云盘APP通知领好礼",
-      "reward": "+200豆",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 551,
-      "name": "连续31天开启云盘APP通知",
-      "reward": "",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 522,
-      "name": "当月上传文件满100个",
-      "reward": "",
-      "ok": false,
-      "msg": "需真实操作(sendcloud/sendsms/interfacecallback)",
-      "afterProcess": 17,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 585,
-      "name": "去体验AI相机",
-      "reward": "",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 609,
-      "name": "和AI助手对话",
-      "reward": "+20豆",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    },
-    {
-      "id": 547,
-      "name": "加入一个知识库",
-      "reward": "+10豆",
-      "ok": true,
-      "msg": "已完成",
-      "afterProcess": 0,
-      "afterState": "FINISH"
-    },
-    {
-      "id": 106,
-      "name": "手动上传一个文件",
-      "reward": "+6豆",
-      "ok": true,
-      "msg": "success",
-      "afterProcess": 0,
-      "afterState": "WAIT"
-    }
-  ],
+  "msg": "已获取 18 个真实任务",
   "tasks": [
     {
       "id": 431,
       "group": "cloudEmail",
       "name": "去使用移动云手机",
       "reward": "+20豆",
-      "state": "FINISH",
+      "state": "WAIT",
       "limit": "MONTH",
       "steps": [
         "sendcloud",
@@ -175,7 +18,38 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 3
+      "currstep": 0
+    },
+    {
+      "id": 607,
+      "group": "month",
+      "name": "下月签到领惊喜福利",
+      "reward": "+50豆",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "reservationstep",
+        "finish",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 604,
+      "group": "month",
+      "name": "去云盘图书馆阅读书籍",
+      "reward": "+10豆",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
     },
     {
       "id": 409,
@@ -190,7 +64,7 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 1
+      "currstep": 0
     },
     {
       "id": 113,
@@ -206,7 +80,7 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 1
+      "currstep": 0
     },
     {
       "id": 434,
@@ -223,59 +97,28 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 2
-    },
-    {
-      "id": 607,
-      "group": "month",
-      "name": "下月签到领惊喜福利",
-      "reward": "+50豆",
-      "state": "FINISH",
-      "limit": "MONTH",
-      "steps": [
-        "reservationstep",
-        "finish",
-        "click"
-      ],
-      "process": 0,
-      "currDay": 0,
-      "currstep": 3
-    },
-    {
-      "id": 604,
-      "group": "month",
-      "name": "去云盘图书馆阅读书籍",
-      "reward": "+10豆",
-      "state": "FINISH",
-      "limit": "MONTH",
-      "steps": [
-        "sendcloud",
-        "click"
-      ],
-      "process": 0,
-      "currDay": 0,
-      "currstep": 2
+      "currstep": 0
     },
     {
       "id": 118,
       "group": "hidden",
       "name": "调查问卷",
       "reward": "",
-      "state": "FINISH",
+      "state": "WAIT",
       "limit": "EVER",
       "steps": [
         "click"
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 1
+      "currstep": 0
     },
     {
       "id": 319,
       "group": "hiddenabc",
       "name": "小云互动礼",
       "reward": "",
-      "state": "FINISH",
+      "state": "WAIT",
       "limit": "DAY",
       "steps": [
         "sendcloud",
@@ -283,7 +126,23 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 2
+      "currstep": 0
+    },
+    {
+      "id": 105,
+      "group": "time",
+      "name": "绑定公众号",
+      "reward": "+200豆",
+      "state": "WAIT",
+      "limit": "EVER",
+      "steps": [
+        "sendcloud",
+        "wechatbinding",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
     },
     {
       "id": 548,
@@ -353,7 +212,7 @@
         "sendsms",
         "interfacecallback"
       ],
-      "process": 17,
+      "process": 0,
       "currDay": 0,
       "currstep": 0
     },
@@ -371,7 +230,7 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 2
+      "currstep": 0
     },
     {
       "id": 609,
@@ -389,14 +248,14 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 3
+      "currstep": 0
     },
     {
       "id": 547,
       "group": "time",
       "name": "加入一个知识库",
       "reward": "+10豆",
-      "state": "FINISH",
+      "state": "WAIT",
       "limit": "MONTH",
       "steps": [
         "sendcloud",
@@ -404,7 +263,7 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 2
+      "currstep": 0
     },
     {
       "id": 106,
@@ -420,7 +279,7 @@
       ],
       "process": 0,
       "currDay": 0,
-      "currstep": 1
+      "currstep": 0
     }
   ]
 }
