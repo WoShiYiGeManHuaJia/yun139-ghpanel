@@ -7,6 +7,7 @@
 <style>
   :root { --bg:#0f172a; --card:#1e293b; --line:#334155; --txt:#e2e8f0; --mut:#94a3b8; --acc:#38bdf8; --ok:#34d399; --err:#f87171; --warn:#fbbf24; }
   * { box-sizing:border-box; margin:0; padding:0; }
+  html, body { max-width:100%; overflow-x:hidden; }
   body { background:var(--bg); color:var(--txt); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif; padding:16px; line-height:1.5; }
   h1 { font-size:18px; margin-bottom:4px; display:flex; align-items:center; gap:8px; }
   h1 .dot { width:10px; height:10px; border-radius:50%; background:var(--ok); display:inline-block; }
@@ -23,6 +24,11 @@
          flex:none; width:100%; min-height:44px; line-height:1.35; padding:11px 12px;
          white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .btn.wrap { white-space:normal; }
+  /* flex 行内的按钮：平分剩余宽度，绝不撑出屏幕（手机端关键修复） */
+  .row > .btn, .ops > .btn { flex:1 1 0; width:auto; min-width:0; margin-top:0; }
+  .ops > .btn + .btn { margin-left:0; }
+  .ops { flex-wrap:wrap; }
+  .ops > .btn { flex:1 1 calc(50% - 4px); }
   .btn:disabled { opacity:.5; cursor:not-allowed; }
   .btn.warn { background:var(--warn); color:#3a2400; }
   .btn.ghost { background:transparent; border:1px solid var(--line); color:var(--txt); font-weight:400; }
@@ -67,7 +73,8 @@
   .toast.err { background:#b91c1c; }
   .mask { position:fixed; inset:0; background:rgba(0,0,0,.62); display:none; z-index:998; align-items:center; justify-content:center; padding:16px; }
   .mask.show { display:flex; }
-  .dialog { background:var(--card); border:1px solid var(--line); border-radius:12px; width:100%; max-width:480px; padding:16px; }
+  .dialog { background:var(--card); border:1px solid var(--line); border-radius:12px; width:100%; max-width:480px;
+            padding:16px 16px 0; max-height:86vh; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; }
   .dialog h3 { font-size:14px; margin-bottom:4px; }
   .dialog .tip { font-size:12px; color:var(--mut); margin-bottom:10px; line-height:1.6; }
   .dialog textarea { width:100%; min-height:140px; resize:vertical; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px; }
@@ -75,7 +82,12 @@
   .dialog .status { font-size:12px; min-height:20px; margin:10px 0 2px; }
   .dialog .status.ok { color:var(--ok); }
   .dialog .status.err { color:var(--err); }
-  .dialog .row { margin-top:6px; }
+  .dialog .row { margin:12px -16px 0; padding:12px 16px 16px; gap:8px;
+                 position:sticky; bottom:0; background:var(--card); }
+  .dialog .row > .btn { font-size:13px; padding:11px 8px; min-height:44px; }
+  @media (max-width:400px) {
+    .dialog .row > .btn { font-size:12px; padding:10px 6px; }
+  }
   .dialog .spinner { display:inline-block; width:18px; height:18px; border:3px solid var(--line); border-top-color:var(--acc); border-radius:50%; animation:spin .8s linear infinite; vertical-align:-4px; margin-right:8px; }
   @keyframes spin { to { transform:rotate(360deg); } }
   .tabs { display:flex; gap:8px; margin-top:14px; }
@@ -83,7 +95,8 @@
   .tab.active { border-color:var(--acc); color:var(--acc); background:rgba(56,189,248,.08); font-weight:600; }
   .pane { margin-top:2px; }
   #tasklist { min-height:8px; }
-  .card .btn + .btn { margin-top:8px; }
+  .card > .btn + .btn { margin-top:8px; }
+  .ops > .btn { margin-top:0; }
   .tasklist { display:flex; flex-direction:column; gap:6px; }
   .tasklist .tsk { display:flex; align-items:center; gap:10px; background:#0b1220; border:1px solid var(--line); border-radius:10px; padding:10px 12px; color:var(--txt); font-size:13px; }
   .tasklist .tsk input { width:auto; height:16px; accent-color:var(--acc); flex:none; }
@@ -103,7 +116,8 @@
   .bar > span { display:block; height:100%; background:linear-gradient(90deg,var(--acc),var(--ok)); border-radius:4px; }
   .grp-title { font-size:11px; color:var(--mut); margin:10px 0 2px; letter-spacing:.5px; }
   .btn.gold { background:linear-gradient(135deg,#fbbf24,#f59e0b); color:#3a2400; font-weight:700; }
-  .acc .cloud { display:flex; align-items:center; gap:8px; margin-top:8px; background:rgba(56,189,248,.06); border:1px solid rgba(56,189,248,.22); border-radius:8px; padding:7px 10px; font-size:12px; }
+  .acc .cloud { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:8px; background:rgba(56,189,248,.06); border:1px solid rgba(56,189,248,.22); border-radius:8px; padding:7px 10px; font-size:12px; }
+  .acc .cloud > span { white-space:nowrap; }
   .acc .cloud .num { font-weight:700; color:var(--acc); font-size:14px; }
   .acc .cloud .bb { color:var(--warn); font-weight:600; }
   .acc .cloud .dim { color:var(--mut); }
