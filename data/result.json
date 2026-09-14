@@ -1,7 +1,6 @@
 {
-  "ts": "2026-09-14 11:27:47",
-  "type": "send_code",
-  "ok": true,
-  "msg": "successed to process!",
-  "phone": "18244754895"
+  "ts": "2026-09-14 11:28:22",
+  "type": "do_login",
+  "ok": false,
+  "msg": "登录被风控拦截(ec=PML401010009)"
 }
