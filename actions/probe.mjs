@@ -10,18 +10,25 @@ let JWT = "";
 const hJ = (host) => ({ "User-Agent": UA, "Host": host, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest", "jwtToken": JWT, "Cookie": "jwtToken=" + JWT });
 const log = (k, v) => out.steps.push({ k, v });
 async function getJwt() {
-  const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
-    method: "POST", headers: { "Authorization": "Basic " + A, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
-    body: JSON.stringify({ account: PHONE, toSourceId: "001005" }) });
-  const j = await r.json();
-  if (String(j.code) !== "0") throw new Error("querySpecToken 失败 " + j.code);
-  const r2 = await fetch(`${CY7071}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(j.data.token)}`, { headers: { "Host": H7071, "Accept": "*/*" }, signal: AbortSignal.timeout(20000) });
-  const j2 = await r2.json();
-  JWT = j2.result.token;
+  let last;
+  for (let i = 0; i < 5; i++) {
+    try {
+      const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
+        method: "POST", headers: { "Authorization": "Basic " + A, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
+        body: JSON.stringify({ account: PHONE, toSourceId: "001005" }), signal: AbortSignal.timeout(25000) });
+      const j = await r.json();
+      if (String(j.code) !== "0") throw new Error("querySpecToken code=" + j.code);
+      const r2 = await fetch(`${CY7071}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(j.data.token)}`, { headers: { "Host": H7071, "Accept": "*/*" }, signal: AbortSignal.timeout(25000) });
+      const j2 = await r2.json();
+      if (!j2 || !j2.result || !j2.result.token) throw new Error("tyrzLogin 无 token");
+      JWT = j2.result.token; return;
+    } catch (e) { last = e; await new Promise(z => setTimeout(z, 2500 * (i + 1))); }
+  }
+  throw new Error("getJwt 5次失败: " + String((last && last.message) || last));
 }
 async function req(url, host, tries) {
   let last;
-  for (let i = 0; i < (tries || 2); i++) {
+  for (let i = 0; i < (tries || 3); i++) {
     try { const r = await fetch(url, { headers: hJ(host), signal: AbortSignal.timeout(18000) });
       const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
       return { status: r.status, j, raw: t.slice(0, 350) };
