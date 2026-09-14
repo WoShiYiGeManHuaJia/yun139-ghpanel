@@ -460,6 +460,47 @@ async function main() {
       out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(updated));
       out.msg = type === "sign" ? "签到完成" : "续期完成";
       out.ok = true;
+    } else if (type === "task") {
+      const accounts = await decryptAccounts();
+      const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks : ["sign"];
+      const results = [];
+      for (const a of accounts) {
+        const phone = a.phone;
+        for (const t of wanted) {
+          const row = { phone, masked: maskPhone(phone), name: a.name || "", task: t };
+          try {
+            if (t === "sign") {
+              const r = await signOne(a.authorization, phone);
+              row.ok = r.ok;
+              row.message = `每日签到: ${r.message}`;
+            } else if (t === "backup") {
+              row.ok = false; row.message = "云盘备份需在 App 内主动开启，接口无法代开";
+            } else if (t === "notify31") {
+              row.ok = false; row.message = "连续 31 天通知属长期行为任务，需日常保持，无法单次接口完成";
+            } else if (t === "upload100") {
+              row.ok = false; row.message = "传满 100 个文件为累计任务，需 App 内持续上传";
+            } else if (t === "manual_upload") {
+              row.ok = false; row.message = "手动上传需 App 内真实操作，暂未接入自动执行";
+            } else if (t === "ai_camera") {
+              row.ok = false; row.message = "AI 相机需打开 App 功能操作，暂未接入自动执行";
+            } else if (t === "ai_chat") {
+              row.ok = false; row.message = "AI 对话需 App 内交互完成，暂未接入自动执行";
+            } else if (t === "lib_read") {
+              row.ok = false; row.message = "图书馆阅读需 App 内完成阅读行为，暂未接入自动执行";
+            } else {
+              row.ok = false; row.message = "未知任务: " + t;
+            }
+          } catch (e) {
+            row.ok = false;
+            row.message = String(e.message || e).slice(0, 200);
+          }
+          results.push(row);
+          await new Promise(r => setTimeout(r, 150));
+        }
+      }
+      out.results = results;
+      out.msg = "云朵任务执行完成";
+      out.ok = true;
     } else {
       throw new Error("未知命令: " + type);
     }
