@@ -1,86 +1,77 @@
 {
- "ts": "2026-09-14T17:02:47.429Z",
+ "ts": "2026-09-14T17:11:54.439Z",
  "steps": [
   {
    "k": "jwt",
    "v": "ok"
   },
   {
-   "k": "页面标题",
-   "v": "移动云盘云朵中心"
+   "k": "① 初始云豆",
+   "v": 922
   },
   {
-   "k": "URL",
-   "v": "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1#/newsignin"
-  },
-  {
-   "k": "元素 .AIPoints",
-   "v": "3 个"
-  },
-  {
-   "k": "元素 [class*=\"AIPoints\"]",
-   "v": "4 个"
-  },
-  {
-   "k": "元素 .receive_cloud",
-   "v": "0 个"
-  },
-  {
-   "k": "元素 [class*=\"receive\"]",
-   "v": "0 个"
-  },
-  {
-   "k": "元素 .cloudNum",
-   "v": "0 个"
-  },
-  {
-   "k": "页面文本",
-   "v": "温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 172****9953 奖 品 规 则 922 云盘专属AI豆 +32 +6 可领取 +6 可领取 戳我看看吧～ 本月已签到 3 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 14 未签 15 16 17 18 19 20 热门活动 做任务 兑好礼 开启备份领好礼 +200豆 开启备份，云端无损存储 下月再来 连续31天开启云盘APP通知 +200豆完成进度(1/31) 开启中 手动上传一个文件 +6豆 备份后完成任务奖励翻倍 去完成 和AI助手对话 +20豆 智能问答，懂你所需 去体验 使用PC客户端 +60豆 备份后完成任务奖励翻倍 去完成 分享文件领好礼0/7 5豆*7+2"
-  },
-  {
-   "k": "★ device 头捕获",
-   "v": []
-  },
-  {
-   "k": "签到相关请求",
+   "k": "② 气泡元素",
    "v": [
     {
-     "api": "/ycloud/signin/public/text/sign_in_3/dialog.json",
-     "devKeys": []
+     "text": "+32",
+     "path": "div.AIPoints.one.is-next-month < div.AIPoints_area < div.top_area < div.newsignin_container"
     },
     {
-     "api": "/ycloud/signin/public/text/sign_in_3/floatWindow.json",
-     "devKeys": []
+     "text": "+32",
+     "path": "p.AI_num < div.AIPoints.one.is-next-month < div.AIPoints_area < div.top_area"
     },
     {
-     "api": "/ycloud/signin/task/taskListV3",
-     "devKeys": []
+     "text": "+32",
+     "path": "span < p.AI_num < div.AIPoints.one.is-next-month < div.AIPoints_area"
     },
     {
-     "api": "/ycloud/signin/page/getCode?op=code",
-     "devKeys": []
+     "text": "+6",
+     "path": "span < p.AI_num < div.AIPoints.two < div.AIPoints_area"
     },
     {
-     "api": "/ycloud/signin/page/startSignIn?client=app&deviceId=BIbT9Ca46%2Fz2R8gcWCWs5mcn8TUs2B39v5WT",
-     "devKeys": [
-      "isdeviceid=true"
-     ]
+     "text": "可领取",
+     "path": "span < p.AI_num < div.AIPoints.two < div.AIPoints_area"
     },
     {
-     "api": "/ycloud/signin/page/infoV3?client=app",
-     "devKeys": []
+     "text": "+6",
+     "path": "span < p.AI_num < div.AIPoints.three < div.AIPoints_area"
     },
     {
-     "api": "/ycloud/signin/page/doTaskPost",
-     "devKeys": [
-      "isdeviceid=true"
-     ]
-    },
-    {
-     "api": "/ycloud/signin/task/taskListV3",
-     "devKeys": []
+     "text": "可领取",
+     "path": "span < p.AI_num < div.AIPoints.three < div.AIPoints_area"
     }
    ]
+  },
+  {
+   "k": "③ 点击过程",
+   "v": [
+    {
+     "round": 1,
+     "可领取数量": 2
+    },
+    {
+     "round": 1,
+     "错误": "locator.click: Timeout 6000ms exceeded.\nCall log:\n  - waiting for locator('text="
+    }
+   ]
+  },
+  {
+   "k": "④ 领取接口调用",
+   "v": [
+    {
+     "api": "/ycloud/signin/page/startSignIn?client=app&deviceId=BZ5h1nzP…(打码)",
+     "status": 200,
+     "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"todaySignIn\":true,\"signInPoints\":3,\"signCount\":2,\"time\":1789405923413,\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0"
+    }
+   ]
+  },
+  {
+   "k": "⑤ 最终云豆",
+   "v": {
+    "起始": 922,
+    "现在": 922,
+    "净增": 0
+   }
   }
  ],
  "note": []
