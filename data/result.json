@@ -1,79 +1,269 @@
 {
-  "ts": "2026-09-14 18:23:16",
-  "type": "status",
+  "ts": "2026-09-14 18:24:23",
+  "type": "list",
   "ok": true,
-  "msg": "已查询 3 个账号",
-  "status": [
+  "msg": "已获取 17 个真实任务",
+  "tasks": [
     {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": true,
-      "total": 0,
-      "toReceive": 50,
-      "receivable": 250,
-      "nextMonth": 0,
-      "list": [
-        {
-          "cloudType": 3,
-          "cloudNum": 200,
-          "recordId": 1078
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2343297183
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2343297165
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2343297080
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 20,
-          "recordId": 2343297072
-        }
+      "id": 431,
+      "group": "cloudEmail",
+      "name": "去使用移动云手机",
+      "reward": "+20豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "processbindtask",
+        "click"
       ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":0,\"maxType\":\"完成任务\","
+      "process": 0,
+      "currDay": 0,
+      "currstep": 3
     },
     {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "ok": true,
-      "total": 0,
-      "toReceive": 0,
-      "receivable": 200,
-      "nextMonth": 0,
-      "list": [
-        {
-          "cloudType": 3,
-          "cloudNum": 200,
-          "recordId": 550
-        }
+      "id": 113,
+      "group": "month",
+      "name": "使用PC客户端",
+      "reward": "+60豆",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "nda",
+        "click"
       ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":0,\"maxType\":\"\",\"cal\""
+      "process": 0,
+      "currDay": 0,
+      "currstep": 1
     },
     {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": true,
-      "total": 960,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 38,
-      "list": [
-        {
-          "cloudType": 2,
-          "cloudNum": 38,
-          "recordId": null
-        }
+      "id": 434,
+      "group": "month",
+      "name": "分享文件领好礼0/7",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "checktime",
+        "nda",
+        "click"
       ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 607,
+      "group": "month",
+      "name": "下月签到领惊喜福利",
+      "reward": "+50豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "reservationstep",
+        "finish",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 3
+    },
+    {
+      "id": 604,
+      "group": "month",
+      "name": "去云盘图书馆阅读书籍",
+      "reward": "+10豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 409,
+      "group": "month",
+      "name": "从固定入口访问云朵中心",
+      "reward": "+6豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 3
+    },
+    {
+      "id": 118,
+      "group": "hidden",
+      "name": "调查问卷",
+      "reward": "",
+      "state": "FINISH",
+      "limit": "EVER",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 1
+    },
+    {
+      "id": 319,
+      "group": "hiddenabc",
+      "name": "小云互动礼",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "DAY",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 1,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 548,
+      "group": "time",
+      "name": "开启备份领好礼",
+      "reward": "首月+400豆",
+      "state": "WAIT",
+      "limit": "EVER",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 549,
+      "group": "time",
+      "name": "开启备份领好礼",
+      "reward": "+200豆",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 550,
+      "group": "time",
+      "name": "开启云盘APP通知领好礼",
+      "reward": "+200豆",
+      "state": "WAIT",
+      "limit": "EVER",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 551,
+      "group": "time",
+      "name": "连续31天开启云盘APP通知",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 522,
+      "group": "time",
+      "name": "当月上传文件满100个",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "sendsms",
+        "interfacecallback"
+      ],
+      "process": 18,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 585,
+      "group": "time",
+      "name": "去体验AI相机",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click",
+        "interfacecallback"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 609,
+      "group": "time",
+      "name": "和AI助手对话",
+      "reward": "+20豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "cloudtasklogstep",
+        "sendcloud",
+        "processbindtask",
+        "click",
+        "interfacecallback"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 6
+    },
+    {
+      "id": 547,
+      "group": "time",
+      "name": "加入一个知识库",
+      "reward": "+10豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 106,
+      "group": "day",
+      "name": "手动上传一个文件",
+      "reward": "+6豆",
+      "state": "FINISH",
+      "limit": "DAY",
+      "steps": [
+        "sendcloud",
+        "nda",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 3
     }
   ]
 }
