@@ -1,5 +1,5 @@
 {
- "ts": "2026-09-14T15:56:28.047Z",
+ "ts": "2026-09-14T16:01:21.741Z",
  "steps": [
   {
    "k": "jwt",
@@ -14,7 +14,7 @@
    }
   },
   {
-   "k": "★ A client=app cloudId=2343307559 cloudType=0",
+   "k": "★ A1 +isDeviceId app 2343307559/0",
    "v": {
     "code": 615,
     "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
@@ -25,7 +25,7 @@
    }
   },
   {
-   "k": "★ B client=app cloudId=2343307413 cloudType=0",
+   "k": "★ A2 +isDeviceId app 2343307413/0",
    "v": {
     "code": 615,
     "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
@@ -36,7 +36,7 @@
    }
   },
   {
-   "k": "★ C client=app cloudId='' cloudType=2",
+   "k": "★ A3 +isDeviceId app ''/2",
    "v": {
     "code": 615,
     "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
@@ -47,7 +47,18 @@
    }
   },
   {
-   "k": "   D client=out cloudId=2343307559 cloudType=0",
+   "k": "   A4 +isDeviceId mini 2343307559/0",
+   "v": {
+    "code": 615,
+    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
+    "result": null,
+    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "   A5 +isDeviceId 数字cloudType0 '0'",
    "v": {
     "code": 615,
     "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
