@@ -1,65 +1,65 @@
 {
- "ts": "2026-09-14T14:49:40.348Z",
+ "ts": "2026-09-14T14:52:32.000Z",
  "steps": [
   {
    "k": "jwt",
    "v": "ok"
   },
   {
-   "k": "① page/info 领取前",
+   "k": "膨胀-查询",
    "v": {
-    "status": 404,
-    "todaySignIn": null,
-    "receive": null,
-    "total": null,
-    "keys": null,
-    "raw": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-   }
-  },
-  {
-   "k": "② 签到动作",
-   "v": "今日已签到，跳过"
-  },
-  {
-   "k": "③ page/receive 领取",
-   "v": {
-    "status": 404,
-    "msg": "访问资源不存在",
-    "receive": null,
-    "total": null,
-    "raw": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
-   }
-  },
-  {
-   "k": "④ page/info 领取后",
-   "v": {
-    "status": 404,
-    "receive": null,
-    "total": null
-   }
-  },
-  {
-   "k": "⑤ 备份礼 info",
-   "v": {
-    "status": 200,
-    "msg": "success",
-    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"nextMonth\":200,\"curMonth\":200,\"state\":1}}"
-   }
-  },
-  {
-   "k": "⑤ 通知任务 status",
-   "v": {
-    "status": 200,
-    "msg": "success",
-    "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"pushOn\":1,\"firstTaskStatus\":3,\"secondTaskStatus\":1,\"pushTaskStatus\":0,\"onDuaration\":1,\"total\":31}}"
-   }
-  },
-  {
-   "k": "⑤ 任务扩展 taskExpansion",
-   "v": {
-    "status": 200,
-    "msg": "success",
     "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"preMonthBackup\":true,\"curMonthTaskRecordCount\":0,\"curMonthBackupTaskAccept\":false,\"nextMonthTaskRecordCount\":20,\"acceptDate\":\"202609\"}}"
+   }
+  },
+  {
+   "k": "★膨胀-领取",
+   "v": {
+    "status": 0,
+    "code": null,
+    "msg": null,
+    "cloudCount": null,
+    "raw": "fetch failed"
+   }
+  },
+  {
+   "k": "通知-状态",
+   "v": {
+    "pushOn": 1,
+    "first": 3,
+    "second": 1
+   }
+  },
+  {
+   "k": "通知-任务1",
+   "v": "已领取，跳过"
+  },
+  {
+   "k": "★通知-领任务2",
+   "v": {
+    "status": 404,
+    "raw": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly err"
+   }
+  },
+  {
+   "k": "备份-状态",
+   "v": {
+    "state": 1,
+    "curMonth": 200
+   }
+  },
+  {
+   "k": "备份-领取",
+   "v": "state=1（0=可领 1=已领 -1=未备份）"
+  },
+  {
+   "k": "★余额接口命中",
+   "v": "全部404（未找到）"
+  },
+  {
+   "k": "云朵大作战",
+   "v": {
+    "status": 404,
+    "raw": "{\"code\":404,\"msg\":\"访问资源不存在\"}"
    }
   }
  ]
