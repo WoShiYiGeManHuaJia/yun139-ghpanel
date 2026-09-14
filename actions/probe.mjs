@@ -39,10 +39,10 @@ async function G(p, tries) {
   }
   return { status: 0, j: null, raw: "失败" };
 }
-async function POST(p, body, tries) {
+async function POST(p, body, tries, extra) {
   let last;
   for (let i = 0; i < (tries || 3); i++) {
-    try { const r = await fetch(MM + p, { method: "POST", headers: { ...hJ(), "Content-Type": "application/json;charset=UTF-8" }, body: JSON.stringify(body), signal: AbortSignal.timeout(20000) });
+    try { const r = await fetch(MM + p, { method: "POST", headers: { ...hJ(), ...(extra || {}), "Content-Type": "application/json;charset=UTF-8" }, body: JSON.stringify(body), signal: AbortSignal.timeout(20000) });
       const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
       return { status: r.status, j, raw: t.slice(0, 200) };
     } catch (e) { last = e; await sleep(1200); }
@@ -61,15 +61,17 @@ async function main() {
   const START = { total: s.total, toReceive: s.toReceive };
   log("⓪ 基线", { total: s.total, toReceive: s.toReceive, list: s.list });
   // ★ 正确参数：{client, cloudId, cloudType} → POST receiveV3
+  const DEV = { isDeviceId: "true", showLoading: "true" };
   const plans = [
-    ["★ A client=app cloudId=2343307559 cloudType=0", { client: "app", cloudId: "2343307559", cloudType: 0 }],
-    ["★ B client=app cloudId=2343307413 cloudType=0", { client: "app", cloudId: "2343307413", cloudType: 0 }],
-    ["★ C client=app cloudId='' cloudType=2", { client: "app", cloudId: "", cloudType: 2 }],
-    ["   D client=out cloudId=2343307559 cloudType=0", { client: "out", cloudId: "2343307559", cloudType: 0 }],
+    ["★ A1 +isDeviceId app 2343307559/0", { client: "app", cloudId: "2343307559", cloudType: 0 }, DEV],
+    ["★ A2 +isDeviceId app 2343307413/0", { client: "app", cloudId: "2343307413", cloudType: 0 }, DEV],
+    ["★ A3 +isDeviceId app ''/2", { client: "app", cloudId: "", cloudType: 2 }, DEV],
+    ["   A4 +isDeviceId mini 2343307559/0", { client: "mini", cloudId: "2343307559", cloudType: 0 }, DEV],
+    ["   A5 +isDeviceId 数字cloudType0 '0'", { client: "app", cloudId: "2343307559", cloudType: "0" }, DEV],
   ];
   let win = null;
-  for (const [name, body] of plans) {
-    const r = await POST("/ycloud/signin/page/receiveV3", body, 2);
+  for (const [name, body, extra] of plans) {
+    const r = await POST("/ycloud/signin/page/receiveV3", body, 2, extra);
     const s2 = await snap();
     const changed = (s2.total !== s.total) || (s2.toReceive !== s.toReceive);
     log((changed ? "★★★成功 " : "") + name, {
