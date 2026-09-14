@@ -1,7 +1,8 @@
 {
-  "ts": "2026-09-14 11:25:06",
-  "type": "send_code",
+  "ts": "2026-09-14 11:25:33",
+  "type": "do_login",
   "ok": true,
-  "msg": "successed to process!",
+  "msg": "登录成功, 已抓取令牌",
+  "enc_accounts": "36JrP0ijQO6zVSNJ6Ba6kmLhcF21NNNB01MGY+uRzw0uoU7IirVdulqQvgB5nfB1JQA3yFAOgRkx6AFdj6sylXOpylPerKDXSAhqWBvHQqfHakJkb8zAtNlC0WgSb8KIAbYboyJDl/4/pZw20GoM2QVZZP4ww8ii5WbKQ1zME9i01PB1AVWjgcVxZaVdxM2+yifNKW784lrgiro2vZT+n/pPLHkm98uMVkXbup5Kov/pSfLTlPJDWzDI923Z/4wBFrQHOwlhZuOCUw2HzPSj/UqIm+tWsv1NDkWzaJCbhMLM3v4sba6PuEiq5GvuYxPTAt6x4bK0LEpA9wjwo8OPdENAKcKEYBOe9Ukz4dZGrMXTxatoGcEB6zoSBhErc+rgN98aFNDl1z6mq4U/hdspvDwyNKmAgKliUmPSZaahbBUL8UYWFQjcp98sLZ5V6njqcGzDhJkZCp9kZ8zUDvXNE+UyUT9F1Zs9bOI+5xrfqccrq7Q5/K06i50EyHnSxzZsQ6bcluKKMQglXmVoFmg57g/qbketChOUBoe1O3+W5ixy6eBcDLDPNmtC+UpS+BfGtiXh3HFDSWa6ZLtI32mL+WtCFFZCS8mmn2D3x3hjK0oRaJ63G1MaDLz30XynH3Bqugw=",
   "phone": "13787464642"
 }
