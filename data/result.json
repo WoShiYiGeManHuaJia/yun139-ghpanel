@@ -1,17 +1,30 @@
 {
-  "ts": "2026-09-14 17:46:43",
-  "type": "receive",
+  "ts": "2026-09-14 17:55:11",
+  "type": "sign",
   "ok": true,
-  "msg": "气泡领取完成，云豆 934 → 934（+0）",
-  "receive": {
-    "ok": true,
-    "before": 934,
-    "after": 934,
-    "got": 0,
-    "recv": [],
-    "steps": [
-      "初始云豆 934",
-      "最终云豆 934"
-    ]
-  }
+  "msg": "签到完成",
+  "results": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "name": "139-4642",
+      "ok": false,
+      "message": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "name": "139-6553",
+      "ok": false,
+      "message": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+    },
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "name": "139-9953",
+      "ok": false,
+      "message": "Unexpected token '<', \"<html>\r\n<h\"... is not valid JSON"
+    }
+  ],
+  "enc_accounts": "DI0RocdIvERZtLQmRBsCaWn7z7qvx0BcR4Edvw+2+4sqCtu2LcXwaiWkhGCFq1cgbDlEXEQU13b0w39ZCtvnKR9uJ5GaxKwmDFLHygJ9WLAP/HvyDr8zz0ytleFD3xnb7kDBkNdGHkDPp3Rgdt3jDb9jX1VzYtl/143pEIO+t/0nkF5wYa7kxRIjyyejX4dn6+4qphDHNYMsK2k/NOC8aH3CBESJGRXEvhnOeY/NJDM1yJ8zHYsNPzj1E7OSCAlDKWwxk9mJK1uvcL4JuLPeGoL3ifHNwK3RxXelTsjffehIjsqBC7Xbcm0aAXGgXkI3ZOI6DhTbvAGZQTTQiTS2i5ury14jLqNdycPUIYidAx6H0L82+PSaHTnpwOKFw/xwlzks1jYWN89WjACp5nwN8/cRJCIdRgU+CHkt3rhJFUI5NXzCEOZN7HX4lIkbcmp9R9CYheLo/QMLEAlu9TqLBCtfdTksJGNnAuXBvmC9SQpdPRn5UecuqyP/vTwlmXdRd4y3/16PmyYEYCn32S7+6o16Ntx5ZDraIS4FxWi8lEIGPK6J02OmxOrKIDh/GFnNLTEHr1T5A9fWlwENpehxBgE0xMrMA2uQW3AOzMA+xvEzTDDY2FiYFNt7H6quF9N446TEoDj6XSwJq6p2Qe9NjeclOpND5mxtmQASwXTdTvoLOX8ExeEO2EPnxPH6zYDzClhy+9goO+7axoTWx4gW2LPvSIgh2mxTxe8NDAbKv+EPdD6ofTDi2UN36xr460Ca2g7dv9Y1akcZ83FpLrnFUV3pUXiJYIhpWGYTJPdDuo7hklZ7r6rOe16hgqw51Iuu15t4TZf6pc1ENZ9JAyS0J5In+QyenI821UBxMlLrk1Uzj+VLte6PxWstptkj+Ky9T6l8uVfxHsobE4YSg7LuBU/PjjVQo260mkadqVvR/VE1RFYYKbSheZsSdA17xEoXagGNu/sPcWB2Jb9vvwU+IaPpa0cYyNxMRdQ2GAe7E7Wp0EXthMNuXrwf/ddszMJQ16RLYNrK+Hqu+I9e4tvxux3HXEZLfJEki4o7lonMAumkXNC+9GpwxHGlmC5Ok/drRGMjODhvGY0x63W8PCCNKno/nhVLdnV3gNMNAPdJK+SSsZ9VwfHuu0CHrF8sMoYTFMOtGwwT+fFfSdzafHej9gbSa4KLiUJPyau2Lr1c1QfDP8/R/+KJ7k/lp/nzn8A1zEW/7XsqlIpQs19rQ5ShJ2xADXe9gVxG1gFoYT7Ig1ZGfxJFwgLOwwqqAA4bqSyIlM15aYFECTIfH5fEf8u6MlF3p+JtHNvPqRdFstFix7PJ+WCubh4u2IyA/4lOhViwvIoE1PyUG3BEllZh+51UF9ZdaETFBqVtX89ax0ELntFR/C7knnLdu4tKN8zMDOSA9pullMnZiXKLKMrJD9LteG0Ioz7e9b5yX5veOK3oxABA1G9GFmCQom/o4cAos8/uIqU9R7B/Mn08W+ZCDL7Y3OID9iyr4sFTcImV0Pd3fi+MPXRHqtdDlU38iGJHtrXL4FdYvG+rPcNJVvX9ieQdi7ndkVpMkQo/vpKLBXpqnjlN5nzr1petT5VTSqCFOi0+yJSgaSWUA2wIQ+uQitnn+WO8ctnEIyFm3aTWkSd54cwhbnQno0fCDIOs3lwHMJxkgRJTBRfOA1F3fyhwlyY0QjEAnjfEv5D0ffi8pITZP2D/GMuO2WR7PgxLwYktVjr1pheg65ZkgkPEyUAHLoh1KPX/n4CY8CWQJ03Zv1hJbDvPfOTZ7v7nwDzSrcIkuQxjvxZlsirwm1jnLjkKACjj6nctCVYdAjbLEFHpJiPpm9QXZhC3FNZ/g2fr3yV6K3vJ/o3Yw1bPGp4A/Acw/aR2gInki4D9yRPMUppbA0/BBxRXbjTS2galULf+eSdKYqv5lqXNfseYqcjuRvoBOIjO4m2hvkNckKNsR3zaRBiGJII="
 }
