@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>云盘令牌管家 · GitHub Actions 版</title>
+<title>云盘令牌管家</title>
 <style>
   :root { --bg:#0f172a; --card:#1e293b; --line:#334155; --txt:#e2e8f0; --mut:#94a3b8; --acc:#38bdf8; --ok:#34d399; --err:#f87171; --warn:#fbbf24; }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -34,72 +34,95 @@
   .badge.ok { background:rgba(52,211,153,.15); color:var(--ok); }
   .badge.exp { background:rgba(251,191,36,.15); color:var(--warn); }
   .badge.err { background:rgba(248,113,113,.15); color:var(--err); }
+  .acc.flash { outline:2px solid var(--ok); border-radius:10px; animation:flash 2.5s ease; }
+  @keyframes flash { 0% { box-shadow:0 0 0 0 rgba(52,211,153,.55); } 70% { box-shadow:0 0 0 12px rgba(52,211,153,0); } 100% { box-shadow:none; } }
   .ops { display:flex; gap:8px; margin-top:12px; }
-  #log { background:#0b1220; border:1px solid var(--line); border-radius:8px; padding:10px; font-size:12px; font-family:ui-monospace,Menlo,Consolas,monospace; color:var(--mut); max-height:180px; overflow-y:auto; white-space:pre-wrap; word-break:break-all; }
+  .ops #inp_code { flex:1; padding:12px; font-size:16px; letter-spacing:4px; }
+  .divider { text-align:center; color:var(--mut); font-size:11px; margin:14px 0 2px; border-bottom:1px dashed var(--line); padding-bottom:5px; }
+  #log { background:#0b1220; border:1px solid var(--line); border-radius:8px; padding:10px; font-size:12px; font-family:ui-monospace,Menlo,Consolas,monospace; color:var(--mut); max-height:200px; overflow-y:auto; white-space:pre-wrap; word-break:break-all; }
   #log .l-ok { color:var(--ok); } #log .l-err { color:var(--err); } #log .l-warn { color:var(--warn); }
   .loading { color:var(--acc); animation:blink 1s infinite; }
   @keyframes blink { 50% { opacity:.3; } }
   .empty { color:var(--mut); font-size:13px; text-align:center; padding:20px 0; }
   details > summary { cursor:pointer; color:var(--mut); font-size:12px; margin-top:8px; }
+  details.cfg { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 16px; margin-bottom:14px; }
+  details.cfg > summary { color:var(--mut); font-size:12px; margin-top:0; }
   .hint { font-size:12px; color:var(--mut); margin-top:6px; }
   .hint code { background:#0b1220; padding:1px 5px; border-radius:4px; border:1px solid var(--line); }
+  .toast { position:fixed; top:12px; left:50%; transform:translateX(-50%); background:#0d9488; color:#fff; padding:10px 16px; border-radius:8px; font-size:13px; z-index:999; box-shadow:0 4px 12px rgba(0,0,0,.4); display:none; max-width:92vw; }
+  .toast.err { background:#b91c1c; }
 </style>
 </head>
 <body>
   <h1><span class="dot"></span>云盘令牌管家</h1>
-  <div class="sub">GitHub Actions 后台执行 · 数据仅存本机浏览器 localStorage</div>
+  <div class="sub">签到 / 续期后台自动执行 · 数据仅存本机浏览器</div>
+  <div class="toast" id="toast"></div>
 
-  <div class="card">
-    <h2>① 连接配置</h2>
-    <label>GitHub 仓库 (owner/name，默认私有 yun139-panel)</label>
-    <input id="cfg_repo" placeholder="WoShiYiGeManHuaJia/yun139-panel">
-    <label>PAT 令牌（仅触发 workflow 用，权限最小化建议）</label>
-    <input id="cfg_token" type="password" placeholder="ghp_...">
-    <label>DATA_KEY（数据加密密钥，须与仓库 Secret PANEL_DATA_KEY 一致）</label>
-    <input id="cfg_key" type="password" placeholder="留空则自动生成">
-    <div class="row">
-      <button class="btn ghost" id="btn_save_cfg">保存配置</button>
-      <button class="btn ghost" id="btn_gen_key">生成 DATA_KEY</button>
+  <!-- 连接配置：默认折叠，分享给他人时完全看不到令牌输入区 -->
+  <details class="cfg" id="cfgBox">
+    <summary>⚙ 高级配置（已自动填充，一般无需修改）</summary>
+    <div style="margin-top:6px">
+      <label>GitHub 仓库 (owner/name)</label>
+      <input id="cfg_repo" placeholder="WoShiYiGeManHuaJia/yun139-ghpanel">
+      <label>PAT 令牌（仅后台触发任务用）</label>
+      <input id="cfg_token" type="password" placeholder="ghp_...">
+      <label>DATA_KEY（数据加密密钥）</label>
+      <input id="cfg_key" type="password" placeholder="留空则自动生成">
+      <div class="row">
+        <button class="btn ghost" id="btn_save_cfg">保存配置</button>
+        <button class="btn ghost" id="btn_gen_key">生成 DATA_KEY</button>
+      </div>
+      <div class="hint">通常通过分享链接打开已自动填充，无需手动配置。PAT 与 DATA_KEY 仅存本浏览器 localStorage。</div>
     </div>
-    <div class="hint">PAT 与 DATA_KEY 通过 <code>localStorage</code> 保存在本浏览器，不上传任何服务器。</div>
-  </div>
+  </details>
 
   <div class="card">
-    <h2>② 账号</h2>
+    <h2>① 账号</h2>
     <div class="accounts" id="accounts"></div>
-    <button class="btn ghost" style="margin-top:0" id="btn_paste">+ 粘贴 authorization 添加</button>
+
+    <div class="divider">方式一 · 手机号+验证码抓令牌</div>
     <div class="ops">
-      <input id="inp_phone" placeholder="手机号 (发验证码/登录用)" style="flex:1.6">
+      <input id="inp_phone" placeholder="手机号，如 138xxxx8888" style="flex:1.7">
+      <button class="btn warn" id="btn_send" style="flex:0.55;margin:0">发验证码</button>
     </div>
     <div class="ops">
-      <button class="btn warn" id="btn_send">发验证码</button>
-      <input id="inp_code" placeholder="验证码" style="flex:0.9">
+      <input id="inp_code" placeholder="输入短信中的 6 位验证码">
     </div>
     <button class="btn" id="btn_login">登录并抓令牌</button>
+    <div class="hint">登录成功后，令牌会自动保存到上方账号列表，<b>无需手动填写任何配置</b>。</div>
+
+    <div class="divider">方式二 · 粘贴 authorization（推荐，免验证码）</div>
+    <button class="btn ghost" id="btn_paste">＋ 粘贴 authorization 添加</button>
+    <div class="hint">在 App 里抓包得到形如 <code>pc:手机号:xxx…</code> 的 authorization 后粘贴，无需验证码。登录总被风控拦截时请优先用这种方式。</div>
   </div>
 
   <div class="card">
-    <h2>③ 一键操作</h2>
+    <h2>② 一键操作</h2>
     <div class="ops">
       <button class="btn" id="btn_sign">全部签到</button>
       <button class="btn" id="btn_refresh">全部续期</button>
     </div>
-    <div class="hint">点击后通过 PAT 触发仓库 Actions 任务，结果回写 <code>data/result.json</code>，页面自动轮询读取（约每 4s）。</div>
+    <div class="hint">对上方已添加的账号执行签到 / 续期，结果自动回写并刷新本页账号数据（约每 4s 轮询）。</div>
   </div>
 
   <div class="card">
-    <h2>④ 结果日志</h2>
+    <h2>③ 结果日志</h2>
     <div id="log">等待操作…</div>
   </div>
 
   <details>
-    <summary>使用说明 / 首次配置 5 步</summary>
+    <summary>使用说明 / 常见问题</summary>
     <div class="hint" style="margin-top:8px">
-      1. 私有仓库 yun139-panel 已含 Actions（panel.yaml + actions/run.mjs）。<br>
-      2. 在仓库 Settings → Secrets and variables → Actions 新建 Secret 名 <b>PANEL_DATA_KEY</b>，值填本页第二步自动生成的 DATA_KEY（或手动随机串）。<br>
-      3. 本页填 PAT（权限含仓库读写 + Actions:workflow，或直接用你的全权限经典 PAT）。<br>
-      4. 保存配置后，先“粘贴 authorization 添加”已有账号，或用手机号+验证码抓取新令牌。<br>
-      5. 点“全部签到/全部续期”，等日志出现结果。刷新页面可从本地恢复账号。
+      <b>推荐用法（3 步）</b><br>
+      1. 方式二：粘贴已有 authorization 添加账号；<br>
+      2. 点「全部签到 / 全部续期」；<br>
+      3. 看结果日志，账号到期时间会自动更新。<br><br>
+      <b>为什么方式一（验证码登录）不成功？</b><br>
+      后台任务跑在海外服务器，中国移动对该类出口做了安全拦截（报错常为
+      <code>ec=S001 / 风控</code>），验证码能发出但登录会被拦。这是运营商风控，换登录次数通常无效；
+      请优先用「方式二 粘贴 authorization」，签到 / 续期不受影响。<br><br>
+      <b>抓到的令牌在哪？</b><br>
+      自动存在本页「① 账号」列表里，明文只存本机浏览器 localStorage，刷新、重开页面都还在；不会上传任何服务器。
   </div>
   </details>
 
@@ -111,6 +134,14 @@
   const $ = id => document.getElementById(id);
   const log = (msg, cls) => { const box = $("log"); const line = document.createElement("div"); line.className = "l-" + (cls || ""); line.textContent = "[" + new Date().toLocaleTimeString() + "] " + msg; box.prepend(line); };
   const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  let toastTimer = null;
+  function toast(msg, cls) {
+    const t = $("toast"); t.textContent = msg; t.className = "toast" + (cls === "err" ? " err" : "");
+    t.style.display = "block";
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.style.display = "none"; }, 3600);
+  }
 
   // ---- 本地配置 ----
   function loadCfg() {
@@ -177,10 +208,10 @@
   }
 
   // ---- 账号渲染 ----
-  async function renderAccounts() {
+  async function renderAccounts(flashIdx) {
     const list = await loadAccounts();
     const box = $("accounts");
-    if (!list.length) { box.innerHTML = '<div class="empty">暂无账号，先粘贴授权串或手机号登录添加</div>'; return; }
+    if (!list.length) { box.innerHTML = '<div class="empty">暂无账号，请用下方「方式一 / 方式二」添加</div>'; return; }
     box.innerHTML = "";
     list.forEach(function (a, i) {
       const el = document.createElement("div"); el.className = "acc";
@@ -193,6 +224,7 @@
         '<div class="ops" style="margin-top:6px"><button class="btn sm danger" data-idx="' + i + '">删除</button></div>';
       box.appendChild(el);
     });
+    if (flashIdx != null && box.children[flashIdx]) { box.children[flashIdx].classList.add("flash"); box.children[flashIdx].scrollIntoView({ behavior: "smooth", block: "center" }); }
     box.querySelectorAll("[data-idx]").forEach(function (b) {
       b.onclick = async function () { const lst = await loadAccounts(); lst.splice(+b.dataset.idx, 1); await saveAccounts(lst); renderAccounts(); log("已删除账号"); };
     });
@@ -200,7 +232,7 @@
 
   // ---- 粘贴 authorization ----
   async function pasteAccount() {
-    const raw = prompt("粘贴 authorization（形如 pc:手机号:token，可通过移动云盘抓包获得）");
+    const raw = prompt("粘贴 authorization（形如 pc:手机号:token，可在移动云盘 App 抓包获得）");
     if (!raw) return;
     try {
       const parts = atob(raw.split(" ").pop()).split(":");
@@ -217,14 +249,20 @@
         created_at: new Date().toISOString(),
       };
       if (idx >= 0) list[idx] = acc; else list.push(acc);
-      await saveAccounts(list); renderAccounts(); log("已添加账号 " + phone.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2"));
-    } catch (e) { log("解析失败: " + e.message, "err"); }
+      await saveAccounts(list); renderAccounts(); log("已添加账号 " + phone.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")); toast("账号已添加 ✓");
+    } catch (e) { log("解析失败: " + e.message, "err"); toast("authorization 格式不对，请检查后重试", "err"); }
   }
   function fmt(ms) { const d = new Date(ms); const p = n => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes()); }
 
   // ---- 结果轮询 ----
   let lastETag = "", lastTs = "";
   let watching = false;
+  function friendlyMsg(msg) {
+    if (!msg) return msg;
+    if (/ec=S00|风控|S001/.test(msg)) return msg + " —— 已向运营商风控拦截，后台(海外)直接登录受限。请改用「方式二 粘贴 authorization」添加账号";
+    if (/缺少加密数据|未配置|PANEL_DATA_KEY|DATA_KEY/.test(msg)) return msg + "（前后端密钥不一致，请重新用分享链接打开）";
+    return msg;
+  }
   async function pollResult() {
     try {
       const r = await fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`, {
@@ -237,8 +275,14 @@
       if (!j || j.ts === lastTs) return;
       lastTs = j.ts;
       if (j.enc_accounts) {
-        const list = JSON.parse(await decText(j.enc_accounts));
-        await saveAccounts(list); renderAccounts(); log("账号数据已回写本地（含最新令牌/到期时间）", "ok");
+        try {
+          const list = JSON.parse(await decText(j.enc_accounts));
+          await saveAccounts(list);
+          const isNew = j.type === "do_login";
+          renderAccounts(isNew ? list.length - 1 : null);
+          if (isNew) { log("登录成功，新令牌已保存到上方账号列表", "ok"); toast("新令牌已保存到上方「① 账号」列表 ✓"); }
+          else log("账号数据已回写本地（含最新令牌/到期时间）", "ok");
+        } catch (e) { log("账号数据回写失败（前后端 DATA_KEY 不一致）", "err"); }
       }
       if (j.results) {
         j.results.forEach(function (x) {
@@ -246,21 +290,21 @@
           log((x.name ? x.name + " " : "") + x.masked + " → " + x.message, cls);
         });
       }
-      log("[" + j.type + "] " + j.msg + (j.ok ? "" : " ❌"), j.ok ? "ok" : "err");
+      log("[" + j.type + "] " + friendlyMsg(j.msg) + (j.ok ? "" : " ❌"), j.ok ? "ok" : "err");
+      if (j.type === "send_code" && j.ok) toast("验证码已发送，请查收短信");
     } catch (e) { /* 静默，继续轮询 */ }
   }
   function startWatch() { if (watching) return; watching = true; setInterval(pollResult, 4000); }
 
   // ---- 触发 Actions ----
   function busy(b, on) { b.disabled = on; }
-  async function runSign() { const b = $("btn_sign"); busy(b, true); try { const list = await loadAccounts(); if (!list.length) throw new Error("无账号"); await dispatch("sign", { cipher: await encText(JSON.stringify(list)) }); log("签到任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
-  async function runRefresh() { const b = $("btn_refresh"); busy(b, true); try { const list = await loadAccounts(); if (!list.length) throw new Error("无账号"); await dispatch("refresh", { cipher: await encText(JSON.stringify(list)) }); log("续期任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
-  async function runSend() { const b = $("btn_send"); const phone = $("inp_phone").value.trim(); if (!/^1\d{10}$/.test(phone)) { log("请输入正确手机号", "err"); return; } busy(b, true); try { await dispatch("send_code", { phone }); log("验证码请求已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
-  async function runLogin() { const b = $("btn_login"); const phone = $("inp_phone").value.trim(), code = $("inp_code").value.trim(); if (!/^1\d{10}$/.test(phone) || !code) { log("请填写手机号和验证码", "err"); return; } busy(b, true); try { const list = await loadAccounts(); await dispatch("do_login", { phone, code, cipher: await encText(JSON.stringify(list)) }); log("登录任务已触发，新令牌将回写本地…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); } finally { busy(b, false); } }
+  async function runSign() { const b = $("btn_sign"); busy(b, true); try { const list = await loadAccounts(); if (!list.length) throw new Error("无账号，请先在上方添加"); await dispatch("sign", { cipher: await encText(JSON.stringify(list)) }); log("签到任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); toast(e.message, "err"); } finally { busy(b, false); } }
+  async function runRefresh() { const b = $("btn_refresh"); busy(b, true); try { const list = await loadAccounts(); if (!list.length) throw new Error("无账号，请先在上方添加"); await dispatch("refresh", { cipher: await encText(JSON.stringify(list)) }); log("续期任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); toast(e.message, "err"); } finally { busy(b, false); } }
+  async function runSend() { const b = $("btn_send"); const phone = $("inp_phone").value.trim(); if (!/^1\d{10}$/.test(phone)) { log("请输入正确手机号", "err"); toast("请输入正确手机号", "err"); return; } busy(b, true); try { await dispatch("send_code", { phone }); log("验证码请求已触发，等待结果…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); toast("发送失败：" + e.message, "err"); } finally { busy(b, false); } }
+  async function runLogin() { const b = $("btn_login"); const phone = $("inp_phone").value.trim(), code = $("inp_code").value.trim(); if (!/^1\d{10}$/.test(phone) || !code) { log("请填写手机号和验证码", "err"); toast("请先填写手机号和验证码", "err"); return; } busy(b, true); try { const list = await loadAccounts(); await dispatch("do_login", { phone, code, cipher: await encText(JSON.stringify(list)) }); log("登录任务已触发，成功后将自动保存令牌…", "warn"); lastTs = ""; startWatch(); } catch (e) { log(e.message, "err"); toast(e.message, "err"); } finally { busy(b, false); } }
 
   // ---- init ----
   // 支持 URL 自动配置：#token=ghp_xxx&key=DATA_KEY&repo=owner/name
-  // 打开后自动写入 localStorage 并保存，无需手动填写
   function applyUrlCfg() {
     try {
       const q = new URLSearchParams(location.hash.replace(/^#/, ""));
