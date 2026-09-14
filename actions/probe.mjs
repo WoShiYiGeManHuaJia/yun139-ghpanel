@@ -1,14 +1,20 @@
 const AUTH = process.env.YUN139_AUTHORIZATION || "";
 const PHONE = process.env.YUN139_PHONE || "";
+const UDID = "1235293937743367395";
+const AK = "Um7AMDEqBJxN3vJO";
 const out = { ts: new Date().toISOString(), steps: [] };
 const A = String(AUTH).trim().replace(/^basic /i, "").replace(/^Basic /i, "");
 const UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
 const CY7071 = "https://caiyun.feixin.10086.cn:7071";
 const MM = "https://m.mcloud.139.com", HM = "m.mcloud.139.com";
+const REFER = "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1";
 let JWT = "";
-const hJ = () => ({ "User-Agent": UA, "Host": HM, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest", "jwtToken": JWT, "Cookie": "jwtToken=" + JWT });
 const log = (k, v) => out.steps.push({ k, v });
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+const hJ = (ex) => ({ "User-Agent": UA, "Host": HM, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest",
+  "Referer": REFER, "Origin": "https://m.mcloud.139.com",
+  "jwtToken": JWT, "Cookie": `jwtToken=${JWT}; ud_id=${UDID}; a_k=${AK}; NATION_CODE=86; platform=2`,
+  ...(ex || {}) });
 async function getJwt() {
   let last;
   for (let i = 0; i < 6; i++) {
@@ -34,64 +40,69 @@ async function G(p, tries) {
   for (let i = 0; i < (tries || 3); i++) {
     try { const r = await fetch(MM + p, { headers: hJ(), signal: AbortSignal.timeout(20000) });
       const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
-      return { status: r.status, j, raw: t.slice(0, 200) };
+      return { j, raw: t.slice(0, 200) };
     } catch (e) { last = e; await sleep(1200); }
   }
-  return { status: 0, j: null, raw: "失败" };
+  return { j: null, raw: "失败" };
 }
 async function snap() {
   const a = await G("/ycloud/signin/page/getCloudNum", 2);
   const b = await G("/ycloud/signin/page/infoV3?client=app", 2);
   const R = (b.j && b.j.result) || {};
-  return { total: a.j && a.j.result, toReceive: R.toReceive, list: JSON.stringify(R.receiveList) };
+  return { total: a.j && a.j.result, list: JSON.stringify(R.receiveList || []) };
+}
+async function tryReceive(rid, opt) {
+  const body = { client: "app", cloudId: rid, cloudType: 0 };
+  const url = MM + "/ycloud/signin/page/receiveV3" + (opt.query || "");
+  for (let i = 0; i < 2; i++) {
+    try {
+      const r = await fetch(url, { method: "POST", headers: { ...hJ(opt.headers), "Content-Type": "application/json;charset=UTF-8", "isDeviceId": "true" },
+        body: JSON.stringify(body), signal: AbortSignal.timeout(20000) });
+      const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
+      return { j, raw: t.slice(0, 160) };
+    } catch (e) { await sleep(1000); }
+  }
+  return { j: null, raw: "请求失败" };
 }
 async function main() {
   await getJwt(); log("jwt", "ok");
-  let s = await snap();
-  const START = { total: s.total, toReceive: s.toReceive };
-  log("⓪ 基线", { total: s.total, toReceive: s.toReceive, list: s.list });
-  // ① 拿任务列表，找所有 FINISH 任务的 cloudId
-  const tl = await G("/market/signin/task/taskList?marketname=sign_in_3", 3);
-  const flat = [];
-  for (const v of Object.values((tl.j && tl.j.result) || {})) if (Array.isArray(v)) for (const t of v) flat.push(t);
-  const fin = flat.filter(t => t.state === "FINISH");
-  log("① FINISH 任务", fin.map(t => ({ id: t.id, cloudId: t.cloudId, cloudType: t.cloudType,
-    name: String(t.name || "").replace(/<[^>]*>/g, "").slice(0, 14) })));
-  // ② 用任务的 cloudId + cloudType 领（receiveV3）
-  for (const t of fin.slice(0, 4)) {
-    if (!t.cloudId) continue;
-    const body = { client: "app", cloudId: String(t.cloudId), cloudType: t.cloudType !== undefined ? t.cloudType : 0 };
-    let r;
-    for (let i = 0; i < 2; i++) {
-      try { r = await fetch(MM + "/ycloud/signin/page/receiveV3", { method: "POST",
-        headers: { ...hJ(), "Content-Type": "application/json;charset=UTF-8", "isDeviceId": "true" },
-        body: JSON.stringify(body), signal: AbortSignal.timeout(20000) });
-        const t2 = await r.text(); let j = null; try { j = JSON.parse(t2); } catch {}
-        r = { status: r.status, j, raw: t2.slice(0, 160) }; break;
-      } catch (e) { r = { status: 0, j: null, raw: String(e.message) }; await sleep(1000); }
+  // 提取 isDeviceId / deviceId 的 JS 上下文
+  try {
+    const rr = await fetch("https://m.mcloud.139.com/portal/mobilecloud/public/js/newsignin.336f18c3.js", { headers: { "User-Agent": UA, "Referer": REFER }, signal: AbortSignal.timeout(40000) });
+    const s = await rr.text();
+    for (const kw of ["isDeviceId", "deviceId"]) {
+      let idx = 0, n = 0;
+      while ((idx = s.indexOf(kw, idx)) !== -1 && n < 2) {
+        log("JS上下文 " + kw, s.slice(Math.max(0, idx - 150), idx + 180).replace(/\s+/g, " "));
+        idx += kw.length; n++;
+      }
     }
-    const s2 = await snap();
-    const changed = (s2.total !== s.total) || (s2.toReceive !== s.toReceive);
-    log((changed ? "★★★成功 " : "") + "② 任务" + t.id + " cloudId=" + t.cloudId, {
-      code: r.j && r.j.code, msg: r.j && r.j.msg, raw: r.raw.slice(0, 100),
-      总豆: s.total + "→" + s2.total, 待领: s.toReceive + "→" + s2.toReceive });
-    if (changed) { s = s2; }
-    await sleep(600);
-  }
-  // ③ receiveTask 逐个 FINISH 任务 id
-  for (const t of fin.slice(0, 5)) {
-    const r = await G(`/ycloud/signin/page/receiveTask?taskId=${t.id}`, 2);
-    const s2 = await snap();
-    const changed = (s2.total !== s.total) || (s2.toReceive !== s.toReceive);
-    log((changed ? "★★★成功 " : "") + "③ receiveTask id=" + t.id, {
-      code: r.j && r.j.code, result: r.j && r.j.result, raw: r.raw.slice(0, 90),
-      总豆: s.total + "→" + s2.total, 待领: s.toReceive + "→" + s2.toReceive });
-    if (changed) s = s2;
-    await sleep(500);
+  } catch (e) { log("JS上下文", "下载失败 " + e.message); }
+  let s = await snap();
+  const START = s.total;
+  log("⓪ 基线", { total: s.total, list: s.list });
+  const METHODS = [
+    ["① 仅设备cookie(数字cloudId)", {}],
+    ["② +query deviceId", { query: "?deviceId=" + UDID }],
+    ["③ +header deviceId", { headers: { deviceId: UDID } }],
+  ];
+  let win = null;
+  for (const rid of [2343307559, 2343307413]) {
+    let got = false;
+    for (const [name, opt] of METHODS) {
+      const r = await tryReceive(rid, opt);
+      const s2 = await snap();
+      const changed = (s2.total !== s.total) || (s2.list !== s.list);
+      log((changed ? "★★★成功 " : "") + name + " rid=" + rid, {
+        code: r.j && r.j.code, msg: r.j && r.j.msg, raw: r.raw.slice(0, 100),
+        总豆: s.total + "→" + s2.total, 清单变化: s.list !== s2.list ? "是" : "否" });
+      if (changed) { s = s2; got = true; win = name; log("★到账", { rid, 豆增加: (s2.total || 0) - (START || 0) }); break; }
+      await sleep(700);
+    }
+    if (!got) log("✗ 未能领取 rid=" + rid, { 说明: "该 6 豆气泡暂无法通过 API 领取" });
   }
   const sEnd = await snap();
-  log("最终", { 起始: START, 现在: { total: sEnd.total, toReceive: sEnd.toReceive },
-    总增豆: (sEnd.total || 0) - (START.total || 0) });
+  log("最终", { 起始总豆: START, 现在总豆: sEnd.total, 净增: (sEnd.total || 0) - (START || 0), 清单: sEnd.list, 成功方法: win || "无" });
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
   .finally(async () => { const fs = await import("fs");
