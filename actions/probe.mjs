@@ -9,6 +9,7 @@ const H7071 = "caiyun.feixin.10086.cn:7071", HN = "caiyun.feixin.10086.cn";
 let JWT = "";
 const hJ = (host) => ({ "User-Agent": UA, "Host": host, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest", "jwtToken": JWT, "Cookie": "jwtToken=" + JWT });
 const log = (k, v) => out.steps.push({ k, v });
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function getJwt() {
   const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
     method: "POST", headers: { "Authorization": "Basic " + A, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
@@ -20,65 +21,54 @@ async function getJwt() {
   if (!j2 || !j2.result || !j2.result.token) throw new Error("tyrzLogin 失败");
   JWT = j2.result.token;
 }
-async function req(p, host, method, body) {
-  try {
-    const r = await fetch((host === H7071 ? CY7071 : CY) + p, { method: method || "GET", headers: hJ(host), body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(20000) });
-    const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
-    return { status: r.status, j, raw: t.slice(0, 300) };
-  } catch (e) { return { status: 0, raw: String(e.message || e) }; }
+async function req(p, host, method, body, tries) {
+  let last;
+  for (let i = 0; i < (tries || 3); i++) {
+    try {
+      const r = await fetch((host === H7071 ? CY7071 : CY) + p, { method: method || "GET", headers: hJ(host), body: body ? JSON.stringify(body) : undefined, signal: AbortSignal.timeout(20000) });
+      const t = await r.text(); let j = null; try { j = JSON.parse(t); } catch {}
+      return { status: r.status, j, raw: t.slice(0, 300) };
+    } catch (e) { last = e; await sleep(1500 * (i + 1)); }
+  }
+  return { status: 0, raw: "重试后仍失败: " + String((last && last.message) || last) };
 }
 async function main() {
   await getJwt(); log("jwt", "ok");
-  // ★ 实领 1：膨胀云朵（你的账号 preMonthBackup=true 且未领，可领 20）
-  const ex = await req("/market/signin/page/taskExpansion", HN);
-  log("膨胀-查询", { raw: ex.raw.slice(0, 200) });
-  const exr = ex.j && ex.j.result || {};
+  // ★ 重试膨胀领取（两主机都试）
+  const ex = await req("/market/signin/page/taskExpansion", HN, "GET", null, 3);
+  const exr = (ex.j && ex.j.result) || {};
+  log("膨胀-查询", { pre: exr.preMonthBackup, accept: exr.curMonthBackupTaskAccept, date: exr.acceptDate, next: exr.nextMonthTaskRecordCount });
   if (exr.preMonthBackup && !exr.curMonthBackupTaskAccept) {
-    const r = await req(`/market/signin/page/receiveTaskExpansion?acceptDate=${exr.acceptDate}`, HN);
-    log("★膨胀-领取", { status: r.status, code: r.j ? r.j.code : null, msg: r.j ? r.j.msg : null,
-      cloudCount: r.j && r.j.result ? r.j.result.cloudCount : null, raw: r.raw.slice(0, 200) });
-  } else log("★膨胀-领取", "不满足条件(已领或未备份) " + JSON.stringify(exr).slice(0,150));
-  // ★ 实领 2：通知云朵
-  const ms = await req("/market/msgPushOn/task/status", HN);
-  const msr = ms.j && ms.j.result || {};
-  log("通知-状态", { pushOn: msr.pushOn, first: msr.firstTaskStatus, second: msr.secondTaskStatus });
-  if (msr.pushOn === 1) {
-    if (msr.firstTaskStatus !== 3) {
-      const r = await req("/market/msgPushOn/task/obtain", HN, "POST", { type: 1 });
-      log("★通知-领任务1", { status: r.status, raw: r.raw.slice(0, 200) });
-    } else log("通知-任务1", "已领取，跳过");
-    if (msr.secondTaskStatus === 2 || msr.secondTaskStatus === 1) {
-      const r = await req("/market/msgPushOn/task/obtain", HN, "POST", { type: 2 });
-      log("★通知-领任务2", { status: r.status, raw: r.raw.slice(0, 200) });
+    for (const host of [HN, H7071]) {
+      const r = await req(`/market/signin/page/receiveTaskExpansion?acceptDate=${exr.acceptDate}`, host, "GET", null, 4);
+      log("★膨胀-领取[" + host + "]", { status: r.status, code: r.j ? r.j.code : null, msg: r.j ? r.j.msg : null,
+        cloudCount: (r.j && r.j.result) ? r.j.result.cloudCount : null, raw: r.raw.slice(0, 220) });
+      if (r.status === 200) break;
+    }
+  } else log("膨胀-领取", "不满足条件");
+  // ★ 爆破 task 动作名（用 FINISH 的 431 和 WAIT 的 106）
+  const acts = ["draw", "obtain", "get", "claim", "gain", "pick", "finish", "complete", "submit", "take", "open", "bind", "send", "process", "award"];
+  const hits = [];
+  for (const act of acts) {
+    for (const id of ["431", "106", "319"]) {
+      const r = await req(`/market/signin/task/${act}?id=${id}`, HN, "GET", null, 1);
+      if (r.status === 200) { hits.push({ act, id, raw: r.raw.slice(0, 180) }); break; }
     }
   }
-  // ★ 实领 3：备份礼
-  const bg = await req("/market/backupgift/info", HN);
-  const bgr = bg.j && bg.j.result || {};
-  log("备份-状态", { state: bgr.state, curMonth: bgr.curMonth });
-  if (bgr.state === 0) {
-    const r = await req("/market/backupgift/receive", HN);
-    log("★备份-领取", { status: r.status, raw: r.raw.slice(0, 200) });
-  } else log("备份-领取", "state=" + bgr.state + "（0=可领 1=已领 -1=未备份）");
-  // ★ 爆破余额接口（找 200 的）
-  const cands = [
-    "/market/signin/page/cloudInfo", "/market/signin/cloud/info", "/market/signin/user/cloudCount",
-    "/market/signin/page/cloud", "/market/signin/totalCloud", "/market/signin/cloud/total",
-    "/market/signin/page/init", "/market/signin/index", "/market/signin/home",
-    "/market/signin/page/home", "/market/signin/page/main", "/market/signin/user/total",
-    "/market/signin/cloud/count", "/market/signin/bean", "/market/signin/page/bean",
-    "/market/signin/page/signInInfo", "/market/signin/sign/info", "/market/signin/user/info",
-    "/market/signin/task/myCloud", "/market/signin/cloud/myCloud", "/market/signin/cloudNum",
-  ];
-  const hits = [];
-  for (const p of cands) {
-    const r = await req(p, HN);
-    if (r.status === 200) hits.push({ p, raw: r.raw.slice(0, 250) });
+  log("★task 动作命中", hits.length ? hits : "全部404");
+  // ★ 爆破 page 下接口
+  const pages = ["info", "receive", "cloud", "total", "init", "home", "main", "bean", "cloudBean", "userInfo", "account", "myInfo", "detail", "status"];
+  const ph = [];
+  for (const p of pages) {
+    const r = await req(`/market/signin/page/${p}`, HN, "GET", null, 1);
+    if (r.status === 200) ph.push({ p, raw: r.raw.slice(0, 200) });
   }
-  log("★余额接口命中", hits.length ? hits : "全部404（未找到）");
-  // 云朵大作战
-  const cg = await req("/market/signin/hecheng1T/info?op=info", HN);
-  log("云朵大作战", { status: cg.status, raw: cg.raw.slice(0, 200) });
+  log("★page 接口命中", ph.length ? ph : "全部404");
+  // 7071 主机再试 page/receive
+  const r7071 = await req("/market/signin/page/receive", H7071, "GET", null, 2);
+  log("page/receive[:7071]", { status: r7071.status, raw: r7071.raw.slice(0, 180) });
+  const i7071 = await req("/market/signin/page/info?client=app", H7071, "GET", null, 2);
+  log("page/info[:7071]", { status: i7071.status, raw: i7071.raw.slice(0, 180) });
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
   .finally(async () => { const fs = await import("fs");
