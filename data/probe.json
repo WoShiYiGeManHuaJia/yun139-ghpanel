@@ -1,5 +1,5 @@
 {
- "ts": "2026-09-14T17:14:52.127Z",
+ "ts": "2026-09-14T17:16:48.793Z",
  "steps": [
   {
    "k": "jwt",
@@ -10,67 +10,76 @@
    "v": 922
   },
   {
-   "k": "② 气泡元素",
+   "k": "② 气泡状态",
    "v": [
     {
-     "text": "+32",
-     "path": "div.AIPoints.one.is-next-month < div.AIPoints_area < div.top_area < div.newsignin_container"
+     "cls": "AIPoints one is-next-month",
+     "txt": "+32"
     },
     {
-     "text": "+32",
-     "path": "p.AI_num < div.AIPoints.one.is-next-month < div.AIPoints_area < div.top_area"
+     "cls": "AIPoints two",
+     "txt": "+6 可领取"
     },
     {
-     "text": "+32",
-     "path": "span < p.AI_num < div.AIPoints.one.is-next-month < div.AIPoints_area"
-    },
-    {
-     "text": "+6",
-     "path": "span < p.AI_num < div.AIPoints.two < div.AIPoints_area"
-    },
-    {
-     "text": "可领取",
-     "path": "span < p.AI_num < div.AIPoints.two < div.AIPoints_area"
-    },
-    {
-     "text": "+6",
-     "path": "span < p.AI_num < div.AIPoints.three < div.AIPoints_area"
-    },
-    {
-     "text": "可领取",
-     "path": "span < p.AI_num < div.AIPoints.three < div.AIPoints_area"
+     "cls": "AIPoints three",
+     "txt": "+6 可领取"
     }
    ]
   },
   {
-   "k": "③ 点击过程",
+   "k": "★★★ .AIPoints.two 领取成功",
+   "v": {
+    "增加": 6
+   }
+  },
+  {
+   "k": "③ 逐个结果",
    "v": [
     {
-     "round": 1,
-     "可领取数量": 3
+     "气泡": ".AIPoints.two",
+     "点击": "成功",
+     "云豆": "922 → 928",
+     "变化": 6,
+     "备注": ""
     },
     {
-     "round": 1,
-     "错误": "locator.click: Timeout 6000ms exceeded.\nCall log:\n  - waiting for locator('text="
+     "气泡": ".AIPoints.three",
+     "点击": "成功",
+     "云豆": "928 → 928",
+     "变化": 0,
+     "备注": "force点击失败: locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waitin | 已用JS点击"
     }
    ]
   },
   {
-   "k": "④ 领取接口调用",
+   "k": "④ receive 接口",
    "v": [
     {
-     "api": "/ycloud/signin/page/startSignIn?client=app&deviceId=BAukgTdR…(打码)",
+     "api": "/ycloud/signin/page/receiveV3",
      "status": 200,
-     "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"todaySignIn\":true,\"signInPoints\":3,\"signCount\":2,\"time\":1789406101742,\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0"
+     "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":6,\"total\":928,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\",\""
     }
    ]
   },
   {
-   "k": "⑤ 最终云豆",
+   "k": "⑤ 点击后气泡状态",
+   "v": [
+    {
+     "cls": "AIPoints one is-next-month",
+     "txt": "+32"
+    },
+    {
+     "cls": "AIPoints two",
+     "txt": "+6 可领取"
+    }
+   ]
+  },
+  {
+   "k": "⑥ 最终",
    "v": {
     "起始": 922,
-    "现在": 922,
-    "净增": 0
+    "现在": 928,
+    "净增": 6
    }
   }
  ],
