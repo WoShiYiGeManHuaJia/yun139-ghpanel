@@ -1,5 +1,124 @@
 {
- "ts": "2026-09-14T15:48:34.410Z",
- "steps": [],
- "fatal": "getJwt 失败: ★业务码异常 resultCode=104000"
+ "ts": "2026-09-14T15:51:06.950Z",
+ "steps": [
+  {
+   "k": "jwt",
+   "v": "ok（已校验 resultCode）"
+  },
+  {
+   "k": "⓪ 基线",
+   "v": {
+    "total": 919,
+    "toReceive": 12,
+    "list": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]"
+   }
+  },
+  {
+   "k": "A receiveTask?recordId",
+   "v": {
+    "code": null,
+    "msg": null,
+    "result": null,
+    "raw": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><cente",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "B receiveTask?recordId+cloudType=0",
+   "v": {
+    "code": null,
+    "msg": null,
+    "result": null,
+    "raw": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><cente",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "C receiveTask?cloudType=2",
+   "v": {
+    "code": null,
+    "msg": null,
+    "result": null,
+    "raw": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><cente",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "D receiveTask?cloudType=0",
+   "v": {
+    "code": null,
+    "msg": null,
+    "result": null,
+    "raw": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><cente",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "E receiveTask?cloudNum",
+   "v": {
+    "code": null,
+    "msg": null,
+    "result": null,
+    "raw": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><cente",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "F POST receiveV3{recordId,cloudType0}",
+   "v": {
+    "code": 615,
+    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
+    "result": null,
+    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "G POST receiveV3{cloudType:2}",
+   "v": {
+    "code": 615,
+    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
+    "result": null,
+    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "H POST receiveV3{}",
+   "v": {
+    "code": 615,
+    "msg": "活动太火爆啦，兑换失败，试试其他奖品吧",
+    "result": null,
+    "raw": "{\"code\":615,\"msg\":\"活动太火爆啦，兑换失败，试试其他奖品吧\"}",
+    "总豆": "919→919",
+    "待领": "12→12"
+   }
+  },
+  {
+   "k": "最终",
+   "v": {
+    "基线": {
+     "total": 919,
+     "toReceive": 12
+    },
+    "现在": {
+     "total": 919,
+     "toReceive": 12
+    },
+    "list": "[{\"cloudType\":2,\"cloudNum\":32},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307559},{\"cloudType\":0,\"cloudNum\":6,\"recordId\":2343307413}]",
+    "成功方案": "无"
+   }
+  }
+ ],
+ "rcLog": {
+  "inner": "0",
+  "outer": "104000"
+ }
 }
