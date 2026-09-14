@@ -51,6 +51,17 @@
   .hint code { background:#0b1220; padding:1px 5px; border-radius:4px; border:1px solid var(--line); }
   .toast { position:fixed; top:12px; left:50%; transform:translateX(-50%); background:#0d9488; color:#fff; padding:10px 16px; border-radius:8px; font-size:13px; z-index:999; box-shadow:0 4px 12px rgba(0,0,0,.4); display:none; max-width:92vw; }
   .toast.err { background:#b91c1c; }
+  .mask { position:fixed; inset:0; background:rgba(0,0,0,.62); display:none; z-index:998; align-items:center; justify-content:center; padding:16px; }
+  .mask.show { display:flex; }
+  .dialog { background:var(--card); border:1px solid var(--line); border-radius:12px; width:100%; max-width:480px; padding:16px; }
+  .dialog h3 { font-size:14px; margin-bottom:4px; }
+  .dialog .tip { font-size:12px; color:var(--mut); margin-bottom:10px; line-height:1.6; }
+  .dialog textarea { width:100%; min-height:140px; resize:vertical; font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px; }
+  .dialog textarea:focus { outline:none; border-color:var(--acc); }
+  .dialog .status { font-size:12px; min-height:20px; margin:10px 0 2px; }
+  .dialog .status.ok { color:var(--ok); }
+  .dialog .status.err { color:var(--err); }
+  .dialog .row { margin-top:6px; }
 </style>
 </head>
 <body>
@@ -93,7 +104,7 @@
 
     <div class="divider">方式二 · 粘贴 authorization（推荐，免验证码）</div>
     <button class="btn ghost" id="btn_paste">＋ 粘贴 authorization 添加</button>
-    <div class="hint">在 App 里抓包得到形如 <code>pc:手机号:xxx…</code> 的 authorization 后粘贴，无需验证码。登录总被风控拦截时请优先用这种方式。</div>
+    <div class="hint">在 App 里抓包复制整段授权内容（浏览器扩展导出的 <code>Authorization: Basic …</code>、JSON 或 cURL 均可）粘贴到弹窗，点「识别并添加」自动解析为账号，无需验证码。登录总被风控拦截时请优先用这种方式。</div>
   </div>
 
   <div class="card">
@@ -125,6 +136,20 @@
       自动存在本页「① 账号」列表里，明文只存本机浏览器 localStorage，刷新、重开页面都还在；不会上传任何服务器。
   </div>
   </details>
+
+  <!-- 粘贴 authorization 解析弹窗 -->
+  <div class="mask" id="maskPaste">
+    <div class="dialog">
+      <h3>粘贴 authorization（自动识别）</h3>
+      <div class="tip">把抓包复制的内容整体粘贴进来即可——单行、整段请求头、<code>Authorization: Basic …</code>、JSON、cURL 都行。点「识别并添加」自动解析。</div>
+      <textarea id="pasteText" placeholder="在此粘贴授权内容…"></textarea>
+      <div class="status ok" id="pasteStatus"></div>
+      <div class="row">
+        <button class="btn ghost" id="btn_paste_ok" style="margin:0">识别并添加</button>
+        <button class="btn ghost" id="btn_paste_cancel" style="margin:0">取消</button>
+      </div>
+    </div>
+  </div>
 
 <script>
 (function(){
@@ -230,27 +255,63 @@
     });
   }
 
-  // ---- 粘贴 authorization ----
-  async function pasteAccount() {
-    const raw = prompt("粘贴 authorization（形如 pc:手机号:token，可在移动云盘 App 抓包获得）");
-    if (!raw) return;
+  // ---- 粘贴 authorization（弹窗 + 智能识别）----
+  function openPasteDialog() {
+    $("pasteText").value = "";
+    $("pasteStatus").textContent = "";
+    $("pasteStatus").className = "status";
+    $("maskPaste").classList.add("show");
+    setTimeout(function () { $("pasteText").focus(); }, 60);
+  }
+  function closePasteDialog() { $("maskPaste").classList.remove("show"); }
+
+  // 把抓包复制的五花八门内容归一化成 "pc:手机号:token" 整段
+  function normalizeAuthText(t) {
+    t = (t || "").replace(/\s+/g, " ").trim();
+    if (!t) return null;
+    var m;
+    if (/^Basic\s+/i.test(t)) return t;                                        // 已是整段
+    m = t.match(/authorization"?\s*[:=]\s*(["']?)(Basic[^"',\s}]*)\1/i);       // JSON / 请求头
+    if (m) return m[2];
+    m = t.match(/authorization\s*:\s*(Basic[^\s'"]*)/i);                        // cURL / 纯文本兜底
+    if (m) return m[1];
+    if (/^pc:\d{6,}/i.test(t)) return "Basic " + t;                           // 只有解码后的 pc:手机号:token
+    if (/^[A-Za-z0-9+/=]+$/.test(t)) return "Basic " + t;                     // 裸 base64
+    return "Basic " + t;                                                       // 最后兜底交给 atob 判断
+  }
+
+  async function submitPaste() {
+    const rawTxt = $("pasteText").value;
+    if (!rawTxt.trim()) { $("pasteStatus").textContent = "内容为空，请粘贴抓包复制的授权内容"; $("pasteStatus").className = "status err"; return; }
+    const auth = normalizeAuthText(rawTxt);
     try {
-      const parts = atob(raw.split(" ").pop()).split(":");
-      if (parts.length < 3) throw new Error("格式错误");
-      const phone = parts[1], tok = parts.slice(2).join(":");
+      const b64 = auth.split(" ").pop();
+      let parts;
+      try { parts = atob(b64).split(":"); } catch (er) { throw new Error("不是有效的 Base64 授权码"); }
+      if (parts.length < 3) throw new Error("缺少手机号/令牌段");
+      const phone = parts[1];
+      if (!/^\d{6,}$/.test(phone)) throw new Error("手机号段异常: " + phone);
+      const tok = parts.slice(2).join(":");
       const str = tok.split("|");
       const expMs = str.length >= 4 ? parseInt(str[3], 10) : 0;
       const list = await loadAccounts();
       const idx = list.findIndex(a => a.phone === phone);
       const acc = {
         id: String(idx >= 0 ? list[idx].id : Date.now() % 1000000),
-        name: "139-" + phone.slice(-4), phone, authorization: raw.trim(),
+        name: "139-" + phone.slice(-4), phone, authorization: auth.trim(),
         expires_at: expMs ? fmt(expMs) : null, remaining_days: expMs ? Math.round((expMs - Date.now()) / 86400000 * 10) / 10 : null,
         created_at: new Date().toISOString(),
       };
-      if (idx >= 0) list[idx] = acc; else list.push(acc);
+      if (idx >= 0) { list[idx] = acc; $("pasteStatus").textContent = "已更新账号 +" + phone.slice(-4); }
+      else { list.push(acc); $("pasteStatus").textContent = "已添加账号 +" + phone.slice(-4); }
+      $("pasteStatus").className = "status ok";
       await saveAccounts(list); renderAccounts(); log("已添加账号 " + phone.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")); toast("账号已添加 ✓");
-    } catch (e) { log("解析失败: " + e.message, "err"); toast("authorization 格式不对，请检查后重试", "err"); }
+      setTimeout(closePasteDialog, 700);
+    } catch (e) {
+      $("pasteStatus").textContent = "解析失败：" + (e.message || "格式不对") + "，请确认复制内容是否完整";
+      $("pasteStatus").className = "status err";
+      log("解析失败: " + e.message, "err");
+    }
   }
   function fmt(ms) { const d = new Date(ms); const p = n => String(n).padStart(2, "0"); return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) + " " + p(d.getHours()) + ":" + p(d.getMinutes()); }
 
@@ -318,7 +379,10 @@
   }
   $("btn_save_cfg").onclick = saveCfg;
   $("btn_gen_key").onclick = genKey;
-  $("btn_paste").onclick = pasteAccount;
+  $("btn_paste").onclick = function () { openPasteDialog(); };
+  $("btn_paste_ok").onclick = submitPaste;
+  $("btn_paste_cancel").onclick = closePasteDialog;
+  $("maskPaste").addEventListener("click", function (e) { if (e.target === $("maskPaste")) closePasteDialog(); });
   $("btn_sign").onclick = runSign;
   $("btn_refresh").onclick = runRefresh;
   $("btn_send").onclick = runSend;
