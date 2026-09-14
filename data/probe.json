@@ -1,25 +1,6 @@
 {
- "ts": "2026-09-14T14:23:33.486Z",
- "pages": [
-  {
-   "p": "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin",
-   "status": 0,
-   "len": 0,
-   "err": "fetch failed"
-  },
-  {
-   "p": "https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html",
-   "status": 200,
-   "len": 7756
-  }
- ],
- "scripts": [
-  "https://img.mcloud.139.com/mcloud_static/js/probe_v20260728.js",
-  "/portal/mobilecloud/js/fp.min.js",
-  "https://h.app.coc.10086.cn/appother/js/public/cmcc.js",
-  "https://lf3-data.volccdn.com/obj/data-static/log-sdk/collect/5.0/collect-privity-v5.1.10.js",
-  "https://img.mcloud.139.com/portal/mobilecloud/public/js/chunk-vendors.f3c3cfb0.js",
-  "https://img.mcloud.139.com/portal/mobilecloud/public/js/index.041ef93c.js"
- ],
- "apis": []
+ "ts": "2026-09-14T14:26:35.857Z",
+ "scripts": [],
+ "paths": [],
+ "fatal": "fetch failed"
 }
