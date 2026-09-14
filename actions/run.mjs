@@ -450,7 +450,58 @@ async function clickTask(jwt, id) {
 }
 
 
+// ===== 云朵状态查询（轻量 API，不开浏览器）=====
+const MCLOUD = "https://m.mcloud.139.com";
+async function mcloudGet(jwt, path) {
+  const tries = [
+    { headers: { "User-Agent": MOBILE_UA_FALLBACK, "jwtToken": jwt, "Accept": "application/json, text/plain, */*", "X-Requested-With": "XMLHttpRequest", "Referer": MCLOUD + "/", "Cookie": "jwtToken=" + jwt } },
+    { headers: { "User-Agent": MOBILE_UA_FALLBACK, "Accept": "application/json, text/plain, */*", "Cookie": "jwtToken=" + jwt, "Referer": MCLOUD + "/" } },
+  ];
+  let lastErr = null;
+  for (const t of tries) {
+    try {
+      const r = await fetch(MCLOUD + path, { headers: t.headers, signal: AbortSignal.timeout(20000) });
+      const txt = await r.text();
+      let j = null; try { j = JSON.parse(txt); } catch { j = null; }
+      if (j) return j;
+      lastErr = new Error("非 JSON: " + txt.slice(0, 80));
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr || new Error("云朵状态请求失败");
+}
+function numOf(v) {
+  if (v === null || v === undefined) return null;
+  const n = parseInt(String(v).replace(/[^\d-]/g, ""), 10);
+  return isNaN(n) ? null : n;
+}
+async function cloudStatus(jwt) {
+  const out = { total: null, toReceive: null, list: [], nextMonth: 0, receivable: 0, raw: "" };
+  try {
+    const j1 = await mcloudGet(jwt, "/ycloud/signin/page/getCloudNum");
+    out.total = numOf(j1.result !== undefined ? j1.result : (j1.data && j1.data.cloudNum));
+  } catch (e) { out.errNum = String(e.message || e).slice(0, 80); }
+  try {
+    const j2 = await mcloudGet(jwt, "/ycloud/signin/page/infoV3?client=app");
+    const res = j2.result || j2.data || {};
+    out.toReceive = numOf(res.toReceive !== undefined ? res.toReceive : res.receiveNum);
+    const arr = res.receiveList || res.taskList || res.list || [];
+    if (Array.isArray(arr)) {
+      out.list = arr.slice(0, 12).map(x => ({
+        cloudType: x.cloudType, cloudNum: numOf(x.cloudNum !== undefined ? x.cloudNum : x.num),
+        recordId: x.recordId || x.cloudId || null,
+      }));
+    }
+    out.raw = JSON.stringify(j2).slice(0, 200);
+  } catch (e) { out.errInfo = String(e.message || e).slice(0, 80); }
+  for (const it of out.list) {
+    if (it.cloudType === 2) out.nextMonth += (it.cloudNum || 0);
+    else out.receivable += (it.cloudNum || 0);
+  }
+  return out;
+}
+
 // ===== 气泡领取：必须用真实浏览器（deviceId 由页面指纹动态生成）=====
+const MOBILE_UA_FALLBACK = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
 const SIGNIN_PAGE = "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1#/newsignin";
 const MOBILE_UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
@@ -645,12 +696,46 @@ async function main() {
       out.results = results;
       out.msg = "云朵任务执行完成";
       out.ok = true;
+    } else if (type === "status") {
+      const accounts = await decryptAccounts();
+      const rows = [];
+      for (const a of accounts) {
+        const row = { phone: a.phone, masked: maskPhone(a.phone) };
+        try {
+          const jwt = await getJwt(a.authorization, a.phone);
+          const st = await cloudStatus(jwt);
+          row.ok = true;
+          row.total = st.total;
+          row.toReceive = st.toReceive;
+          row.receivable = st.receivable;
+          row.nextMonth = st.nextMonth;
+          row.list = st.list;
+          if (st.errNum || st.errInfo) row.warn = (st.errNum || "") + " " + (st.errInfo || "");
+          if (st.raw) row.raw = st.raw;
+        } catch (e) { row.ok = false; row.message = String(e.message || e).slice(0, 120); }
+        rows.push(row);
+        await new Promise(r => setTimeout(r, 400));
+      }
+      out.status = rows;
+      out.ok = rows.some(r => r.ok);
+      out.msg = "已查询 " + rows.length + " 个账号";
     } else if (type === "receive") {
-      const c = await pickCreds();
-      const rb = await receiveBubbles(c.authorization, c.phone);
-      out.receive = rb;
-      out.ok = !!rb.ok;
-      out.msg = rb.ok ? ("气泡领取完成，云豆 " + rb.before + " → " + rb.after + "（+" + rb.got + "）") : ("领取失败: " + (rb.error || "未知"));
+      const accounts = await decryptAccounts();
+      const only = String(payload.phone || "").trim();
+      const targets = only ? accounts.filter(a => String(a.phone) === only) : accounts;
+      if (!targets.length) throw new Error("未找到目标账号");
+      const rows = [];
+      for (const a of targets) {
+        const rb = await receiveBubbles(a.authorization, a.phone);
+        rows.push({ phone: a.phone, masked: maskPhone(a.phone), ok: !!rb.ok,
+          before: rb.before, after: rb.after, got: rb.got, steps: rb.steps,
+          error: rb.error || (rb.ok ? "" : "未知") });
+        await new Promise(r => setTimeout(r, 500));
+      }
+      out.receiveList = rows;
+      out.receive = rows.length === 1 ? rows[0] : null;
+      out.ok = rows.some(r => r.ok);
+      out.msg = rows.map(r => r.masked + " " + (r.ok ? (r.before + "→" + r.after + " +" + r.got) : ("失败:" + r.error))).join("；");
     } else if (type === "list") {
       const c = await pickCreds();
       const jwt = await getJwt(c.authorization, c.phone);

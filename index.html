@@ -98,6 +98,14 @@
   .bar > span { display:block; height:100%; background:linear-gradient(90deg,var(--acc),var(--ok)); border-radius:4px; }
   .grp-title { font-size:11px; color:var(--mut); margin:10px 0 2px; letter-spacing:.5px; }
   .btn.gold { background:linear-gradient(135deg,#fbbf24,#f59e0b); color:#3a2400; font-weight:700; }
+  .acc .cloud { display:flex; align-items:center; gap:8px; margin-top:8px; background:rgba(56,189,248,.06); border:1px solid rgba(56,189,248,.22); border-radius:8px; padding:7px 10px; font-size:12px; }
+  .acc .cloud .num { font-weight:700; color:var(--acc); font-size:14px; }
+  .acc .cloud .bb { color:var(--warn); font-weight:600; }
+  .acc .cloud .dim { color:var(--mut); }
+  .acc .cloud .btn.sm { margin-left:auto; padding:5px 10px; font-size:11px; background:linear-gradient(135deg,#fbbf24,#f59e0b); color:#3a2400; border:none; }
+  .acc .cloud .btn.sm:disabled { filter:grayscale(.6); opacity:.6; }
+  .acc .ops { margin-top:8px !important; }
+
   .hero { background:linear-gradient(135deg,rgba(56,189,248,.14),rgba(52,211,153,.10)); border:1px solid rgba(56,189,248,.3); }
   .hero h2 { color:var(--acc); }
   .stat { display:flex; gap:8px; margin:10px 0 2px; }
@@ -169,14 +177,11 @@
   </div>
 
   <div class="card hero">
-    <h2>🎁 云朵气泡领取</h2>
-    <div class="stat">
-      <div><b id="st_bean">—</b><span>云豆总数</span></div>
-      <div><b id="st_got">—</b><span>本次领取</span></div>
-      <div><b id="st_time">—</b><span>上次执行</span></div>
-    </div>
-    <button class="btn gold" id="btn_receive">领取可领气泡</button>
-    <div class="hint">气泡必须用真实浏览器环境才能领（服务端校验设备指纹），后台会自动开一个手机浏览器点掉所有可领气泡。<b>下月才能领的会自动跳过</b>。每天 09:05 定时任务也会自动领一次。</div>
+    <h2>🎁 云朵气泡</h2>
+    <div class="hint" style="margin-top:0">每个号码的云豆数与可领气泡显示在<b>上方账号卡片</b>里，可对单个号码单独领取。</div>
+    <button class="btn gold" id="btn_status">刷新全部云朵状态</button>
+    <button class="btn" id="btn_receive">一键领取全部号码气泡</button>
+    <div class="hint">气泡必须用真实浏览器环境才能领（服务端校验设备指纹），后台会自动开一个手机浏览器逐个点掉。<b>下月才能领的会自动跳过</b>。每天 09:05 定时任务也会自动领一次。</div>
   </div>
 
   <div class="card">
@@ -335,6 +340,42 @@
   }
 
   // ---- 账号渲染 ----
+  const LS_CLOUD = "gh139_cloud";
+  function loadCloud() { try { return JSON.parse(localStorage.getItem(LS_CLOUD) || "{}"); } catch (e) { return {}; } }
+  function saveCloud(m) { try { localStorage.setItem(LS_CLOUD, JSON.stringify(m)); } catch (e) {} }
+  function cloudHtml(phone) {
+    const c = loadCloud()[String(phone)];
+    if (!c) return '<span class="dim">云豆 —</span><span class="dim">待领 —</span>'
+      + '<button class="btn sm" data-rec="' + phone + '">领气泡</button>';
+    const bean = (c.total != null ? '<span class="num">' + c.total + '</span><span class="dim">云豆</span>' : '<span class="dim">云豆 —</span>');
+    const bub = (c.receivable > 0 ? '<span class="bb">🎁 ' + c.receivable + ' 豆可领</span>' : '<span class="dim">无可领</span>');
+    const nx = (c.nextMonth > 0 ? '<span class="dim">下月 ' + c.nextMonth + '</span>' : '');
+    return bean + bub + nx + '<button class="btn sm" data-rec="' + phone + '">领气泡</button>';
+  }
+  function refreshCloudUI() {
+    document.querySelectorAll("[data-cloud]").forEach(function (box) {
+      box.innerHTML = cloudHtml(box.dataset.cloud);
+    });
+    bindCloudBtns();
+  }
+  function bindCloudBtns() {
+    document.querySelectorAll("[data-rec]").forEach(function (b) {
+      if (b.dataset.bound) return;
+      b.dataset.bound = "1";
+      b.onclick = function () { runReceive(b.dataset.rec, b); };
+    });
+  }
+  async function runStatus() {
+    const list = await loadAccounts();
+    if (!list.length) { toast("无账号", "err"); return; }
+    setBusy($("btn_status"), true, "查询中…");
+    pending = { type: "status", kind: "status" };
+    try {
+      await dispatch("status", { cipher: await encText(JSON.stringify(list)) });
+      log("已触发云朵状态查询…", "warn"); lastTs = ""; startWatch();
+    } catch (e) { setBusy($("btn_status"), false); pending = null; log(e.message, "err"); toast(e.message, "err"); }
+  }
+
   async function renderAccounts(flashIdx) {
     const list = await loadAccounts();
     const box = $("accounts");
@@ -346,9 +387,10 @@
       const badge = a.status === "error" ? '<span class="badge err">异常</span>'
         : (days != null && days < 7 ? '<span class="badge exp">' + days + '天</span>' : '<span class="badge ok">正常</span>');
       el.innerHTML =
-        '<div class="top"><span class="phone">' + (a.name || "139-" + a.phone.slice(-4)) + '</span>' + badge + '</div>' +
+        '<div class="top"><span class="phone">139-' + String(a.phone).slice(-4) + '</span>' + badge + '</div>' +
         '<div class="meta">' + String(a.phone).replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2") + (a.expires_at ? " · 到期 " + a.expires_at : "") + '</div>' +
-        '<div class="ops" style="margin-top:6px"><button class="btn sm danger" data-idx="' + i + '">删除</button></div>';
+        '<div class="cloud" data-cloud="' + a.phone + '">' + cloudHtml(a.phone) + '</div>' +
+        '<div class="ops"><button class="btn sm danger" data-idx="' + i + '">删除</button></div>';
       box.appendChild(el);
     });
     if (flashIdx != null && box.children[flashIdx]) { box.children[flashIdx].classList.add("flash"); box.children[flashIdx].scrollIntoView({ behavior: "smooth", block: "center" }); }
@@ -570,8 +612,15 @@
       toast("云朵任务执行完成", j.ok ? "" : "err");
     } else if (kind === "receive") {
       setBusy($("btn_receive"), false);
-      renderReceive(j.receive);
-      toast(j.ok ? ("领取完成 +" + ((j.receive && j.receive.got) || 0)) : "本次无可领气泡", j.ok ? "" : "err");
+      if (j.receiveList) renderReceiveRows(j.receiveList);
+      else if (j.receive) renderReceiveRows([j.receive]);
+      const got = (j.receiveList || []).reduce(function (s2, x) { return s2 + (x.got || 0); }, (j.receive && j.receive.got) || 0);
+      toast(got > 0 ? ("领取完成 +" + got) : "本次无可领气泡", got > 0 ? "" : "err");
+    } else if (kind === "status") {
+      setBusy($("btn_status"), false);
+      renderStatusRows(j.status);
+      const sum = (j.status || []).reduce(function (s2, x) { return s2 + (x.receivable || 0); }, 0);
+      toast(sum > 0 ? ("共 " + sum + " 豆可领") : "暂无可领气泡", sum > 0 ? "" : "err");
     }
     pending = null;
   }
@@ -652,26 +701,47 @@
       log(e.message, "err"); toast(e.message, "err");
     }
   }
-  async function runReceive() {
+  async function runReceive(phone, btn) {
     const list = await loadAccounts();
     if (!list.length) { toast("无账号，请先添加", "err"); return; }
-    setBusy($("btn_receive"), true, "领取中…（约 3 分钟）");
-    pending = { type: "receive", kind: "receive" };
+    if (btn) setBusy(btn, true, "领取中…");
+    pending = { type: "receive", kind: "receive", phone: phone || "" };
     try {
-      await dispatch("receive", { cipher: await encText(JSON.stringify(list)) });
-      log("气泡领取已触发，后台需要启动真实浏览器，约 2-3 分钟…", "warn");
+      await dispatch("receive", { phone: phone || "", cipher: await encText(JSON.stringify(list)) });
+      log((phone ? "139-" + phone.slice(-4) : "全部账号") + " 气泡领取已触发，后台需启动真实浏览器，约 2-3 分钟…", "warn");
       lastTs = ""; startWatch();
     } catch (e) {
-      setBusy($("btn_receive"), false); pending = null;
+      if (btn) setBusy(btn, false); pending = null;
       log(e.message, "err"); toast(e.message, "err");
     }
   }
-  function renderReceive(rb) {
-    if (!rb) return;
-    if (rb.after !== undefined && rb.after !== null) $("st_bean").textContent = rb.after;
-    $("st_got").textContent = (rb.got > 0 ? "+" : "") + (rb.got || 0);
-    $("st_time").textContent = new Date().toTimeString().slice(0, 5);
-    (rb.steps || []).forEach(function (x) { log("· " + x, x.indexOf("+") >= 0 ? "ok" : ""); });
+  function applyCloudCache(phone, patch) {
+    const m = loadCloud();
+    m[String(phone)] = Object.assign({}, m[String(phone)] || {}, patch);
+    saveCloud(m); refreshCloudUI();
+  }
+  function renderStatusRows(rows) {
+    (rows || []).forEach(function (r) {
+      if (!r.ok) { log("139-" + String(r.phone).slice(-4) + " 查询失败：" + r.message, "err"); return; }
+      applyCloudCache(r.phone, { total: r.total, toReceive: r.toReceive, receivable: r.receivable, nextMonth: r.nextMonth });
+      const parts = ["139-" + String(r.phone).slice(-4)];
+      if (r.total != null) parts.push("云豆 " + r.total);
+      if (r.receivable > 0) parts.push("🎁 可领 " + r.receivable);
+      if (r.nextMonth > 0) parts.push("下月 " + r.nextMonth);
+      if (r.toReceive != null) parts.push("待领数 " + r.toReceive);
+      log(parts.join(" · "), r.receivable > 0 ? "ok" : "");
+      if (r.warn) log("   ⚠ " + r.warn, "warn");
+    });
+  }
+  function renderReceiveRows(rows) {
+    (rows || []).forEach(function (r) {
+      const tag = "139-" + String(r.phone).slice(-4);
+      if (!r.ok) { log(tag + " 领取失败：" + (r.error || "未知"), "err"); return; }
+      applyCloudCache(r.phone, { total: r.after });
+      log(tag + " 云豆 " + r.before + " → " + r.after + (r.got > 0 ? "（+" + r.got + "）" : "（无可领）"), r.got > 0 ? "ok" : "");
+      (r.steps || []).forEach(function (x) { log("   · " + x, x.indexOf("+") >= 0 ? "ok" : ""); });
+    });
+    document.querySelectorAll("[data-rec]").forEach(function (b) { if (b.disabled) setBusy(b, false); });
   }
 
   async function runTasks() {
@@ -724,12 +794,13 @@
   $("btn_login").onclick = runLogin;
   $("btn_tasks").onclick = runTasks;
   $("btn_list").onclick = fetchTaskList;
-  $("btn_receive").onclick = runReceive;
+  $("btn_receive").onclick = function () { runReceive("", $("btn_receive")); };
+  $("btn_status").onclick = runStatus;
   loadCfg(); applyUrlCfg(); renderAccounts(); renderTaskPlaceholder(); startWatch();
   pollResult().then(function () {
     fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`,
       { headers: { Authorization: "token " + (sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json" } })
-      .then(r => r.ok ? r.json() : null).then(j => { if (j && j.receive) renderReceive(j.receive); }).catch(function () {});
+      .then(r => r.ok ? r.json() : null).then(j => { if (j && j.receiveList) renderReceiveRows(j.receiveList); }).catch(function () {});
   });
 })();
 </script>
