@@ -46,6 +46,8 @@ jobs:
           EVENT_TYPE: ${{ github.event.action || inputs.event_type }}
           PAYLOAD: ${{ github.event.client_payload != null && toJson(github.event.client_payload) || inputs.payload || '' }}
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
+          YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
+          YUN139_PHONE: ${{ secrets.YUN139_PHONE }}
         run: node actions/run.mjs
 
       - name: Commit result
