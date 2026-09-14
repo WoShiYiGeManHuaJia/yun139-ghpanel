@@ -1,5 +1,5 @@
 {
- "ts": "2026-09-14T17:16:48.793Z",
+ "ts": "2026-09-14T17:19:54.323Z",
  "steps": [
   {
    "k": "jwt",
@@ -7,7 +7,7 @@
   },
   {
    "k": "① 初始云豆",
-   "v": 922
+   "v": 928
   },
   {
    "k": "② 气泡状态",
@@ -18,10 +18,6 @@
     },
     {
      "cls": "AIPoints two",
-     "txt": "+6 可领取"
-    },
-    {
-     "cls": "AIPoints three",
      "txt": "+6 可领取"
     }
    ]
@@ -38,14 +34,14 @@
     {
      "气泡": ".AIPoints.two",
      "点击": "成功",
-     "云豆": "922 → 928",
+     "云豆": "928 → 934",
      "变化": 6,
      "备注": ""
     },
     {
      "气泡": ".AIPoints.three",
      "点击": "成功",
-     "云豆": "928 → 928",
+     "云豆": "934 → 934",
      "变化": 0,
      "备注": "force点击失败: locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waitin | 已用JS点击"
     }
@@ -57,7 +53,7 @@
     {
      "api": "/ycloud/signin/page/receiveV3",
      "status": 200,
-     "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":6,\"total\":928,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\",\""
+     "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":6,\"total\":934,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\",\""
     }
    ]
   },
@@ -67,18 +63,14 @@
     {
      "cls": "AIPoints one is-next-month",
      "txt": "+32"
-    },
-    {
-     "cls": "AIPoints two",
-     "txt": "+6 可领取"
     }
    ]
   },
   {
    "k": "⑥ 最终",
    "v": {
-    "起始": 922,
-    "现在": 928,
+    "起始": 928,
+    "现在": 934,
     "净增": 6
    }
   }
