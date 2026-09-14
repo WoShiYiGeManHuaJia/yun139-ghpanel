@@ -11,12 +11,17 @@ permissions:
 jobs:
   daily:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - name: 自动续期令牌 + 执行云朵任务
+      - name: 安装 Playwright（气泡领取需要真实浏览器）
+        run: |
+          npm i playwright@1.49.1
+          npx playwright install chromium
+      - name: 自动续期令牌 + 执行云朵任务 + 领取气泡
         env:
           EVENT_TYPE: daily
           PAYLOAD: "{}"

@@ -2,11 +2,11 @@ name: yun139-panel-task
 
 on:
   repository_dispatch:
-    types: [sign, refresh, send_code, do_login, task]
+    types: [sign, refresh, send_code, do_login, task, receive, daily]
   workflow_dispatch:
     inputs:
       event_type:
-        description: 事件类型 sign/refresh/send_code/do_login/task
+        description: 事件类型 sign/refresh/send_code/do_login/task/receive/daily
         required: true
         type: string
       payload:
@@ -20,6 +20,7 @@ permissions:
 jobs:
   run-task:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,6 +29,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      - name: Install playwright (气泡领取需要)
+        env:
+          ET: ${{ github.event.action || inputs.event_type }}
+        run: |
+          if [ "$ET" = "receive" ] || [ "$ET" = "daily" ]; then
+            npm i playwright@1.49.1
+            npx playwright install chromium
+          else
+            echo "跳过 playwright 安装"
+          fi
 
       - name: Execute task
         env:

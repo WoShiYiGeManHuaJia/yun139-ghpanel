@@ -449,6 +449,78 @@ async function clickTask(jwt, id) {
   return { ok: String(j.code) === "0", code: j.code, msg: j.msg || "" };
 }
 
+
+// ===== 气泡领取：必须用真实浏览器（deviceId 由页面指纹动态生成）=====
+const SIGNIN_PAGE = "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1#/newsignin";
+const MOBILE_UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+async function readCloudNum(page) {
+  try {
+    const t = await page.locator("body").innerText();
+    const m = String(t).match(/(\d{2,7})\s*云盘专属AI豆/);
+    return m ? parseInt(m[1], 10) : null;
+  } catch (e) { return null; }
+}
+
+async function receiveBubbles(authorization, phone) {
+  const steps = [];
+  let chromium = null;
+  try { const pw = await import("playwright"); chromium = pw.chromium; }
+  catch (e) { return { ok: false, error: "playwright 未安装", got: 0, steps }; }
+  const jwt = await getJwt(authorization, phone);
+  const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
+  let before = null, after = null, got = 0;
+  try {
+    const ctx = await browser.newContext({
+      userAgent: MOBILE_UA, viewport: { width: 390, height: 844 },
+      deviceScaleFactor: 3, isMobile: true, hasTouch: true,
+      locale: "zh-CN", timezoneId: "Asia/Shanghai",
+    });
+    await ctx.addCookies([
+      { name: "jwtToken", value: jwt, domain: "m.mcloud.139.com", path: "/" },
+      { name: "ud_id", value: "1235293937743367395", domain: "m.mcloud.139.com", path: "/" },
+      { name: "a_k", value: "Um7AMDEqBJxN3vJO", domain: "m.mcloud.139.com", path: "/" },
+      { name: "NATION_CODE", value: "86", domain: "m.mcloud.139.com", path: "/" },
+      { name: "platform", value: "2", domain: "m.mcloud.139.com", path: "/" },
+    ]);
+    const page = await ctx.newPage();
+    const recv = [];
+    page.on("response", async (r) => {
+      if (/receiveV3/.test(r.url())) {
+        let b = ""; try { b = (await r.text()).slice(0, 150); } catch (e) {}
+        recv.push(b);
+      }
+    });
+    await page.goto(SIGNIN_PAGE, { waitUntil: "domcontentloaded", timeout: 120000 });
+    await sleep(11000);
+    before = await readCloudNum(page);
+    steps.push("初始云豆 " + before);
+    for (let round = 0; round < 6; round++) {
+      const n = await page.locator(".AIPoints:not(.is-next-month)").count();
+      if (!n) break;
+      const b0 = await readCloudNum(page);
+      let clicked = false, err = "";
+      try { await page.locator(".AIPoints:not(.is-next-month)").first().click({ force: true, timeout: 8000 }); clicked = true; }
+      catch (e) {
+        err = String(e.message || e).slice(0, 60);
+        try { await page.evaluate(() => { const e2 = document.querySelector(".AIPoints:not(.is-next-month)"); if (e2) e2.click(); }); clicked = true; }
+        catch (e3) {}
+      }
+      await sleep(3800);
+      const b1 = await readCloudNum(page);
+      const delta = (b0 !== null && b1 !== null) ? (b1 - b0) : 0;
+      if (delta > 0) { got += delta; steps.push("第" + (round + 1) + "次领取 +" + delta + "（" + b0 + "→" + b1 + "）"); }
+      else { steps.push("第" + (round + 1) + "次无变化（" + b0 + "→" + b1 + "）" + (err ? " err=" + err : "")); if (!clicked) break; }
+    }
+    after = await readCloudNum(page);
+    steps.push("最终云豆 " + after);
+    return { ok: true, before, after, got, recv: recv.slice(0, 6), steps };
+  } finally {
+    try { await browser.close(); } catch (e) {}
+  }
+}
+
 async function main() {
   const type = process.env.EVENT_TYPE || "";
   let payload = {};
@@ -573,6 +645,12 @@ async function main() {
       out.results = results;
       out.msg = "云朵任务执行完成";
       out.ok = true;
+    } else if (type === "receive") {
+      const c = await pickCreds();
+      const rb = await receiveBubbles(c.authorization, c.phone);
+      out.receive = rb;
+      out.ok = !!rb.ok;
+      out.msg = rb.ok ? ("气泡领取完成，云豆 " + rb.before + " → " + rb.after + "（+" + rb.got + "）") : ("领取失败: " + (rb.error || "未知"));
     } else if (type === "list") {
       const c = await pickCreds();
       const jwt = await getJwt(c.authorization, c.phone);
@@ -608,7 +686,16 @@ async function main() {
       const map = {}; for (const t of after) map[t.id] = t;
       for (const r of results) { const a = map[r.id]; if (a) { r.afterProcess = a.process; r.afterState = a.state; } }
       out.results = results; out.tasks = after;
-      out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务";
+      try {
+        const rb = await receiveBubbles(c.authorization, c.phone);
+        out.receive = rb;
+        if (rb.ok) out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务；气泡领取 +" + rb.got + "（" + rb.before + "→" + rb.after + "）";
+        else out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务；气泡领取失败";
+      } catch (rbErr) {
+        out.receive = { ok: false, error: String(rbErr.message || rbErr).slice(0, 150) };
+        out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务；气泡领取异常";
+      }
+      if (!out.msg) out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务";
       out.ok = true;
     } else {
       throw new Error("未知命令: " + type);
