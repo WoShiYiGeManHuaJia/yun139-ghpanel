@@ -24,7 +24,7 @@ async function getJwt() {
       JWT = j2.result.token; return;
     } catch (e) { last = e; await sleep(2500 * (i + 1)); }
   }
-  throw new Error("getJwt 失败: " + String((last && last.message) || last));
+  throw new Error("getJwt 失败");
 }
 async function G(p, tries) {
   let last;
@@ -34,7 +34,7 @@ async function G(p, tries) {
       return { status: r.status, j, raw: t };
     } catch (e) { last = e; await sleep(1200); }
   }
-  return { status: 0, raw: "失败:" + String(((last && last.message) || last) || "").slice(0, 70), j: null };
+  return { status: 0, j: null, raw: "失败" };
 }
 async function P(p, body, tries) {
   let last;
@@ -44,43 +44,47 @@ async function P(p, body, tries) {
       return { status: r.status, j, raw: t };
     } catch (e) { last = e; await sleep(1200); }
   }
-  return { status: 0, raw: "失败:" + String(((last && last.message) || last) || "").slice(0, 70), j: null };
+  return { status: 0, j: null, raw: "失败" };
 }
-function brief(o, n) { const j = o.j || {}; return { status: o.status, code: j.code, msg: j.msg, res: JSON.stringify(j.result).slice(0, n || 200) }; }
 async function main() {
   await getJwt(); log("jwt", "ok");
-  // ① 余额 BEFORE
   const b1 = await G("/ycloud/signin/page/getCloudNum", 3);
-  const BEFORE = (b1.j && b1.j.result);
-  log("① 余额 BEFORE", { num: BEFORE, raw: b1.raw.slice(0, 120) });
-  // ② infoV3 完整（找 toReceive）
+  const BEFORE = b1.j && b1.j.result;
+  log("① 余额 BEFORE", BEFORE);
+  // ★ infoV3 完整打印 receiveList
   const iv = await G("/ycloud/signin/page/infoV3?client=app", 3);
   const R = (iv.j && iv.j.result) || {};
-  log("② infoV3 关键字段", { keys: Object.keys(R).slice(0, 40),
-    toReceive: R.toReceive, beforeTotal: R.beforeTotal, signInPoints: R.signInPoints,
-    signCount: R.signCount, maxType: R.maxType,
-    todaySignIn: R.todaySignIn, receive: R.receive, total: R.total });
-  // ③ taskListV3 用 POST 拿任务（找待领取）
-  const tl = await P("/ycloud/signin/task/taskListV3", { marketname: "sign_in_3" }, 3);
-  let finIds = [];
-  if (tl.j && String(tl.j.code) === "0") {
-    const flat = [];
-    for (const v of Object.values(tl.j.result || {})) if (Array.isArray(v)) for (const t of v) flat.push(t);
-    finIds = flat.filter(t => t.state === "FINISH").map(t => t.id);
-    log("③ taskListV3(POST)", { n: flat.length, fin: finIds.slice(0, 12) });
-  } else log("③ taskListV3(POST)", brief(tl, 200));
-  // ④ ★ 领取气泡：receiveTask?taskId=106（你刚完成的上传任务）
-  const targets = [106, ...finIds.filter(x => x !== 106)].slice(0, 4);
-  for (const id of targets) {
+  log("② toReceive", R.toReceive);
+  log("② ★receiveList 原始", JSON.stringify(R.receiveList));
+  log("② receiveList 类型", Array.isArray(R.receiveList) ? ("数组 len=" + R.receiveList.length) : typeof R.receiveList);
+  const rl = Array.isArray(R.receiveList) ? R.receiveList : [];
+  // ★ 按 receiveList 每项领取
+  const results = [];
+  for (const item of rl.slice(0, 10)) {
+    const keys = Object.keys(item);
+    const id = item.taskId || item.id || item.taskid;
+    if (id === undefined) { results.push({ item, skip: "无 id 字段", keys }); continue; }
     const r = await G(`/ycloud/signin/page/receiveTask?taskId=${id}`, 3);
-    log("④ ★receiveTask[" + id + "]", brief(r, 250));
-    await sleep(800);
+    results.push({ id, keys, code: r.j && r.j.code, msg: r.j && r.j.msg, result: r.j && r.j.result, raw: r.raw.slice(0, 140) });
+    await sleep(700);
   }
-  // ⑤ 余额 AFTER
+  log("③ ★按 receiveList 领取", results);
+  // 若 receiveList 为空，试 POST receiveV3
+  if (rl.length === 0) {
+    const rv = await P("/ycloud/signin/page/receiveV3", {}, 3);
+    log("③ 备选 receiveV3(POST)", { status: rv.status, code: rv.j && rv.j.code, msg: rv.j && rv.j.msg, res: JSON.stringify(rv.j && rv.j.result).slice(0, 200) });
+    const rv2 = await P("/ycloud/signin/page/receiveV3", { marketname: "sign_in_3" }, 2);
+    log("③ 备选 receiveV3(marketname)", { status: rv2.status, code: rv2.j && rv2.j.code, msg: rv2.j && rv2.j.msg, res: JSON.stringify(rv2.j && rv2.j.result).slice(0, 200) });
+  }
+  // 再查余额
   const b2 = await G("/ycloud/signin/page/getCloudNum", 3);
-  const AFTER = (b2.j && b2.j.result);
-  log("⑤ 余额 AFTER", { num: AFTER, raw: b2.raw.slice(0, 120) });
-  log("⑥ ★结论", { before: BEFORE, after: AFTER, 变化: (typeof BEFORE === "number" && typeof AFTER === "number") ? (AFTER - BEFORE) : "无法比较" });
+  const AFTER = b2.j && b2.j.result;
+  log("④ 余额 AFTER", AFTER);
+  const iv2 = await G("/ycloud/signin/page/infoV3?client=app", 3);
+  const R2 = (iv2.j && iv2.j.result) || {};
+  log("⑤ 领取后 toReceive", R2.toReceive);
+  log("⑥ ★结论", { before: BEFORE, after: AFTER, 变化: (BEFORE != null && AFTER != null) ? AFTER - BEFORE : "?",
+    toReceive前: R.toReceive, toReceive后: R2.toReceive });
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
   .finally(async () => { const fs = await import("fs");
