@@ -1,8 +1,7 @@
 {
-  "ts": "2026-09-14 11:27:12",
-  "type": "do_login",
+  "ts": "2026-09-14 11:27:47",
+  "type": "send_code",
   "ok": true,
-  "msg": "登录成功, 已抓取令牌",
-  "enc_accounts": "gwRz0iGw+8hrdVqoHzL1ueJJnv3xZs/VP+ZIyZM33tYZUCLgo9BkkXqm3IDycf4A7HIYWXisLZTSSfirCAiewPsTrFVu2C/BGTHVuI+ERoqQ7VcEsNCtteFPNYuTyO959g0FxM4158TgaMj9AAttVgx1CPcjGD0s20vHiNbq/IoWpyP/BsXJXxBLizu95dzRIm1nVzgRk0aWi3eaNUH3ZLtPeTkWeCaxWqi4tm6EW/9OeZk9UYrNsh1kO00q68k1pdlKWiJEMHwziutcpyxj5IMU3bldyvYeN9nPIY/lZOQZHutU8MLxMfI91wPHMhkR7nENA7Yqgfqude72+lKaciuHDFp1tBktYyjlyTldwOSshHxYLfhQKNSDBdZOE70BqQhucK2eQvZaiFxd1CFpnJRaOcMze8G6Xl4QAYZM44yWCq+q/Gqixbbqdd0xU66cxyIj+JEa71AF4stnehMfrAVDZfVOonW1g85cRe3PIznhA8DjUwUMpfvf6DLDbWXCYIvzxI5vW93cxuGCOfSu5Fe1BfaVsj3G4rZ3+aatRiM3DLIiwkSTf2L2BMqMXPra8e/blJlvt9jxSXAe8pF8FqkPOGFnEWvN6eejmF8dV9Qz0pOZGrVKSJ7BW3QHpjvTdbge9EpYrhHeUG4AU/rfe3XGoqVLOgOEcHEzmWgfphM7TNHtIjge3sWFCW4i2eHUPtupDJMLqyiAaxaunDnT/LBAeD/DOYQwI15wQkAuRuu0kfcDtC4gK7l0yAAvIXuTWIWx9Wry7iNUoj0OaCDcW0gJbc3Zsnu/nhG13BbVaP2nhhW6Jf4pIu+4vBT4rjewGQL6WW4wlTFPUK+Je49hhBt/bHoY7B1te6kDpRbHAw9mBRkrD02azo/QzSCa7uvhlBgzhFZbKyUpmFApKsqH2ZsGUujf8cbO6wLkw8F/tRD8VEV74Rd4kHFzyeZ9CW87eOKb+DfTUM7wgXcOTet27GDZVtpdvcAmwjqJrHu6w8CDouulYDorTXSO4q2Xde2gsj9sc5A9kyAL7Y0RWmHbn/zPjDavLXaYEBPiyQry0QoKjyrs5xUR+c0y4pMHKf0NPfTsP+jI3Cc6UEIgOduRKJ4ogX6gPbPu2BZjChEHwCOqmAEZ7aZ0CTI9EOOXZNqiW4ieCU8y/bs0hspqeGOBnem5F+z02jLkkd9asuJXgmC8Rx971mMto2aJHphJ4b9j2wDIKZHkQYtHDLYPBueZUWEnMIEnzrA=",
-  "phone": "13717306553"
+  "msg": "successed to process!",
+  "phone": "18244754895"
 }
