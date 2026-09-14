@@ -1,5 +1,61 @@
 {
- "ts": "2026-09-14T13:32:10.104Z",
- "steps": [],
- "fatal": "fetch failed"
+ "ts": "2026-09-14T13:34:10.609Z",
+ "steps": [
+  {
+   "page": {
+    "status": 200,
+    "len": 7756
+   }
+  },
+  {
+   "scripts": [
+    "https://img.mcloud.139.com/mcloud_static/js/probe_v20260728.js",
+    "/portal/mobilecloud/js/fp.min.js",
+    "https://h.app.coc.10086.cn/appother/js/public/cmcc.js",
+    "https://lf3-data.volccdn.com/obj/data-static/log-sdk/collect/5.0/collect-privity-v5.1.10.js",
+    "https://img.mcloud.139.com/portal/mobilecloud/public/js/chunk-vendors.f3c3cfb0.js",
+    "https://img.mcloud.139.com/portal/mobilecloud/public/js/index.041ef93c.js"
+   ]
+  },
+  {
+   "paths_total": 0
+  },
+  {
+   "paths_relevant": []
+  },
+  {
+   "jwt_hints": []
+  },
+  {
+   "auth_tests": [
+    {
+     "path": "/ycloud/signin/page/startSignIn",
+     "auth": "cookie-only",
+     "status": 405,
+     "body": "<html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly"
+    },
+    {
+     "path": "/ycloud/signin/page/signInIndex",
+     "auth": "cookie-only",
+     "status": 405,
+     "body": "<html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly"
+    },
+    {
+     "path": "https://caiyun.feixin.10086.cn:7071/portal/auth/tyrzLogin.action",
+     "status": 200,
+     "body": "{\"code\":\"200050409\",\"msg\":\"token 已失效\"}"
+    },
+    {
+     "path": "https://caiyun.feixin.10086.cn/portal/auth/tyrzLogin.action",
+     "status": 200,
+     "body": "{\"code\":200050409,\"msg\":\"token已失效\"}"
+    },
+    {
+     "path": "https://yun.139.com/portal/auth/tyrzLogin.action",
+     "err": "fetch failed",
+     "cause": "ETIMEDOUT"
+    }
+   ]
+  }
+ ]
 }
