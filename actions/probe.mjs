@@ -1,73 +1,81 @@
-import crypto from "crypto";
 const AUTH = process.env.YUN139_AUTHORIZATION || "";
 const PHONE = process.env.YUN139_PHONE || "";
 const out = { ts: new Date().toISOString() };
 const A = String(AUTH).trim().replace(/^basic /i, "").replace(/^Basic /i, "");
-const md5 = s => crypto.createHash("md5").update(s, "utf8").digest("hex");
-const rnd = n => crypto.randomBytes(Math.ceil(n/2)).toString("hex").slice(0,n);
-function calSign(body, ts, randStr) {
-  let b = encodeURIComponent(body);
-  b = [...b].sort().join("");
-  b = Buffer.from(b, "utf8").toString("base64");
-  const res = md5(b) + md5(ts + ":" + randStr);
-  return md5(res).toUpperCase();
+const CY_HOSTS = ["https://caiyun.feixin.10086.cn:7071", "https://caiyun.feixin.10086.cn", "https://yun.139.com"];
+const UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
+function cyH(jwt, host) {
+  return { "User-Agent": UA, "Host": host.replace("https://", ""), "jwtToken": jwt, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest" };
 }
-function H(bodyObj) {
-  const ts = new Date().toLocaleString("sv-SE", { timeZone: "Asia/Shanghai" }).replace("T", " ");
-  const randStr = rnd(16);
-  const bodyStr = JSON.stringify(bodyObj);
-  return {
-    "Accept": "application/json, text/plain, */*",
-    "Content-Type": "application/json",
-    "CMS-DEVICE": "default",
-    "Authorization": "Basic " + A,
-    "mcloud-channel": "1000101",
-    "mcloud-client": "10701",
-    "mcloud-sign": `${ts},${randStr},${calSign(bodyStr, ts, randStr)}`,
-    "mcloud-version": "7.14.0",
-    "Origin": "https://yun.139.com",
-    "Referer": "https://yun.139.com/w/",
-    "x-DeviceInfo": "||9|7.14.0|chrome|120.0.0.0|||windows 10||zh-CN|||",
-    "x-huawei-channelSrc": "10000034",
-    "x-inner-ntwk": "2",
-    "x-m4c-caller": "PC",
-    "x-m4c-src": "10002",
-    "x-SvcType": "1",
-    "Inner-Hcy-Router-Https": "1",
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0.0.0 Safari/537.36",
-  };
-}
-async function post(url, body) {
-  const b = JSON.stringify(body);
-  const r = await fetch(url, { method: "POST", headers: H(body), body: b, signal: AbortSignal.timeout(25000) });
-  return { status: r.status, body: (await r.text()).slice(0, 500) };
+async function getJwt() {
+  const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
+    method: "POST",
+    headers: { "Authorization": "Basic " + A, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
+    body: JSON.stringify({ account: PHONE, toSourceId: "001005" }),
+  });
+  const j = await r.json();
+  if (String(j.code) !== "0") throw new Error("querySpecToken 失败 " + j.code + " " + j.message);
+  const sso = j.data.token;
+  for (const h of CY_HOSTS) {
+    try {
+      const r2 = await fetch(`${h}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(sso)}`, { headers: { "Host": h.replace("https://", "") }, signal: AbortSignal.timeout(20000) });
+      const j2 = await r2.json();
+      if (j2 && j2.result && j2.result.token) return j2.result.token;
+    } catch (e) {}
+  }
+  throw new Error("tyrzLogin 失败");
 }
 async function main() {
-  // 1) 路由查询
-  const variants = [
-    { account: PHONE, accountType: 1 },
-    { commonAccountInfo: { account: PHONE, accountType: 1 } },
-    { account: PHONE },
-    { userName: PHONE, accountType: 1 },
-  ];
-  out.route = [];
-  for (const v of variants) {
-    const r = await post("https://user-njs.yun.139.com/user/route/qryRoutePolicy", v);
-    out.route.push({ req: JSON.stringify(v).slice(0, 60), status: r.status, body: r.body.slice(0, 400) });
+  const jwt = await getJwt();
+  out.jwt_ok = true;
+  // 1) 完整原始任务列表
+  for (const h of CY_HOSTS) {
+    try {
+      const r = await fetch(h + "/market/signin/task/taskList?marketname=sign_in_3", { headers: cyH(jwt, h), signal: AbortSignal.timeout(20000) });
+      const j = await r.json();
+      if (String(j.code) === "0") { out.raw = j; out.host = h; break; }
+    } catch (e) {}
   }
-  // 2) 直接试 yun.139.com 的 /file/create
-  const png = Buffer.from("89504e470d0a1a0a0000000d4948445200000001000000010806000000" +
-    "1f15c4890000000d4944415478da63f8cfc0f01f0005fb02fe3f3b7e6b0000000049454e44ae426082", "hex");
-  const size = png.length;
-  const hash = crypto.createHash("sha256").update(png).digest("hex").toUpperCase();
-  const createBody = {
-    contentHash: hash, contentHashAlgorithm: "SHA256", contentType: "application/octet-stream",
-    parallelUpload: true, size, parentFileId: "/", name: "_autotest_" + Date.now() + ".png",
-    type: "file", fileRenameMode: "auto_rename",
-    partInfos: [{ partNumber: 1, partSize: size, parallelHashCtx: { partOffset: 0 } }],
-  };
-  out.create = await post("https://yun.139.com/file/create", createBody);
-  out.pngSize = size; out.hash = hash.slice(0, 16) + "…";
+  // 汇总所有字段 + 任务简表
+  const keys = new Set(); const list = [];
+  for (const arr of Object.values((out.raw && out.raw.result) || {})) {
+    if (!Array.isArray(arr)) continue;
+    for (const t of arr) { Object.keys(t).forEach(k => keys.add(k)); list.push(t); }
+  }
+  out.all_keys = [...keys];
+  out.tasks = list.map(t => ({
+    id: t.id, name: String(t.name || "").replace(/<[^>]*>/g, ""), state: t.state,
+    process: t.process, currstep: t.currstep, stepTypeSet: t.stepTypeSet,
+    award: t.content_display2 || "", receiveUrl: t.receiveUrl || t.url || "",
+  }));
+  // 找含"领/收/receive/award/draw/bubble/cloud"的字段值
+  const clues = [];
+  for (const t of list) for (const [k, v] of Object.entries(t)) {
+    if (/receive|award|draw|bubble|cloud|collect|领取|收/i.test(k + "=" + JSON.stringify(v)) && String(v).length < 200)
+      clues.push(t.id + " " + k + "=" + JSON.stringify(v));
+  }
+  out.clues = [...new Set(clues)].slice(0, 40);
+  // 2) 探测领取/气泡接口
+  const id0 = list.length ? list[0].id : "";
+  const paths = [
+    "/market/signin/index", "/market/signin/user/info", "/market/signin/signin/index",
+    "/market/signin/cloud/info", "/market/signin/cloud/list",
+    "/market/signin/task/receive?id=" + id0, "/market/signin/task/draw?id=" + id0,
+    "/market/signin/task/collect?id=" + id0, "/market/signin/award/receive?id=" + id0,
+    "/market/signin/task/click?key=award&id=" + id0,
+    "/market/signin/task/click?key=receive&id=" + id0,
+  ];
+  out.probe = [];
+  for (const p of paths) {
+    for (const h of CY_HOSTS) {
+      try {
+        const r = await fetch(h + p, { headers: cyH(jwt, h), signal: AbortSignal.timeout(12000) });
+        const t = (await r.text()).slice(0, 260);
+        out.probe.push({ p, h: h.replace("https://", ""), status: r.status, body: t });
+        break;
+      } catch (e) { /* next */ }
+    }
+  }
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
   .finally(async () => {
