@@ -26,16 +26,14 @@ async function getJwt() {
       JWT = j2.result.token; return;
     } catch (e) { last = e; await sleep(2000 * (i + 1)); }
   }
-  throw new Error("getJwt 失败: " + String((last && last.message) || last));
+  throw new Error("getJwt 失败");
 }
 async function main() {
   const { chromium } = await import("playwright");
   await getJwt(); log("jwt", "ok");
   const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
-  const ctx = await browser.newContext({
-    userAgent: UA, viewport: { width: 390, height: 844 }, deviceScaleFactor: 3,
-    isMobile: true, hasTouch: true, locale: "zh-CN", timezoneId: "Asia/Shanghai",
-  });
+  const ctx = await browser.newContext({ userAgent: UA, viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 3, isMobile: true, hasTouch: true, locale: "zh-CN", timezoneId: "Asia/Shanghai" });
   await ctx.addCookies([
     { name: "jwtToken", value: JWT, domain: "m.mcloud.139.com", path: "/" },
     { name: "ud_id", value: "1235293937743367395", domain: "m.mcloud.139.com", path: "/" },
@@ -44,31 +42,67 @@ async function main() {
     { name: "platform", value: "2", domain: "m.mcloud.139.com", path: "/" },
   ]);
   const page = await ctx.newPage();
-  const devHits = [], apiCalls = [];
-  page.on("request", r => {
-    try {
-      const h = r.headers(), u = r.url();
-      const keys = Object.keys(h).filter(k => /^(deviceid|x-device-id|device_id|uaid|box|x-uaid|fp|fingerprint)$/i.test(k));
-      if (keys.length) devHits.push({ url: u.slice(0, 120), kv: keys.map(k => k + "=" + String(h[k]).slice(0, 90)) });
-      if (u.includes("/ycloud/signin/")) apiCalls.push({ api: u.replace("https://m.mcloud.139.com", "").slice(0, 90),
-        devKeys: Object.keys(h).filter(k => /device|uaid|box|fp/i.test(k)).map(k => k + "=" + String(h[k]).slice(0, 70)) });
-    } catch (e) {}
+  const recvCalls = [];
+  page.on("response", async r => {
+    const u = r.url();
+    if (u.includes("receive") || u.includes("startSignIn")) {
+      let body = ""; try { body = (await r.text()).slice(0, 200); } catch (e) {}
+      recvCalls.push({ api: u.replace("https://m.mcloud.139.com","").slice(0,110), status: r.status(), body });
+    }
   });
-  page.on("console", m => { if (/deviceId|device/i.test(m.text())) out.note.push({ k: "console", v: m.text().slice(0, 150) }); });
   await page.goto(PAGE, { waitUntil: "domcontentloaded", timeout: 120000 });
-  await sleep(11000);
-  log("页面标题", await page.title());
-  log("URL", page.url().slice(0, 120));
-  for (const sel of [".AIPoints", '[class*="AIPoints"]', ".receive_cloud", '[class*="receive"]', ".cloudNum"]) {
-    try { log("元素 " + sel, (await page.locator(sel).count()) + " 个"); } catch (e) { log("元素 " + sel, "查询失败"); }
+  await sleep(12000);
+  const readNum = async () => {
+    try { const t = (await page.locator("body").innerText()).match(/(\d{2,6})\s*云盘专属AI豆/); return t ? parseInt(t[1]) : null; }
+    catch (e) { return null; }
+  };
+  const N0 = await readNum(); log("① 初始云豆", N0);
+  // 找出所有"可领取"气泡元素
+  const bubbles = await page.evaluate(() => {
+    const res = [];
+    document.querySelectorAll("*").forEach(el => {
+      if (el.children.length === 0 || el.className) {
+        const t = (el.innerText || "").trim();
+        if (t === "可领取" || /^\+\d+$/.test(t)) {
+          let p = el, path = [];
+          for (let i = 0; i < 4 && p; i++) {
+            path.push(p.tagName.toLowerCase() + (p.className && typeof p.className === "string" ? "." + p.className.trim().split(/\s+/).join(".") : ""));
+            p = p.parentElement;
+          }
+          res.push({ text: t, path: path.join(" < ") });
+        }
+      }
+    });
+    return res.slice(0, 20);
+  });
+  log("② 气泡元素", bubbles);
+  // 点击策略：依次尝试点击"可领取"文本所在的可点区域
+  const clickAttempts = [];
+  for (let round = 1; round <= 4; round++) {
+    let clicked = false;
+    try {
+      const loc = page.locator("text=可领取").first();
+      const cnt = await page.locator("text=可领取").count();
+      clickAttempts.push({ round, 可领取数量: cnt });
+      if (cnt > 0) {
+        // 点父级容器（气泡本身可点）
+        await loc.locator("xpath=ancestor::div[contains(@class,'cloud') or contains(@class,'cloudIcon') or contains(@class,'AI')][1]").first().click({ timeout: 8000 });
+        clicked = true;
+      }
+    } catch (e) {
+      try { await page.locator("text=可领取").first().click({ timeout: 6000 }); clicked = true; }
+      catch (e2) { clickAttempts.push({ round, 错误: String(e2.message).slice(0, 80) }); }
+    }
+    if (!clicked) break;
+    await sleep(3500);
+    const N = await readNum();
+    clickAttempts.push({ round, 点击后云豆: N, 变化: N !== null && N0 !== null ? N - N0 : null });
+    if (N !== null && N0 !== null && N > N0) { log("★★★ 领取成功", { 云豆: N0 + " → " + N, 增加: N - N0 }); break; }
   }
-  // 页面文本片段，看是否已渲染出云豆/气泡
-  try {
-    const txt = (await page.locator("body").innerText()).replace(/\s+/g, " ").slice(0, 400);
-    log("页面文本", txt);
-  } catch (e) { log("页面文本", "读取失败"); }
-  log("★ device 头捕获", devHits.slice(0, 12));
-  log("签到相关请求", apiCalls.slice(0, 18));
+  log("③ 点击过程", clickAttempts);
+  log("④ 领取接口调用", recvCalls.slice(0, 10));
+  const N1 = await readNum();
+  log("⑤ 最终云豆", { 起始: N0, 现在: N1, 净增: (N1 !== null && N0 !== null) ? N1 - N0 : null });
   await browser.close();
 }
 main().catch(e => { out.fatal = String(e && e.message || e); })
