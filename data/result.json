@@ -1,70 +1,7 @@
 {
-  "ts": "2026-09-15 05:59:37",
-  "requestId": "status-1789451963494-6a4cb290",
-  "type": "status",
-  "ok": true,
-  "msg": "已查询 3 个账号",
-  "status": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": true,
-      "total": 253,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 0,
-      "list": [],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "ok": true,
-      "total": 203,
-      "toReceive": 50,
-      "receivable": 50,
-      "nextMonth": 0,
-      "list": [
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309273
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309249
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309138
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 20,
-          "recordId": 2344309118
-        }
-      ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"完成任务\",\""
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": true,
-      "total": 960,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 38,
-      "list": [
-        {
-          "cloudType": 2,
-          "cloudNum": 38,
-          "recordId": null
-        }
-      ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
-    }
-  ],
-  "enc_accounts": "UTbap0c1E9JmPYuNKsnnBS1fUpq8RxLYMP/K2pjkKqaR/aHJGq4s9ngXK714AwcEOejg49A1UAv6EPKO0NgceeAN7qvwzCmkel/RlC4FmJ4PlBgFqg1IpTMcpkRviPnM3RACoSf5AlhbvPqO6AUh2t+5mzDSVy3kk59TXiXCislQ5cWtF+ddR8tEFuexcpALogpNQkbsXO5YUK7fEr/6CrY/LCFhl49X/p3a8SUaffV05J1FrLuS/De8Ei9joS2307DZqWRu21DGfr+vCNXxkP8j1GG46Nrbe7A4kHjS0bXVJAylSNJWM64i/suuveS9iVHOYDGyZPsaLvoLTQt7ljzJG391g5sTOtIczb65mCYZvVA4aQxNW1Nwji0ylsm/FDqTizW9559YgTWPPhSpsKteLDqoC+q/VMYhJhyoAf1PF6+DxUqWeNLGL5oFRLqXIiX76o/DZ1U3xwDVc2MDx2NY6/w/lRBZGkOHydIXWfefT9mifmYVBX2JAhYhRWYww7TBpqFi3g3nyOv65bkNvYUP0/pg0p7lMDC1rsUt7lcZkER1eonIFm+c/7HQJageb0K5Q2gk27YNqWZzIJAyNcP3NR9NjQY5WRiDNURKIDYnOi/ZJmh5GOMjWEK5f2fhnhfMiEEju4UOwwB/R4kwAyDc+v76DKp5lTU27Heo1okUqisLpREQ866HWFZfqcEO9obW8QKrc+jVgYryqUdl8SNMzm3yleqJKTSlp69RB4A+Re2i1SPgM1sTyPfH8WucDUDGhOPfGUNIqla46361mIPg08DvZHCsYoiLTTus33QW05hwphPTFEHWNzsfpS/vCpN4084yEc4876vD0NDzgZfo5mVXTHQhWe6nSQpiPfzj/HHGQzzjb4PvA5cMEaKOy91VWQBieSCYdRAAbvKshXij7aet9ojCyK0hCCZNrlLBCSkd83v0Mu/PxX2+h8b04h4yKV3eF0j0rksAifgtKFLXDDNXgM7R5meIg4dHRBw08ZQpREF97pFNwQ33/Rzj8iyPAfQ3SgnDWZAfwK4vix1WXJ5fR8Z+cy20GfO1odKKdA8UqACN8O0+XgjjCGX12Q9IJ+ct1lPhGR4rO+jm9ko8Gbz0ABwhoYgpei6KoaxVzRi/hkm/MXsnywoxeZ92gOfOmQBQcFfqWWVpRTpZsBiBPT9ZYd5PJgg5aBBCu9jgXq1A2EoOgio8SgBDI2mF9uY/sEG9Yhj3mG76usgo0dg1oMFdftwfxrzigwoO5spY4t9jlh3OleVQuvzyRnMfO4Y11rnl89hDji6koiHdP67ol285JGYmRaxrHmqmAjUj+imleNI6cIJnRk7l6LTINwUdHRIypOovAug0yOeVcHY0EVO4lMc36r/tFNf1Oy5JBuoCC3BJvLAsjb7Q1aKZRSVgvbEDnAbPSfK+6LfjV+MDUXc7PwqPU/yMkxgxWAS1K8OJ7gvCB/IVIqWw5UfGmr0yl4fWJqtdevdVUtXOkdMDJX6q1/iNUR/7JOQ1VnsN8tWx3fJS4HYWsilTZJapQ30jyWoio1ZPXcRqCQ92rPbqOdEMmWSA33eMWknoVLP8RC3bC0+bX0002R2/ihEtLLuITCwrpGyC7jGgSLeiRMGB+9LuJT2oB+n0NJJv0J56ep52APvaJ6oRNnepJ2HNJrzFX/tFz9QebfNmyLKrKVfFMgYWCrdeiKKoAJnQ2VoJwCw0ViRLbiJ0fWBftehoOxGVZah9FhE3EFi3XleQ9Nvx3f/yG7t2P4Dt/rLTxLXYovUo9udfpu85XU/Yup02A8cgJp9e/iVQ8wGllYCnGWgTMZztt3uOxOdhIb3O9z0LCXSNa2lo1vLKVnZ38rQKvWmKsoPvx1xaI3rPV4laT812tH+AG30r244BeaDzBfxgKWqS0UXqt67eMQHfZ1zera8pNBHPpNG/MlSlL/IA8EJrGljwjTcpMyrGwHOq5ZA="
+  "ts": "2026-09-15 06:00:06",
+  "requestId": "list-1789451994892-3369aff0",
+  "type": "list",
+  "ok": false,
+  "msg": "fetch failed"
 }
