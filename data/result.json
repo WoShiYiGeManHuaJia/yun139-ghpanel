@@ -1,6 +1,6 @@
 {
-  "ts": "2026-09-15 00:33:20",
+  "ts": "2026-09-15 00:33:47",
   "type": "do_login",
   "ok": false,
-  "msg": "The operation failed for an operation-specific reason"
+  "msg": "登录被风控拦截(ec=S001)"
 }
