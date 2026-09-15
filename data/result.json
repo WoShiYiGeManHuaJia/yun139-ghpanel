@@ -1,7 +1,8 @@
 {
-  "ts": "2026-09-15 00:44:47",
-  "type": "send_code",
+  "ts": "2026-09-15 00:45:08",
+  "type": "do_login",
   "ok": true,
-  "msg": "successed to process!",
+  "msg": "登录成功, 已抓取令牌",
+  "enc_accounts": "AIQD4f9B8w7XAUAqk+RUkC45d/zy1VJ5TeCOkOTN8cL1+UlBAXT/lFaeuFSOHvP3nBa8jQTXrc1MO6t/QWU+Y+Q4MofAFjafkKClsz4Nnedg/Dbyfx5Vo7iZXPMdAUeXWMwUkdD/HUESzuZA5ZLfHWz/QEDcxVXCLx972gwKuaEPrNlrG0g3/wgtqISmC7AZLU6Ubn82qabNUuy/B5Q4pyQiEw7n0d42uGyivkOHcONg9onpRDhGkTbx7BINit5p5I1B+LCwH5Fm2bKWx9NjIDERuch7apxE8MunbAMj09jp+M2U1tZrCWIlmAlvHbJmceuewccaPiWoD48VUF8E5xLK+1EYScC57NQeV+YJFrLLgwQRxnEPD/3IKVQZ+mFLMiWvrs5mAAJIVYyL7tjXPbXLskM7rQaUOk6Q1Ko5nWK2lxz8ddxqpsvK/LMFFI93NZDXi7R5i8VqIziThe7gK2leCczUQRdDfh5VHmvaXg8RioGUDnYFXQSEjxJ28a3hW+AZinL+WuzSGUfzw+FSTxU/7/SCnAfFBCWCvrE13B21D7zRjaRBp1CDP4XMPGIkL4xpqIbEeNqmenMARJalefQLkwJE9v5BCM05udM42gRsy+LoEqsnkLALYPVyEhhn7ow=",
   "phone": "17274079953"
 }
