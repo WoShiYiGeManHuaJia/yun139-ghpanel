@@ -1,51 +1,189 @@
 {
-  "ts": "2026-09-15 14:22:04",
-  "requestId": "daily-1789482124091-hrugd4dg",
+  "ts": "2026-09-15 14:46:49",
+  "requestId": "daily-1789483609680-eayxxyyu",
   "type": "daily",
-  "ok": false,
-  "msg": "共 3 个账号，成功 0 个",
+  "ok": true,
+  "msg": "共 3 个账号，成功 3 个",
   "perAccount": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "ok": false,
-      "error": "fetch failed"
+      "refresh": "成功，剩余 30 天",
+      "tasks": 11,
+      "taskOk": 11,
+      "taskFail": 0,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+0（258→258）",
+      "ok": true
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "ok": false,
-      "error": "fetch failed"
+      "refresh": "成功，剩余 30 天",
+      "tasks": 12,
+      "taskOk": 12,
+      "taskFail": 0,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "30G流量0元领",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+0（258→258）",
+      "ok": true
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "ok": false,
-      "error": "fetch failed"
+      "refresh": "成功，剩余 30 天",
+      "tasks": 7,
+      "taskOk": 7,
+      "taskFail": 0,
+      "taskDetail": [
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        }
+      ],
+      "receive": "+0（960→960）",
+      "ok": true
     }
   ],
-  "enc_accounts": "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",
+  "enc_accounts": "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",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
-      "ok": false,
-      "message": "fetch failed"
+      "ok": true,
+      "message": "续期成功，剩余 30 天；任务11个；气泡+0（258→258）"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
-      "ok": false,
-      "message": "fetch failed"
+      "ok": true,
+      "message": "续期成功，剩余 30 天；任务12个；气泡+0（258→258）"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
-      "ok": false,
-      "message": "fetch failed"
+      "ok": true,
+      "message": "续期成功，剩余 30 天；任务7个；气泡+0（960→960）"
     }
   ],
   "dingtalk": {
