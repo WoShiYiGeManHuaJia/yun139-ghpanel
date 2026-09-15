@@ -1156,6 +1156,7 @@ async function main() {
           probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, cap) });
         } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 120) }); }
       }
+      const M = "https://m.mcloud.139.com/ycloud/mcloudday";
       const H2 = { "User-Agent": UA_CLOUD, "jwtToken": jwt, "Cookie": "jwtToken=" + jwt,
                    "Accept": "application/json, text/plain, */*", "X-Requested-With": "XMLHttpRequest",
                    "Referer": "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay",
@@ -1164,22 +1165,40 @@ async function main() {
         try {
           const r = await fetchWithTimeout(url, Object.assign({ headers: H2 }, opt || {}), 30000);
           const t = await r.text();
-          probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, 3000) });
-        } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 110) }); }
+          probes.push({ tag, url: url.slice(0, 150), status: r.status, len: t.length, body: t.slice(0, 1200) });
+        } catch (e) { probes.push({ tag, url: url.slice(0, 150), err: String(e.message || e).slice(0, 110) }); }
       }
-      const M = "https://m.mcloud.139.com/ycloud/mcloudday";
       const post = (b) => ({ method: "POST", body: JSON.stringify(b || {}) });
-      // A) 活动信息（完整，看预约字段）
-      await P2("activityInfo", M + "/common/activityInfo?marketName=mCloudDay");
-      // B) 预约：open=true / false 两种
-      await P2("reservation?open=true", M + "/common/reservation?open=true&marketName=mCloudDay", post({}));
-      await P2("reservation?open=1", M + "/common/reservation?open=1&marketName=mCloudDay", post({}));
-      // C) 奖品清单（完整）
-      await P2("gift/list", M + "/gift/list");
-      // D) 我的奖品
-      await P2("myPrize", "https://m.mcloud.139.com/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2?pageNum=1&pageSize=20");
-      // E) 各省/全网 extGift
-      await P2("extGift", M + "/gift/list?client=app&type=ext");
+      // A) 预约：带 sourceid 各种组合
+      for (const sid of ["1000", "1427", "1"]) {
+        await P2("resv_sid" + sid, M + "/common/reservation?open=true&marketName=mCloudDay&sourceid=" + sid, post({}));
+      }
+      await P2("resv_body_sid", M + "/common/reservation", post({ marketName: "mCloudDay", open: true, sourceid: "1000" }));
+      await P2("resv_body_src", M + "/common/reservation", post({ marketName: "mCloudDay", open: true, source: "app" }));
+      await P2("resv_client", M + "/common/reservation?open=true&marketName=mCloudDay&client=app&sourceid=1000", post({}));
+      // B) 预约状态查询
+      await P2("resv_status", M + "/common/reservationStatus?marketName=mCloudDay&sourceid=1000");
+      await P2("resv_query", M + "/common/queryReservation?marketName=mCloudDay");
+      await P2("resv_info", M + "/common/reservationInfo?marketName=mCloudDay");
+      // C) 遍历全部账号查会员等级 + 活动资格
+      const ra2 = await resolveAccounts();
+      out.levels = [];
+      for (const ac of (ra2.list || [])) {
+        try {
+          const jj = await getJwt(ac.authorization, ac.phone);
+          const tk2 = jj.data && jj.data.token;
+          if (!tk2) { out.levels.push({ phone: maskPhone(ac.phone), err: "jwt失败" }); continue; }
+          const hh = { ...H2, jwtToken: tk2, Cookie: "jwtToken=" + tk2 };
+          const r1 = await fetchWithTimeout(M + "/common/activityInfo?marketName=mCloudDay", { headers: hh }, 30000);
+          const j1 = await r1.json();
+          const rs = j1.result || {};
+          out.levels.push({ phone: maskPhone(ac.phone), memberLevel: rs.memberLevel,
+            finalUserType: rs.finalUserType, isMember: rs.isMember,
+            online: rs.online, activityDay: rs.activityDay, reservationSwitch: rs.reservationSwitch,
+            gotoneLevel: rs.gotoneLevel, cloudPhoneLevel: rs.cloudPhoneLevel });
+        } catch (e) { out.levels.push({ phone: maskPhone(ac.phone), err: String(e.message || e).slice(0, 80) }); }
+        await new Promise(r => setTimeout(r, 1500));
+      }
       out.probes = probes;
       out.ok = true;
       out.msg = "会员日探测完成，共 " + probes.length + " 个请求";
