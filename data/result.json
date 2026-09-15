@@ -1,7 +1,7 @@
 {
-  "ts": "2026-09-15 01:23:04",
+  "ts": "2026-09-15 01:24:57",
   "type": "sync",
-  "ok": false,
-  "msg": "写入仓库文件失败: Cannot access 'fs' before initialization",
+  "ok": true,
+  "msg": "已同步 1 个账号到仓库（定时任务将使用）",
   "synced": 1
 }
