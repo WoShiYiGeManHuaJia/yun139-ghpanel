@@ -1,14 +1,7 @@
 {
-  "ts": "2026-09-15 00:37:44",
-  "type": "status",
-  "ok": false,
-  "msg": "已查询 1 个账号",
-  "status": [
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "ok": false,
-      "message": "querySpecToken 失败 code=1010010015 msg=鉴权失效"
-    }
-  ]
+  "ts": "2026-09-15 00:44:47",
+  "type": "send_code",
+  "ok": true,
+  "msg": "successed to process!",
+  "phone": "17274079953"
 }
