@@ -1,0 +1,6 @@
+{
+  "steps": [
+    "FATAL: The operation failed for an operation-specific reason",
+    "STACK: OperationError: The operation failed for an operation-specific reason\n    at AESCipherJob.onDone (node:internal/crypto/util:462:19)"
+  ]
+}
