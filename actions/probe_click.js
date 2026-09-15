@@ -109,7 +109,17 @@ async function main() {
       const cls = await els[i].getAttribute("class");
       const txt = (await els[i].innerText()).replace(/\s+/g, " ").slice(0, 60);
       const box = await els[i].boundingBox();
-      log("  [" + i + "] class='" + cls + "' text='" + txt + "' box=" + JSON.stringify(box));
+      let vis = "", anim = "";
+      try { vis = String(await els[i].isVisible()); } catch (e) { vis = "err"; }
+      try {
+        anim = await page.evaluate(idx => {
+          const el = document.querySelectorAll(".AIPoints")[idx];
+          if (!el) return "no-el";
+          const st = getComputedStyle(el);
+          return "anim=" + (st.animationName || "none") + " trans=" + (st.transition || "none").slice(0, 30);
+        }, i);
+      } catch (e) { anim = "err"; }
+      log("  [" + i + "] class='" + cls + "' text='" + txt + "' vis=" + vis + " " + anim);
     } catch (e) { log("  [" + i + "] 读取失败 " + String(e.message).slice(0, 60)); }
   }
 
@@ -117,14 +127,30 @@ async function main() {
   for (let i = 0; i < els.length; i++) {
     const cls = await els[i].getAttribute("class").catch(() => "");
     if (/is-next-month/.test(String(cls))) { log("  跳过 [" + i + "] 下月可领"); continue; }
-    log("=== 点击 [" + i + "] ===");
+    log("=== 点击 [" + i + "] (JS 强制点击，绕过浮动动画) ===");
     captured.length = 0;
+    let clickErr = "";
+    // ① 先试 force 点击
     try {
-      await els[i].scrollIntoViewIfNeeded();
-      await sleep(500);
-      await els[i].click({ timeout: 8000 });
-      await sleep(3500);
-    } catch (e) { log("  点击异常: " + String(e.message).slice(0, 100)); }
+      await els[i].click({ force: true, timeout: 6000 });
+      log("  方式① force click 成功");
+    } catch (e) {
+      clickErr = String(e.message).slice(0, 60);
+      // ② 退回 JS 直接派发 click（完全绕过 actionability 检查）
+      try {
+        await page.evaluate(idx => {
+          const el = document.querySelectorAll(".AIPoints")[idx];
+          if (!el) return "no-el";
+          el.click();
+          // 有些页面监听的是子元素，父子都派发一次
+          const inner = el.querySelector("div,span,img");
+          if (inner) inner.click();
+          return "clicked";
+        }, i);
+        log("  方式② JS click 已派发（force 失败: " + clickErr + "）");
+      } catch (e2) { log("  点击全部失败: " + String(e2.message).slice(0, 80)); }
+    }
+    await sleep(3500);
     // 输出本次点击捕获到的关键请求
     for (const c of captured) {
       if (c.RESPONSE) { log("  ★响应 " + c.RESPONSE + " → " + c.body); }
