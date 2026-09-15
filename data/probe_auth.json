@@ -1,0 +1,20 @@
+{
+  "steps": [
+    "账号总数: 3",
+    "===== 137****4642 =====",
+    "  auth 长度=288 开头=cGM6MTM3ODc0NjQ2NDI6S29G",
+    "  toSourceId=001005 → {\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidssolgf257632493492a89356a1c4f370cb429\"}}",
+    "  toSourceId=001007 → {\"success\":false,\"code\":\"1010199999\",\"message\":\"未知异常\",\"data\":{\"result\":{\"resultCode\":\"05010048\",\"resultDesc\":\"获取移动统一认证临时票据失败\"},\"resultCode\":null,\"token\":null}}",
+    "  toSourceId=001001 → {\"success\":false,\"code\":\"1010199999\",\"message\":\"未知异常\",\"data\":{\"result\":{\"resultCode\":\"05010048\",\"resultDesc\":\"获取移动统一认证临时票据失败\"},\"resultCode\":null,\"token\":null}}",
+    "===== 137****6553 =====",
+    "  auth 长度=288 开头=cGM6MTM3MTczMDY1NTM6dnZw",
+    "  toSourceId=001005 → {\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidssolgba0be2f271f6c2b97489d211d503cbba\"}}",
+    "  toSourceId=001007 → {\"success\":false,\"code\":\"1010199999\",\"message\":\"未知异常\",\"data\":{\"result\":{\"resultCode\":\"05010048\",\"resultDesc\":\"获取移动统一认证临时票据失败\"},\"resultCode\":null,\"token\":null}}",
+    "  toSourceId=001001 → {\"success\":false,\"code\":\"1010199999\",\"message\":\"未知异常\",\"data\":{\"result\":{\"resultCode\":\"05010048\",\"resultDesc\":\"获取移动统一认证临时票据失败\"},\"resultCode\":null,\"token\":null}}",
+    "===== 172****9953 =====",
+    "  auth 长度=288 开头=cGM6MTcyNzQwNzk5NTM6U1M0",
+    "  toSourceId=001005 → {\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidssolga1d925004e400e350d8873d487e48789\"}}",
+    "  toSourceId=001007 → {\"success\":false,\"code\":\"1010199999\",\"message\":\"未知异常\",\"data\":{\"result\":{\"resultCode\":\"05010048\",\"resultDesc\":\"获取移动统一认证临时票据失败\"},\"resultCode\":null,\"token\":null}}",
+    "  toSourceId=001001 → {\"success\":false,\"code\":\"1010199999\",\"message\":\"未知异常\",\"data\":{\"result\":{\"resultCode\":\"05010048\",\"resultDesc\":\"获取移动统一认证临时票据失败\"},\"resultCode\":null,\"token\":null}}"
+  ]
+}
