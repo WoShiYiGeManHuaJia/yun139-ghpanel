@@ -31,6 +31,8 @@ jobs:
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
           YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
           YUN139_PHONE: ${{ secrets.YUN139_PHONE }}
+          DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
+          DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
         run: node actions/run.js
       - name: Commit result
         run: |

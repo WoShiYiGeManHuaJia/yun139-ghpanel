@@ -34,6 +34,8 @@ jobs:
           EVENT_TYPE: mday16
           PAYLOAD: ${{ github.event.inputs.mode && format('{{"mode":"{0}","priority":"星巴克","maxWaitSec":5100,"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000}}', github.event.inputs.mode) || '{"mode":"grab","priority":"星巴克","maxWaitSec":5100,"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000}' }}
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
+          DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
+          DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
         run: node actions/run.js
       - name: Commit result
         run: |

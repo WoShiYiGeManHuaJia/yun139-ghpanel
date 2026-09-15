@@ -73,6 +73,35 @@ function fmtDate(d) {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
 }
 function nowStr() { return fmtDate(new Date()); }
+
+// ===== 钉钉机器人推送 =====
+// 需要在仓库 Secrets 配置：DINGTALK_WEBHOOK（必填）、DINGTALK_SECRET（机器人安全设为"加签"时填）
+const nodeCrypto = require("node:crypto");
+async function sendDingTalk(title, lines) {
+  const webhook = String(process.env.DINGTALK_WEBHOOK || "").trim();
+  if (!webhook) { console.log("[钉钉] 未配置 DINGTALK_WEBHOOK，跳过推送"); return { skipped: true }; }
+  let url = webhook;
+  const secret = String(process.env.DINGTALK_SECRET || "").trim();
+  if (secret) {
+    const ts = Date.now();
+    const sign = encodeURIComponent(
+      nodeCrypto.createHmac("sha256", secret).update(ts + "\n" + secret).digest("base64"));
+    url += (webhook.includes("?") ? "&" : "?") + "timestamp=" + ts + "&sign=" + sign;
+  }
+  const body = { msgtype: "markdown", markdown: {
+    title: String(title || "云盘签到").slice(0, 60),
+    text: (Array.isArray(lines) ? lines : [String(lines)]).join("\n") } };
+  try {
+    const r = await fetchWithTimeout(url, { method: "POST",
+      headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }, 20000);
+    const t = await r.text();
+    console.log("[钉钉] HTTP " + r.status + " " + t.slice(0, 160));
+    return { ok: r.ok, status: r.status, body: t.slice(0, 200) };
+  } catch (e) {
+    console.log("[钉钉] 发送异常: " + String(e.message || e).slice(0, 120));
+    return { ok: false, error: String(e.message || e).slice(0, 120) };
+  }
+}
 function maskPhone(p) {
   p = String(p || "");
   return p.length >= 7 ? p.slice(0, 3) + "****" + p.slice(-4) : p;
@@ -1440,6 +1469,24 @@ async function main() {
       out.ok = out.results.some(x => x.ok);
       out.msg = (mode === "query" ? "会员日资格查询完成" : (anyGot ? "会员日抢购完成，有收获" : "会员日抢购完成，未抢到"))
         + "（" + results.length + " 个账号）";
+
+      // ---- 钉钉推送会员日结果 ----
+      try {
+        const L = [];
+        L.push("### 移动云盘 · 16号会员日" + (mode === "query" ? "（资格查询）" : "（抢购）"));
+        L.push("**时间**：" + nowStr());
+        L.push("");
+        for (const x of out.results) {
+          L.push("#### " + (x.masked || "?") + "　" + (x.ok ? "✅" : "❌"));
+          L.push("- " + (x.message || "无详情"));
+          L.push("");
+        }
+        L.push("---");
+        L.push(out.msg);
+        out.dingtalk = await sendDingTalk("会员日" + (mode === "query" ? "资格查询" : "抢购结果"), L);
+      } catch (e) {
+        out.dingtalk = { ok: false, error: String(e.message || e).slice(0, 120) };
+      }
     } else if (type === "srefresh") {    } else if (type === "srefresh") {
       const c = await pickCreds();
       const rr = await refreshToken(c.phone, decodeAuth(c.authorization).token);
@@ -1488,6 +1535,9 @@ async function main() {
             await new Promise(x => setTimeout(x, 600));
           }
           item.tasks = results.length;
+          item.taskOk = results.filter(r => r.ok).length;
+          item.taskFail = results.filter(r => !r.ok).length;
+          item.taskDetail = results.map(r => ({ name: r.name, ok: r.ok }));
 
           // 3) 领气泡（真实浏览器，较慢）
           try {
@@ -1510,6 +1560,33 @@ async function main() {
         message: [x.refresh ? "续期" + x.refresh : "", x.tasks !== undefined ? "任务" + x.tasks + "个" : "", x.receive ? "气泡" + x.receive : "", x.error || ""].filter(Boolean).join("；") }));
       out.ok = okCount > 0;
       out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个";
+
+      // ---- 钉钉推送每日报告（含任务完成情况）----
+      try {
+        const L = [];
+        L.push("### 移动云盘 · 每日签到报告");
+        L.push("**时间**：" + nowStr());
+        L.push("");
+        for (const x of perAccount) {
+          L.push("#### " + x.masked + "　" + (x.ok ? "✅ 正常" : "❌ 异常"));
+          if (x.refresh) L.push("- 令牌续期：" + x.refresh);
+          if (x.tasks !== undefined) {
+            L.push("- 任务：执行 " + x.tasks + " 个，成功 " + (x.taskOk || 0) + " 个"
+              + (x.taskFail ? ("，失败 " + x.taskFail + " 个") : ""));
+            const det = (x.taskDetail || []).slice(0, 12);
+            for (const t of det) L.push("    - " + (t.ok ? "✔ " : "✘ ") + (t.name || "未命名任务"));
+            if ((x.taskDetail || []).length > 12) L.push("    - ……共 " + x.taskDetail.length + " 个");
+          }
+          if (x.receive) L.push("- 云豆气泡：" + x.receive);
+          if (x.error) L.push("- 异常：" + x.error);
+          L.push("");
+        }
+        L.push("---");
+        L.push("共 " + accounts.length + " 个账号，成功 " + okCount + " 个");
+        out.dingtalk = await sendDingTalk("云盘每日签到报告", L);
+      } catch (e) {
+        out.dingtalk = { ok: false, error: String(e.message || e).slice(0, 120) };
+      }
     } else {
       throw new Error("未知命令: " + type);
     }
