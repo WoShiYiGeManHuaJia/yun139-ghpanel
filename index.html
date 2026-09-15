@@ -156,6 +156,11 @@
         <input id="cfg_remember" type="checkbox" checked style="width:auto;height:16px;accent-color:var(--acc);flex:none;margin:0">
         <span>记住 PAT（推荐勾选，存本机浏览器，下次打开自动带上）</span>
       </label>
+      <div class="row" style="margin-top:8px;gap:6px">
+        <input id="inp_patpass" type="password" placeholder="解锁口令（默认 yun139）" style="flex:1.6">
+        <button class="btn ghost sm" id="btn_unlock" style="flex:1">口令解锁</button>
+      </div>
+      <div class="hint" id="unlockTip" style="display:none"></div>
       <button class="btn ghost" id="btn_copy_link" style="margin-top:8px">复制分享链接（换设备用）</button>
       <div class="hint">PAT 仅存当前浏览器会话；DATA_KEY 存在当前浏览器本地。复制分享链接只会分享仓库地址，不会携带 PAT 或 DATA_KEY。换设备后请重新填写凭据。</div>
     </div>
@@ -309,7 +314,9 @@
 <script>
 (function(){
   const REPO_DEFAULT = "";
-  const LS_REPO = "gh139_repo", LS_TOKEN = "gh139_token", LS_KEY = "gh139_key", LS_ACC = "gh139_acc", LS_REMEMBER = "gh139_remember";
+  // 内置加密 PAT：用短口令解密，避免每次复制 40 位令牌（口令存本机后自动解锁）
+const BUILTIN_PAT = {salt:"71385ead7fdd10df40c91e0c",nonce:"5206505cff0cdccbe55b1571",ct:"d6f72098d0cac0f1598ef00f11c8515893ee2b58dec74813e90a8aebdd71ae923c6cd6afba2c86c2cd7d41538aa39b8f142a4cb5cbe9df89"};
+const LS_REPO = "gh139_repo", LS_TOKEN = "gh139_token", LS_KEY = "gh139_key", LS_ACC = "gh139_acc", LS_REMEMBER = "gh139_remember", LS_PATPASS = "gh139_patpass";
   const LS_CLOUD = "gh139_cloud", LS_TIP = "gh139_tasktip_off";
   const $ = id => document.getElementById(id);
   const log = (msg, cls) => { const box = $("log"); if (!box) return; const line = document.createElement("div"); line.className = "l-" + (cls || ""); line.textContent = "[" + new Date().toLocaleTimeString() + "] " + String(msg); box.prepend(line); };
@@ -331,6 +338,34 @@
     toastTimer = setTimeout(() => { t.style.display = "none"; }, 3600);
   }
 
+
+  // ---- 内置 PAT 口令解锁 ----
+  async function derivePatKey(pass) {
+    const enc = new TextEncoder();
+    const km = await crypto.subtle.importKey("raw", enc.encode(pass), "PBKDF2", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: new Uint8Array(BUILTIN_PAT.salt.match(/../g).map(h=>parseInt(h,16))), iterations: 100000, hash: "SHA-256" }, km, 256);
+    return crypto.subtle.importKey("raw", bits, "AES-GCM", false, ["decrypt"]);
+  }
+  async function unlockBuiltinPat(pass) {
+    try {
+      const key = await derivePatKey(pass);
+      const raw = Uint8Array.from(BUILTIN_PAT.ct.match(/../g).map(h=>parseInt(h,16)));
+      const iv = Uint8Array.from(BUILTIN_PAT.nonce.match(/../g).map(h=>parseInt(h,16)));
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, raw);
+      return new TextDecoder().decode(pt);
+    } catch (e) { return ""; }
+  }
+  async function autoUnlockPat() {
+    // 已有 PAT 直接用
+    if (localStorage.getItem(LS_TOKEN) || sessionStorage.getItem(LS_TOKEN)) return true;
+    // 用上次记住的口令自动解锁
+    const saved = localStorage.getItem(LS_PATPASS);
+    if (saved) {
+      const p = await unlockBuiltinPat(saved);
+      if (p) { localStorage.setItem(LS_TOKEN, p); return true; }
+    }
+    return false;
+  }
   // ---- 本地配置 ----
   function loadCfg() {
     $("cfg_repo").value = localStorage.getItem(LS_REPO) || REPO_DEFAULT;
@@ -1019,10 +1054,25 @@
   };
   $("btn_tip_cancel").onclick = closeTaskTip;
   $("maskTaskTip").addEventListener("click", function (e) { if (e.target === $("maskTaskTip")) closeTaskTip(); });
+  $("btn_unlock").onclick = async function () {
+    const pass = ($("inp_patpass").value || "").trim();
+    if (!pass) { toast("请输入解锁口令", "err"); return; }
+    const p = await unlockBuiltinPat(pass);
+    if (!p) { $("unlockTip").textContent = "口令错误"; $("unlockTip").style.color = "var(--err)"; $("unlockTip").style.display = "block"; return; }
+    localStorage.setItem(LS_PATPASS, pass);
+    localStorage.setItem(LS_TOKEN, p);
+    $("unlockTip").textContent = "✓ 已解锁，PAT 已保存，下次自动带上";
+    $("unlockTip").style.color = "var(--ok)"; $("unlockTip").style.display = "block";
+    $("inp_patpass").value = "";
+    loadCfg();
+    toast("PAT 已解锁 ✓");
+  };
   $("btn_list").onclick = fetchTaskList;
   $("btn_receive").onclick = function () { runReceive("", $("btn_receive")); };
   $("btn_status").onclick = runStatus;
-  loadCfg(); applyUrlCfg(); renderAccounts(); renderTaskPlaceholder(); startWatch();
+  loadCfg();
+  autoUnlockPat().then(function(){ loadCfg(); });
+  applyUrlCfg(); renderAccounts(); renderTaskPlaceholder(); startWatch();
   pollResult().then(function () {
     api(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`)
       .then(r => r.ok ? r.json() : null).then(j => { if (j && j.receiveList) renderReceiveRows(j.receiveList); }).catch(function () {});
