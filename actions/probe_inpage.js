@@ -136,10 +136,46 @@ async function main() {
       await sleep(1800);
     }
 
+    // 页面内 API 没领到 → 补一次 JS 强制点击（绕过浮动动画）
+    try {
+      const idx = arr.indexOf(it);
+      const r2 = await page.evaluate(i => {
+        const el = document.querySelectorAll(".AIPoints")[i];
+        if (!el) return "no-el";
+        el.click();
+        const inner = el.querySelector("div,span,img");
+        if (inner) inner.click();
+        return "clicked";
+      }, idx);
+      log("  JS 强制点击 [" + idx + "]: " + r2);
+      await sleep(3000);
+    } catch (e) { log("  JS 点击异常 " + String(e.message).slice(0, 60)); }
+
     const cn = await mcloudGet(jwt, "/ycloud/signin/page/getCloudNum");
     const now = cn.result !== undefined ? cn.result : (cn.data && cn.data.cloudNum);
     log("  → 余额 " + b0 + " → " + now + (Number(now) > Number(b0) ? " 【已到账 +" + (Number(now) - Number(b0)) + "】" : ""));
     if (Number(now) > Number(b0)) { log("★ 成功，停止"); break; }
+  }
+
+  // 最后兜底：遍历所有元素 JS 强制点一遍
+  if (loaded) {
+    log("=== 兜底：遍历全部元素 JS 点击 ===");
+    const n = await page.locator(".AIPoints").count();
+    for (let i = 0; i < n; i++) {
+      try {
+        const cls = await page.locator(".AIPoints").nth(i).getAttribute("class");
+        if (/is-next-month/.test(String(cls))) continue;
+        await page.evaluate(idx => {
+          const el = document.querySelectorAll(".AIPoints")[idx];
+          if (el) { el.click(); const c = el.querySelector("div,span,img"); if (c) c.click(); }
+        }, i);
+        log("  点击 [" + i + "]");
+        await sleep(2500);
+        const cn = await mcloudGet(jwt, "/ycloud/signin/page/getCloudNum");
+        const now = cn.result !== undefined ? cn.result : (cn.data && cn.data.cloudNum);
+        if (Number(now) > Number(b0)) { log("  ★★ 到账 +" + (Number(now) - Number(b0))); break; }
+      } catch (e) { log("  点击 [" + i + "] 异常 " + String(e.message).slice(0, 50)); }
+    }
   }
 
   const cnF = await mcloudGet(jwt, "/ycloud/signin/page/getCloudNum");
