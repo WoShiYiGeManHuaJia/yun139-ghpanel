@@ -1,6 +1,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const { decodeAuth, rsaEncrypt, pkcs7Unpad, hexToBytes, aesGcmEncryptText, aesGcmDecryptText, deriveKey, stableJsonStringify } = require('../actions/run.js');
+const crypto = require('node:crypto');
+const { decodeAuth, rsaEncrypt, pkcs7Unpad, hexToBytes, aesEcbDecryptBytes, aesGcmEncryptText, aesGcmDecryptText, deriveKey, stableJsonStringify } = require('../actions/run.js');
 
 (async () => {
 
@@ -17,6 +18,21 @@ assert.throws(() => hexToBytes('0'));
 assert.deepEqual(pkcs7Unpad(new Uint8Array([...new Uint8Array(15).fill(1), 1])).length, 15);
 assert.throws(() => pkcs7Unpad(new Uint8Array(16).fill(0)));
 
+// 手写 AES-ECB 实现与 node:crypto 对照（关闭自动填充，逐字节一致才算通过，防原语回归）
+const aesKey = crypto.randomBytes(24);            // AES-192，与 thirdPartyLogin 内层同规格
+const aesPt = crypto.randomBytes(48);             // 16 的倍数
+const aesCipher = crypto.createCipheriv('aes-192-ecb', aesKey, null);
+aesCipher.setAutoPadding(false);
+const aesCt = Buffer.concat([aesCipher.update(aesPt), aesCipher.final()]);
+const aesDec = Buffer.from(aesEcbDecryptBytes(new Uint8Array(aesCt), new Uint8Array(aesKey)));
+assert.equal(aesDec.equals(aesPt), true, 'AES-192-ECB 手写解密应与 node:crypto 一致');
+const aesCipher2 = crypto.createCipheriv('aes-128-ecb', aesKey.subarray(0, 16), null);
+aesCipher2.setAutoPadding(false);
+const aesCt2 = Buffer.concat([aesCipher2.update(aesPt), aesCipher2.final()]);
+const aesDec2 = Buffer.from(aesEcbDecryptBytes(new Uint8Array(aesCt2), new Uint8Array(aesKey.subarray(0, 16))));
+assert.equal(aesDec2.equals(aesPt), true, 'AES-128-ECB 手写解密应与 node:crypto 一致');
+assert.throws(() => aesEcbDecryptBytes(new Uint8Array(15), new Uint8Array(16)));
+
 const key = await deriveKey('smoke-test-key');
 const plain = JSON.stringify({ hello: '世界', n: 123 });
 const cipher = await aesGcmEncryptText(key, plain);
@@ -26,10 +42,7 @@ assert.equal(stableJsonStringify({b:1,a:2}), '{"a":2,"b":1}');
 
 const html = fs.readFileSync(require('node:path').join(__dirname, '../index.html'), 'utf8');
 assert.match(html, /requestId/);
-// PAT 只允许在用户勾选「记住」后写入 localStorage，不允许无条件写入
-assert.doesNotMatch(html, /localStorage\.setItem\(LS_TOKEN,\s*\$\("cfg_pat"\)/);
-assert.match(html, /if \(remember\) localStorage\.setItem\(LS_TOKEN/);
-assert.match(html, /cfg_remember/);
+assert.doesNotMatch(html, /localStorage\.setItem\(LS_TOKEN/);
 assert.doesNotMatch(html, /return;\s*applyCloudCache/);
 assert.match(html, /armPending\(\{ type: "rtask"/);
 assert.match(html, /armPending\(\{ type: "send_code", kind: "send" \}/);

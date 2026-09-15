@@ -282,6 +282,7 @@ async function getJwtOnce(authorization, phone) {
   });
   const j = await responseJsonChecked(r, "querySpecToken");
   if (String(j.code) !== "0") throw new Error(`querySpecToken 失败 code=${j.code} msg=${j.message || ""} raw=${JSON.stringify(j).slice(0, 200)}`);
+  if (!j.data || !j.data.token) throw new Error("querySpecToken 响应缺少 token: " + JSON.stringify(j).slice(0, 200));
   const ssoToken = j.data.token;
   for (const h of CY_HOSTS) {
     try {
@@ -306,6 +307,7 @@ async function getSsoToken(authorization, phone) {
     const inner = (j.data && j.data.result && (j.data.result.resultCode + " " + j.data.result.resultDesc)) || "";
     throw new Error("querySpecToken 失败 code=" + j.code + " msg=" + (j.message || "") + " inner=" + inner);
   }
+  if (!j.data || !j.data.token) throw new Error("querySpecToken 响应缺少 token");
   return j.data.token;
 }
 // 风控码：命中说明被临时限流/拒绝，需要更长的退避等待（不是令牌真的失效）
@@ -351,10 +353,12 @@ async function ensureAuth(a) {
   }
 }
 
-async function signOne(authorization, phone) {
+async function signOne(authorization, phone, dev) {
   try {
     const jwt = await getJwt(authorization, phone);
-    const r = await fetchWithTimeout(`https://m.mcloud.139.com/ycloud/signin/page/startSignIn?client=app&deviceId=${encodeURIComponent(DEFAULT_DEVICE)}`, {
+    // 优先使用账号自身设备标识（与多账号风控原则一致），缺失才回退内置 deviceId
+    const deviceId = (dev && (dev.ud_id || dev.deviceId)) || DEFAULT_DEVICE;
+    const r = await fetchWithTimeout(`https://m.mcloud.139.com/ycloud/signin/page/startSignIn?client=app&deviceId=${encodeURIComponent(deviceId)}`, {
       method: "POST",
       headers: { "Host": "m.mcloud.139.com", "jwtToken": jwt, "Origin": "https://m.mcloud.139.com", "Referer": "https://m.mcloud.139.com/", "Accept": "application/json, text/plain, */*", "Content-Type": "application/json" },
       body: "{}",
@@ -383,8 +387,11 @@ async function refreshToken(phone, token) {
   let exp = null, remain = null;
   if (strs.length >= 4) {
     const expMs = parseInt(strs[3], 10);
-    exp = fmtDate(new Date(expMs));
-    remain = Math.round((expMs - Date.now()) / 86400000 * 10) / 10;
+    // 时间戳非法时不能写成 "NaN-NaN-NaN NaN:NaN:NaN"，置空由前端显示“未知”
+    if (Number.isFinite(expMs) && expMs > 0) {
+      exp = fmtDate(new Date(expMs));
+      remain = Math.round((expMs - Date.now()) / 86400000 * 10) / 10;
+    }
   }
   return { ok: true, data: { new_token: newTok, new_expires_at: exp, remaining_days: remain } };
 }
@@ -952,13 +959,14 @@ async function main() {
       const dec = decodeAuth(authorization);
       const strs = dec.token.split("|");
       const expMs = strs.length >= 4 ? parseInt(strs[3], 10) : 0;
+      const expValid = Number.isFinite(expMs) && expMs > 0;
       const newAcc = {
         id: String(Date.now() % 1000000),
         name: payload.name || `139-${phone.slice(-4)}`,
         phone,
         authorization,
-        expires_at: fmtDate(new Date(expMs)),
-        remaining_days: expMs ? Math.round((expMs - Date.now()) / 86400000 * 10) / 10 : null,
+        expires_at: expValid ? fmtDate(new Date(expMs)) : "",
+        remaining_days: expValid ? Math.round((expMs - Date.now()) / 86400000 * 10) / 10 : null,
         created_at: nowStr(),
       };
       const existing = accounts.findIndex(a => String(a.phone) === phone);
@@ -994,7 +1002,7 @@ async function main() {
         const row = { phone, masked: maskPhone(phone), name: a.name || "" };
         try {
           if (type === "sign") {
-            const r = await signOne(a.authorization, phone);
+            const r = await signOne(a.authorization, phone, a);
             row.ok = r.ok; row.message = r.message;
           } else {
             const r = await refreshToken(phone, decodeAuth(a.authorization).token);
@@ -1026,7 +1034,7 @@ async function main() {
           const row = { phone, masked: maskPhone(phone), name: a.name || "", task: t };
           try {
             if (t === "sign") {
-              const r = await signOne(a.authorization, phone);
+              const r = await signOne(a.authorization, phone, a);
               row.ok = r.ok;
               row.message = `每日签到: ${r.message}`;
             } else if (t === "backup") {
@@ -1209,6 +1217,6 @@ async function main() {
   console.log(JSON.stringify(out));
 }
 
-module.exports = { decodeAuth, cleanAuth, maskPhone, rsaEncrypt, pkcs7Unpad, hexToBytes, aesGcmEncryptText, aesGcmDecryptText, deriveKey, stableJsonStringify, getJwt, cloudStatus, receiveViaApi };
+module.exports = { decodeAuth, cleanAuth, maskPhone, rsaEncrypt, pkcs7Unpad, hexToBytes, aesEcbDecryptBytes, aesGcmEncryptText, aesGcmDecryptText, deriveKey, stableJsonStringify, getJwt, cloudStatus, receiveViaApi };
 
 if (require.main === module) main().catch(e => { console.error("FATAL:", e); process.exit(1); });
