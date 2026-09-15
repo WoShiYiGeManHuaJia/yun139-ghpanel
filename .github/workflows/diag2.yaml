@@ -1,0 +1,29 @@
+name: yun139-diag2
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 运行诊断
+        env:
+          DIAG_PHONE: "17274079953"
+          DIAG_AUTH: ${{ secrets.DIAG_AUTH_9953 }}
+        run: node actions/diag2.js
+      - name: 保存
+        run: |
+          mkdir -p data
+          cp /tmp/diag2/out.json data/diag2.json || echo none
+          git config user.name "bot"
+          git config user.email "bot@users.noreply.github.com"
+          git checkout -f -B main $(git rev-parse HEAD)
+          git add data/diag2.json
+          git diff --cached --quiet && echo "无变化" || git commit -m "diag2: 完整原始返回"
+          git push origin main || echo skip
