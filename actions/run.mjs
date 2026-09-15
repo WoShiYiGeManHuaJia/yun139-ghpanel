@@ -683,6 +683,7 @@ async function main() {
   }
   // ---- 账号仓库文件：data/accounts.enc（用 DATA_KEY 加密，续期后自动回写，供定时任务使用）----
   const STORE_PATH = new URL("../data/accounts.enc", import.meta.url);
+  let saveStoreErr = "";
   async function loadStore() {
     try {
       const b = fs.readFileSync(STORE_PATH, "utf8").trim();
@@ -692,8 +693,11 @@ async function main() {
     } catch (e) { return null; }
   }
   async function saveStore(list) {
-    try { fs.writeFileSync(STORE_PATH, await aesGcmEncryptText(key, JSON.stringify(list))); return true; }
-    catch (e) { return false; }
+    try {
+      const payloadStr = await aesGcmEncryptText(key, JSON.stringify(list));
+      fs.writeFileSync(STORE_PATH, payloadStr);
+      return true;
+    } catch (e) { saveStoreErr = String(e.message || e); return false; }
   }
   // 统一解析账号来源：前端 cipher > 仓库文件 > Secret 兜底
   async function resolveAccounts() {
@@ -751,7 +755,7 @@ async function main() {
       if (!accounts.length) throw new Error("账号列表为空");
       const okw = await saveStore(accounts);
       out.ok = okw;
-      out.msg = okw ? ("已同步 " + accounts.length + " 个账号到仓库（定时任务将使用）") : "写入仓库文件失败";
+      out.msg = okw ? ("已同步 " + accounts.length + " 个账号到仓库（定时任务将使用）") : ("写入仓库文件失败: " + saveStoreErr);
       out.synced = accounts.length;
     } else if (type === "sign" || type === "refresh") {
       const ra = await resolveAccounts();
