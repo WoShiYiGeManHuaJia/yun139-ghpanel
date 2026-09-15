@@ -1,6 +1,6 @@
 {
-  "ts": "2026-09-15 12:10:32",
-  "requestId": "mday16-1789474232818-hml7dpsi",
+  "ts": "2026-09-15 12:13:34",
+  "requestId": "mday16-1789474414147-xyck137t",
   "type": "mday16",
   "ok": true,
   "msg": "会员日抢购完成，未抢到（3 个账号）",
@@ -13,14 +13,7 @@
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "memberLevel": "2",
-      "isMember": true,
-      "online": false,
-      "activityDay": false,
-      "countdownMs": 51561849,
-      "memberDesc": "黄金会员",
-      "coarseSleepSec": 20,
-      "result": "等待超时未开闸（已等 20s，查了 0 次）"
+      "err": "fetch failed"
     },
     {
       "phone": "13717306553",
@@ -40,7 +33,7 @@
       "isMember": true,
       "online": false,
       "activityDay": false,
-      "countdownMs": 51535968,
+      "countdownMs": 51378467,
       "memberDesc": "白银会员",
       "coarseSleepSec": 20,
       "result": "等待超时未开闸（已等 20s，查了 0 次）"
