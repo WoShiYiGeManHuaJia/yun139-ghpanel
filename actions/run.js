@@ -640,17 +640,78 @@ async function diagPage(page) {
   } catch (e) { return { url: "", text: "诊断失败: " + String(e.message || e).slice(0, 80), all: -1, clickable: -1 }; }
 }
 
+// ===== API 直连领取（cloudType=3 的大额任务奖励实测可领，浏览器点击反而触发不了）=====
+async function postReceiveV3(jwt, body) {
+  const r = await fetchWithTimeout(MCLOUD + "/ycloud/signin/page/receiveV3", {
+    method: "POST",
+    headers: { ...{ "User-Agent": MOBILE_UA_FALLBACK, "jwtToken": jwt, "Accept": "application/json, text/plain, */*",
+      "X-Requested-With": "XMLHttpRequest", "Referer": MCLOUD + "/", "Cookie": "jwtToken=" + jwt },
+      "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  }, 20000);
+  const t = await r.text();
+  let j = {}; try { j = JSON.parse(t); } catch { j = { _raw: t.slice(0, 120) }; }
+  return j;
+}
+// 遍历待领清单逐个领取；cloudId 必须是数字，cloudType 必须用清单里的原值
+async function receiveViaApi(jwt, list) {
+  const steps = [];
+  let got = 0;
+  const details = [];
+  for (const it of list || []) {
+    const rawId = it.recordId !== undefined && it.recordId !== null ? it.recordId : it.cloudId;
+    const cloudId = Number(rawId);
+    const ct = Number(it.cloudType);
+    const num = Number(it.cloudNum !== undefined ? it.cloudNum : (it.num || 0)) || 0;
+    if (!cloudId || isNaN(cloudId)) { steps.push("跳过无效项 " + JSON.stringify(it).slice(0, 100)); continue; }
+    let j = null;
+    try { j = await postReceiveV3(jwt, { client: "app", cloudId, cloudType: ct }); }
+    catch (e) { steps.push("cloudId=" + cloudId + " 请求异常: " + String(e.message).slice(0, 60)); continue; }
+    const code = String(j.code);
+    const recv = j.result && (j.result.receive !== undefined ? j.result.receive : j.result.receiveNum);
+    details.push({ cloudId, cloudType: ct, code, receive: recv });
+    if (code === "0" && Number(recv) > 0) {
+      got += Number(recv);
+      steps.push("✅ API 领取 +" + recv + "（cloudId=" + cloudId + " type=" + ct + " 标称" + num + "）");
+    } else {
+      steps.push("✗ cloudId=" + cloudId + " type=" + ct + " code=" + code + " msg=" + (j.msg || "") + (recv !== undefined ? " receive=" + recv : ""));
+    }
+    await sleep(1200);
+  }
+  return { got, steps, details };
+}
+
 async function receiveBubbles(authorization, phone, dev) {
   const steps = [];
   dev = dev || {};
-  let chromium = null;
-  try { const pw = require("playwright"); chromium = pw.chromium; }
-  catch (e) { return { ok: false, error: "playwright 未安装", got: 0, steps }; }
   let jwt;
   try { jwt = await getJwt(authorization, phone); }
   catch (e) { return { ok: false, error: "令牌失效或鉴权失败: " + String(e.message || e).slice(0, 80), got: 0, steps }; }
-  const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
+  // 先尝试 API 直连领取（大额任务奖励这条路实测可行且不需要浏览器）
   let before = null, after = null, got = 0;
+  try {
+    const st0 = await cloudStatus(jwt);
+    before = st0.total;
+    if (st0.list && st0.list.length) {
+      const ra = await receiveViaApi(jwt, st0.list);
+      got += ra.got;
+      for (const x of ra.steps) steps.push("[API] " + x);
+      const st1 = await cloudStatus(jwt);
+      after = st1.total;
+      if (after !== null && before !== null && after > before) got = Math.max(got, after - before);
+      if (got > 0) {
+        steps.push("API 领取完成: " + before + " → " + after + "（+" + got + "）");
+        return { ok: true, before, after, got, via: "api", steps };
+      }
+      steps.push("API 未领到，回退浏览器点击…");
+    }
+  } catch (e) {
+    steps.push("API 领取异常，回退浏览器: " + String(e.message || e).slice(0, 80));
+  }
+  let chromium = null;
+  try { const pw = require("playwright"); chromium = pw.chromium; }
+  catch (e) { return { ok: false, error: "playwright 未安装且 API 未领到", got, before, after, steps }; }
+  const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
   // 页面需要 token 参数才进入已登录态（用户原始链接里带 token=…）
   let pageUrl = SIGNIN_PAGE;
   try {
