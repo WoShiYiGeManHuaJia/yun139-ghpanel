@@ -582,6 +582,93 @@ async function mcloudGet(jwt, path) {
   }
   throw lastErr || new Error("云朵状态请求失败");
 }
+// ===== 16号会员日（mCloudDay）=====
+const MDAY = "https://m.mcloud.139.com/ycloud/mcloudday";
+function mdayHeaders(jwt) {
+  return { "User-Agent": UA_CLOUD, "jwtToken": jwt, "Cookie": "jwtToken=" + jwt,
+           "Accept": "application/json, text/plain, */*", "X-Requested-With": "XMLHttpRequest",
+           "Referer": "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay",
+           "Content-Type": "application/json;charset=UTF-8" };
+}
+async function mdayGet(jwt, path) {
+  let last;
+  for (let i = 0; i < 3; i++) {
+    try {
+      const r = await fetchWithTimeout(MDAY + path, { headers: mdayHeaders(jwt) }, 25000);
+      const t = await r.text();
+      let j = null; try { j = JSON.parse(t); } catch { j = null; }
+      if (j) return j;
+      last = new Error("非JSON:" + t.slice(0, 60));
+    } catch (e) { last = e; await new Promise(r => setTimeout(r, 1500 * (i + 1))); }
+  }
+  throw last || new Error("会员日请求失败");
+}
+async function mdayPost(jwt, path, body) {
+  let last;
+  for (let i = 0; i < 3; i++) {
+    try {
+      const r = await fetchWithTimeout(MDAY + path, {
+        method: "POST", headers: mdayHeaders(jwt),
+        body: JSON.stringify(body || {}) }, 25000);
+      const t = await r.text();
+      let j = null; try { j = JSON.parse(t); } catch { j = null; }
+      if (j) return j;
+      last = new Error("非JSON:" + t.slice(0, 60));
+    } catch (e) { last = e; await new Promise(r => setTimeout(r, 1500 * (i + 1))); }
+  }
+  throw last || new Error("会员日请求失败");
+}
+// 活动状态
+async function mdayInfo(jwt) {
+  const j = await mdayGet(jwt, "/common/activityInfo?marketName=mCloudDay");
+  if (String(j.code) !== "0") throw new Error("活动信息失败:" + (j.msg || j.code));
+  const r = j.result || {};
+  return { online: !!r.online, activityDay: !!r.activityDay, extGiftOnline: !!r.extGiftOnline,
+           blindboxOnline: !!r.blindboxOnline, reservationSwitch: !!r.reservationSwitch,
+           memberLevel: r.memberLevel, finalUserType: r.finalUserType, isMember: !!r.isMember,
+           gotoneLevel: r.gotoneLevel, countdownMs: Number(r.countDownTimeStamp) || 0,
+           raw: r };
+}
+// 奖品列表
+async function mdayGifts(jwt, ext) {
+  const j = await mdayGet(jwt, "/gift/list?client=app" + (ext ? "&type=ext" : ""));
+  if (String(j.code) !== "0") throw new Error("奖品列表失败:" + (j.msg || j.code));
+  const r = j.result || {};
+  const arr = r.nationalPrizeList || r.prizeList || [];
+  return arr.map(p => ({ prizeId: p.prizeId, name: p.prizeName, hasStock: !!p.hasStock,
+                         received: !!p.receiveFlag, sort: p.sort || 0 }));
+}
+// 预约（必须 POST + body，GET/query 会报"不支持该预约来源"）
+async function mdayReserve(jwt) {
+  return await mdayPost(jwt, "/common/reservation",
+    { marketName: "mCloudDay", open: true, sourceid: "1000", source: "app" });
+}
+// 领奖：试多个候选路径
+async function mdayReceive(jwt, prizeId) {
+  const paths = ["/gift/receive", "/gift/draw", "/prize/receive", "/gift/get"];
+  const bodies = [
+    { prizeId: String(prizeId), marketName: "mCloudDay", client: "app" },
+    { prizeId: Number(prizeId), marketName: "mCloudDay" },
+  ];
+  const tried = [];
+  for (const pth of paths) {
+    for (const b of bodies) {
+      try {
+        const j = await mdayPost(jwt, pth, b);
+        tried.push(pth + "→" + String(j.code));
+        if (String(j.code) === "0") return { ok: true, path: pth, body: b, resp: j, tried };
+      } catch (e) { tried.push(pth + "→ERR"); }
+    }
+  }
+  return { ok: false, tried };
+}
+function fmtCountdown(ms) {
+  if (!ms || ms <= 0) return "已开始";
+  const s = Math.floor(ms / 1000);
+  const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60);
+  return (d ? d + "天" : "") + h + "小时" + m + "分";
+}
+
 function numOf(v) {
   if (v === null || v === undefined) return null;
   const n = parseInt(String(v).replace(/[^\d-]/g, ""), 10);
@@ -1265,6 +1352,65 @@ async function main() {
       out.ok = results.some(x => !x.err);
       out.msg = (mode === "query" ? "会员日资格查询完成" : (anyGot ? "会员日抢购完成，有收获" : "会员日抢购完成，未抢到"))
         + "（" + results.length + " 个账号）";
+    } else if (type === "mday") {
+      // 16号会员日：查状态 → 预约 →（活动开启时）领奖
+      const ra = await resolveAccounts();
+      out.acctDiag = ra.diag;
+      const accounts = ra.list;
+      const wantReceive = payload.receive !== false;
+      const per = [];
+      let okCount = 0;
+      for (let i = 0; i < accounts.length; i++) {
+        const a = accounts[i];
+        if (i > 0) await new Promise(r => setTimeout(r, 3000));
+        const it = { phone: a.phone, masked: maskPhone(a.phone) };
+        try {
+          const auth = await ensureAuth(a);
+          const jwt = await getJwt(auth, a.phone);
+          const info = await mdayInfo(jwt);
+          it.memberLevel = info.memberLevel;
+          it.isMember = info.isMember;
+          it.online = info.online;
+          it.activityDay = info.activityDay;
+          it.countdown = fmtCountdown(info.countdownMs);
+          // 预约（开关打开就约）
+          if (info.reservationSwitch) {
+            try {
+              const rv = await mdayReserve(jwt);
+              it.reserve = String(rv.code) === "0" ? "已预约" : ("失败:" + (rv.msg || rv.code));
+              if (String(rv.code) === "0") okCount++;
+            } catch (e) { it.reserve = "异常:" + String(e.message || e).slice(0, 70); }
+          } else { it.reserve = "开关关闭，跳过"; }
+          // 领奖（仅活动开启）
+          if (wantReceive && info.online) {
+            try {
+              const gifts = await mdayGifts(jwt);
+              it.gifts = gifts.length;
+              const got = [];
+              for (const g of gifts) {
+                if (!g.hasStock || g.received) continue;
+                const rr = await mdayReceive(jwt, g.prizeId);
+                got.push(g.name + (rr.ok ? "✅" : "❌"));
+                await new Promise(r => setTimeout(r, 1200));
+              }
+              it.received = got;
+            } catch (e) { it.receiveErr = String(e.message || e).slice(0, 90); }
+          } else if (wantReceive) {
+            it.receiveSkip = "活动未开启（" + fmtCountdown(info.countdownMs) + "后开始）";
+          }
+          it.ok = true;
+        } catch (e) {
+          it.ok = false; it.error = String(e.message || e).slice(0, 150);
+        }
+        per.push(it);
+      }
+      out.perAccount = per;
+      out.results = per.map(x => ({ phone: x.phone, masked: x.masked, ok: x.ok,
+        message: ["等级" + (x.memberLevel || "?"), "活动" + (x.online ? "开启" : "未开"),
+                  x.reserve ? "预约" + x.reserve : "", x.received ? "领奖" + x.received.join(" ") : "",
+                  x.receiveSkip || "", x.error || ""].filter(Boolean).join("；") }));
+      out.ok = okCount > 0 || per.some(x => x.ok);
+      out.msg = "会员日处理完成（" + per.length + " 个账号）";
     } else if (type === "srefresh") {    } else if (type === "srefresh") {
       const c = await pickCreds();
       const rr = await refreshToken(c.phone, decodeAuth(c.authorization).token);
