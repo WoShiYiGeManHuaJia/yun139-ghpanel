@@ -1366,12 +1366,25 @@ async function main() {
             const t0 = Date.now();
             // 智能前置休眠：倒计时还远就先粗睡，临近开闸再密集轮询（避免请求过多被限流）
             const cd = Number(R.countDownTimeStamp || 0);
+            // ★ 不能一次性粗睡到开闸前：coarseSleep 被 MAX_WAIT_MS 截断后会睡过头，
+            //   醒来时 Date.now()-t0 已 >= MAX_WAIT_MS，while 循环一次都不执行，直接判超时。
+            //   改为分段短睡（每段 ≤10 分钟），睡醒就检查，把控制权交给下面的 while 轮询。
             if (cd > 300000) {
-              const coarseSleep = Math.min(cd - 240000, MAX_WAIT_MS);
-              if (coarseSleep > 1000) {
-                it.coarseSleepSec = Math.round(coarseSleep / 1000);
-                await new Promise(r => setTimeout(r, coarseSleep));
+              const SEG = 600000;   // 每段最多睡 10 分钟
+              let slept = 0;
+              while (slept < MAX_WAIT_MS - 60000) {
+                const left = cd - slept - 240000;
+                if (left <= 1000) break;                 // 已接近开闸，交给 while 密集轮询
+                const seg = Math.min(SEG, left, MAX_WAIT_MS - 60000 - slept);
+                if (seg <= 1000) break;
+                await new Promise(r => setTimeout(r, seg));
+                slept += seg;
+                // 睡醒先探一次，已开闸就直接跳出
+                const pk = await api("/common/activityInfo?marketName=mCloudDay").catch(() => ({}));
+                const pkR = pk.result || {};
+                if (pkR.online && pkR.activityDay) break;
               }
+              it.coarseSleepSec = Math.round(slept / 1000);
             }
             const FAST_MS = Number(payload.fastPollSec || 5) * 1000;
             let waited = Math.round((Date.now() - t0) / 1000);
