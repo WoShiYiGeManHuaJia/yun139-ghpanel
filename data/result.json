@@ -1,64 +1,51 @@
 {
-  "ts": "2026-09-15 04:28:10",
-  "requestId": "status-1789446490484-nxvvnfk4",
-  "type": "status",
-  "ok": true,
-  "msg": "已查询 3 个账号",
-  "status": [
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": false,
-      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The toke"
-    },
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": true,
-      "total": 253,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 0,
-      "list": [],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
-    },
+  "ts": "2026-09-15 04:48:55",
+  "requestId": "receive-1789447735932-1t7k2fsw",
+  "type": "receive",
+  "ok": false,
+  "msg": "137****6553 失败:页面未加载出云豆数据（登录态失效或页面改版）",
+  "badAccounts": [
+    "137****6553"
+  ],
+  "enc_accounts": "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",
+  "receiveList": [
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "ok": true,
-      "total": 3,
-      "toReceive": 50,
-      "receivable": 250,
-      "nextMonth": 0,
-      "list": [
-        {
-          "cloudType": 3,
-          "cloudNum": 200,
-          "recordId": 550
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309273
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309249
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309138
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 20,
-          "recordId": 2344309118
-        }
+      "ok": false,
+      "got": 0,
+      "steps": [
+        "页面 token: 已获取",
+        "首次未读到云豆，重载页面重试…",
+        "初始云豆 null",
+        "⚠ 页面未读到云豆，诊断：URL=https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1&token=YZsidssolg20c408ea7d98798c55b297345f1f09f9#/newsignin",
+        "   页面文本: 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 137****6553 奖 品 规 则 3 云盘专属AI豆 +200 可领取 +10 可领取 +10 可领取 +10 可领取 +20 可领取 戳我看看吧～ 本月已签到 1 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 未签 14 今天 16 17 18 19 20 热门活动 做任务 兑好礼 绑定公众号 +",
+        "   气泡元素: 共 5 个，可点击 5 个",
+        "   API 云豆: 3 / 可领 250 / 下月 0",
+        "第1次无变化（null→null）",
+        "第2次无变化（null→null）",
+        "最终云豆 null"
       ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"完成任务\",\""
+      "error": "页面未加载出云豆数据（登录态失效或页面改版）"
     }
   ],
-  "enc_accounts": "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"
+  "receive": {
+    "phone": "13717306553",
+    "masked": "137****6553",
+    "ok": false,
+    "got": 0,
+    "steps": [
+      "页面 token: 已获取",
+      "首次未读到云豆，重载页面重试…",
+      "初始云豆 null",
+      "⚠ 页面未读到云豆，诊断：URL=https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1&token=YZsidssolg20c408ea7d98798c55b297345f1f09f9#/newsignin",
+      "   页面文本: 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 137****6553 奖 品 规 则 3 云盘专属AI豆 +200 可领取 +10 可领取 +10 可领取 +10 可领取 +20 可领取 戳我看看吧～ 本月已签到 1 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 未签 14 今天 16 17 18 19 20 热门活动 做任务 兑好礼 绑定公众号 +",
+      "   气泡元素: 共 5 个，可点击 5 个",
+      "   API 云豆: 3 / 可领 250 / 下月 0",
+      "第1次无变化（null→null）",
+      "第2次无变化（null→null）",
+      "最终云豆 null"
+    ],
+    "error": "页面未加载出云豆数据（登录态失效或页面改版）"
+  }
 }
