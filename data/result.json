@@ -1,43 +1,56 @@
 {
-  "ts": "2026-09-15 03:03:46",
-  "type": "status",
+  "ts": "2026-09-15 03:06:01",
+  "type": "receive",
   "ok": true,
-  "msg": "已查询 3 个账号",
-  "status": [
+  "msg": "172****9953 失败:自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The toke；137****4642 253→253 +0；137****6553 失败:页面未加载出云豆数据（登录态失效或页面改版）",
+  "badAccounts": [
+    "137****6553"
+  ],
+  "enc_accounts": "FWeY3BGa7rx/A0acin8+57yy4e98QHqAPCw4ooEJs39MM4jXanzRTGG1hfezwznKG0qALcaFYgf94LKRTRaDojuJMWyq870UDnkLYOfclwYy+v9XkwzB+jNlDfOjrrw73AFQwNE1xw57q2fngDffM/04vD/ppiWc9lSvTYoURTXzq6wJYH8t6D6l8inFFX1+86wOHLmrgyRt2e8gpaKzyfJGxAbp074bo+hci6GcyxnPSL+FHpl5RIrSae/BE1HRJA/wK/WZNc+sOoXPg2geRrGWveOuiDgGqkWDzz5S2xn/nhq1R+FuDfkhNk15FZ476iySywDst7dA9W5in1rNus4yt17r6WJz/wOvKF22S6Ly/eNuX92dIVPV0mz5qsaprvZH5tf5RZlrGk+QVWvaQmWfPgNHEinF4gREivts1GFrCCigscG36c5WfKYd8io3f2eJh9UbYmWzpvTe9PEI2YgU4CUKwD6ckw3NiMDgTXMY2F0ezSzf8jGCT+fnuyowXJDBcEPaLIW8ppnA0mGuWrZlI5+p5quW0bPE+Unhbexq4d2cE8UkczneU38r26i5gFAngjT6HjBrQCLBtr3OT9EuWeukawt1XCB8s1vWjTSMpbDTj4WiQDbDyXnDr5IIQ1uKVjuJ4gvz8cNzV6POLSsMh6ZtHKy4ZNN+KdTqXnotzDvgTtQ20qBffnuOfT6HdeTtW0s7fi6Mg9VZmFRQnHnYgfDglMyoRGe3a1VigMCeuk+YYlqMvt/K2+QCtM00mmvSt+dXuVvof+NCLh13F7zBOdn0pSq8fFerzEM/GNjm/KCZEyjSXgwY7cA5a0jB/Aa1gGIj9f1vMOyydyrCz1FXuczc7qV4fgrc1SUdbiW/klj7ky6fqddp13Hq+aiF/clU5pSif1WFZe4QDZxPE9KAl8A7/u4T5gKini2GEC0+KmzVrVJpBXeA4/2xDOT5scAJuNRrgjEykXiLKTUmHR49LgxkorNAV3kKvKNE8wgS8YDm3P3CIiXUslmdt191qSBtQ7SV7ZYyI1KFPaXclZVUYWMYmXtCeqn/pz2CzCT03uYMkLJjFpAgXEh9b5VQ52zmuqmX0CwEHEs+4jXNBZIRUXdKYLcBhfSmIoqspZasMGt2Gj5UhFa/ZIoKPwkIro06imotDl/vMRvT/rm70LkYFeBYh3S3WH7vDWaP0L5V72ZbcT1U0qXgv+9ZxsDWXgM0Tp18k7DfrjonO/uefYMB6lkAELIHr5FPL2T+5hp0ckisPoBZFjJc1PfxSUu8MTTBJRtVQ40kb8XTQieZqEq8STxiDd9/rU3bc/Ye+Bm3WRY23BYFWr7nf8rPLZyP1ea6WbfIAtFo33hgIZgEPZW08oc9rrwttgXKKsc34VoYGpIFk9/Q8/2FLzy6a4oPyQBa/McfrIArhNo0WrkiXjOkBlcHnCF8IgZKeGf95y5h8gSCLjAs+oqqXGWT2GFhAD2eQcXu5d96Ug2XDQuP1jff3RiQsUgROOE2yusyxk3TEVYAHJY6F7ZNAzcM0LjV37+95TQN08Aqk9CoBR/hoGx/RlnXVaM9LfmlKmLZF2bXmUYDTj11U6HWxsoK9afsQ70ho5aBKabsUWgonYjzyODczL1tPgxJ9LSZpgJ5TS3p21goDYHiziucpeuVCnWzeIyAnXx3XCFe9pKGO90yYi5mpdoJLmDT/2TACl6lUQcN8wkvnuMGtY3XmR+nqFGgQBQWL5lBGI/NuEa1/SiTGTlTnlwMzCMTSQiWRXOwIWVP/Svl4gy6rd2itgPpB0hNdgZd3VaV/8E1JDH6xb6jxmqJdYM5P2xWNGJ+mA8JsFlzYZnbgJ/3l8x6CGUFHHeeUDhuJDb2Nl20yDm0LI2D8951O+yD6Ml7dwdgPA31M7+XkFp0j/5xR/+xeRl1vSeHhfshTVLaS1zRGcaSMu7MToFJYNHk+egX8mkFhuTRvr0KLuE=",
+  "receiveList": [
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "ok": false,
-      "message": "fetch failed"
+      "got": 0,
+      "steps": [
+        "异常中断"
+      ],
+      "error": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The toke"
     },
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "ok": true,
-      "total": 253,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 0,
-      "list": [],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
+      "before": 253,
+      "after": 253,
+      "got": 0,
+      "steps": [
+        "页面 token: 已获取",
+        "初始云豆 253",
+        "最终云豆 253"
+      ],
+      "error": ""
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "ok": true,
-      "total": 3,
-      "toReceive": 0,
-      "receivable": 200,
-      "nextMonth": 0,
-      "list": [
-        {
-          "cloudType": 3,
-          "cloudNum": 200,
-          "recordId": 550
-        }
+      "ok": false,
+      "got": 0,
+      "steps": [
+        "页面 token: 已获取",
+        "首次未读到云豆，重载页面重试…",
+        "初始云豆 null",
+        "⚠ 页面未读到云豆，诊断：URL=https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1&token=YZsidssolg872f8a2130ad0e971c1e001ced7fb81c#/newsignin",
+        "   页面文本: 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 137****6553 奖 品 规 则 3 云盘专属AI豆 +200 可领取 戳我看看吧～ 本月已签到 1 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 未签 14 今天 16 17 18 19 20 热门活动 做任务 兑好礼 下月签到领惊喜福利 +50豆 连续签到月月可领 立即预定 绑定公众号 +200",
+        "   气泡元素: 共 1 个，可点击 1 个",
+        "   API 云豆: 3 / 可领 200 / 下月 0",
+        "第1次无变化（null→null）",
+        "第2次无变化（null→null）",
+        "最终云豆 null"
       ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"\",\"cal\""
+      "error": "页面未加载出云豆数据（登录态失效或页面改版）"
     }
   ],
-  "enc_accounts": "kMmC53iHFZhlG+XlFS3nS24pvnfjUqsP5odbEdIZ0t8r66EcGtLxJ+SXfikCtFPJgFFR6bwFVhWjndHnWCknaozjl/3khpFg3rpE6guHMGxAYpkdk+fvZPp6azokhx8FMPssIXLxMyKHyrAk5ItJ3Z519hAObiEVIoFf5c3lhnlMfAIvwpbfLkWiwAWS6bniuWFoYDq6uvM+p7dcc+GLepOZ8XzMTGF+vheG1XAEKPIgcYBqgRLQLGbx7Zd34ahS7r+30RZRftOGDgur/irBxr/lTQ2MjbQehKxN3BKalvNiMmN/ekjopcfNQV2nNvwTRVU0BurGEhWYOyjOQ4nrYBJKVQmXSPedv0VeAYRAfLmaNCNCakFpI9uXymtu4yj/EUTfOqo3mnu628o1ag47XETKHdIxYpqHSI4pDlfT/v01oMbxwPqWOTYVmAyLJ40vXoi4hsSngl/uvVr2tt5hXcx/wknznivelSnsnMHwlUvVqNvEOL9RkhYg0G7LTEDTLv3b9X2VeivM+MyBH/ht0KDTem/wH7EVDPI07SokQE/RESq3BNcK6IXzgrFW2DYab11G1OV3w+9zOCLZnAZm7yWMDEpp3dBZYVPY6SWDHbRcHiQggHUVuIYfQWiSLoUlE4ZL95QT6K6PjvW6Xf1LIJ7GQTOpfJO2XoUTfjzaBqTIFXjYfscbogtSVrEmuXackGBsue8CEGp4YkrV0POukD5hOZrfsPUyJHmcir36w4NZJV4eJulzAZZgvn7Si5Ev1FrTCnc4LtQqVPkunX7P8A7JvxcPS5BQGdZn9HJMQkAQQk7VYRYpx8aeabRnoHpyVodhidUKtSlADYaLUIbe3oUbbhWTDXLcmOoXUa77eQbp4V1eXLwCcHVPuECfv8WRhP3tVD5fNFf+Oq8zeIfyCc3ceDEyHmDulxqWoeQaKDVloerssiKxUGPS8I8FqjBi5RqAU4lB2aG7hXTHOtF9FGwT+ddQckdNWlVYHxtBJNR7my9wv3A6th9KICxo9S/2gOtsrUnn/a14Q/vDz7aVa4ivqSXqg2w2ucGota0dT+a3RT1oPgVB1R9EhB3Y+HIXVTo1BsWA+pFHVOfJ21dJbGrSlBmWgFVPV+HJj/2xaLVdU9qBDJjOQBF8fCboDaiIMn+n3sPFuZFGevktqG5rHa6a8JOZuAX+kBVFgWGHFVGA5Il0OsZeRya2/QFcLgrsEy0GyHwiKp3GxlbAWhAiTaYwX9VVzJu96Z2lIgFrIkkU69ubM072pDtYxQ3Ack/MRrSeVKQPtT7JmQPhgPgjIyKySJJCk3VcMa6qXbP5/jJ1FL8w/13v8xQ4r4y8GkzsIduwWO8fxz8joORbqqb9fyM47jY1eiNsSPCaswmWeOU0HYhbF1AyoFyawxnKmtps9pY6/r9x/vihTgXcdJgzdAzThMERtXzAP0DDIJlL3HnWg4igbNlVF7kv4xXXei7K1M/UxvZWNnhW4FpymA6F+5wkClPD5ezu9CssrH2y5PQXfFwceYOulBYhPfNa4saFur2iJWKp4QatxA5hHwSPavIdu4D/OBajjObyLleFyHkrEaVLZC5EdiimIYdXESr+IEYOpFjS3bNwhyqRykSrTB2Ap+JlSc3eDh84Ws6WAfNzspmDGQctlmwonDdMuA9t7p/vTqpWY5ItkfKqIG2n+kx4mZTOlhHgjJ5rWBtBx3Nefmve4yOHBtk+E6Hi2Nxz5mx+zT6BfzlyZ0QJt/lqZFuv78xge23KpRTA1NIP/lFdyu3iOWFrTZhI1Hlhsi1JsCvE+8VDO/dQPa2mkmNhhVrgr5n2JFMcyrC+GCOzGnLH69Cyz8rclhGkPWuhN7w8rcKh4c5kyPksLyFJBXggxSXDAaWEte8Zj7Aq/cR6u9+g2tP9LWW1iMJ7onsPerMHRx/3hgEjGaZ1MMFrBAKQF+ZFoOQmuEvsRArh/VC2rICAOoM="
+  "receive": null
 }
