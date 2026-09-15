@@ -1,0 +1,16 @@
+{
+  "steps": [
+    "===== 137****4642 =====",
+    "  toReceive=undefined receiveNum=undefined",
+    "  receiveList 条数: 0",
+    "  cloudType=3 条数: 0",
+    "===== 137****6553 =====",
+    "  toReceive=undefined receiveNum=undefined",
+    "  receiveList 条数: 0",
+    "  cloudType=3 条数: 0"
+  ],
+  "compare": {
+    "137****4642": [],
+    "137****6553": []
+  }
+}
