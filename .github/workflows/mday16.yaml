@@ -1,0 +1,55 @@
+name: yun139-mday16
+
+# 每月16号会员日（星动日）自动抢奖品
+# 北京 09:20 启动（UTC 01:20），轮询等开闸，黄金/白银场 10:30
+# GitHub cron 用 UTC，且可能延迟数分钟，故提前启动并长时等待
+on:
+  schedule:
+    - cron: '20 1 16 * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'query=只查资格 / grab=自动抢'
+        required: false
+        default: 'grab'
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  grab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    concurrency:
+      group: yun139-mday16
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run mday16
+        env:
+          EVENT_TYPE: mday16
+          PAYLOAD: ${{ github.event.inputs.mode && format('{{"mode":"{0}","maxWaitSec":5100,"fastPollSec":5}}', github.event.inputs.mode) || '{"mode":"grab","maxWaitSec":5100,"fastPollSec":5}' }}
+          PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
+        run: node actions/run.js
+      - name: Commit result
+        run: |
+          set -e
+          git config user.name "yun139-panel-bot"
+          git config user.email "yun139-panel-bot@users.noreply.github.com"
+          mkdir -p /tmp/mdayout
+          cp data/result.json /tmp/mdayout/result.json
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git checkout -B main FETCH_HEAD
+            cp /tmp/mdayout/result.json data/result.json
+            git add data/result.json
+            if git diff --cached --quiet; then echo "无变化"; break; fi
+            if git commit -m "mday16 会员日抢购结果 $(date -u +'%Y-%m-%d %H:%M UTC')" && git push origin main; then
+              echo "推送成功"; break
+            fi
+            echo "推送失败，重试 $i"; sleep 8
+          done

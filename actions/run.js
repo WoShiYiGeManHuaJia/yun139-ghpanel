@@ -1276,6 +1276,11 @@ async function main() {
             it.memberDesc = (mj.result || {}).desc || "";
           } catch (e) {}
 
+          if (R.isMember === false) {
+            it.result = "非会员，无资格参加会员日";
+            results.push(it); continue;
+          }
+
           if (mode === "query") {
             // 只读：清单 + 预约尝试
             const gl = await api("/gift/list");
@@ -1297,19 +1302,35 @@ async function main() {
           let open = !!(R.online && R.activityDay);
           if (!open) {
             const t0 = Date.now();
-            let waited = 0;
+            // 智能前置休眠：倒计时还远就先粗睡，临近开闸再密集轮询（避免请求过多被限流）
+            const cd = Number(R.countDownTimeStamp || 0);
+            if (cd > 300000) {
+              const coarseSleep = Math.min(cd - 240000, MAX_WAIT_MS);
+              if (coarseSleep > 1000) {
+                it.coarseSleepSec = Math.round(coarseSleep / 1000);
+                await new Promise(r => setTimeout(r, coarseSleep));
+              }
+            }
+            const FAST_MS = Number(payload.fastPollSec || 5) * 1000;
+            let waited = Math.round((Date.now() - t0) / 1000);
+            let checked = 0;
             while (Date.now() - t0 < MAX_WAIT_MS) {
-              await new Promise(r => setTimeout(r, POLL_MS));
-              waited = Math.round((Date.now() - t0) / 1000);
               const i2 = await api("/common/activityInfo?marketName=mCloudDay").catch(() => ({}));
+              checked++;
               const R2 = i2.result || {};
               if (R2.online && R2.activityDay) {
-                open = true; it.waitedSec = waited;
+                open = true; it.waitedSec = waited; it.checked = checked;
                 it.online = R2.online; it.activityDay = R2.activityDay;
                 break;
               }
+              if ((R2.countDownTimeStamp || 0) > 300000) {
+                await new Promise(r => setTimeout(r, 60000));
+              } else {
+                await new Promise(r => setTimeout(r, FAST_MS));
+              }
+              waited = Math.round((Date.now() - t0) / 1000);
             }
-            if (!open) { it.result = "等待超时未开闸（已等 " + waited + "s）"; results.push(it); continue; }
+            if (!open) { it.result = "等待超时未开闸（已等 " + waited + "s，查了 " + checked + " 次）"; results.push(it); continue; }
           }
 
           // 3) 开抢：按 sort 顺序逐个 verify + receive
