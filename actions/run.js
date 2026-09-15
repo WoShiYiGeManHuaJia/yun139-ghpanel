@@ -1416,8 +1416,28 @@ async function main() {
         }
         results.push(it);
       }
-      out.results = results;
-      out.ok = results.some(x => !x.err);
+      // 补齐面板需要的字段：message / ok / name（否则面板显示 undefined 且判定为失败爆红）
+      const MLEVEL = { "2": "黄金", "1": "白银", "3": "钻石", "-1": "非会员" };
+      out.results = results.map(x => {
+        const lv = MLEVEL[String(x.memberLevel)] || (x.memberDesc || ("Lv" + (x.memberLevel ?? "?")));
+        const bits = [];
+        bits.push("等级" + lv);
+        if (x.reservation) bits.push("预约" + x.reservation);
+        if (x.prizeCount) bits.push("奖品" + x.prizeCount + "件");
+        if (x.priority && x.prioId && x.prioId !== "清单中未找到") bits.push("优先目标" + x.priority + "(" + x.prioId + ")");
+        if (x.countdownMs) bits.push("倒计时" + fmtCountdown(Number(x.countdownMs)));
+        if (x.fastLane) bits.push(x.fastLane);
+        if (x.got && x.got.length) bits.push("抢到：" + x.got.join("、"));
+        if (x.result) bits.push(x.result);
+        if (x.err) bits.push("异常：" + x.err);
+        const gotAny = (x.got && x.got.length) || x.fastGot;
+        return Object.assign({}, x, {
+          name: "会员日",
+          message: bits.join("；") || (x.err ? String(x.err) : "无返回"),
+          ok: !!(!x.err && (gotAny || mode === "query" || x.reservation === "预约成功"))
+        });
+      });
+      out.ok = out.results.some(x => x.ok);
       out.msg = (mode === "query" ? "会员日资格查询完成" : (anyGot ? "会员日抢购完成，有收获" : "会员日抢购完成，未抢到"))
         + "（" + results.length + " 个账号）";
     } else if (type === "srefresh") {    } else if (type === "srefresh") {
