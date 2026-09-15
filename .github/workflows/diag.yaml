@@ -1,0 +1,36 @@
+name: yun139-diag
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 安装 Playwright
+        run: |
+          npm i --no-audit --no-fund playwright@1.63.0
+          npx playwright install chromium
+      - name: 运行诊断
+        env:
+          DIAG_PHONE: "17274079953"
+          DIAG_AUTH: ${{ secrets.DIAG_AUTH_9953 }}
+        run: node actions/diag.js > /tmp/diaglog.txt 2>&1 || true; cat /tmp/diaglog.txt | head -c 3000
+      - name: 保存诊断结果
+        run: |
+          mkdir -p data
+          cp /tmp/diag/out.json data/diag.json || echo "no output"
+          git config user.name "bot"
+          git config user.email "bot@users.noreply.github.com"
+          git checkout -f -B main $(git rev-parse HEAD)
+          git add data/diag.json
+          git diff --cached --quiet && echo "无变化" || git commit -m "diag: 云朵中心原始请求抓取"
+          git push origin main || echo "push skipped"
