@@ -379,6 +379,13 @@
   }
 
   // ---- 账号渲染 ----
+  // 号码标签：用真实号段（172/137/139…）+ 后四位，不再硬编码 139
+  function tagOf(phone) {
+    const p = String(phone || "");
+    if (p.length >= 7) return p.slice(0, 3) + "-" + p.slice(-4);
+    return p || "未知";
+  }
+
   const LS_CLOUD = "gh139_cloud";
   function loadCloud() { try { return JSON.parse(localStorage.getItem(LS_CLOUD) || "{}"); } catch (e) { return {}; } }
   function saveCloud(m) { try { localStorage.setItem(LS_CLOUD, JSON.stringify(m)); } catch (e) {} }
@@ -426,7 +433,7 @@
       const badge = a.status === "error" ? '<span class="badge err">异常</span>'
         : (days != null && days < 7 ? '<span class="badge exp">' + days + '天</span>' : '<span class="badge ok">正常</span>');
       el.innerHTML =
-        '<div class="top"><span class="phone">139-' + String(a.phone).slice(-4) + '</span>' + badge + '</div>' +
+        '<div class="top"><span class="phone">' + tagOf(a.phone) + '</span>' + badge + '</div>' +
         '<div class="meta">' + String(a.phone).replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2") + (a.expires_at ? " · 到期 " + a.expires_at : "") + '</div>' +
         '<div class="cloud" data-cloud="' + a.phone + '">' + cloudHtml(a.phone) + '</div>' +
         '<div class="ops"><button class="btn sm danger" data-idx="' + i + '">删除</button></div>';
@@ -572,7 +579,7 @@
       const idx = list.findIndex(a => a.phone === phone);
       const acc = {
         id: String(idx >= 0 ? list[idx].id : Date.now() % 1000000),
-        name: "139-" + phone.slice(-4), phone, authorization: auth.trim(),
+        name: tagOf(phone), phone, authorization: auth.trim(),
         expires_at: expMs ? fmt(expMs) : null, remaining_days: expMs ? Math.round((expMs - Date.now()) / 86400000 * 10) / 10 : null,
         created_at: new Date().toISOString(),
       };
@@ -782,7 +789,7 @@
     armPending({ type: "receive", kind: "receive", phone: phone || ""  });
     try {
       await dispatch("receive", { phone: phone || "", cipher: await encText(JSON.stringify(list)) });
-      log((phone ? "139-" + phone.slice(-4) : "全部账号") + " 气泡领取已触发，后台需启动真实浏览器，约 2-3 分钟…", "warn");
+      log((phone ? tagOf(phone) : "全部账号") + " 气泡领取已触发，后台需启动真实浏览器，约 2-3 分钟…", "warn");
       lastTs = ""; startWatch();
     } catch (e) {
       if (btn) setBusy(btn, false); clearPending();
@@ -796,9 +803,9 @@
   }
   function renderStatusRows(rows) {
     (rows || []).forEach(function (r) {
-      if (!r.ok) { log("139-" + String(r.phone).slice(-4) + " 查询失败：" + r.message, "err"); return; }
+      if (!r.ok) { log(tagOf(r.phone) + " 查询失败：" + r.message, "err"); return; }
       applyCloudCache(r.phone, { total: r.total, toReceive: r.toReceive, receivable: r.receivable, nextMonth: r.nextMonth });
-      const parts = ["139-" + String(r.phone).slice(-4)];
+      const parts = [tagOf(r.phone)];
       if (r.total != null) parts.push("云豆 " + r.total);
       if (r.receivable > 0) parts.push("🎁 可领 " + r.receivable);
       if (r.nextMonth > 0) parts.push("下月 " + r.nextMonth);
@@ -809,7 +816,7 @@
   }
   function renderReceiveRows(rows) {
     (rows || []).forEach(function (r) {
-      const tag = "139-" + String(r.phone).slice(-4);
+      const tag = tagOf(r.phone);
       const em = String(r.error || "未知");
       if (/令牌|鉴权|失效/.test(em)) {
         log(tag + " 令牌已失效，请重新用「方式二」粘贴该号码的 authorization 更新后再试", "err");
