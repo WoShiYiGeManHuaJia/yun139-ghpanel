@@ -855,7 +855,7 @@ async function main() {
   try { payload = JSON.parse(process.env.PAYLOAD || "{}"); } catch { throw new Error("PAYLOAD 不是合法 JSON"); }
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error("PAYLOAD 必须是 JSON 对象");
   const dataKey = process.env.PANEL_DATA_KEY || "";
-  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily"]);
+  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily","probe16"]);
   if (!allowedTypes.has(type)) throw new Error("未知命令: " + type);
   const key = dataKey ? await deriveKey(dataKey) : null;
 
@@ -1141,7 +1141,10 @@ async function main() {
       out.acctDiag = ra.diag;
       const c = ra.list[0] || await pickCreds();
       out.phone = c.phone; out.masked = maskPhone(c.phone);
-      const jwt = await getJwt(c.authorization, c.phone);
+      let jwt = "";
+      try { jwt = await getJwt(c.authorization, c.phone); }
+      catch (e) { out.ok = false; out.msg = "jwt 获取失败: " + String(e.message || e).slice(0,150); 
+                  out.probes = []; fs.writeFileSync(path.join(__dirname, "../data/result.json"), JSON.stringify(out, null, 2)); return console.log(JSON.stringify(out)); }
       const H = { "User-Agent": UA_CLOUD, "jwtToken": jwt, "Cookie": "jwtToken=" + jwt,
                   "Accept": "*/*", "X-Requested-With": "XMLHttpRequest", "Referer": "https://m.mcloud.139.com/" };
       const probes = [];
