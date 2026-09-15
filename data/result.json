@@ -1,7 +1,7 @@
 {
-  "ts": "2026-09-15 01:13:20",
+  "ts": "2026-09-15 01:19:59",
   "type": "sync",
   "ok": false,
-  "msg": "写入仓库文件失败",
+  "msg": "写入仓库文件失败: Cannot access 'fs' before initialization",
   "synced": 1
 }
