@@ -966,7 +966,6 @@ async function main() {
     out.msg = String(e.message || e).slice(0, 300);
   }
 
-  const fs = await import("fs");
   fs.writeFileSync(new URL("../data/result.json", import.meta.url), JSON.stringify(out, null, 2));
   console.log(JSON.stringify(out));
 }
