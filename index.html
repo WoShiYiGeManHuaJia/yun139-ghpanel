@@ -150,11 +150,11 @@
         <button class="btn ghost" id="btn_save_cfg">保存配置</button>
         <button class="btn ghost" id="btn_gen_key">生成 DATA_KEY</button>
       </div>
-      <label>连接令牌 PAT（仅当前浏览器会话保存）</label>
+      <label>连接令牌 PAT（勾选下方「记住」后存本机，下次自动带上）</label>
       <input id="cfg_pat" type="password" value="" placeholder="github_pat_... 或 ghp_...">
       <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--mut);cursor:pointer">
-        <input id="cfg_remember" type="checkbox" style="width:auto;height:16px;accent-color:var(--acc);flex:none;margin:0">
-        <span>记住 PAT（存本机浏览器，换设备/清缓存需重填）</span>
+        <input id="cfg_remember" type="checkbox" checked style="width:auto;height:16px;accent-color:var(--acc);flex:none;margin:0">
+        <span>记住 PAT（推荐勾选，存本机浏览器，下次打开自动带上）</span>
       </label>
       <button class="btn ghost" id="btn_copy_link" style="margin-top:8px">复制分享链接（换设备用）</button>
       <div class="hint">PAT 仅存当前浏览器会话；DATA_KEY 存在当前浏览器本地。复制分享链接只会分享仓库地址，不会携带 PAT 或 DATA_KEY。换设备后请重新填写凭据。</div>
@@ -309,7 +309,7 @@
 <script>
 (function(){
   const REPO_DEFAULT = "";
-  const LS_REPO = "gh139_repo", LS_TOKEN = "gh139_token", LS_KEY = "gh139_key", LS_ACC = "gh139_acc";
+  const LS_REPO = "gh139_repo", LS_TOKEN = "gh139_token", LS_KEY = "gh139_key", LS_ACC = "gh139_acc", LS_REMEMBER = "gh139_remember";
   const LS_CLOUD = "gh139_cloud", LS_TIP = "gh139_tasktip_off";
   const $ = id => document.getElementById(id);
   const log = (msg, cls) => { const box = $("log"); if (!box) return; const line = document.createElement("div"); line.className = "l-" + (cls || ""); line.textContent = "[" + new Date().toLocaleTimeString() + "] " + String(msg); box.prepend(line); };
@@ -338,7 +338,7 @@
     try {
       const pat = localStorage.getItem(LS_TOKEN) || sessionStorage.getItem(LS_TOKEN) || "";
       $("cfg_pat").value = pat;
-      if ($("cfg_remember")) $("cfg_remember").checked = !!localStorage.getItem(LS_TOKEN);
+      if ($("cfg_remember")) $("cfg_remember").checked = localStorage.getItem(LS_REMEMBER) !== "0";
     } catch (e) {}
   }
   function saveCfg() {
@@ -346,7 +346,8 @@
     localStorage.setItem(LS_KEY, $("cfg_key").value.trim());
     try {
       const pv = $("cfg_pat").value.trim();
-      const remember = $("cfg_remember") && $("cfg_remember").checked;
+      const remember = !($("cfg_remember") && $("cfg_remember").checked === false);
+      localStorage.setItem(LS_REMEMBER, remember ? "1" : "0");
       sessionStorage.removeItem(LS_TOKEN);
       localStorage.removeItem(LS_TOKEN);
       if (pv) {
@@ -786,11 +787,24 @@
   }
   async function pollResult() {
     try {
-      const r = await fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`, {
-        headers: { Authorization: "Bearer " + (localStorage.getItem(LS_TOKEN) || sessionStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag },
-      });
+      const tk = localStorage.getItem(LS_TOKEN) || sessionStorage.getItem(LS_TOKEN) || "";
+      const hdr = { Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag };
+      if (tk) hdr.Authorization = "Bearer " + tk;
+      let r;
+      try {
+        r = await fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`, { headers: hdr });
+      } catch (e) { return; }
       if (r.status === 304) return;
-      if (!r.ok) { log("读取结果失败 " + r.status, "err"); return; }
+      if (!r.ok) {
+        if (r.status === 401 || r.status === 403) {
+          // 401/403 多为 PAT 失效或限流：改用匿名重试一次，公开仓库匿名也可读
+          try {
+            const r2 = await fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`, { headers: { Accept: "application/vnd.github.raw+json" } });
+            if (!r2.ok) { log("读取结果失败 " + r2.status, "err"); return; }
+            r = r2;
+          } catch (e2) { log("读取结果失败 " + r.status, "err"); return; }
+        } else { log("读取结果失败 " + r.status, "err"); return; }
+      }
       lastETag = r.headers.get("etag") || "";
       const j = await r.json();
       if (!j) return;
@@ -1008,7 +1022,6 @@
   $("btn_list").onclick = fetchTaskList;
   $("btn_receive").onclick = function () { runReceive("", $("btn_receive")); };
   $("btn_status").onclick = runStatus;
-  try { localStorage.removeItem(LS_TOKEN); } catch (e) {}
   loadCfg(); applyUrlCfg(); renderAccounts(); renderTaskPlaceholder(); startWatch();
   pollResult().then(function () {
     api(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`)
