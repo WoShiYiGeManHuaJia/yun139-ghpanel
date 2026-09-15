@@ -765,14 +765,14 @@ async function receiveBubbles(authorization, phone, dev) {
         recv.push(b);
       }
     });
-    await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 120000 });
+    await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 45000 });
     await sleep(11000);
     let rb0 = await readCloudNumSafe(page, jwt);
     before = rb0.v;
     if (before === null) {
       // 首次未渲染出来，重载一次再试（偶发白屏/接口慢）
       steps.push("首次未读到云豆，重载页面重试…");
-      try { await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 }); } catch (e) {}
+      try { await page.reload({ waitUntil: "domcontentloaded", timeout: 45000 }); } catch (e) {}
       await sleep(9000);
       rb0 = await readCloudNumSafe(page, jwt);
       before = rb0.v;
@@ -797,12 +797,27 @@ async function receiveBubbles(authorization, phone, dev) {
       if (!n) break;
       eligible = true;
       const b0 = (await readCloudNumSafe(page, jwt)).v;
+      // ★ 气泡有浮动动画，locator.click() 的 actionability 检查必然超时。
+      //   实测只有 JS 直接派发 click（并补点子元素）才能真正触发领取。
       let clicked = false, err = "";
-      try { await page.locator(".AIPoints:not(.is-next-month)").first().click({ force: true, timeout: 8000 }); clicked = true; }
-      catch (e) {
-        err = String(e.message || e).slice(0, 60);
-        try { await page.evaluate(() => { const e2 = document.querySelector(".AIPoints:not(.is-next-month)"); if (e2) e2.click(); }); clicked = true; }
-        catch (e3) {}
+      try {
+        const r = await page.evaluate(() => {
+          const els = Array.from(document.querySelectorAll(".AIPoints"))
+            .filter(el => !/is-next-month/.test(el.className || ""));
+          if (!els.length) return "none";
+          const el = els[0];
+          el.click();
+          // 事件可能绑在子元素上，父子都派发一次
+          const inner = el.querySelector("div,span,img");
+          if (inner) inner.click();
+          return "clicked:" + els.length;
+        });
+        if (String(r).indexOf("clicked") === 0) clicked = true; else err = "无元素(" + r + ")";
+      } catch (e) { err = String(e.message || e).slice(0, 60); }
+      if (!clicked) {
+        // JS 点击失败才回退 locator（大概率也会超时，仅作兜底）
+        try { await page.locator(".AIPoints:not(.is-next-month)").first().click({ force: true, timeout: 6000 }); clicked = true; }
+        catch (e2) { err = String(e2.message || e2).slice(0, 60); }
       }
       await sleep(3800);
       const b1 = (await readCloudNumSafe(page, jwt)).v;
