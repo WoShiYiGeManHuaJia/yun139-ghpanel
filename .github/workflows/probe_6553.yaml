@@ -16,6 +16,8 @@ jobs:
         with:
           node-version: "20"
       - name: 6553 bubble probe
+        env:
+          PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
         run: node actions/probe_6553.js
       - name: Commit
         run: |
