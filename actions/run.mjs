@@ -263,6 +263,29 @@ async function getJwt(authorization, phone) {
   }
   throw last;
 }
+// 鉴权失效(1010010015)时自动续期一次，返回可用的 authorization（会就地更新 a）
+async function ensureAuth(a) {
+  try {
+    await getJwtOnce(a.authorization, a.phone);
+    return a.authorization;
+  } catch (e) {
+    const msg = String(e.message || e);
+    if (!/1010010015|鉴权失效/.test(msg)) throw e;
+    let d;
+    try { d = decodeAuth(a.authorization); } catch (e2) { throw e; }
+    const r = await refreshToken(a.phone, d.token);
+    if (!r.ok) throw new Error("自动续期失败: " + r.error);
+    const newAuth = btoa(unescape(encodeURIComponent(`${d.prefix}:${a.phone}:${r.data.new_token}`)));
+    a.authorization = newAuth;
+    a.expires_at = r.data.new_expires_at;
+    a.remaining_days = r.data.remaining_days;
+    a.last_refresh = nowStr();
+    a.auto_refreshed = true;
+    await getJwtOnce(newAuth, a.phone);   // 验证新凭据可用
+    return newAuth;
+  }
+}
+
 async function signOne(authorization, phone) {
   try {
     const jwt = await getJwt(authorization, phone);
@@ -772,7 +795,9 @@ async function main() {
       for (const a of accounts) {
         const row = { phone: a.phone, masked: maskPhone(a.phone) };
         try {
-          const jwt = await getJwt(a.authorization, a.phone);
+          const auth = await ensureAuth(a);
+          if (a.auto_refreshed) { row.refreshed = true; a.auto_refreshed = false; }
+          const jwt = await getJwt(auth, a.phone);
           const st = await cloudStatus(jwt);
           row.ok = true;
           row.total = st.total;
@@ -789,6 +814,7 @@ async function main() {
       out.status = rows;
       out.ok = rows.some(r => r.ok);
       out.msg = "已查询 " + rows.length + " 个账号";
+      if (key) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
     } else if (type === "receive") {
       let accounts = [];
       try { accounts = await decryptAccounts(); } catch (e) { accounts = []; }
@@ -800,7 +826,8 @@ async function main() {
       for (const a of targets) {
         let rb;
         try {
-          rb = await receiveBubbles(a.authorization, a.phone, { ud_id: a.ud_id, a_k: a.a_k });
+          const auth = await ensureAuth(a);
+          rb = await receiveBubbles(auth, a.phone, { ud_id: a.ud_id, a_k: a.a_k });
         } catch (e) {
           rb = { ok: false, error: String(e.message || e).slice(0, 120), got: 0, steps: ["异常中断"] };
         }
@@ -811,6 +838,7 @@ async function main() {
       }
       // 令牌失效的账号在结果中明确标注，方便前端提示用户重新粘贴
       out.badAccounts = rows.filter(r => !r.ok && /令牌|鉴权|失效/.test(String(r.error || ""))).map(r => r.masked || r.phone);
+      if (key) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
       out.receiveList = rows;
       out.receive = rows.length === 1 ? rows[0] : null;
       out.ok = rows.some(r => r.ok);
