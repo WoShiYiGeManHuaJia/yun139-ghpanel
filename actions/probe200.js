@@ -40,13 +40,27 @@ async function getJwt(authorization, phone) {
   throw new Error("tyrzLogin 失败");
 }
 
+const MCLOUD = "https://m.mcloud.139.com";
+const MOBILE_UA_FALLBACK = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
+const H1 = (jwt) => ({ "User-Agent": MOBILE_UA_FALLBACK, "jwtToken": jwt, "Accept": "application/json, text/plain, */*",
+  "X-Requested-With": "XMLHttpRequest", "Referer": MCLOUD + "/", "Cookie": "jwtToken=" + jwt });
 async function mcloudGet(jwt, p) {
-  const r = await fetchWithTimeout("https://m.mcloud.139.com" + p, {
-    headers: { "Authorization": "Bearer " + jwt, Accept: "application/json, text/plain, */*",
-      "User-Agent": "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0" },
-  });
-  const t = await r.text();
-  try { return JSON.parse(t); } catch { return { _raw: t.slice(0, 200) }; }
+  for (const hh of [H1(jwt), { "User-Agent": MOBILE_UA_FALLBACK, "Accept": "application/json, text/plain, */*", "Cookie": "jwtToken=" + jwt, "Referer": MCLOUD + "/" }]) {
+    try {
+      const r = await fetchWithTimeout(MCLOUD + p, { headers: hh }, 20000);
+      const t = await r.text();
+      try { const j = JSON.parse(t); if (j) return j; } catch {}
+    } catch (e) {}
+  }
+  return { _err: "请求失败" };
+}
+async function postReceive(jwt, body) {
+  const r = await fetchWithTimeout(MCLOUD + "/ycloud/signin/page/receiveV3", {
+    method: "POST",
+    headers: { ...H1(jwt), "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  }, 20000);
+  return (await r.text()).replace(/\s+/g, " ").slice(0, 200);
 }
 
 async function main() {
@@ -66,6 +80,7 @@ async function main() {
 
     // 1) 完整 infoV3
     const info = await mcloudGet(jwt, "/ycloud/signin/page/infoV3?client=app");
+    log("  infoV3 原始: " + JSON.stringify(info).slice(0, 400));
     const res = (info && (info.result || info.data)) || {};
     log("  toReceive=" + res.toReceive + " receiveNum=" + res.receiveNum);
     const arr = res.receiveList || res.taskList || res.list || [];
@@ -92,12 +107,7 @@ async function main() {
       ];
       for (const v of variants) {
         try {
-          const r = await fetchWithTimeout("https://m.mcloud.139.com/ycloud/signin/page/receiveV3", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Authorization": "Bearer " + jwt, Accept: "application/json" },
-            body: JSON.stringify(v.body),
-          });
-          const t = (await r.text()).replace(/\s+/g, " ").slice(0, 160);
+          const t = await postReceive(jwt, v.body);
           log("    [" + v.label + "] " + t);
         } catch (e) { log("    [" + v.label + "] 异常 " + String(e.message).slice(0, 60)); }
         await sleep(900);
@@ -109,12 +119,7 @@ async function main() {
       for (const it of arr.slice(0, 4)) {
         const cloudId = it.recordId !== undefined ? it.recordId : it.cloudId;
         try {
-          const r = await fetchWithTimeout("https://m.mcloud.139.com/ycloud/signin/page/receiveV3", {
-            method: "POST",
-            headers: { "Content-Type": "application/json", "Authorization": "Bearer " + jwt },
-            body: JSON.stringify({ client: "app", cloudId: Number(cloudId), cloudType: Number(it.cloudType) }),
-          });
-          const t = (await r.text()).replace(/\s+/g, " ").slice(0, 160);
+          const t = await postReceive(jwt, { client: "app", cloudId: Number(cloudId), cloudType: Number(it.cloudType) });
           log("    尝试 cloudId=" + cloudId + " type=" + it.cloudType + " → " + t);
         } catch (e) { log("    尝试异常 " + String(e.message).slice(0, 60)); }
         await sleep(900);
