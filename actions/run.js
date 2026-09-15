@@ -954,6 +954,55 @@ async function receiveBubbles(authorization, phone, dev) {
       else { steps.push("气泡#" + (idx + 1) + " " + res + " 无变化（" + b0 + "→" + b1 + "）"); }
     }
     after = (await readCloudNumSafe(page, jwt)).v;
+
+    // ── 领完复检：API 还有可领就继续领，直到清零或连续无进展 ──
+    // 这是"确保领干净"的关键：不是点一轮就结束，而是反复核对到可领=0
+    for (let qa = 0; qa < 4; qa++) {
+      let stQ = null;
+      try { stQ = await cloudStatus(jwt); } catch (e) { break; }
+      const pend = (stQ.list || []).filter(x => x && x.cloudType === 0 && x.recordId);
+      steps.push("复检#" + (qa + 1) + ": API可领 " + (stQ.receivable || 0) + "，待领项 " + pend.length);
+      if (!pend.length) { steps.push("✅ 可领已清零"); break; }
+
+      // 先试 API（大额/部分类型这条路可行）
+      let moved = false;
+      try {
+        const rq = await receiveViaApi(jwt, pend);
+        if (rq.got > 0) { got += rq.got; moved = true; steps.push("  复检API +" + rq.got); }
+        for (const x of rq.steps) steps.push("    " + x);
+      } catch (e) { steps.push("  复检API异常: " + String(e.message || e).slice(0, 50)); }
+
+      // API 没领到就回退页面点击（页面元素每次重新枚举，因为 DOM 会刷新）
+      if (!moved) {
+        const nNow = await page.evaluate(() => document.querySelectorAll(".AIPoints").length);
+        for (let idx = 0; idx < Math.min(nNow, 12); idx++) {
+          const isNext = await page.evaluate((k) => {
+            const el = document.querySelectorAll(".AIPoints")[k];
+            return !el ? "gone" : (/is-next-month/.test(el.className || "") ? "next" : "ok");
+          }, idx);
+          if (isNext !== "ok") continue;
+          const b0 = (await readCloudNumSafe(page, jwt)).v;
+          await page.evaluate((k) => {
+            const el = document.querySelectorAll(".AIPoints")[k];
+            if (!el) return;
+            el.scrollIntoView({ block: "center" });
+            const rc = el.getBoundingClientRect();
+            const cx = rc.x + rc.width / 2, cy = rc.y + rc.height / 2;
+            const fire = (t) => el.dispatchEvent(new PointerEvent(t, { bubbles: true, cancelable: true, clientX: cx, clientY: cy, pointerType: "touch", isPrimary: true }));
+            fire("pointerdown"); fire("pointerup"); fire("click"); el.click();
+            const inner = el.querySelector("div,span,img");
+            if (inner) inner.click();
+          }, idx);
+          await sleep(6000);
+          const b1 = (await readCloudNumSafe(page, jwt)).v;
+          const d = (b0 !== null && b1 !== null) ? (b1 - b0) : 0;
+          if (d > 0) { got += d; moved = true; steps.push("  复检点击#" + (idx + 1) + " +" + d + "（" + b0 + "→" + b1 + "）"); }
+        }
+      }
+      if (!moved) { steps.push("⚠ 复检发现仍有可领，但本轮未领到（可能需真机环境）"); break; }
+      await sleep(2500);
+    }
+    after = (await readCloudNumSafe(page, jwt)).v;
     steps.push("最终云豆 " + after);
     if (before === null && after === null) {
       return { ok: false, error: "页面未加载出云豆数据（登录态失效或页面改版）", got: 0, steps };
