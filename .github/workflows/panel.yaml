@@ -2,11 +2,11 @@ name: yun139-panel-task
 
 on:
   repository_dispatch:
-    types: [sign, refresh, send_code, do_login, task, receive, daily, status]
+    types: [sign, refresh, send_code, do_login, task, receive, daily, status, sync]
   workflow_dispatch:
     inputs:
       event_type:
-        description: 事件类型 sign/refresh/send_code/do_login/task/receive/daily/status
+        description: 事件类型 sign/refresh/send_code/do_login/task/receive/daily/status/sync
         required: true
         type: string
       payload:

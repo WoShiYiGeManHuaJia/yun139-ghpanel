@@ -363,6 +363,17 @@
   async function saveAccounts(list) { localStorage.setItem(LS_ACC, await encText(JSON.stringify(list))); }
 
   // ---- GitHub API ----
+  // 把本地账号列表同步到仓库文件 data/accounts.enc（供定时任务使用）
+  async function syncAccountsToRepo(reason) {
+    try {
+      const list = await loadAccounts();
+      if (!list || !list.length) return;
+      const cipher = await encText(JSON.stringify(list));
+      await dispatch("sync", { cipher: cipher });
+      log("已同步 " + list.length + " 个账号到仓库" + (reason ? "（" + reason + "）" : ""), "ok");
+    } catch (e) { log("同步账号到仓库失败：" + (e.message || e), "err"); }
+  }
+
   function owner() { return ($("cfg_repo").value.trim() || REPO_DEFAULT).split("/")[0]; }
   function repo() { return ($("cfg_repo").value.trim() || REPO_DEFAULT).split("/")[1]; }
   async function api(url, opts) {
@@ -446,8 +457,7 @@
     });
     if (flashIdx != null && box.children[flashIdx]) { box.children[flashIdx].classList.add("flash"); box.children[flashIdx].scrollIntoView({ behavior: "smooth", block: "center" }); }
     box.querySelectorAll("[data-idx]").forEach(function (b) {
-      b.onclick = async function () { const lst = await loadAccounts(); lst.splice(+b.dataset.idx, 1); await saveAccounts(lst); renderAccounts(); log("已删除账号"); };
-    });
+      b.onclick = async function () { const lst = await loadAccounts(); lst.splice(+b.dataset.idx, 1); await saveAccounts(lst); renderAccounts(); syncAccountsToRepo("删除账号"); log("已删除账号"); };    });
   }
 
   // ---- 方式一 / 方式二 tab 切换 ----
@@ -592,6 +602,7 @@
       else { list.push(acc); $("pasteStatus").textContent = "已添加账号 +" + phone.slice(-4); }
       $("pasteStatus").className = "status ok";
       await saveAccounts(list); renderAccounts(); log("已添加账号 " + phone.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")); toast("账号已添加 ✓");
+    syncAccountsToRepo("新增账号");
       setTimeout(closePasteDialog, 700);
     } catch (e) {
       $("pasteStatus").textContent = "解析失败：" + (e.message || "格式不对") + "，请确认复制内容是否完整";

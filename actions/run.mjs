@@ -11,6 +11,8 @@ const KEY_HEX_2 = "7150714477323633586746674c337538";                   // 16字
 const SMS_RSA_N = "9ec3874c5b705b9aeaffc80684f94ce59dd13dd78dfddf856081dbe4999c7c1382a335ee4fc73ed1a9efc6d923ce0862c703659e606e84df0e61f4bbf3d62e1ffa917906c70bb39d962b0b8a574d58f1d135461c3dad16de55d21b7fbcd425caec50d73ef5e8e6e6f0d86a956c8b1c70c6ab2357727d7762e084e2097be633dc1805d52cf725eda28ae1969c98508d8657c1cdb108d62bd3f94191d3de8c79432fa68d19afbfa4541492cf38c90e4bfa466740f00b5ca9159071b2d5b4fdfb55ba974e9865af5bb276fdedddab703f52f2240b861463f7622f5c22821271d46f4c89144e2128cd32f372503493a8f272e75ebe977b201c46dcd3aed0209c7635";
 const SMS_RSA_E = 65537;
 
+import fs from "fs";
+
 // ---------------- 通用工具 ----------------
 function b64encode(bytes) { return Buffer.from(bytes).toString("base64"); }
 function utf8B64(str) { return Buffer.from(str, "utf8").toString("base64"); }
@@ -679,6 +681,29 @@ async function main() {
     if (!Array.isArray(arr)) throw new Error("解密结果不是账号列表");
     return arr;
   }
+  // ---- 账号仓库文件：data/accounts.enc（用 DATA_KEY 加密，续期后自动回写，供定时任务使用）----
+  const STORE_PATH = new URL("../data/accounts.enc", import.meta.url);
+  async function loadStore() {
+    try {
+      const b = fs.readFileSync(STORE_PATH, "utf8").trim();
+      if (!b) return null;
+      const arr = JSON.parse(await aesGcmDecryptText(key, b));
+      return Array.isArray(arr) && arr.length ? arr : null;
+    } catch (e) { return null; }
+  }
+  async function saveStore(list) {
+    try { fs.writeFileSync(STORE_PATH, await aesGcmEncryptText(key, JSON.stringify(list))); return true; }
+    catch (e) { return false; }
+  }
+  // 统一解析账号来源：前端 cipher > 仓库文件 > Secret 兜底
+  async function resolveAccounts() {
+    try { const l = await decryptAccounts(); if (l.length) return { list: l, trusted: true }; } catch (e) {}
+    const st = await loadStore();
+    if (st) return { list: st, trusted: true };
+    const c = await pickCreds();
+    return { list: [c], trusted: false };
+  }
+
   // 定时运行时没有前端 cipher，回退读仓库 Secret
   async function pickCreds() {
     const ea = process.env.YUN139_AUTHORIZATION, ep = process.env.YUN139_PHONE;
@@ -719,8 +744,18 @@ async function main() {
       out.phone = phone;
       out.msg = "登录成功, 已抓取令牌";
       out.ok = true;
-    } else if (type === "sign" || type === "refresh") {
+    } else if (type === "sync") {
+      // 前端把当前账号列表同步到仓库文件（供定时任务使用）
+      if (!key) throw new Error("未配置 PANEL_DATA_KEY");
       const accounts = await decryptAccounts();
+      if (!accounts.length) throw new Error("账号列表为空");
+      const okw = await saveStore(accounts);
+      out.ok = okw;
+      out.msg = okw ? ("已同步 " + accounts.length + " 个账号到仓库（定时任务将使用）") : "写入仓库文件失败";
+      out.synced = accounts.length;
+    } else if (type === "sign" || type === "refresh") {
+      const ra = await resolveAccounts();
+      const accounts = ra.list;
       const results = [];
       const updated = [];
       for (const a of accounts) {
@@ -743,11 +778,13 @@ async function main() {
         updated.push(a);
       }
       out.results = results;
-      out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(updated));
+       if (key) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(updated));
+       if (ra.trusted) await saveStore(updated);   // 续期后回写仓库
       out.msg = type === "sign" ? "签到完成" : "续期完成";
       out.ok = true;
     } else if (type === "task") {
-      const accounts = await decryptAccounts();
+      const ra = await resolveAccounts();
+      const accounts = ra.list;
       const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks : ["sign"];
       const results = [];
       for (const a of accounts) {
@@ -788,10 +825,8 @@ async function main() {
       out.msg = "云朵任务执行完成";
       out.ok = true;
     } else if (type === "status") {
-      let accounts = [];
-      let fromCipher = false;
-      try { accounts = await decryptAccounts(); fromCipher = true; } catch (e) { accounts = []; }
-      if (!accounts.length) { const c = await pickCreds(); accounts = [c]; }
+      const ra = await resolveAccounts();
+      const accounts = ra.list;
       const rows = [];
       for (const a of accounts) {
         const row = { phone: a.phone, masked: maskPhone(a.phone) };
@@ -816,12 +851,11 @@ async function main() {
       out.ok = rows.some(r => r.ok);
       out.msg = "已查询 " + rows.length + " 个账号";
       // 仅当账号来自前端加密数据才回写，避免用 Secret 兜底的单个号覆盖用户全部账号
-      if (key && fromCipher) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
+      if (key && ra.trusted) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
+      if (ra.trusted) await saveStore(accounts);
     } else if (type === "receive") {
-      let accounts = [];
-      let recvFromCipher = false;
-      try { accounts = await decryptAccounts(); recvFromCipher = true; } catch (e) { accounts = []; }
-      if (!accounts.length) { const c = await pickCreds(); accounts = [c]; }
+      const ra2 = await resolveAccounts();
+      const accounts = ra2.list;
       const only = String(payload.phone || "").trim();
       const targets = only ? accounts.filter(a => String(a.phone) === only) : accounts;
       if (!targets.length) throw new Error("未找到目标账号");
@@ -841,7 +875,8 @@ async function main() {
       }
       // 令牌失效的账号在结果中明确标注，方便前端提示用户重新粘贴
       out.badAccounts = rows.filter(r => !r.ok && /令牌|鉴权|失效/.test(String(r.error || ""))).map(r => r.masked || r.phone);
-      if (key && recvFromCipher) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
+      if (key && ra2.trusted) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
+      if (ra2.trusted) await saveStore(accounts);
       out.receiveList = rows;
       out.receive = rows.length === 1 ? rows[0] : null;
       out.ok = rows.some(r => r.ok);
@@ -859,39 +894,66 @@ async function main() {
       out.msg = rr.ok ? ("续期成功，剩余 " + rr.data.remaining_days + " 天") : (rr.error || "续期失败");
       if (rr.ok) out.new_expires_at = rr.data.new_expires_at;
     } else if (type === "rtask" || type === "daily") {
-      const c = await pickCreds();
-      if (type === "daily") {
-        const rr = await refreshToken(c.phone, decodeAuth(c.authorization).token);
-        out.refresh = rr.ok ? ("成功，剩余 " + rr.data.remaining_days + " 天") : (rr.error || "失败");
-        if (rr.ok) out.new_expires_at = rr.data.new_expires_at;
+      // daily：遍历仓库/前端账号逐个续期 + 推进任务 + 领气泡，并回写仓库
+      const ra = await resolveAccounts();
+      const accounts = ra.list;
+      const perAccount = [];
+      let okCount = 0;
+      for (const a of accounts) {
+        const item = { phone: a.phone, masked: maskPhone(a.phone) };
+        try {
+          const auth = await ensureAuth(a);
+
+          // 1) 续期
+          if (type === "daily") {
+            const rr = await refreshToken(a.phone, decodeAuth(auth).token);
+            if (rr.ok) {
+              const d = decodeAuth(auth);
+              a.authorization = btoa(unescape(encodeURIComponent(`${d.prefix}:${a.phone}:${rr.data.new_token}`)));
+              a.expires_at = rr.data.new_expires_at;
+              a.remaining_days = rr.data.remaining_days;
+              a.last_refresh = nowStr();
+              item.refresh = "成功，剩余 " + rr.data.remaining_days + " 天";
+            } else {
+              item.refresh = "失败：" + rr.error;
+            }
+          }
+
+          // 2) 推进可点击任务
+          const jwt = await getJwt(a.authorization, a.phone);
+          const before = await fetchTaskList(jwt);
+          const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks.map(String) : [];
+          const results = [];
+          for (const t of before) {
+            if (wanted.length && !wanted.includes(String(t.id))) continue;
+            if (t.state === "FINISH") continue;
+            if (t.steps.indexOf("click") < 0) continue;
+            const r = await clickTask(jwt, t.id);
+            results.push({ id: t.id, name: t.name, ok: r.ok });
+            await new Promise(x => setTimeout(x, 600));
+          }
+          item.tasks = results.length;
+
+          // 3) 领气泡（真实浏览器，较慢）
+          try {
+            const rb = await receiveBubbles(a.authorization, a.phone, { ud_id: a.ud_id, a_k: a.a_k });
+            item.receive = rb.ok ? ("+" + rb.got + "（" + rb.before + "→" + rb.after + "）") : ("失败：" + (rb.error || "未知"));
+          } catch (e) { item.receive = "异常：" + String(e.message || e).slice(0, 80); }
+
+          item.ok = true; okCount++;
+        } catch (e) {
+          item.ok = false; item.error = String(e.message || e).slice(0, 160);
+        }
+        perAccount.push(item);
+        await new Promise(x => setTimeout(x, 1200));
       }
-      const jwt = await getJwt(c.authorization, c.phone);
-      const before = await fetchTaskList(jwt);
-      const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks.map(String) : [];
-      const results = [];
-      for (const t of before) {
-        if (wanted.length && !wanted.includes(String(t.id))) continue;
-        if (t.state === "FINISH") { results.push({ id: t.id, name: t.name, reward: t.reward, ok: true, msg: "已完成" }); continue; }
-        if (t.steps.indexOf("click") < 0) { results.push({ id: t.id, name: t.name, reward: t.reward, ok: false, msg: "需真实操作(" + t.steps.join("/") + ")" }); continue; }
-        const r = await clickTask(jwt, t.id);
-        results.push({ id: t.id, name: t.name, reward: t.reward, ok: r.ok, msg: r.msg });
-        await new Promise(x => setTimeout(x, 600));
-      }
-      const after = await fetchTaskList(jwt);
-      const map = {}; for (const t of after) map[t.id] = t;
-      for (const r of results) { const a = map[r.id]; if (a) { r.afterProcess = a.process; r.afterState = a.state; } }
-      out.results = results; out.tasks = after;
-      try {
-        const rb = await receiveBubbles(c.authorization, c.phone);
-        out.receive = rb;
-        if (rb.ok) out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务；气泡领取 +" + rb.got + "（" + rb.before + "→" + rb.after + "）";
-        else out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务；气泡领取失败";
-      } catch (rbErr) {
-        out.receive = { ok: false, error: String(rbErr.message || rbErr).slice(0, 150) };
-        out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务；气泡领取异常";
-      }
-      if (!out.msg) out.msg = (out.refresh ? "续期" + out.refresh + "；" : "") + "处理 " + results.length + " 个任务";
-      out.ok = true;
+      out.perAccount = perAccount;
+      if (key && ra.trusted) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
+      if (ra.trusted) await saveStore(accounts);
+      out.results = perAccount.map(x => ({ phone: x.phone, masked: x.masked, name: "", ok: x.ok,
+        message: [x.refresh ? "续期" + x.refresh : "", x.tasks !== undefined ? "任务" + x.tasks + "个" : "", x.receive ? "气泡" + x.receive : "", x.error || ""].filter(Boolean).join("；") }));
+      out.ok = okCount > 0;
+      out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个";
     } else {
       throw new Error("未知命令: " + type);
     }
