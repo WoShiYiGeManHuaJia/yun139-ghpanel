@@ -1503,6 +1503,9 @@ async function main() {
         const a = accounts[ai];
         if (ai > 0) await new Promise(r => setTimeout(r, 3500));
         const item = { phone: a.phone, masked: maskPhone(a.phone) };
+        // 网络抖动（fetch failed / ECONNRESET / timeout）整体重试，避免限流时误报"异常"
+        for (let attempt = 0; attempt < 3; attempt++) {
+        let netErr = null;
         try {
           const auth = await ensureAuth(a);
 
@@ -1548,7 +1551,18 @@ async function main() {
           item.ok = !item.refresh || !String(item.refresh).startsWith("失败：");
           if (item.ok) okCount++;
         } catch (e) {
-          item.ok = false; item.error = String(e.message || e).slice(0, 160);
+          const msg = String(e.message || e);
+          const isNet = /fetch failed|ECONNRESET|ETIMEDOUT|timeout|socket hang up|network/i.test(msg);
+          if (isNet && attempt < 2) {
+            netErr = msg;
+            await new Promise(r => setTimeout(r, [15000, 40000][attempt] || 20000));
+            continue;
+          }
+          item.ok = false;
+          item.error = (isNet ? "网络异常（已重试3次）：" : "") + msg.slice(0, 140);
+        }
+        if (netErr) continue;
+        break;
         }
         perAccount.push(item);
         await new Promise(x => setTimeout(x, 1200));
