@@ -597,25 +597,38 @@ const MOBILE_UA_FALLBACK = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1
 const SIGNIN_PAGE = "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1#/newsignin";
 const MOBILE_UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
 async function readCloudNum(page) {
-  // 优先：在页面上下文里直接调官方接口，避免文案变化导致读不到
+  // ① 页面上下文里调官方接口（注意：必须用浏览器原生 fetch，Node 侧函数在页面里不存在）
   try {
     const v = await page.evaluate(async () => {
       try {
-        const r = await fetchWithTimeout("/ycloud/signin/page/getCloudNum", { headers: { Accept: "application/json, text/plain, */*" }, credentials: "include" });
+        const r = await fetch("/ycloud/signin/page/getCloudNum", { headers: { Accept: "application/json, text/plain, */*" }, credentials: "include" });
+        if (!r.ok) return null;
         const j = await r.json();
         const n = (j && j.result !== undefined && j.result !== null) ? j.result : (j && j.data && j.data.cloudNum);
         return n === undefined || n === null ? null : Number(n);
       } catch (e) { return null; }
     });
-    if (v !== null && !isNaN(v)) return v;
+    if (v !== null && v !== undefined && !isNaN(v)) return v;
   } catch (e) {}
-  // 兜底：页面文案（兼容「云盘专属AI豆 / 云豆 / AI豆」多种写法）
+  // ② 兜底：页面文案（云豆可能为个位数，不能限制最少 2 位）
   try {
     const t = await page.locator("body").innerText();
-    const m = String(t).match(/([\d,]{2,9})\s*(?:云盘专属AI豆|云豆|AI豆)/);
+    const m = String(t).match(/([\d,]{1,9})\s*(?:云盘专属AI豆|云豆|AI豆)/);
     if (m) { const n = parseInt(String(m[1]).replace(/,/g, ""), 10); return isNaN(n) ? null : n; }
   } catch (e) {}
   return null;
+}
+// 云豆读取的统一入口：页面读不到时直接用 API，避免误判为"页面未加载"
+async function readCloudNumSafe(page, jwt) {
+  let v = await readCloudNum(page);
+  if (v !== null) return { v, src: "page" };
+  if (jwt) {
+    try {
+      const st = await cloudStatus(jwt);
+      if (st && st.total !== null && st.total !== undefined) return { v: st.total, src: "api" };
+    } catch (e) {}
+  }
+  return { v: null, src: "none" };
 }
 async function diagPage(page) {
   try {
@@ -670,14 +683,17 @@ async function receiveBubbles(authorization, phone, dev) {
     });
     await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 120000 });
     await sleep(11000);
-    before = await readCloudNum(page);
+    let rb0 = await readCloudNumSafe(page, jwt);
+    before = rb0.v;
     if (before === null) {
       // 首次未渲染出来，重载一次再试（偶发白屏/接口慢）
       steps.push("首次未读到云豆，重载页面重试…");
       try { await page.reload({ waitUntil: "domcontentloaded", timeout: 120000 }); } catch (e) {}
       await sleep(9000);
-      before = await readCloudNum(page);
+      rb0 = await readCloudNumSafe(page, jwt);
+      before = rb0.v;
     }
+    if (before !== null) steps.push("云豆来源: " + rb0.src);
     steps.push("初始云豆 " + before);
     if (before === null) {
       const d = await diagPage(page);
@@ -696,7 +712,7 @@ async function receiveBubbles(authorization, phone, dev) {
       const n = await page.locator(".AIPoints:not(.is-next-month)").count();
       if (!n) break;
       eligible = true;
-      const b0 = await readCloudNum(page);
+      const b0 = (await readCloudNumSafe(page, jwt)).v;
       let clicked = false, err = "";
       try { await page.locator(".AIPoints:not(.is-next-month)").first().click({ force: true, timeout: 8000 }); clicked = true; }
       catch (e) {
@@ -705,16 +721,18 @@ async function receiveBubbles(authorization, phone, dev) {
         catch (e3) {}
       }
       await sleep(3800);
-      const b1 = await readCloudNum(page);
+      const b1 = (await readCloudNumSafe(page, jwt)).v;
       const delta = (b0 !== null && b1 !== null) ? (b1 - b0) : 0;
       if (delta > 0) { got += delta; steps.push("第" + (round + 1) + "次领取 +" + delta + "（" + b0 + "→" + b1 + "）"); noChange = 0; }
       else { steps.push("第" + (round + 1) + "次无变化（" + b0 + "→" + b1 + "）" + (err ? " err=" + err : "")); noChange++; if (!clicked || noChange >= 2) break; }
     }
-    after = await readCloudNum(page);
+    after = (await readCloudNumSafe(page, jwt)).v;
     steps.push("最终云豆 " + after);
     if (before === null && after === null) {
       return { ok: false, error: "页面未加载出云豆数据（登录态失效或页面改版）", got: 0, steps };
     }
+    // 页面读不到初始值时以 API 值为准，避免把"可领取"误判成失败
+    if (before === null && after !== null) before = after;
     if (before !== null && after !== null && after > before && got === 0) got = after - before;
     if (eligible && got === 0 && before !== null && after !== null && after <= before) {
       return { ok: false, before, after, got: 0, error: "检测到可领取气泡，但点击后云豆未增加", recv: recv.slice(0, 6), steps };
