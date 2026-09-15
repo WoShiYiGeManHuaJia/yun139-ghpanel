@@ -976,7 +976,7 @@ async function main() {
   try { payload = JSON.parse(process.env.PAYLOAD || "{}"); } catch { throw new Error("PAYLOAD 不是合法 JSON"); }
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error("PAYLOAD 必须是 JSON 对象");
   const dataKey = process.env.PANEL_DATA_KEY || "";
-  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily","probe16","mday16","diag"]);
+  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily","probe16","mday16","diag","verify"]);
   if (!allowedTypes.has(type)) throw new Error("未知命令: " + type);
   const key = dataKey ? await deriveKey(dataKey) : null;
 
@@ -1622,6 +1622,135 @@ async function main() {
       } catch (e) {
         out.dingtalk = { ok: false, error: String(e.message || e).slice(0, 120) };
       }
+    } else if (type === "verify") {
+      // ── 零容忍验证：API 清单 / 页面气泡 / 点击结果 / 最终复检，四步逐项核对 ──
+      const ra = await resolveAccounts();
+      const only = String(payload.phone || "").trim();
+      const targets = only ? ra.list.filter(a => String(a.phone) === only) : ra.list;
+      const vout = [];
+      for (const a of targets) {
+        const V = { phone: a.phone, masked: maskPhone(a.phone), pass: true, issues: [], steps: [] };
+        try {
+          const auth = await ensureAuth(a);
+          const jwt = await getJwt(auth, a.phone);
+
+          // 步骤1：API 清单
+          const st = await cloudStatus(jwt);
+          V.apiBefore = { total: st.total, receivable: st.receivable, toReceive: st.toReceive,
+                          nextMonth: st.nextMonth, list: st.list };
+          V.steps.push("①API: 云豆=" + st.total + " 可领=" + st.receivable + " 待领=" + st.toReceive + " 下月=" + st.nextMonth);
+          if (!st.list || !st.list.length) V.steps.push("①API 清单为空");
+
+          // 步骤2：打开页面，抓真实气泡元素
+          let chromium = null;
+          try { chromium = require("playwright").chromium; } catch (e) {}
+          if (!chromium) {
+            V.pass = false; V.issues.push("playwright 未安装，无法做页面核对");
+            vout.push(V); continue;
+          }
+          const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
+          try {
+            let pageUrl = SIGNIN_PAGE;
+            try { const sso = await getSsoToken(auth, a.phone); if (sso) pageUrl = SIGNIN_PAGE.replace("#/newsignin", "&token=" + encodeURIComponent(sso) + "#/newsignin"); } catch (e) {}
+            const ctx = await browser.newContext({ userAgent: MOBILE_UA, viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true, locale: "zh-CN", timezoneId: "Asia/Shanghai" });
+            await ctx.addCookies([
+              { name: "jwtToken", value: jwt, domain: "m.mcloud.139.com", path: "/" },
+              { name: "NATION_CODE", value: "86", domain: "m.mcloud.139.com", path: "/" },
+              { name: "platform", value: "2", domain: "m.mcloud.139.com", path: "/" },
+            ].concat(a.ud_id ? [{ name: "ud_id", value: String(a.ud_id), domain: "m.mcloud.139.com", path: "/" }] : [])
+             .concat(a.a_k ? [{ name: "a_k", value: String(a.a_k), domain: "m.mcloud.139.com", path: "/" }] : []));
+            const page = await ctx.newPage();
+            const recvRes = [];
+            page.on("response", async r => {
+              if (/receiveV3/.test(r.url())) {
+                let b = ""; try { b = (await r.text()).slice(0, 160); } catch (e) {}
+                recvRes.push(b);
+              }
+            });
+            await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 60000 });
+            await sleep(13000);
+
+            const snap = await page.evaluate(() => {
+              const all = Array.from(document.querySelectorAll(".AIPoints"));
+              return all.map((el, i) => ({
+                i, cls: el.className,
+                text: (el.innerText || "").replace(/\s+/g, " ").trim().slice(0, 30),
+                isNext: /is-next-month/.test(el.className || ""),
+                x: Math.round(el.getBoundingClientRect().x),
+                y: Math.round(el.getBoundingClientRect().y),
+                w: Math.round(el.getBoundingClientRect().width),
+                h: Math.round(el.getBoundingClientRect().height),
+              }));
+            });
+            V.pageBefore = snap;
+            V.steps.push("②页面: 气泡 " + snap.length + " 个 → " +
+              (snap.map(x => (x.isNext ? "[下月]" : "[可领]") + x.text).join(" | ") || "无"));
+
+            // 一致性核对：API 说可领 vs 页面显示可领
+            const apiCanGet = (st.list || []).filter(x => x && x.cloudType === 0 && x.recordId);
+            const pageCanGet = snap.filter(x => !x.isNext);
+            V.consistency = { apiCanGetCount: apiCanGet.length, pageCanGetCount: pageCanGet.length,
+                              apiNums: apiCanGet.map(x => x.cloudNum), pageTexts: pageCanGet.map(x => x.text) };
+            V.steps.push("③核对: API可领 " + apiCanGet.length + " 个" + JSON.stringify(apiCanGet.map(x=>x.cloudNum)) +
+                         " / 页面可领 " + pageCanGet.length + " 个" + JSON.stringify(pageCanGet.map(x=>x.text)));
+            if (apiCanGet.length !== pageCanGet.length) {
+              V.issues.push("API 与页面可领数量不一致（API " + apiCanGet.length + " vs 页面 " + pageCanGet.length + "）");
+            }
+
+            // 步骤4：逐个点击可领气泡
+            const beforeBal = (await readCloudNumSafe(page, jwt)).v;
+            let clickedAny = false, totalGot = 0;
+            for (const b of pageCanGet) {
+              const b0 = (await readCloudNumSafe(page, jwt)).v;
+              const res = await page.evaluate((k) => {
+                const el = document.querySelectorAll(".AIPoints")[k];
+                if (!el) return "gone";
+                el.scrollIntoView({ block: "center" });
+                const rc = el.getBoundingClientRect();
+                const cx = rc.x + rc.width / 2, cy = rc.y + rc.height / 2;
+                const fire = (t) => el.dispatchEvent(new PointerEvent(t, { bubbles: true, cancelable: true, clientX: cx, clientY: cy, pointerType: "touch", isPrimary: true }));
+                fire("pointerdown"); fire("pointerup"); fire("click"); el.click();
+                const inner = el.querySelector("div,span,img");
+                if (inner) inner.click();
+                return "ok";
+              }, b.i);
+              await sleep(6000);
+              const b1 = (await readCloudNumSafe(page, jwt)).v;
+              const d = (b0 !== null && b1 !== null) ? (b1 - b0) : 0;
+              clickedAny = true;
+              totalGot += Math.max(0, d);
+              V.steps.push("④点击#" + (b.i + 1) + " 「" + b.text + "」 " + res + " " + b0 + "→" + b1 + (d > 0 ? " +" + d : " 无变化"));
+              if (d <= 0) { V.pass = false; V.issues.push("气泡「" + b.text + "」点击后云豆未增加（" + b0 + "→" + b1 + "）"); }
+            }
+            const afterBal = (await readCloudNumSafe(page, jwt)).v;
+            V.browser = { before: beforeBal, after: afterBal, got: totalGot, clicked: clickedAny, recvRes: recvRes.slice(0, 5) };
+
+            // 步骤5：最终 API 复检，可领必须归零
+            await sleep(2500);
+            const st2 = await cloudStatus(jwt);
+            V.apiAfter = { total: st2.total, receivable: st2.receivable, toReceive: st2.toReceive, list: st2.list };
+            V.steps.push("⑤复检: 云豆=" + st2.total + " 可领=" + st2.receivable + " 待领=" + st2.toReceive);
+            if (pageCanGet.length > 0 && (st2.receivable || 0) > 0) {
+              V.pass = false; V.issues.push("点击后 API 仍显示可领 " + st2.receivable + "，未清零");
+            }
+            if (totalGot > 0 && st2.total !== (beforeBal === null ? st2.total : beforeBal + totalGot)) {
+              // 余额对不上只做记录，云豆可能因签到等其它动作变动
+              V.issues.push("注意：页面 +" + totalGot + "，API 复检 " + (beforeBal === null ? "?" : beforeBal) + "→" + st2.total);
+            }
+          } finally { try { await browser.close(); } catch (e) {} }
+        } catch (e) {
+          V.pass = false;
+          V.fatal = String(e.message || e).slice(0, 200);
+          V.issues.push("执行异常: " + V.fatal);
+        }
+        vout.push(V);
+        await sleep(4000);
+      }
+      out.verify = vout;
+      out.ok = vout.every(v => v.pass);
+      out.msg = "零容忍验证：" + vout.filter(v => v.pass).length + "/" + vout.length + " 通过" +
+                (out.ok ? " ✅" : " ❌ " + vout.flatMap(v => v.issues).join("; ").slice(0, 300));
+      try { fs.writeFileSync(path.join(__dirname, "../data/verify.json"), JSON.stringify(vout, null, 2)); } catch (e) {}
     } else if (type === "diag") {
       // 深度诊断：不跳过任何一个气泡，逐步点击并记录每次请求/响应
       const ra = await resolveAccounts();
