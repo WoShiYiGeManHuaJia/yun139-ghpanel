@@ -1251,13 +1251,22 @@ async function main() {
           };
           if (acct.ud_id) H["deviceId"] = acct.ud_id;
 
-          async function api(path, body) {
-            const opt = { headers: H };
-            if (body !== undefined) { opt.method = "POST"; opt.body = JSON.stringify(body); }
-            const r = await fetchWithTimeout(M + path, opt, 30000);
-            const t = await r.text();
-            let j = null; try { j = JSON.parse(t); } catch { j = { raw: t.slice(0, 150) }; }
-            return j || {};
+          async function api(path, body, tries) {
+            const n = tries || 3;
+            let lastErr = null;
+            for (let k = 0; k < n; k++) {
+              try {
+                const opt = { headers: H };
+                if (body !== undefined) { opt.method = "POST"; opt.body = JSON.stringify(body); }
+                const r = await fetchWithTimeout(M + path, opt, 30000);
+                const t = await r.text();
+                let j = null; try { j = JSON.parse(t); } catch { j = null; }
+                if (j) return j;
+                lastErr = new Error("非JSON:" + t.slice(0, 60));
+              } catch (e) { lastErr = e; }
+              if (k < n - 1) await new Promise(r => setTimeout(r, 1500 * (k + 1)));
+            }
+            throw lastErr || new Error("接口失败");
           }
 
           // 1) 资格 / 状态
@@ -1305,7 +1314,8 @@ async function main() {
             // 智能前置休眠：倒计时还远就先粗睡，临近开闸再密集轮询（避免请求过多被限流）
             const cd = Number(R.countDownTimeStamp || 0);
             if (cd > 300000) {
-              const coarseSleep = Math.min(cd - 240000, MAX_WAIT_MS);
+              // 粗睡最多占 60% 预算，剩余留给密集轮询
+              const coarseSleep = Math.min(cd - 240000, MAX_WAIT_MS * 0.6);
               if (coarseSleep > 1000) {
                 it.coarseSleepSec = Math.round(coarseSleep / 1000);
                 await new Promise(r => setTimeout(r, coarseSleep));
@@ -1314,8 +1324,10 @@ async function main() {
             const FAST_MS = Number(payload.fastPollSec || 5) * 1000;
             let waited = Math.round((Date.now() - t0) / 1000);
             let checked = 0;
-            while (Date.now() - t0 < MAX_WAIT_MS) {
-              const i2 = await api("/common/activityInfo?marketName=mCloudDay").catch(() => ({}));
+            while (checked === 0 || Date.now() - t0 < MAX_WAIT_MS) {
+              let i2 = {};
+              try { i2 = await api("/common/activityInfo?marketName=mCloudDay"); }
+              catch (e) { it.pollErr = String(e.message || e).slice(0, 60); }
               checked++;
               const R2 = i2.result || {};
               if (R2.online && R2.activityDay) {
@@ -1323,13 +1335,13 @@ async function main() {
                 it.online = R2.online; it.activityDay = R2.activityDay;
                 break;
               }
-              if ((R2.countDownTimeStamp || 0) > 300000) {
-                await new Promise(r => setTimeout(r, 60000));
-              } else {
-                await new Promise(r => setTimeout(r, FAST_MS));
-              }
+              waited = Math.round((Date.now() - t0) / 1000);
+              if (Date.now() - t0 >= MAX_WAIT_MS) break;
+              const nextCd = Number(R2.countDownTimeStamp || 0);
+              await new Promise(r => setTimeout(r, nextCd > 300000 ? 60000 : FAST_MS));
               waited = Math.round((Date.now() - t0) / 1000);
             }
+            it.checked = checked; it.waitedSec = waited;
             if (!open) { it.result = "等待超时未开闸（已等 " + waited + "s，查了 " + checked + " 次）"; results.push(it); continue; }
           }
 
@@ -1368,6 +1380,7 @@ async function main() {
           it.err = String(e.message || e).slice(0, 140);
         }
         results.push(it);
+        await new Promise(r => setTimeout(r, 2500));
       }
       out.results = results;
       out.ok = results.some(x => !x.err);
