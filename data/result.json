@@ -1,7 +1,54 @@
 {
-  "ts": "2026-09-15 06:54:31",
-  "requestId": "sync-1789455259841-40bf5378",
-  "type": "sync",
-  "ok": false,
-  "msg": "The operation failed for an operation-specific reason"
+  "ts": "2026-09-15 06:55:02",
+  "requestId": "rtask-1789455288668-356c89e8",
+  "type": "rtask",
+  "ok": true,
+  "msg": "共 3 个账号，成功 3 个",
+  "perAccount": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "tasks": 12,
+      "receive": "失败：playwright 未安装且 API 未领到",
+      "ok": true
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "tasks": 12,
+      "receive": "失败：playwright 未安装且 API 未领到",
+      "ok": true
+    },
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "tasks": 8,
+      "receive": "失败：playwright 未安装且 API 未领到",
+      "ok": true
+    }
+  ],
+  "enc_accounts": "Ww/0K42r9qFlLNBaY8Aifa3k2OoGOVMbRI8g6kyUBLHUTcdDUAoc7rnJOisWMXeis4C3GKmHLOtkisvSPKM4eFQKDgL3rBE+sZ7NVYRjrUb3WVOiSKvWLylj2HQ731A6NjpYOc7mkzasmx7lkG9CbhgL1AbjoQXN6r7QYFoE9QQbe3UveQaBVMe6FgkvMJF60wft8t74LkPKpw3M1WiHxGaWiN099FKlrfNlRqg5mh9xgbEwssAl5f8VMob1dH0L79J0aBJ7yYU54m1KowhYi1U7V1KhQg9/CTHmLOyKSDzMZrs+sLPUqToJAKQlcbHG9n2/Lu/5I/QMz/AKZ1Diz7XPqLO9uUlKt1iYee+OgbV//iIsczz3mNm0nxjtAkOc8cjN8z/oLAza0oAs1YPrSbKFiJfgqvUUArgLaY8Khv2ussdmR28shW8Jc5QMPik0cT4gI+TIq2GFdZZt7Hb2pj9j+aCZ+7vwadVwpb0/yjyWhvyVklWAGW4CEHCMjXEYLV3opQpF6WsbuDfNUVRp0d4ky0/VLj+HJmhe8YOX6+I29B4PPmdiGoMwMiIQe5B9q0U9aF1uvKdespE1M5SyGdYADspTcKO71wSaa4xchsKdljvIiFu0CaMvv9GeSnvjpgEDb1fKO9GkfHzSBmbI4ymSLkoUFWf9Lfgwb2gdlNWjvpcelCZc+zogbLSVYNcWJmYBdImP14L5S+TMOTZL72WstJoPOLdfHaQNW7LELDeP5IVheVbfdB2TewvjeQ+0Aj/rpwP81l9gSb2m0p62Y7c5aW9aBQhDRP8Uq6v7/JXMYCaIBUkrcyfS6B02+Gbhivsa1/1E+WN4m3VpfkhPH6CT0XE0ig5rqOF4aeUHnJyboU4Pfsc0kgdvoSuR4mbdUtfGWwzRYc827xSqy0giRjOaTi2ra/CRSCh6jpKv0oD5oP4qbryoqxhbNeD6LTOhXIKcRMfDLiE0W7WYdpHjw91j06fiyjs0lYk29iq4V+upkEJkMG3nV7Rdt7aDP1E1GTbSDwR++V2Kuw3/jXtWMIbf8cwgOI4xuI4JvRHQlDbDBsbwhbkGJwqMxwHa2YOvpmTbA+NCA3D5bormsbDMXU+3y8EII3NhR1xqTXqSNjLDW1b2wMof5ewMPb4QSHoZJ8/92ydN8nI+6qKxYaBKi81/jMa547TadqB6h/8aC7hPMo3oEtd4w7Ztd4km8BayVPU2sOl28XQxg8QoTm6rNTaTnwjeIEZSTIebE/jt1VCgm1ivb3fSodlPOUk0SGRBhtd3Zw1foZLu2lZTBBP8msHZ9vqM2PI33Wf7js6BTqAMBU9ACo7eaAQrEs6YfsBjpNJKUf+Sf8Bm1zSvEqgvfUJUy4ontV7bFsWfvjgQ4WL7HWz97Ns6bgHs7NHxl+y96R9TbddAp0jTeCYbSFYeX7hWFyDMr6xKfw5gU3i/ekriNCmOJpXbQWy8IKaoCAC6/e+If+DIQaaPFbmE5H91RxRXdZdtAV/BsvJ4FqIZYeiiVbq7+eQOJ6dt+NPHU8/mgTYQXHEqE8qRXUt+FIRT+M6V//68CxcAANE06iApIxV0rleBlvb8oMudZpTz3wPnH+K6bgRcUGQUM40QaF9suLz6hdELMNPsxkrCLTKabzgMKSt4hCh7MQQNSqqqFTQ2yFtf+ONlfD/pGxgRkjp+XYIKZMq1F0aFSbqq9Z3PCrxTyph8Zp6re5Ckc4oZMikKB6iToPtkls4AY+9hsQUv8wN/0nAuweqscIRadjmPdG98ASgZdDCnbyK+DY6oZuDlCAOXWoRq5NdATtgdQgjBS9BtWk8IGPhDdLmMblQHbAugzKsKL1ktP7OLXRkqFg3dY+Of81f0MOGh2x0cEvkiMuZnT26Hk33GEHrfxFERaAJJ93aoLTc9MUKBFUAwA/Qs2TQuY4Y+4NmhecY4YbmxYUOCgbRL0NCtUk9dxL5HAK8=",
+  "results": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "name": "",
+      "ok": true,
+      "message": "任务12个；气泡失败：playwright 未安装且 API 未领到"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "name": "",
+      "ok": true,
+      "message": "任务12个；气泡失败：playwright 未安装且 API 未领到"
+    },
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "name": "",
+      "ok": true,
+      "message": "任务8个；气泡失败：playwright 未安装且 API 未领到"
+    }
+  ]
 }
