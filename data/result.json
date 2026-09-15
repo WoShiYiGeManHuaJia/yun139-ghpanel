@@ -1,69 +1,91 @@
 {
-  "ts": "2026-09-15 10:50:40",
-  "requestId": "status-1789469440089-pmvratc5",
-  "type": "status",
+  "ts": "2026-09-15 11:02:51",
+  "requestId": "probe16-1789470171600-iynuehyo",
+  "type": "probe16",
   "ok": true,
-  "msg": "已查询 3 个账号",
+  "msg": "会员日探测完成，共 11 个请求",
   "acctDiag": [
     "cipher失败:缺少加密数据或密钥",
     "store:3"
   ],
-  "status": [
+  "phone": "13787464642",
+  "masked": "137****4642",
+  "pagePaths": [],
+  "probes": [
     {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": true,
-      "total": 258,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 0,
-      "list": [],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
+      "tag": "page",
+      "url": "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay",
+      "status": 200,
+      "len": 13427,
+      "body": "<!DOCTYPE html><html lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta content=\"width=device-width,user-scalable=no,initial-scale=1\" name=\"viewport\"><meta content=\"always\" name=\"referrer\"><meta http-equiv=\"Pragma\" content=\"no-cache\"><meta http-equiv=\"Cache-Control\" content=\"no-cache\"><meta http-equiv=\"Expires\" content=\"0\"><link rel=\"icon\" href=\"https://img.mcloud.139.com/portal/cloudCircle/favicon.ico\"><title>loading...</title><script>(function() {\n                window._smReadyFuncs = [];\n                window.SMSdk = {\n                    onBoxDataReady: (boxData) => {\n                        console.log('此时拿到boxData或者缓存的boxId');\n                    },\n                    ready: (fn) => {\n                        fn && _smReadyFuncs.push(fn);\n                    }\n                };\n                window._smConf = {\n                    org"
     },
     {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "ok": true,
-      "total": 218,
-      "toReceive": 40,
-      "receivable": 40,
-      "nextMonth": 0,
-      "list": [
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309249
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309138
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 20,
-          "recordId": 2344309118
-        }
-      ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"完成任务\",\""
+      "tag": "memberday_info",
+      "url": "https://m.mcloud.139.com/ycloud/memberday/page/info?client=app",
+      "status": 404,
+      "len": 453,
+      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
     },
     {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": true,
-      "total": 960,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 38,
-      "list": [
-        {
-          "cloudType": 2,
-          "cloudNum": 38,
-          "recordId": null
-        }
-      ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
+      "tag": "mCloudDay_info",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/page/info?client=app",
+      "status": 404,
+      "len": 453,
+      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
+    },
+    {
+      "tag": "huiyuanri_info",
+      "url": "https://m.mcloud.139.com/ycloud/huiyuanri/page/info?client=app",
+      "status": 404,
+      "len": 453,
+      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
+    },
+    {
+      "tag": "activity_list",
+      "url": "https://m.mcloud.139.com/ycloud/activity/page/list?client=app",
+      "status": 404,
+      "len": 453,
+      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
+    },
+    {
+      "tag": "market_huiyuanri",
+      "url": "https://caiyun.feixin.10086.cn/market/huiyuanri/index?marketname=huiyuanri",
+      "err": "This operation was aborted"
+    },
+    {
+      "tag": "market_memberday",
+      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=member_day",
+      "status": 404,
+      "len": 548,
+      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+    },
+    {
+      "tag": "market_mcloudday",
+      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=mCloudDay",
+      "status": 404,
+      "len": 548,
+      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+    },
+    {
+      "tag": "market_16",
+      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=sign_in_16",
+      "status": 404,
+      "len": 548,
+      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+    },
+    {
+      "tag": "vipday",
+      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=vip_day",
+      "status": 404,
+      "len": 548,
+      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+    },
+    {
+      "tag": "member_day2",
+      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=memberday",
+      "status": 404,
+      "len": 548,
+      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
     }
-  ],
-  "enc_accounts": "z05YZgGHvxYKAnb1fO+T+3xrXWSGRboN4+skpu8jqeswHQ1zhd93QRZuEmThXV2yptwZNmLhK7mLqIHAOaeq9htSMYdt8AkvKsNF6yAJe29ynhn744bBcpOvQwFiwnQdJk5mX9AZ497GEdxyKAqHnDf/kxj5UgKpHI6g9+4mENG8EUqWq0mL7es17qO4Ph4BoC32IvhkMkwoLKpNOgs/jXeGixrxd/gQqNT62tX+u7+asIAh5m/8ijqCE9pLVkIIxp/uVXayJ5R6Xw4Ln8FHYkW7uGbeOqwgcLifiK/XTONrVKyJskvv0EPJY0ym8Tp6myy0fjctNbysr8HFlo3d9bIu8UQIiiVKWpWVhnAXpRmp7f4WN762rpDJ3fTLddcUwvmxkkRxBimBuo58NDXpBBvP5pQ96S6X2i2cN5Z0DjVxDokznITRDCsraMqEFg6lmFRe40PUhxSTYs6o9doiBQ0gWZreNNrXbKpKW1GY3726o0mALUWSw4QRcD4REdjjp4Zw+eoJynk8z2MWGfaLVlN1bn2LvezRkM9/uFiyp/9QphH6lz+k1J1srBlFBxcPtg57rVdL3XpCpDCK9Asj1lKhl3f51ChiCN0Ec3XWrTeekO9uFl3h04o49PLzQdoWp+QpKuQOzhsrDiygcUFVVHAojPVTmuC2y+WiX3MKN5GtnZ9uSgocb2+g8wzol9etPwRP8jB+iNplhXA/UicAXuB8HhxsphoFKo/5lQFzOigdSXOFNB5iucy21OYLZ7WOUVoKF030yDtyowOuIPQ1uyK6e56GrT3EG1FJbYI8nXqJ23XYiJzggwnXsSRkb/qvhZ7IHMSs0F/vwcNB7B5A1z4AD50tYRuk32iwDB+XpBkQJWlo0xsW79S5ozHaLHlnGvlA7Hd1r63Fj/HSmn4Ion4T4kWnFh3xq2eV52qJfYZ7jFUun67+NSk7m0TtB0Wg7ptYZMdQGX/AM9Di+vJ1LlDG7EbqE71LW9nT2SDUcCZWppp5LrKavts3PVlOWZJYsTwGfhSekoHyy7aT/zJEHrl2s61jHYjB7Jw8x2HJ+0byUH2r0X8wCqdrTY8FbVIjwRPSqYegxYLqox8FOi0zSfqboibKfknBEUNQr1fdJ43RPDfzbZ8mA7W57FnVsUCFLJ43M/MY4YfRAT8cJAj4DpM09SjKPm2WeKnFbj9Unx3auZmoAQhOObUBRICL1pOWBho24PUN4783IVSryciPdLrTOTs4rHzZFmtifDuUTyO0txONnSHvNbHphSM+o9WKnbJzweY6lh6d7cy46XgRdcrMCcgF+Njcjuvxuj1CxXefQ6wxP77cW+U8xwao5Al/3NoDEmBTj6F3RP4SW16DPawIpmpE0VR5ibG0BZUCmCmbilCfyP5trkDEAyNToqxIjQBH6xiowR+rbywnNHBBQNAX6LJDVDXPEwUPitG/ytpZVTXnyHaSwsMtfY55FZGn9+0te0y0B0KA1/pXKtUzOXvzjcL65UlK51yIeNlTms6NJHF6Mw7ILNwpEmjDcay+DBE3zR+ClNzblkKscK2atSs0Nr+sdGwjfFaSFwPjqolD9Vqztc7PCpp9yRg5sOiYqM0JsWvsQeEd7Q7m25yu1PzzOxynF8ghbHOKnxFFG+kGMbolFZB9ktGsENGiGFFgHFxQ198bqPV4dXCSGctFE29Jj5CXVrbI73ev96J3yybRyN2PErt9sRwA12XHeck2s6bbqLgAD822Yv7eJ5tBEcybNwVf5TNu4p1Hz5T5qh/VYYknTYNCgEOj1BIw+6dCrCFjFd9vizOaVAfCD4CPnegmxZzjJzM1cL5YbpWHwkhmsONv7WkGTieX0mU9yZ5xX7YFmIefCjaQn5Jd7L0Nqg3XP23RkiEShRt3LwzDCO3eu/1yoM4Ix5Grymdp73nfMTN4wkn6R9XQp9re1gDG6+ls2jqsKSBB8yrKK2tLXd0="
+  ]
 }
