@@ -1,7 +1,64 @@
 {
-  "ts": "2026-09-15 00:00:00",
-  "requestId": "bootstrap",
-  "type": "bootstrap",
-  "ok": false,
-  "msg": "等待第一次任务结果"
+  "ts": "2026-09-15 04:28:10",
+  "requestId": "status-1789446490484-nxvvnfk4",
+  "type": "status",
+  "ok": true,
+  "msg": "已查询 3 个账号",
+  "status": [
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "ok": false,
+      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The toke"
+    },
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "ok": true,
+      "total": 253,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 0,
+      "list": [],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "ok": true,
+      "total": 3,
+      "toReceive": 50,
+      "receivable": 250,
+      "nextMonth": 0,
+      "list": [
+        {
+          "cloudType": 3,
+          "cloudNum": 200,
+          "recordId": 550
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 10,
+          "recordId": 2344309273
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 10,
+          "recordId": 2344309249
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 10,
+          "recordId": 2344309138
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 20,
+          "recordId": 2344309118
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"完成任务\",\""
+    }
+  ],
+  "enc_accounts": "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"
 }
