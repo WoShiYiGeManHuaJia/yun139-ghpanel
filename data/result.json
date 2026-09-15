@@ -1,45 +1,31 @@
 {
-  "ts": "2026-09-15 05:10:05",
-  "requestId": "receive-1789449005711-y5q3wvfy",
+  "ts": "2026-09-15 05:34:27",
+  "requestId": "receive-1789450467848-gtcnllap",
   "type": "receive",
   "ok": false,
-  "msg": "137****6553 失败:检测到可领取气泡，但点击后云豆未增加",
+  "msg": "137****6553 失败:fetch failed",
   "badAccounts": [],
-  "enc_accounts": "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",
+  "enc_accounts": "zCMIuXaqh/9ORQPQHqzhfJEtlHMuUKYKcgETL2kUj6xEGBeoTi1sFts0CeGTFJBOAGQ1w933g0LVsYH3rBx80BGI5l9OYmjMFVDVq8la9RTC3wyWkyuQ3uS4F4L2+j0Oh6T+Tc6lo/XGte/9AZkyjCtPu5NW148cBzorTXER6+qczExVkY4h9O5jbevtfw2EznhpIefo7vsrl6RHa9GnKBm+D7pyaudLGZPO67DMqCjamxUiDqqaYIPEJmo33Yg1XNd7dOKBtmSo4YmLNjj5lFYhr7g1Gfw9orplhadN1APDPGgUwz9Grd+aiYgxf8HVeUWn2+njyVe5p12Wkgx6NpfcwEKXmYSeJ2gqx1e+25XdTvn8imoiZPpaqrt72exij3bHRLqcAPrIIEE9kJbDc5Wjft6jQs9IpwmRC+tOI77srXi3xsxcY2YHI8oMhw6TMxnaTGTgP3h6zJ52KF6PGkmaFKfeNGyXBbmI5vJvmpKwXLcGG1z3/1vfQzGhIulu5ogaeVLMMdRLCVsQOurCgz/1x/V/YGB7y/NZ/vAq2qCIeuAQoNSFCJYCaxER+lOQCmlg8xy6mpvj7TgWc2SUPXKGYIb+hXHnP6VXFf/9nh1PLBeJAlCcrjxKf69M6OvHud3HbcDA7o1fz2ax+HCLgIrJT7U3mQYC1dauuzVoD++cIBo27ap695wryZOMJQ7TOcFDLhds3gxcjBJJQMif+y7wFyIunwOKzJ5ELmXViy6qAnzxhZ9aSh6Ef4VXcZ9KXQ0PW1/SfkGLkvAqp6BgOa+y49YJtUQNp39dm4hNChLarcKV6mn/gw3y8h1644DfA6fL/nI9+sikrTVu5VSxgOja+rVY2GGN76zPzdT4sefaAB/Tu1C09BSUfqzxlttfsJjD9FBh87EyWQ57ohZkGyZkzanPExJIw7PmnHnOHpp0JHsp+/C3kDE4K6+QMgxw57CgbLouhzzznMNAbyxArNI+0uNBfNG0ehah1DoNtHN+fWF7L3YcNmtbCzru2Bb7ok68fH7wdruo5ruQp60zorz3E57WwpBkbJyUI2n99uJhCcMoCdBxeWfZ59Ny1qualIVBTXNV7R/W8V5jBy7/wjOp3plG7WSoyrN5M8GGz6f/+J3gYDh2TEj0fv9MXdsOiP7tXrrXMBKdoWz/E2TE/2Br1n0N3CDxphO2AJUchOHvu72FbOtZXJK/Eykdb+id4S3SOS9fYb6ctUG+S4g3Re9fnwEScGwFrtLOcsCGklsnjzaiB+hzgjFysv6WiFfVrFsQTmUvF88l9GhNVh8LXU3RLDsaN3BU629GM5MSnWeKv6DjnZP/cbAdRDnuDEOnrYFMrz1AC+aBWdc=",
   "receiveList": [
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "ok": false,
-      "before": 3,
-      "after": 3,
       "got": 0,
       "steps": [
-        "页面 token: 已获取",
-        "云豆来源: page",
-        "初始云豆 3",
-        "第1次无变化（3→3）",
-        "第2次无变化（3→3）",
-        "最终云豆 3"
+        "异常中断"
       ],
-      "error": "检测到可领取气泡，但点击后云豆未增加"
+      "error": "fetch failed"
     }
   ],
   "receive": {
     "phone": "13717306553",
     "masked": "137****6553",
     "ok": false,
-    "before": 3,
-    "after": 3,
     "got": 0,
     "steps": [
-      "页面 token: 已获取",
-      "云豆来源: page",
-      "初始云豆 3",
-      "第1次无变化（3→3）",
-      "第2次无变化（3→3）",
-      "最终云豆 3"
+      "异常中断"
     ],
-    "error": "检测到可领取气泡，但点击后云豆未增加"
+    "error": "fetch failed"
   }
 }
