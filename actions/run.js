@@ -954,8 +954,14 @@ async function main() {
       out.ok = true;
     } else if (type === "sync") {
       // 前端把当前账号列表同步到仓库文件（供定时任务使用）
-      if (!key) throw new Error("未配置 PANEL_DATA_KEY");
-      const accounts = await decryptAccounts();
+      if (!key) throw new Error("未配置 PANEL_DATA_KEY（仓库 Secret 缺失）");
+      let accounts;
+      try {
+        accounts = await decryptAccounts();
+      } catch (e) {
+        // 最常见原因：浏览器里的 DATA_KEY 与仓库 Secret PANEL_DATA_KEY 不一致
+        throw new Error("解密账号失败：" + String(e.message || e) + "。请确认 ⚙ 高级配置的 DATA_KEY 与仓库 Secret PANEL_DATA_KEY 完全一致");
+      }
       if (!accounts.length) throw new Error("账号列表为空");
       const okw = await saveStore(accounts);
       out.ok = okw;
