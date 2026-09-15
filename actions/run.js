@@ -718,14 +718,22 @@ async function receiveBubbles(authorization, phone, dev) {
         steps.push("API 领取完成: " + before + " → " + after + "（+" + got + "）");
         return { ok: true, before, after, got, via: "api", steps };
       }
-      steps.push("API 未领到，回退浏览器点击…");
+      steps.push("API 未领到（可能无可领或被风控），回退浏览器点击…");
     }
   } catch (e) {
     steps.push("API 领取异常，回退浏览器: " + String(e.message || e).slice(0, 80));
   }
   let chromium = null;
   try { const pw = require("playwright"); chromium = pw.chromium; }
-  catch (e) { return { ok: false, error: "playwright 未安装且 API 未领到", got, before, after, steps }; }
+  catch (e) {
+    // 区分「确实没有可领」和「真的失败」：无可领时 got=0 且余额没变，属正常情况
+    const noPending = (before !== null && before === after) && got === 0;
+    return {
+      ok: noPending,
+      error: noPending ? "当前无可领气泡（余额 " + before + "，无需处理）" : "playwright 未安装且 API 未领到",
+      got, before, after, steps,
+    };
+  }
   const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
   // 页面需要 token 参数才进入已登录态（用户原始链接里带 token=…）
   let pageUrl = SIGNIN_PAGE;
