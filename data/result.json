@@ -1,7 +1,7 @@
 {
-  "ts": "2026-09-15 06:52:16",
-  "requestId": "do_login-1789455122657-e6162f4b",
-  "type": "do_login",
+  "ts": "2026-09-15 06:53:02",
+  "requestId": "sync-1789455171246-613c475e",
+  "type": "sync",
   "ok": false,
-  "msg": "登录被风控拦截(ec=S001)"
+  "msg": "The operation failed for an operation-specific reason"
 }
