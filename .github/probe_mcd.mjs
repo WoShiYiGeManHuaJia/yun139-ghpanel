@@ -1,4 +1,5 @@
 // 探测 16 号会员日（mCloudDay）活动接口 —— 跑在 GitHub Actions（境外 IP 需验证）
+import fs from "fs";
 const RAW = process.env.PROBE_AUTH;
 const PHONE = process.env.PROBE_PHONE;
 const CY_HOSTS=["https://caiyun.feixin.10086.cn:7071","https://caiyun.feixin.10086.cn","https://yun.139.com"];
@@ -65,4 +66,5 @@ async function getJwt(){
   }catch(e){L("致命错误",String(e.message).slice(0,200)); out.error=String(e.message);}
   console.log("\n===FOUND===");
   console.log(JSON.stringify(out.found,null,1).slice(0,2000));
+  require("fs").writeFileSync("data/probe_mcd.json", JSON.stringify(out,null,2));
 })();

@@ -16,7 +16,11 @@ jobs:
           PROBE_AUTH: ${{ secrets.PROBE_AUTH }}
           PROBE_PHONE: ${{ secrets.PROBE_PHONE }}
         run: node .github/probe_mcd.mjs 2>&1 | tee probe.log
-      - uses: actions/upload-artifact@v4
-        with:
-          name: probe-log
-          path: probe.log
+      - name: Commit result
+        run: |
+          set -e
+          git config user.name "probe-bot"
+          git config user.email "probe@bot"
+          git add -f data/probe_mcd.json probe.log || true
+          git commit -m "probe: memberday $(date -u +%Y%m%d%H%M%S)" || echo "no change"
+          for i in 1 2 3 4 5; do git pull --rebase -X ours origin main && git push && break || sleep 5; done
