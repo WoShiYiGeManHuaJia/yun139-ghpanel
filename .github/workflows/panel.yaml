@@ -59,23 +59,26 @@ jobs:
           set -e
           git config user.name "yun139-panel-bot"
           git config user.email "yun139-panel-bot@users.noreply.github.com"
-          git add data/result.json
-          # 账号文件（加密）随结果一起提交，供下次定时任务使用
-          if [ -f data/accounts.enc ]; then git add data/accounts.enc; fi
-          if git diff --cached --quiet; then
-            echo "结果无变化，跳过提交"
-            exit 0
-          fi
-          git commit -m "chore: update panel result $(date -u +%Y%m%d%H%M%S)"
+          # 先保存本次运行结果，后面切分支不会丢失
+          mkdir -p /tmp/panelout
+          cp data/result.json /tmp/panelout/result.json
+          if [ -f data/accounts.enc ]; then cp data/accounts.enc /tmp/panelout/accounts.enc; fi
           for i in 1 2 3 4 5; do
             git fetch origin main
-            if git rebase origin/main; then
-              if git push origin HEAD:main; then
-                echo "提交成功"
-                exit 0
-              fi
-            else
-              git rebase --abort || true
+            # 基于远端最新 main 重建分支（accounts.enc 是二进制，用 rebase 必然冲突）
+            git checkout -f -B main FETCH_HEAD
+            cp /tmp/panelout/result.json data/result.json
+            if [ -f /tmp/panelout/accounts.enc ]; then cp /tmp/panelout/accounts.enc data/accounts.enc; fi
+            git add data/result.json
+            if [ -f data/accounts.enc ]; then git add data/accounts.enc; fi
+            if git diff --cached --quiet; then
+              echo "结果无变化，跳过提交"
+              exit 0
+            fi
+            git commit -m "chore: update panel result $(date -u +%Y%m%d%H%M%S)"
+            if git push origin main; then
+              echo "提交成功"
+              exit 0
             fi
             echo "第 $i 次提交失败，重试…"
             sleep 8
