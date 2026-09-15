@@ -1422,7 +1422,7 @@ async function main() {
         const lv = MLEVEL[String(x.memberLevel)] || (x.memberDesc || ("Lv" + (x.memberLevel ?? "?")));
         const bits = [];
         bits.push("等级" + lv);
-        if (x.reservation) bits.push("预约" + x.reservation);
+        if (x.reservation) bits.push(x.reservation === "预约成功" ? "已预约" : ("预约" + x.reservation));
         if (x.prizeCount) bits.push("奖品" + x.prizeCount + "件");
         if (x.priority && x.prioId && x.prioId !== "清单中未找到") bits.push("优先目标" + x.priority + "(" + x.prioId + ")");
         if (x.countdownMs) bits.push("倒计时" + fmtCountdown(Number(x.countdownMs)));
@@ -1434,7 +1434,7 @@ async function main() {
         return Object.assign({}, x, {
           name: "会员日",
           message: bits.join("；") || (x.err ? String(x.err) : "无返回"),
-          ok: !!(!x.err && (gotAny || mode === "query" || x.reservation === "预约成功"))
+          ok: !!(!x.err && x.isMember !== false && (gotAny || mode === "query" || x.reservation === "预约成功"))
         });
       });
       out.ok = out.results.some(x => x.ok);
