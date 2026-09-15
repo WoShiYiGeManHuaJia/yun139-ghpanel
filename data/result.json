@@ -1,15 +1,15 @@
 {
-  "ts": "2026-09-15 00:59:18",
+  "ts": "2026-09-15 01:01:47",
   "type": "status",
   "ok": false,
   "msg": "已查询 1 个账号",
   "status": [
     {
-      "phone": "13717306553",
-      "masked": "137****6553",
+      "phone": "17274079953",
+      "masked": "172****9953",
       "ok": false,
-      "message": "fetch failed"
+      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The toke"
     }
   ],
-  "enc_accounts": "FLMee5yZSDbF2esWP/10l2tveVf+iym0WLEO8fuQQLIRpKyj51wI7vsIO+Uz4chmywTHqRK7Moyk/1wGn54xweNlnlve0XceIPmKQvxi2DFw7FnB2nQ0R4DysSHqYCvfvu/+foP0UgSicxNFnJA6Faa9jOvh6/t2A5sZYwJzvKDQij6+7s7YzAHX0H4+H6av4pUDUD2OyGyx5AlKt7ivHQtGvLY2dXndBQVq4M++zm2A0cCULq0SH5By6xpfoG6HdFR3/0guJNrz9xrO3zAqOV5IpXrsi5HnxzWDdVj0GAm61sm4W4pIyltblznAZ7OtGbU1qMZXOGJnlkw+gD5CLE1szwJY+fWQQBljVT+YlsxWsrNovq0WsBLr2LNRd5sUNsMEyW5uGwYWVp+0Y5FUhJX1mz3I7f1BFblWOt60OoakCNTIv7qL5OWBdcjxT7DnfKLtP5gBhY1ZngI7/y9hONEbrJZOAAnSaCx3ATTPMWOGRSV0BNhi86lB"
+  "enc_accounts": "iwmfpacy+6t0uSPZjWUEyar9+G/eyLVcmhJSbjuyVv+W3SlHV3bdBrXYhwBr53lNPcnrU6qS+14do90DkYMVHYs21oGR4HO/6CaaF5pjQ7Qn5L3x/8aKy0z+S0GRYYY/1cyks4mOETlIxa82jyiYafqbt/GW/hblMDvdqAdi8mumZdhKvWpBsLiWfC96odIs2rxf/++NA4EKIv1ZsN50uPn+yPPtkDKWM4BrW0KWca9Fr6les39Juob2lYenRcgCmh23RMtxZ/G9Ib5l4CT3SUYKs+vdAZMtKHBfiho1IiAYPZVwz69SvjBdwcm3qxDdGOPieRnPeno06HbXAnSWv+PGMZX/qmJE7DuyBTXLedNZC82aXVOe4TOvQOcpdAwVevecHF4Z1hH6r+tZx96jT5gQcSZCetrgG2/wBQAzPMbWWfrTM7xgOsVJxxuTPdVejSnBe+oJUjCk2n2vtp5dDIK5tjlejc4X/iCWE44owXPZ3662Ckp6RFfk"
 }
