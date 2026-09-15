@@ -1164,22 +1164,22 @@ async function main() {
         try {
           const r = await fetchWithTimeout(url, Object.assign({ headers: H2 }, opt || {}), 30000);
           const t = await r.text();
-          probes.push({ tag, url: url.slice(0, 120), status: r.status, len: t.length, body: t.slice(0, 2500) });
-        } catch (e) { probes.push({ tag, url: url.slice(0, 120), err: String(e.message || e).slice(0, 110) }); }
+          probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, 3000) });
+        } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 110) }); }
       }
       const M = "https://m.mcloud.139.com/ycloud/mcloudday";
-      const MK = ["mCloudDay", "huiyuanri", "mcloudday", "HUIYUANRI", "memberDay"];
-      out.marketTries = [];
-      for (const mk of MK) {
-        await P2("activityInfo:" + mk, M + "/common/activityInfo?marketName=" + mk);
-        await P2("memberLevel:" + mk, "https://m.mcloud.139.com/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=" + mk);
-        await P2("marketConfig:" + mk, "https://m.mcloud.139.com/market/manager/commonMarketconfig/getByMarketName?marketName=" + mk);
-      }
-      // POST 类接口
-      const post = (u, b) => ({ method: "POST", body: JSON.stringify(b || {}) });
-      await P2("POST validate", M + "/common/validate", post(M + "/common/validate"));
-      await P2("POST verify(260615001)", M + "/gift/verify", post(M + "/gift/verify", { prizeId: 260615001 }));
-      await P2("POST lotteryInfo", M + "/blindbox/lotteryInfo", post(M + "/blindbox/lotteryInfo"));
+      const post = (b) => ({ method: "POST", body: JSON.stringify(b || {}) });
+      // A) 活动信息（完整，看预约字段）
+      await P2("activityInfo", M + "/common/activityInfo?marketName=mCloudDay");
+      // B) 预约：open=true / false 两种
+      await P2("reservation?open=true", M + "/common/reservation?open=true&marketName=mCloudDay", post({}));
+      await P2("reservation?open=1", M + "/common/reservation?open=1&marketName=mCloudDay", post({}));
+      // C) 奖品清单（完整）
+      await P2("gift/list", M + "/gift/list");
+      // D) 我的奖品
+      await P2("myPrize", "https://m.mcloud.139.com/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2?pageNum=1&pageSize=20");
+      // E) 各省/全网 extGift
+      await P2("extGift", M + "/gift/list?client=app&type=ext");
       out.probes = probes;
       out.ok = true;
       out.msg = "会员日探测完成，共 " + probes.length + " 个请求";
