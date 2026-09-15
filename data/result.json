@@ -1,54 +1,30 @@
 {
-  "ts": "2026-09-15 00:15:39",
-  "type": "receive",
+  "ts": "2026-09-15 00:17:40",
+  "type": "refresh",
   "ok": true,
-  "msg": "137****4642 253→253 +0；172****9953 失败:令牌失效或鉴权失败: querySpecToken 失败 code=1010010015 msg=鉴权失效；137****6553 失败:页面未加载出云豆数据（登录态失效或页面改版）",
-  "badAccounts": [
-    "172****9953",
-    "137****6553"
-  ],
-  "receiveList": [
+  "msg": "续期完成",
+  "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
+      "name": "139-4642",
       "ok": true,
-      "before": 253,
-      "after": 253,
-      "got": 0,
-      "steps": [
-        "页面 token: 已获取",
-        "初始云豆 253",
-        "最终云豆 253"
-      ],
-      "error": ""
+      "message": "续期成功, 剩余 30 天"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
+      "name": "139-9953",
       "ok": false,
-      "got": 0,
-      "steps": [],
-      "error": "令牌失效或鉴权失败: querySpecToken 失败 code=1010010015 msg=鉴权失效"
+      "message": "续期失败 return=4006 desc=The token does not exist or has expired."
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "ok": false,
-      "got": 0,
-      "steps": [
-        "页面 token: 已获取",
-        "首次未读到云豆，重载页面重试…",
-        "初始云豆 null",
-        "⚠ 页面未读到云豆，诊断：URL=https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1&token=YZsidssolgb7302a493086b705395a9126ad5f585a#/newsignin",
-        "   页面文本: 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 137****6553 奖 品 规 则 3 云盘专属AI豆 +200 可领取 点击气泡即可领取任务奖励哦 本月已签到 1 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 未签 14 今天 16 17 18 19 20 热门活动 做任务 兑好礼 下月签到领惊喜福利 +50豆 连续签到月月可领 立即预定 绑定公",
-        "   气泡元素: 共 1 个，可点击 1 个",
-        "   API 云豆: 3 / 可领 200 / 下月 0",
-        "第1次无变化（null→null）",
-        "第2次无变化（null→null）",
-        "最终云豆 null"
-      ],
-      "error": "页面未加载出云豆数据（登录态失效或页面改版）"
+      "name": "139-6553",
+      "ok": true,
+      "message": "续期成功, 剩余 30 天"
     }
   ],
-  "receive": null
+  "enc_accounts": "TrJs9g9kZ6/084USuQ79UH/60aYHb/UF83b4/Qo+qSg6bUeBUvHdhk5KKIE5nZGrmJ4iQ9pdSVeD80k/qbzogTIn3Gg0TmXl6x6FbA64gtNB4UyScBvqOPO7f52iPVgtgD0IUs5rtzyKjDegBEp/b+ySJfIiLnoY2cg6VE/xTd2NFrqxxBGjpNqtQYi8u8dUxhuaXpmjayhCQft1QgiEUDQ+1SaImqNqohykqzrqhsNfI1AFs6PAZwaSzy2oa/yFb7Deqm/QxlPxazufc2Aj7KU6xAJXkj17fkVCyPIgmVv1EozothQqNn7+tT5SdIuLuFWLJrq+CaujwZdZNaX/CqC3AIOWC8ww7hc4kKx5gpCyrH5cd8AqDQ03K4Cn9X0m4E62B3LNP26X9l+bFE9EB+mfU+gjBNVwC8HL1ObpZYcwzFU7Tiua0sClwYSgPzGJYkvRTuNwEbQrsKDDcA98QVdY8yv8g/m+cIHNtV8iwjpHASAoUwUH+rWCrVlewXu4qrlwoXLyGLslJtagBF3KdgiAIFwOXBcFj9vfAVvPYxuzDVVEewMSYRzCl8QIr/T1k6PFatlUdUzVqBfkNQvIEg4+VYx5rlDT5w6QVpny6EuldTHUjXL99GWjpAd7y1uIJ0PzatZqLUh9ygUx+nWp4F4vPhq6b33M9Yl85cXll2vB5P7BhTJp7E+KWrnMBQrJ6of9QMjbSiJc1jSKFzIAbXg/iwAYzCuKijMJhCnOB116LYLWOYN6Srh2NGWFPo50Jg/PvgSrLCDRpbDyofg/sYhcBsYrPIv2cOy+Z2kvbyrMTzcT1H9/3FobD5dGRS5TzlAi1T3gYpHrrNObsWgM12Xc/3nlX364d8TSqN87xznUEILJHTTTBSzEjqnzcXuLPCHEhEKNrqSaz51q0kvxRhbVwbH7uPPxEHaQEpHhzzs2aQMpGRoHgsyodvo1CbZDPkojx3pGuFm1a+7mBPnjqlHBIVAVSeN/7Ps0d1et+4qP28I9R9BexMbox5JjfrAvNZaeZ0/sJxNh0cKFqkLT/W5ofwfZzD16Ghl3k7HdPRKTuwW1IyAP0fbXT+Tv/Gli1V+q2zrlM98JtAxEhRg/02QhIsi+ll7eA9Vfx0FS5iyxMsJdGX/J3sXQ1/xrmQwDz9ZTgmN2jQ2kix6PcXXGIJ/q9sczZqOMELJZW29S5P6oVZt4iifnO6yqMgpcMh4VwauAbQAgqo52hlsgtI1Jyx9rWVcpMdNwsTaa11Ym9Wwrhw75hwrHzruP6pBBEXZdG3jE62YD5//0HGbMHcBvaCynrVN/ushGHlxr0pIb5lLPoSrQ7jm/SH9dgipgszn272nHyIdVF9xOwiNB+8bZRzzyZLn3me7HM5V1f0JqZypXT5Gg4Nc3Ms4wFSFcJ2gRAHF0cjnwi9ezyLLEBOh7+5k+HeampSZ2mNHMH1VM6I5yDLDE2hym65S3Bf9q7FrvO/34lunuopIvNlAHVTrhwpzDU3dHeyQo6LOC7+BI5Bzj96R9GqRHThWMBdYOHqyXBKcazL7h50HkB2STp/dMjwoiEUpilKvRhXuE111HCn++kn3JBNzRoSrkJBzbTiL079Hv/k/YSqzi0p6buJEEJg+qbmNsseAXMknh3fJDiJ3WiCmHNAsl7eXjspzHd/G8y6pf+SCl1IZl4aXWX9tidmfMTyvai1sxWYXkys3yRKZaVbiPFukKMGf7OThtxHKBcrAciLwX2PIGIKO1Tn7dNfPFbKwC3KdaTJOyDTlt9igyEgCiP2WPSiR0nfi+svJCv+tfU3RmAyJBOUoXL4TBNRZ4KkLrHWJZuSWDzvYRpusaBLzV7lpDa8IDxMBevABgQKBJIkYJoFdHD00nI0f9m14yZeiwOqoGiyD5A+vTzQdPd3kY/yDgEbsBJHvUHO4Afk+hXZPgB5ePdYm8tTVy5vJS701abWrEnlZxUvcUyme39AphmQ=="
 }
