@@ -1,52 +1,31 @@
 {
-  "ts": "2026-09-15 07:10:59",
-  "requestId": "rtask-1789456235396-57c7152b",
-  "type": "rtask",
-  "ok": true,
-  "msg": "共 3 个账号，成功 1 个",
-  "perAccount": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": false,
-      "error": "fetch failed"
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "tasks": 11,
-      "receive": "异常：page.goto: Timeout 120000ms exceeded.\nCall log:\n  - navigating to \"https://m.mcl",
-      "ok": true
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": false,
-      "error": "fetch failed"
-    }
-  ],
-  "enc_accounts": "mao43FFskwO09eoL+AgDEPntGkb7BiYPJBkFDAHM9CP1iO3ycvfpK5y5PrW4YjNdZnuy/aHq5GLDuNp/2IaNAcZAbFBlWPysX/jxjHimKryoxuqHg4fJDFcGPn5LuGi9SGyDXe6QZITV3AmIVm4x9tFeE1rd+DHnh2JHRd3slv+WneMKVobOJAAOMiFavb/h68unFGHiqnYzFUMB4hou4gKSseol/2YKuY5u3Q++ntI7V3UhERvpWjzLVHElyKgeNXiJeYb9sXTQTLuZO+G5sGbtxIoFtmjAHEXFLxJeArJUlYh1JiTE6mjhPxVre77l1zoEH3x8iQYmWIwc455Ie2khaCbhUH+9f7cl3V+QvbYbacpXbl3sveNMX+P3LGnE46KbL6qvDVogujQo4RqNdiOvMRmIZxAIvAYWRb7VuXuSIUBXWiTUXXawoJtzs2MBby8wzUyy5iY+nohm84+7mC8oGpYXBhJHB0KLP9vMLA+drAfh7hPRhnBCBeGQ2zQvTrOf9IXaLqcbKHremk8xk4kJSzT3oFtpknWmL07oGwA90Z2xwQNJ8KIVWl/6XdMYCv1zZmIcAGpFigALfMhrFhkxQ6yfRPA2nSi4zaAZSmeaSwhNHxihitbtqZF0Gy8NCpkCyx0ZOf5+mFfBAwD3kFMcL3idTDytCmtma5bVBa0wFO9iHIG351w8TUOoNax4ZG4n/6AXR53MXskJGTZNdsiQhA/RYGO65hK7Mc3vUHeFVrJmN8pikQNOqMy5b8ZDZuPelHuHuKJqV4FyZZVfmRYyIyeXzmoAEc+xUHLCZibyYVM09UnUoFmud9A8z7m5154ss+DVwoxFH1pVBHUTD2/+KQY1ZvBnCNvBwaN8Fp9sFOaXLpsWX6XNiGZoM8mbTsmbWqq+rTktHLnW5KVqcT6lWJvCWHnnBo8yN/MnjqjpIVRQraqgwcQ6mzWW/6RQxHeSYfloKZMdEBT6X3w19GJ+Eyr9MG/tFdN+ntsIhGiJe67oyHRgPzxpYK+iVsae4ieoXo2/iFdNywF0dkSxNpkcHZuvxQUBa9+jZbkYhaWQhIkOCNA+yIS+OLftaojVubz0TN0gRWgf/NCNCDOJfvip0XlMmlYw1z8A/fGzkoGJRNS/z9OAIWka/p1jidYXeqPh9IDIgldW2L+74bYFgDnd/kOPIOfDKtymsgAajIiPgVlkSCdcGx0hmEwk5Hhh+iRgNc9+6KOSlj35EW5n4UooBiJuYgyLJaxVt5SfXK2CV3yuja+eV8ufl4mE2cgcd/WMfVmYfabw3YpgO5UJoauSKrZhP11fE1glvmSMiXHddfJr4/EFILn51PgsGQfJ0M/UMbs3bHGMh1PwDu26vti1kfyK7zgqxI/Y9x8/kOkjmYb05qsqK0Iy5F7N3QmQyloB+G0cJnGUteCfyt0Ut/c5N8deckzRTy/cy6zkwaW7REkdxA2gY+0slyoyrxVGhRG1E0GOqGKK069BWjEdbyHEXaNQC9W3Vm4Ai1S6tnyIG4mNx401zsxTrtdAOTlRQ+KMc9ymjypJGa71z2fn/DDfOJQbD3s0eVIf7e25HSI9iywhcgKiZ8fX33JOZq6EwNjupxIORFRmTL9k198ZdqM0R7H7cl9i4U6wgFSr64k6/4YfeyYsGNmrxJ11JIshO3x8RWz7roktckI0FTfy76fWtfZ6Cj8pNv9L805kgqU1NETofS0+9WG00cK+PqU80jfRQPVEpVro+gIjDAjLj8Kz1eaGpuq8vc9YXXDxKpDHgQM7lX/XgNm/PNWqJIwT+kwNjquVteY/O+1Hhxni3wS/+H6Ns+hkBE8vux5LgmVJseZHX+6UbpfrfTnNsqjUSNo/RX0W/4B/Dmvis3YVjC7YGZL39AWx9mnEfEw+zTWkpP7HbSZjA87I0nP9Rat58AB9RQRP4cQCMCob7cjglrq3Juf3y/GG8mcE1RCKOr4=",
+  "ts": "2026-09-15 08:39:05",
+  "requestId": "sign-1789461531026-02a1056c",
+  "type": "sign",
+  "ok": false,
+  "msg": "签到完成",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "name": "",
+      "name": "137-4642",
       "ok": false,
-      "message": "fetch failed"
+      "message": "签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx</center> </body> </html> "
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "name": "",
-      "ok": true,
-      "message": "任务11个；气泡异常：page.goto: Timeout 120000ms exceeded.\nCall log:\n  - navigating to \"https://m.mcl"
+      "name": "137-6553",
+      "ok": false,
+      "message": "签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx</center> </body> </html> "
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "name": "",
+      "name": "139-9953",
       "ok": false,
-      "message": "fetch failed"
+      "message": "签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx</center> </body> </html> "
     }
-  ]
+  ],
+  "enc_accounts": "QamOB3SIFNi1cL60Fh27xOVSbpDZLYEQC9b1fqgno9/r61VBIqD0+ijnqY+yuBk6BTHc0SUEwd2cCQ4JaRZKzt9JlYbg/LIwKDWJIUKgP06g0wJezm1E5SiHSddw7gyKg/d8zlpJwetjvIAu9xuxJ89p6H9VGf/vNkD5ui5YrSQ8RYnsgxv/U8TIXiqxP+WYhFYNdgwWs8j/Rk6v6zwQZt2RzNmMdK+zNhoGreErB9yrkyoKTHdJxiNJ661JxWP+5+eUkKVCkCYmxoO86Z016bcNNIuGdkSqypRYQVtoTTwZNmA2TbubhVXmOflPLtbF1wWp3Sh8uHrmwxBBWojuyuAfDPFpQL/n0dZoYyZnntV3QuwpyLpwtgi0sz3vXSTg9V1rgaMYh7vR+K42v2QaDx7mIiTZeM5/kHmUuQfIRn1e9LwmPIwSD6JZjTVlTWcwzen0D/kmx5FbAK5Ojx8dqhnbB0LOrK223XMeP24p7S5A41R39mHowJFvI8gLaZC+Vz7pmEj5r1soY0E/EamD6uIxXsff6txLqcTaKoYr1gv74iPIsXc5JYsH2u+zwpjR9VdiRnhbUM3IhQZRRASnY9enrE3bzwkaAWyaSs+yCN2alEITFp9+SURJ2l6eEVo/VPD7ZBsW7yYg5IGpDvrpllOtSpY1MeYrc/NsDiTn2iozVLvPuSto8rhBaXFc9M5T1ikSmrJVEIAzgZrylMvRcz/uTi4hL+Locbm8PemdsgAYnW+Umtvj0QPiEN2fpwo9baNnyJKoSldgOcGQyCH4zQgDbYhT6M5hutZpPxBrA2vnSM2rYA21+vklXleSzGDBrXVLsrVwJ8kGnkjovtZZnWe5mx72XYDnykaPoCPN6RJ/3vb6q+rd0QI4d+rtW9v2+LKFy8yA6lENSumgkK2QJn5qvs/RYHBZM7O3gJi2FbQpT/MO6TUcaHQQB2bODigsHuMml8+o/TOzi8FYmuI4l0xXmA5un4JaPYlByUe8Pani7ZtBnUUtjMMtjokxSlqiaEejDmyMVWyXux5J64gxJ3//h06oJF/bF6d9YfMjuNGa486kRKK8wzKUt4x4lWRGDsCyyr0dymLnjBzwgwPDSAvDqvswGkm8MByXuNO0EE+nzpVSqh13L5cW08GdEp7O6nex+Mwchum/37YZ6vkb+tNUpj8gsNpgDGJxC4/8H6HaCxYxLggg7OSz79thxLDV0oHGszBc75xDYgvaDERVQSgDPBWtTcXGKqWT3112flkshXchtNLP+T4JzgTE56Bc6dLGgcyvunAtC2Fvtj1xH6qd6BRer2o1rwhj2H95m9j32rn5QAhNJ/qkn2HIn2ECWGbywvolhSHwvAXSX9dcDk7SbNnRHWoegpwOk/7a07FwDonhSg80SK7/Edbt8ArUUdMJjy9WyKjQz77YoM0obdhoDw1rhuxgSOaCJmESaxX/NhK4uFKb/DH+IHtmfUAwkQcvQF0RTNhBu0AwAImYVuLl75jueqrkC4a+DoytXPTTFwm1wVTFlAOsafZpDyACycfPrl+q0De6L+6g1bLIgVTyl7pL2UF8E94vPEuFCmsLPLpkwBWD2AJAR3GnrZZFr0NrpYM5nDkgO7xPNvIhtBta2vG7u5DSI3NHhIIEJ5NeppU+10/8kNUfLDoSltCJ1lyUf6OUQ3ASocUYBXVaWWvf0GnQwveCk/U7d+4Q+ytUIHa09y4iowDZm21amtPtrca4Jh9PsOpBL2vecMoypXAG/ySMhETSZY0Ni11xx8WBnJgc4QsjvXRk1l0Sa1yK9qGWms1i7sj5TlJwCPjwpb5oHNNd+n5kj/mmkuigVsgqxqJ4XSZTjQnCPnOAntsHybnWWT9UMR4g03+jzIeRk9T98mFnAFChRMO+0ZbEBoPuRkCEr1MU+bvtSeHVEmIR8yG8BcNHzJuMcQABGKZ5VdXGhSv7dR8la4Y/Em6FU48="
 }
