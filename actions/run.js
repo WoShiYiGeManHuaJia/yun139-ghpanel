@@ -913,40 +913,45 @@ async function receiveBubbles(authorization, phone, dev) {
         steps.push("   API 云豆: " + st.total + " / 可领 " + st.receivable + " / 下月 " + st.nextMonth);
       } catch (e) { steps.push("   API 读取失败: " + String(e.message || e).slice(0, 60)); }
     }
-    let noChange = 0;
+    // ★ 领取逻辑采用 diag 实测通过的方案：
+    //   1) 遍历全部 .AIPoints（含下月的），逐个按下标点击，跳过 is-next-month
+    //   2) 必须先 scrollIntoView，再派发 pointerdown/pointerup/click 坐标级事件序列
+    //   3) 每步之后等待 6 秒（3.8 秒实测不够，接口还没返回就读了余额）
     let eligible = false;
-    for (let round = 0; round < 6; round++) {
-      const n = await page.locator(".AIPoints:not(.is-next-month)").count();
-      if (!n) break;
+    const totalBubbles = await page.evaluate(() => document.querySelectorAll(".AIPoints").length);
+    steps.push("页面气泡总数 " + totalBubbles);
+    for (let idx = 0; idx < Math.min(totalBubbles, 12); idx++) {
+      const isNextMonth = await page.evaluate((k) => {
+        const el = document.querySelectorAll(".AIPoints")[k];
+        return !el ? "gone" : (/is-next-month/.test(el.className || "") ? "next" : "ok");
+      }, idx);
+      if (isNextMonth === "gone") continue;
+      if (isNextMonth === "next") { steps.push("气泡#" + (idx + 1) + " 是下月的，跳过"); continue; }
       eligible = true;
       const b0 = (await readCloudNumSafe(page, jwt)).v;
-      // ★ 气泡有浮动动画，locator.click() 的 actionability 检查必然超时。
-      //   实测只有 JS 直接派发 click（并补点子元素）才能真正触发领取。
-      let clicked = false, err = "";
-      try {
-        const r = await page.evaluate(() => {
-          const els = Array.from(document.querySelectorAll(".AIPoints"))
-            .filter(el => !/is-next-month/.test(el.className || ""));
-          if (!els.length) return "none";
-          const el = els[0];
-          el.click();
-          // 事件可能绑在子元素上，父子都派发一次
-          const inner = el.querySelector("div,span,img");
-          if (inner) inner.click();
-          return "clicked:" + els.length;
-        });
-        if (String(r).indexOf("clicked") === 0) clicked = true; else err = "无元素(" + r + ")";
-      } catch (e) { err = String(e.message || e).slice(0, 60); }
-      if (!clicked) {
-        // JS 点击失败才回退 locator（大概率也会超时，仅作兜底）
-        try { await page.locator(".AIPoints:not(.is-next-month)").first().click({ force: true, timeout: 6000 }); clicked = true; }
-        catch (e2) { err = String(e2.message || e2).slice(0, 60); }
-      }
-      await sleep(3800);
+      const res = await page.evaluate((k) => {
+        const el = document.querySelectorAll(".AIPoints")[k];
+        if (!el) return "no-el";
+        el.scrollIntoView({ block: "center" });
+        const rc = el.getBoundingClientRect();
+        const cx = rc.x + rc.width / 2, cy = rc.y + rc.height / 2;
+        const fire = (type) => {
+          el.dispatchEvent(new PointerEvent(type, {
+            bubbles: true, cancelable: true, clientX: cx, clientY: cy,
+            pointerType: "touch", isPrimary: true,
+          }));
+        };
+        fire("pointerdown"); fire("pointerup"); fire("click");
+        el.click();
+        const inner = el.querySelector("div,span,img");
+        if (inner) inner.click();
+        return "ok";
+      }, idx);
+      await sleep(6000);
       const b1 = (await readCloudNumSafe(page, jwt)).v;
       const delta = (b0 !== null && b1 !== null) ? (b1 - b0) : 0;
-      if (delta > 0) { got += delta; steps.push("第" + (round + 1) + "次领取 +" + delta + "（" + b0 + "→" + b1 + "）"); noChange = 0; }
-      else { steps.push("第" + (round + 1) + "次无变化（" + b0 + "→" + b1 + "）" + (err ? " err=" + err : "")); noChange++; if (!clicked || noChange >= 2) break; }
+      if (delta > 0) { got += delta; steps.push("气泡#" + (idx + 1) + " 领取 +" + delta + "（" + b0 + "→" + b1 + "）"); }
+      else { steps.push("气泡#" + (idx + 1) + " " + res + " 无变化（" + b0 + "→" + b1 + "）"); }
     }
     after = (await readCloudNumSafe(page, jwt)).v;
     steps.push("最终云豆 " + after);
