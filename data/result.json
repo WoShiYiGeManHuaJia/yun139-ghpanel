@@ -1,194 +1,324 @@
 {
-  "ts": "2026-09-15 14:46:49",
-  "requestId": "daily-1789483609680-eayxxyyu",
-  "type": "daily",
+  "ts": "2026-09-15 15:42:17",
+  "requestId": "diag-1789486937027-u0f14qow",
+  "type": "diag",
   "ok": true,
-  "msg": "共 3 个账号，成功 3 个",
-  "perAccount": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 11,
-      "taskOk": 11,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（258→258）",
-      "ok": true
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 12,
-      "taskOk": 12,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "30G流量0元领",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（258→258）",
-      "ok": true
-    },
+  "msg": "诊断完成（1 个账号）",
+  "diag": [
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 7,
-      "taskOk": 7,
-      "taskFail": 0,
-      "taskDetail": [
+      "steps": [
+        "API 云豆=960 可领=50 待领=50 下月=88",
+        "页面气泡元素: 2 个",
+        "点击#1 ok 960→960",
+        "点击#2 ok 960→1010",
+        "最终云豆 1010"
+      ],
+      "attempts": [
         {
-          "name": "使用PC客户端",
-          "ok": true
+          "via": "api",
+          "item": {
+            "cloudType": 2,
+            "cloudNum": 88,
+            "recordId": null
+          },
+          "got": 0,
+          "steps": [
+            "跳过无效项 {\"cloudType\":2,\"cloudNum\":88,\"recordId\":null}"
+          ]
         },
         {
-          "name": "分享文件领好礼0/7",
-          "ok": true
+          "via": "api",
+          "item": {
+            "cloudType": 0,
+            "cloudNum": 50,
+            "recordId": 2344701789
+          },
+          "got": 0,
+          "steps": [
+            "✗ cloudId=2344701789 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧"
+          ]
         },
         {
-          "name": "开启备份领好礼",
-          "ok": true
+          "via": "browser",
+          "idx": 0,
+          "res": "ok",
+          "before": 960,
+          "after": 960,
+          "delta": 0
         },
         {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
+          "via": "browser",
+          "idx": 1,
+          "res": "ok",
+          "before": 960,
+          "after": 1010,
+          "delta": 50
         }
       ],
-      "receive": "+0（960→960）",
-      "ok": true
+      "api": {
+        "total": 960,
+        "receivable": 50,
+        "toReceive": 50,
+        "nextMonth": 88,
+        "list": [
+          {
+            "cloudType": 2,
+            "cloudNum": 88,
+            "recordId": null
+          },
+          {
+            "cloudType": 0,
+            "cloudNum": 50,
+            "recordId": 2344701789
+          }
+        ]
+      },
+      "page": {
+        "count": 2,
+        "items": [
+          {
+            "i": 0,
+            "cls": "AIPoints one is-next-month",
+            "text": "+88",
+            "display": "flex",
+            "visibility": "visible",
+            "opacity": "1",
+            "x": 199,
+            "y": 82,
+            "w": 39,
+            "h": 39,
+            "inView": true
+          },
+          {
+            "i": 1,
+            "cls": "AIPoints two",
+            "text": "+50 可领取",
+            "display": "flex",
+            "visibility": "visible",
+            "opacity": "1",
+            "x": 148,
+            "y": 82,
+            "w": 39,
+            "h": 39,
+            "inView": true
+          }
+        ],
+        "alt": {
+          ".bubble": 0,
+          ".cloud-bubble": 0,
+          ".points-item": 0,
+          "[class*=bubble]": 0,
+          "[class*=ubble]": 0,
+          ".signin-bubble": 0
+        },
+        "bodyLen": 4352,
+        "bodySnippet": "温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 172****9953 奖 品 规 则 960 云盘专属AI豆 +88 +50 可领取 点击气泡即可领取任务奖励哦 本月已签到 3 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 14 今天 16 17 18 19 20 热门活动 做任务 兑好礼 开启备份领好礼 +200豆 开启备份，云端无损存储 下月再来 连续31天开启云盘APP通知 +200豆完成进度(2/31) 开启中 使用PC"
+      },
+      "final": 1010,
+      "net": [
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+          "m": "POST"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
+          "m": "POST"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+          "m": "POST"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
+          "m": "POST"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+          "m": "POST"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
+          "m": "POST"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+          "b": "{\"code\":0,\"msg\":\"success\"}"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+          "b": "{\"code\":0,\"msg\":\"success\"}"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+          "b": "{\"code\":0,\"msg\":\"success\"}"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
+          "m": "GET"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
+          "m": "POST"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":50,\"total\":1010,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\""
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
+          "m": "GET"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
+          "m": "POST"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":0,\"total\":1010,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\","
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
+          "m": "GET"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
+          "m": "POST"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":0,\"total\":1010,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\","
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":[{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a1"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":[{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a1"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":[{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a1"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
+          "m": "POST"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
+          "m": "GET"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"showPop\":false}}"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
+          "m": "POST"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":false}"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
+          "m": "POST"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
+          "m": "GET"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"showPop\":false}}"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
+          "m": "GET"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"showPop\":false}}"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":false}"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
+          "b": "{\"code\":0,\"msg\":\"success\",\"result\":false}"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/getCloudNum",
+          "m": "GET"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/getCloudNum",
+          "b": "{\"code\":500,\"msg\":\"系统异常\"}"
+        },
+        {
+          "t": "REQ",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/getCloudNum",
+          "m": "GET"
+        },
+        {
+          "t": "RES",
+          "u": "https://m.mcloud.139.com/ycloud/signin/page/getCloudNum",
+          "b": "{\"code\":500,\"msg\":\"系统异常\"}"
+        }
+      ]
     }
-  ],
-  "enc_accounts": "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",
-  "results": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务11个；气泡+0（258→258）"
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务12个；气泡+0（258→258）"
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务7个；气泡+0（960→960）"
-    }
-  ],
-  "dingtalk": {
-    "ok": true,
-    "status": 200,
-    "body": "{\"errcode\":0,\"errmsg\":\"ok\"}"
-  }
+  ]
 }
