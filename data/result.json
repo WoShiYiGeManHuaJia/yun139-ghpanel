@@ -1,53 +1,8 @@
 {
-  "ts": "2026-09-15 05:57:46",
-  "requestId": "status-1789451854818-c0eab082",
-  "type": "status",
-  "ok": true,
-  "msg": "已查询 2 个账号",
-  "status": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": true,
-      "total": 253,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 0,
-      "list": [],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "ok": true,
-      "total": 203,
-      "toReceive": 50,
-      "receivable": 50,
-      "nextMonth": 0,
-      "list": [
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309273
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309249
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309138
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 20,
-          "recordId": 2344309118
-        }
-      ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"完成任务\",\""
-    }
-  ],
-  "enc_accounts": "BxE81f3RxCQsk8KcbGvE95s9t3DXwTfRkh6w6RB1TcJvES9/D0/DBtYzMs0rLnaFqrf9pQ5Z6FKma0RcTL9A2m2WCOUYM9o/knEM/lYysE1NUpCIWRQF77qZXTHBrx6Bt0ODP+rQiTL0zYwEzz3f0NSRPy67xZW8JRBYP1w/+IYYfYi+uDrkG3XF4SF1xS6ca+O047CGRjf+0xwxFjbAswjacMEAuAON2Gm9a0VNp6vhRQk3VmCP92b6vENML8ZpxPTLimYh0uImjUXvkfXARhyMaB2l5t07t2ZgIaapBD9aRFmQMz9ZlpmDm77TLAwyLuSTmXcKsqC8UD8YIbCGe++sj0YI7Lo0lfNWMD/noqeIh202+GrQjFmtj654HmLCsK4FJoyh9+76njqDjh7d38qYed/pnFQEDzO/9zyDxeRY4Igp2pKl6XhJA3/DVVdxC0exd1XSlPYn1YMC69CEVm4Xhw7oSfJbi9NcPmyIK45qeZfwmFnrhf/rV/0+jGYcJYgck+jD03qOBcVXAjBm0aS+P8A9DsIcW/eLHVDwkfxknF4o/aRuUlqYqqMs6vafH+fTuUKhPWjsK8TacwOaPr8yussEreLOZVDyweQxjXVHqFI4ZawpyRpeUluBPg0VwBoKVQdOZJHUZ+VL8Ss1997xVqnbw79t6BpBZdrslRIRi3Cf2jRfECYAePO/xWm+Lv1I5pKGwVJbGiB8UHCW50NHlIEKUOorUDosUKanrPr4xbHqCoKBsF6u1jBXfBGzegXcHm3ItEJwQxo3U6Y2V/UWFD0pp7DNBH+spjRnN/bpo5XZ/5Ts8SQcrqwkPhtTWOUYPY13jUzGhYM4FC87bIfeVTjTNdxfgWW5kxjuI69j+5LP3iSZiUwIawNIBSQlnODX8qvPcGgxbFzvs3Nw2cel4p4t3K2SNYiyPAzeFFMefu9PilbF/FgEvOuTeyz1MaL1ggDdnwqFT7otqDyTRGY/p2p2wtmzlHwcXoE1wu78Yp5aOxk5lA0e29ZDyQaVZ+3OqiQ9bK6dvguFXYSOKQ6C4FEhRpW5s1RdXjCqbeCNIuC+QM49DqqRMJ7ha/91uWXVkHCNoIB2+t5e8qjw6cZM1QiP3P7lYgZXnxzi2cAup7SMJ4E/EY2MiA+eBJHg4PP9t3ToRX8849qhFmeZe9C7dG7H3F/iFbXYjjQAgWoe2OmE9FNqdkPN3ugu+tIR8yzkQZ2/Vgc50ujEwCZwiifPJIIhN5BDMX6L7HFQJQvSHrXTwO+LAHQshTZcIA4vBdLzEAQwaj9sk3vigB9yB9hbEFWaPoVTi01/2+aTPcd95yktQOd4b/BEF/HuUkdu8DEZZFwLrIFaLRM="
+  "ts": "2026-09-15 05:58:29",
+  "requestId": "send_code-1789451895596-3cbc2009",
+  "type": "send_code",
+  "ok": false,
+  "msg": "发送验证码失败: successed to process!",
+  "phone": "17274079953"
 }
