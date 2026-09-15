@@ -1194,6 +1194,6 @@ async function main() {
   console.log(JSON.stringify(out));
 }
 
-module.exports = { decodeAuth, cleanAuth, maskPhone, rsaEncrypt, pkcs7Unpad, hexToBytes, aesGcmEncryptText, aesGcmDecryptText, deriveKey, stableJsonStringify };
+module.exports = { decodeAuth, cleanAuth, maskPhone, rsaEncrypt, pkcs7Unpad, hexToBytes, aesGcmEncryptText, aesGcmDecryptText, deriveKey, stableJsonStringify, getJwt, cloudStatus, receiveViaApi };
 
 if (require.main === module) main().catch(e => { console.error("FATAL:", e); process.exit(1); });
