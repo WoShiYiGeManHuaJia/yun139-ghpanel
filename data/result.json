@@ -1,7 +1,50 @@
 {
-  "ts": "2026-09-15 03:10:14",
-  "type": "sync",
-  "ok": true,
-  "msg": "已同步 3 个账号到仓库（定时任务将使用）",
-  "synced": 3
+  "ts": "2026-09-15 03:11:30",
+  "type": "daily",
+  "ok": false,
+  "msg": "共 3 个账号，成功 0 个",
+  "perAccount": [
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "ok": false,
+      "error": "fetch failed"
+    },
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "ok": false,
+      "error": "fetch failed"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "ok": false,
+      "error": "fetch failed"
+    }
+  ],
+  "enc_accounts": "aSwTUv2nvwrLf9h5DNF1ItmLoXT8sz2n9oHOKyV8lgKJ9QPyn+fa+nxNVVlsRhg6IKcF8eBqJLYFPR+l5Fx3MGfP4scuTFu30rAeuIfjEGx8xfcMB8TM/mjWwMj9gozDcbhIu/GzUlIg0hXuiK/aFYuc58qtzJU1PiOeVcDUawepEL81P2nOxfomDEAm0Iud1/XfsY/ZUGZxb7J/FJyCHLwz3YYGDJje4vP//SgzX6dXp9p1eBCzxZKALCr1+KrO6B6jxFdMxaCBvMkXmpAqHTsokTFt6wnm4vh/HtaMyR/xaIWWnOZ4VqT5KQpbuAe7jVKVtgF75QvYTUpWK3ajGCZLfBLyMuEOMcEtuS3vIy2+cCMSHSuINspTO3QWrgqMVMPiqFZ6c1RWk8JhOdMPw6UzY1RpWkkNC9hV90HAFlYuYNqomu5pc3YfKiJkhMrx0pmf1kBlKwMg55/OqX4GJQxLovbYndc91ycKMLZ9+pbL6QnZOtQDafAZtLnV2tZ4EV82/d8qCyBESizSyUOqMu8UtdY0mYwOgJmzbiiMcRscIt17wtkFVw/BA2+7PN0HfYgkgigBXnOIhw/6U9MEgfs27G/xRACen09wpiwTwk/uQkO16WKALs1xsHXA6qIr7UhUcUPk2A5B7/ltlzsXbg1bKjpwYyWXgwbDlfG4L7HHyMzPosfZszmgu6P1UiDsw1/N1NQonEPmWlrY4hVl2pR1eVo83HaI0ejp6DG8gHZf41EpDZt3blHxksgv6wfwXp6nXWdHoONYTN4OMyPKMOVFLuEUvDSxCCbbPia1q1knbxxackgE1VWymATbUT7DN1YGfeTySme5AlBLCQLJwcrwbdJ6y6CSJa1UUZVfoNMqQSQXpaPZ1duKNA+UAnhywj3MZsX3x03tsw5S9Lm5GuyykFyTkc/pyInMv4m3YFKGq2U9wUVCQhqxQckK24BZDwj0X3t1RVLEC5hOkg+M1/Ej5sl0dDT1LUzDQMr8QSI4rLQ5fBImyX+0gbBR08kRMvkhltzLgflya69I6AFT7pwA050u4ZxZoywxj+lA5dbIjUMpLUXpmG9UHp7QRsjyMcCJ/+zt0vl4z/ptexLq2DShjNeZEiEHfTusd4rf+7lopJgRdY/iEho3qn/7jJuTuNMRbTzSqGfZ/uXOlYu+1nzMtJGFedNVs1mSmBa/ay/XKIF4uQGsPCG9rqPO9GfBfWx+Vx3ru/drhbibgHBWwodF92kcaBruNhZkiSaynYkO9MsNv6WM+Ba4b4ddJVaXBXWIoNZJpaLy8+XWqvSCtX88lZiRoxyb4HJffu8qx+ao82GMxe2Ix6FyJx0U2sgcwWh43QnkEYl4GdBjQWwNBVjXjd5PMim8kl1J7Jr+p4XT8P7I2upLAe28V/5Z54sWnxnIC8KYFnS40547dM4g/cMC1imbapSqq0BtPDHpZCrjXGycRiuO7TibpK56yCsOCbFXmBxZKDpJKQB4eBW7qGsdLWMaJLzvdv8tW1fOnYg71t6LzO0zVbnwk4Wg64xmH1rKxevEgGJC6YiEvL09VGp44h2CYN1xMa+eJf5R54oPxt0r+kbuONDxJVBpI44/Ll3FBeCZjijFQTAitdubVhVJbovLP1p/TYGaexHxMGWGOaOSp6ZEmHDm36p3C56ygBRDtQCpy63q7DiBdQoW13JYRZy+nJZiuSGXxUwU6bQLxPTb0ICchKIpFTA3gJceDGtkZy3C5oNLTIlc0YUuZEQPC6kH5bv2TVKM/oZOW7ckaKEGXhdzH3Q0/ESgcNYQV3QIiQAGDWZStiGZQw+ROc1XLfHZOr5x/lgUrWvk7SzYo6ys/w8VuJ6Uoj8If0cWPiJhMVoTIFFcHAGlapjyzUqHHDUdd+sLmjJdSh4BdQYymEpGXFrhCsjuCbhkO7xhF5X7Rup7nofj6YwMwauUeT+dTjGt/nytKtayLZw8qG2psjY=",
+  "results": [
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "name": "",
+      "ok": false,
+      "message": "fetch failed"
+    },
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "name": "",
+      "ok": false,
+      "message": "fetch failed"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "name": "",
+      "ok": false,
+      "message": "fetch failed"
+    }
+  ]
 }
