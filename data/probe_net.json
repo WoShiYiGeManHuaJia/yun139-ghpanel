@@ -1,0 +1,13 @@
+{
+  "steps": [
+    "=== 网络诊断 2026-09-15T07:18:19.917Z ===",
+    "DNS orches.yun.139.com → 112.33.111.196",
+    "DNS m.mcloud.139.com → 36.138.55.14",
+    "DNS example.com → 172.66.147.243",
+    "✅ 移动鉴权 orches.yun.139.com → HTTP 200（688ms）",
+    "✅ 移动签到页 m.mcloud.139.com → HTTP 200（736ms）",
+    "✅ 云朵接口 caiyun.feixin.10086.cn → HTTP 200（3034ms）",
+    "✅ 对照-公网 example.com → HTTP 200（69ms）",
+    "✅ 对照-GitHub api → HTTP 200（163ms）"
+  ]
+}
