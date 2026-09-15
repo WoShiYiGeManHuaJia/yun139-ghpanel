@@ -307,6 +307,32 @@
   const REPO_DEFAULT = "";
   const LS_REPO = "gh139_repo", LS_TOKEN = "gh139_token", LS_KEY = "gh139_key", LS_ACC = "gh139_acc";
   const LS_CLOUD = "gh139_cloud", LS_TIP = "gh139_tasktip_off";
+  // 内置凭据（AES-256-GCM 密文，页面加载自动解密并写入 localStorage，无需手动填）
+  const BUILTIN_PASS = "yun139-panel-2026", BUILTIN_SALT = "gh139mcloudsalt01";
+  const BUILTIN_CIPHER = "/6kOJN2Zsg8r+KHD8MIU7gitVMCjuYBdJLNEe+wPKPTY4UykmGjOFM5esHTfSXSu4Sht/psfwSMrtG+HZhyqwvM7iZk=";
+  async function builtinPat() {
+    try {
+      const enc = new TextEncoder();
+      const km = await crypto.subtle.importKey("raw", enc.encode(BUILTIN_PASS), "PBKDF2", false, ["deriveBits"]);
+      const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: enc.encode(BUILTIN_SALT), iterations: 120000, hash: "SHA-256" }, km, 256);
+      const aesKey = await crypto.subtle.importKey("raw", bits, { name: "AES-GCM" }, false, ["decrypt"]);
+      const raw = Uint8Array.from(atob(BUILTIN_CIPHER), c => c.charCodeAt(0));
+      const iv = raw.slice(0, 12), ct = raw.slice(12);
+      const dec = await crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, aesKey, ct);
+      return new TextDecoder().decode(dec);
+    } catch (e) { return ""; }
+  }
+  async function ensurePat() {
+    let t = "";
+    try { t = localStorage.getItem(LS_TOKEN) || ""; } catch (e) {}
+    if (t && /^gh[pousr]_|^github_pat_/.test(t)) { try { sessionStorage.setItem(LS_TOKEN, t); } catch (e) {} return t; }
+    const b = await builtinPat();
+    if (b) {
+      try { localStorage.setItem(LS_TOKEN, b); sessionStorage.setItem(LS_TOKEN, b); } catch (e) {}
+      return b;
+    }
+    return "";
+  }
   const $ = id => document.getElementById(id);
   const log = (msg, cls) => { const box = $("log"); if (!box) return; const line = document.createElement("div"); line.className = "l-" + (cls || ""); line.textContent = "[" + new Date().toLocaleTimeString() + "] " + String(msg); box.prepend(line); };
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -331,12 +357,14 @@
   function loadCfg() {
     $("cfg_repo").value = localStorage.getItem(LS_REPO) || REPO_DEFAULT;
     $("cfg_key").value = localStorage.getItem(LS_KEY) || "";
-    try { $("cfg_pat").value = sessionStorage.getItem(LS_TOKEN) || ""; } catch (e) {}
+    try { $("cfg_pat").value = localStorage.getItem(LS_TOKEN) || sessionStorage.getItem(LS_TOKEN) || ""; } catch (e) {}
   }
   function saveCfg() {
     localStorage.setItem(LS_REPO, $("cfg_repo").value.trim() || REPO_DEFAULT);
     localStorage.setItem(LS_KEY, $("cfg_key").value.trim());
-    try { const pv = $("cfg_pat").value.trim(); if (pv) sessionStorage.setItem(LS_TOKEN, pv); else sessionStorage.removeItem(LS_TOKEN); } catch (e) {}
+    try { const pv = $("cfg_pat").value.trim();
+      if (pv) { localStorage.setItem(LS_TOKEN, pv); sessionStorage.setItem(LS_TOKEN, pv); }
+      else { localStorage.removeItem(LS_TOKEN); sessionStorage.removeItem(LS_TOKEN); } } catch (e) {}
     log("配置已保存");
   }
   function genKey() {
@@ -1010,8 +1038,8 @@
   $("btn_list").onclick = fetchTaskList;
   $("btn_receive").onclick = function () { runReceive("", $("btn_receive")); };
   $("btn_status").onclick = runStatus;
-  try { localStorage.removeItem(LS_TOKEN); } catch (e) {}
   loadCfg(); applyUrlCfg(); renderAccounts(); renderTaskPlaceholder(); startWatch();
+  ensurePat().then(function (t) { if (t) { try { $("cfg_pat").value = t; } catch (e) {} } });
   pollResult().then(async function () {
     try {
       const r = await api(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=${encodeURIComponent(await defaultBranch())}`);
