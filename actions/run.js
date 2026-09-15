@@ -1251,22 +1251,13 @@ async function main() {
           };
           if (acct.ud_id) H["deviceId"] = acct.ud_id;
 
-          async function api(path, body, tries) {
-            const n = tries || 3;
-            let lastErr = null;
-            for (let k = 0; k < n; k++) {
-              try {
-                const opt = { headers: H };
-                if (body !== undefined) { opt.method = "POST"; opt.body = JSON.stringify(body); }
-                const r = await fetchWithTimeout(M + path, opt, 30000);
-                const t = await r.text();
-                let j = null; try { j = JSON.parse(t); } catch { j = null; }
-                if (j) return j;
-                lastErr = new Error("非JSON:" + t.slice(0, 60));
-              } catch (e) { lastErr = e; }
-              if (k < n - 1) await new Promise(r => setTimeout(r, 1500 * (k + 1)));
-            }
-            throw lastErr || new Error("接口失败");
+          async function api(path, body) {
+            const opt = { headers: H };
+            if (body !== undefined) { opt.method = "POST"; opt.body = JSON.stringify(body); }
+            const r = await fetchWithTimeout(M + path, opt, 30000);
+            const t = await r.text();
+            let j = null; try { j = JSON.parse(t); } catch { j = { raw: t.slice(0, 150) }; }
+            return j || {};
           }
 
           // 1) 资格 / 状态
@@ -1298,24 +1289,34 @@ async function main() {
             it.prizeCount = all.length;
             it.prizes = all.slice(0, 20).map(x => ({ id: x.prizeId, name: x.prizeName, stock: x.hasStock, got: x.receiveFlag }));
             try {
-              const rv = await fetchWithTimeout(M + "/common/reservation?open=true&marketName=mCloudDay",
-                { method: "POST", headers: H, body: "{}" }, 30000);
+              // 注意：必须 POST + body 传参；用 URL query 会返回 500「不支持该预约来源」
+              const rv = await fetchWithTimeout(M + "/common/reservation",
+                { method: "POST", headers: H,
+                  body: JSON.stringify({ marketName: "mCloudDay", open: true, sourceid: "1000", source: "app" }) }, 30000);
               const rj = await rv.json().catch(() => ({}));
-              it.reservation = (rj.code === 0) ? "预约成功" : (rj.msg || ("code=" + rj.code));
+              it.reservation = (String(rj.code) === "0") ? "预约成功" : (rj.msg || ("code=" + rj.code));
             } catch (e) { it.reservation = "异常:" + String(e.message || e).slice(0, 50); }
             results.push(it);
             continue;
           }
 
-          // 2) grab 模式：轮询等开闸
+          // 2) grab 模式：先预约（成功与否都继续，预约不是抢购前置条件）
+          try {
+            const rv0 = await fetchWithTimeout(M + "/common/reservation",
+              { method: "POST", headers: H,
+                body: JSON.stringify({ marketName: "mCloudDay", open: true, sourceid: "1000", source: "app" }) }, 30000);
+            const rj0 = await rv0.json().catch(() => ({}));
+            it.reservation = (String(rj0.code) === "0") ? "预约成功" : (rj0.msg || ("code=" + rj0.code));
+          } catch (e) { it.reservation = "预约异常:" + String(e.message || e).slice(0, 50); }
+
+          // 轮询等开闸
           let open = !!(R.online && R.activityDay);
           if (!open) {
             const t0 = Date.now();
             // 智能前置休眠：倒计时还远就先粗睡，临近开闸再密集轮询（避免请求过多被限流）
             const cd = Number(R.countDownTimeStamp || 0);
             if (cd > 300000) {
-              // 粗睡最多占 60% 预算，剩余留给密集轮询
-              const coarseSleep = Math.min(cd - 240000, MAX_WAIT_MS * 0.6);
+              const coarseSleep = Math.min(cd - 240000, MAX_WAIT_MS);
               if (coarseSleep > 1000) {
                 it.coarseSleepSec = Math.round(coarseSleep / 1000);
                 await new Promise(r => setTimeout(r, coarseSleep));
@@ -1324,10 +1325,8 @@ async function main() {
             const FAST_MS = Number(payload.fastPollSec || 5) * 1000;
             let waited = Math.round((Date.now() - t0) / 1000);
             let checked = 0;
-            while (checked === 0 || Date.now() - t0 < MAX_WAIT_MS) {
-              let i2 = {};
-              try { i2 = await api("/common/activityInfo?marketName=mCloudDay"); }
-              catch (e) { it.pollErr = String(e.message || e).slice(0, 60); }
+            while (Date.now() - t0 < MAX_WAIT_MS) {
+              const i2 = await api("/common/activityInfo?marketName=mCloudDay").catch(() => ({}));
               checked++;
               const R2 = i2.result || {};
               if (R2.online && R2.activityDay) {
@@ -1335,13 +1334,13 @@ async function main() {
                 it.online = R2.online; it.activityDay = R2.activityDay;
                 break;
               }
-              waited = Math.round((Date.now() - t0) / 1000);
-              if (Date.now() - t0 >= MAX_WAIT_MS) break;
-              const nextCd = Number(R2.countDownTimeStamp || 0);
-              await new Promise(r => setTimeout(r, nextCd > 300000 ? 60000 : FAST_MS));
+              if ((R2.countDownTimeStamp || 0) > 300000) {
+                await new Promise(r => setTimeout(r, 60000));
+              } else {
+                await new Promise(r => setTimeout(r, FAST_MS));
+              }
               waited = Math.round((Date.now() - t0) / 1000);
             }
-            it.checked = checked; it.waitedSec = waited;
             if (!open) { it.result = "等待超时未开闸（已等 " + waited + "s，查了 " + checked + " 次）"; results.push(it); continue; }
           }
 
@@ -1380,71 +1379,11 @@ async function main() {
           it.err = String(e.message || e).slice(0, 140);
         }
         results.push(it);
-        await new Promise(r => setTimeout(r, 2500));
       }
       out.results = results;
       out.ok = results.some(x => !x.err);
       out.msg = (mode === "query" ? "会员日资格查询完成" : (anyGot ? "会员日抢购完成，有收获" : "会员日抢购完成，未抢到"))
         + "（" + results.length + " 个账号）";
-    } else if (type === "mday") {
-      // 16号会员日：查状态 → 预约 →（活动开启时）领奖
-      const ra = await resolveAccounts();
-      out.acctDiag = ra.diag;
-      const accounts = ra.list;
-      const wantReceive = payload.receive !== false;
-      const per = [];
-      let okCount = 0;
-      for (let i = 0; i < accounts.length; i++) {
-        const a = accounts[i];
-        if (i > 0) await new Promise(r => setTimeout(r, 3000));
-        const it = { phone: a.phone, masked: maskPhone(a.phone) };
-        try {
-          const auth = await ensureAuth(a);
-          const jwt = await getJwt(auth, a.phone);
-          const info = await mdayInfo(jwt);
-          it.memberLevel = info.memberLevel;
-          it.isMember = info.isMember;
-          it.online = info.online;
-          it.activityDay = info.activityDay;
-          it.countdown = fmtCountdown(info.countdownMs);
-          // 预约（开关打开就约）
-          if (info.reservationSwitch) {
-            try {
-              const rv = await mdayReserve(jwt);
-              it.reserve = String(rv.code) === "0" ? "已预约" : ("失败:" + (rv.msg || rv.code));
-              if (String(rv.code) === "0") okCount++;
-            } catch (e) { it.reserve = "异常:" + String(e.message || e).slice(0, 70); }
-          } else { it.reserve = "开关关闭，跳过"; }
-          // 领奖（仅活动开启）
-          if (wantReceive && info.online) {
-            try {
-              const gifts = await mdayGifts(jwt);
-              it.gifts = gifts.length;
-              const got = [];
-              for (const g of gifts) {
-                if (!g.hasStock || g.received) continue;
-                const rr = await mdayReceive(jwt, g.prizeId);
-                got.push(g.name + (rr.ok ? "✅" : "❌"));
-                await new Promise(r => setTimeout(r, 1200));
-              }
-              it.received = got;
-            } catch (e) { it.receiveErr = String(e.message || e).slice(0, 90); }
-          } else if (wantReceive) {
-            it.receiveSkip = "活动未开启（" + fmtCountdown(info.countdownMs) + "后开始）";
-          }
-          it.ok = true;
-        } catch (e) {
-          it.ok = false; it.error = String(e.message || e).slice(0, 150);
-        }
-        per.push(it);
-      }
-      out.perAccount = per;
-      out.results = per.map(x => ({ phone: x.phone, masked: x.masked, ok: x.ok,
-        message: ["等级" + (x.memberLevel || "?"), "活动" + (x.online ? "开启" : "未开"),
-                  x.reserve ? "预约" + x.reserve : "", x.received ? "领奖" + x.received.join(" ") : "",
-                  x.receiveSkip || "", x.error || ""].filter(Boolean).join("；") }));
-      out.ok = okCount > 0 || per.some(x => x.ok);
-      out.msg = "会员日处理完成（" + per.length + " 个账号）";
     } else if (type === "srefresh") {    } else if (type === "srefresh") {
       const c = await pickCreds();
       const rr = await refreshToken(c.phone, decodeAuth(c.authorization).token);
