@@ -1,6 +1,6 @@
 {
-  "ts": "2026-09-15 12:18:13",
-  "requestId": "mday16-1789474693300-bpyv9p9a",
+  "ts": "2026-09-15 12:20:42",
+  "requestId": "mday16-1789474842499-invowq38",
   "type": "mday16",
   "ok": true,
   "msg": "会员日资格查询完成（3 个账号）",
@@ -17,8 +17,7 @@
       "isMember": true,
       "online": false,
       "activityDay": false,
-      "countdownMs": 51094546,
-      "memberDesc": "黄金会员",
+      "countdownMs": 50950467,
       "prizeCount": 22,
       "prizes": [
         {
@@ -152,7 +151,6 @@
       "online": false,
       "activityDay": false,
       "countdownMs": 0,
-      "memberDesc": "非会员",
       "result": "非会员，无资格参加会员日"
     },
     {
@@ -162,8 +160,7 @@
       "isMember": true,
       "online": false,
       "activityDay": false,
-      "countdownMs": 51080242,
-      "memberDesc": "白银会员",
+      "countdownMs": 50942018,
       "prizeCount": 22,
       "prizes": [
         {
