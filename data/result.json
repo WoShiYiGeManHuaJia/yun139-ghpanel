@@ -1,7 +1,6 @@
 {
-  "ts": "2026-09-15 00:32:59",
-  "type": "send_code",
-  "ok": true,
-  "msg": "successed to process!",
-  "phone": "17274079953"
+  "ts": "2026-09-15 00:33:20",
+  "type": "do_login",
+  "ok": false,
+  "msg": "The operation failed for an operation-specific reason"
 }
