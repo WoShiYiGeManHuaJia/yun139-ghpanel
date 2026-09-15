@@ -1,16 +1,14 @@
 {
   "steps": [
     "===== 137****4642 =====",
-    "  toReceive=undefined receiveNum=undefined",
+    "  infoV3 原始: {\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":f",
+    "  toReceive=0 receiveNum=undefined",
     "  receiveList 条数: 0",
     "  cloudType=3 条数: 0",
     "===== 137****6553 =====",
-    "  toReceive=undefined receiveNum=undefined",
-    "  receiveList 条数: 0",
-    "  cloudType=3 条数: 0"
+    "  JWT 失败: fetch failed"
   ],
   "compare": {
-    "137****4642": [],
-    "137****6553": []
+    "137****4642": []
   }
 }
