@@ -1135,6 +1135,53 @@ async function main() {
       out.tasks = await fetchTaskList(jwt);
       out.msg = "已获取 " + out.tasks.length + " 个真实任务（" + maskPhone(c.phone) + "）";
       out.ok = true;
+    } else if (type === "probe16") {
+      // 星动日 / 16号会员日 活动接口探测（只读，不领取）
+      const ra = await resolveAccounts();
+      out.acctDiag = ra.diag;
+      const c = ra.list[0] || await pickCreds();
+      out.phone = c.phone; out.masked = maskPhone(c.phone);
+      const jwt = await getJwt(c.authorization, c.phone);
+      const H = { "User-Agent": UA_CLOUD, "jwtToken": jwt, "Cookie": "jwtToken=" + jwt,
+                  "Accept": "*/*", "X-Requested-With": "XMLHttpRequest", "Referer": "https://m.mcloud.139.com/" };
+      const probes = [];
+      async function P(tag, url, opt) {
+        try {
+          const r = await fetchWithTimeout(url, Object.assign({ headers: H }, opt || {}), 25000);
+          const t = await r.text();
+          probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, 900) });
+        } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 120) }); }
+      }
+      // 1) 活动页面本身
+      await P("page", "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay");
+      // 2) 常见活动接口猜测
+      const cands = [
+        ["memberday_info", "https://m.mcloud.139.com/ycloud/memberday/page/info?client=app"],
+        ["mCloudDay_info", "https://m.mcloud.139.com/ycloud/mcloudday/page/info?client=app"],
+        ["huiyuanri_info", "https://m.mcloud.139.com/ycloud/huiyuanri/page/info?client=app"],
+        ["activity_list", "https://m.mcloud.139.com/ycloud/activity/page/list?client=app"],
+        ["market_huiyuanri", "https://caiyun.feixin.10086.cn/market/huiyuanri/index?marketname=huiyuanri"],
+        ["market_memberday", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=member_day"],
+        ["market_mcloudday", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=mCloudDay"],
+        ["market_16", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=sign_in_16"],
+        ["vipday", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=vip_day"],
+        ["member_day2", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=memberday"],
+      ];
+      for (const [tag, u] of cands) await P(tag, u);
+      // 3) 页面里挖到的接口路径，再探一轮
+      const pg = probes.find(x => x.tag === "page" && x.body);
+      if (pg) {
+        const found = [...new Set((pg.body.match(/["'`](\/[A-Za-z0-9_\-\.\/]{8,90})["'`]/g) || [])
+          .map(x => x.slice(1, -1))
+          .filter(x => /ycloud|market|huiyuan|member|activity|day|draw|lottery|gift/i.test(x)))].slice(0, 12);
+        out.pagePaths = found;
+        for (const fp of found) {
+          await P("found:" + fp.slice(-30), "https://m.mcloud.139.com" + fp);
+        }
+      }
+      out.probes = probes;
+      out.ok = true;
+      out.msg = "会员日探测完成，共 " + probes.length + " 个请求";
     } else if (type === "srefresh") {
       const c = await pickCreds();
       const rr = await refreshToken(c.phone, decodeAuth(c.authorization).token);
