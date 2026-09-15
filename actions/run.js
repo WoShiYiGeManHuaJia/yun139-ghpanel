@@ -1156,35 +1156,51 @@ async function main() {
           probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, cap) });
         } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 120) }); }
       }
-      // 1) 会员日专属 JS（mCloudDay）
       const JSBASE = "https://img.mcloud.139.com/portal/cloudCircle/public/js/";
-      const jsFiles = ["mCloudDay.61e70431.js", "mCDmkt.c46538b6.js", "caiyunviporder.4d3a717f.js"];
-      const hitPaths = new Set();
-      for (const jf of jsFiles) {
+      const H2 = { "User-Agent": UA_CLOUD, "jwtToken": jwt, "Cookie": "jwtToken=" + jwt,
+                   "Accept": "application/json, text/plain, */*", "X-Requested-With": "XMLHttpRequest",
+                   "Referer": "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay",
+                   "Content-Type": "application/json" };
+      async function P2(tag, url, opt) {
         try {
-          const r = await fetchWithTimeout(JSBASE + jf, { headers: { "User-Agent": UA_CLOUD, "Referer": "https://m.mcloud.139.com/" } }, 40000);
+          const r = await fetchWithTimeout(url, Object.assign({ headers: H2 }, opt || {}), 30000);
           const t = await r.text();
-          probes.push({ tag: "JS:" + jf, url: JSBASE + jf, status: r.status, len: t.length,
-                        body: t.slice(0, 3000) });
-          if (r.status === 200 && !t.trim().startsWith("{")) {
-            for (const m of t.matchAll(/["'`](\/[A-Za-z0-9_\-\.\/]{8,110})["'`]/g)) {
-              const v = m[1];
-              if (/\.(png|jpg|css|js|svg|gif|woff)$/i.test(v)) continue;
-              hitPaths.add(v);
-            }
-            for (const m of t.matchAll(/(?:get|post|request|url|api|path)\s*[:=]\s*["'`]([^"'`]{6,110})["'`]/gi)) {
-              hitPaths.add(m[1]);
-            }
+          probes.push({ tag, url: url.slice(0, 120), status: r.status, len: t.length, body: t.slice(0, 4000) });
+        } catch (e) { probes.push({ tag, url: url.slice(0, 120), err: String(e.message || e).slice(0, 110) }); }
+      }
+      const M = "https://m.mcloud.139.com/ycloud/mcloudday";
+      // A) 资格校验
+      await P2("validate", M + "/common/validate");
+      await P2("validate?client=app", M + "/common/validate?client=app");
+      // B) 奖品清单（完整）
+      await P2("gift/list", M + "/gift/list");
+      await P2("gift/list?client=app", M + "/gift/list?client=app");
+      await P2("gift/nationalPrizeList", M + "/gift/nationalPrizeList");
+      await P2("gift/provPrizeList", M + "/gift/provPrizeList");
+      // C) 盲盒
+      await P2("blindbox/lotteryInfo", M + "/blindbox/lotteryInfo");
+      await P2("blindbox/listCloudRecord", M + "/blindbox/listCloudRecord");
+      // D) 邀请
+      await P2("invite/generateInviteCode", M + "/invite/generateInviteCode");
+      // E) 从 JS 里挖 receive / verify 的调用上下文
+      try {
+        const r = await fetchWithTimeout(JSBASE + "mCloudDay.61e70431.js",
+          { headers: { "User-Agent": UA_CLOUD, "Referer": "https://m.mcloud.139.com/" } }, 60000);
+        const t = await r.text();
+        const ctx = [];
+        for (const key of ["gift/receive", "gift/verify", "common/validate", "blindbox/lottery", "mcloudday"]) {
+          let i = -1, n = 0;
+          while ((i = t.indexOf(key, i + 1)) !== -1 && n < 2) {
+            ctx.push("### " + key + " @" + i + "\n" + t.slice(Math.max(0, i - 450), i + 450));
+            n++;
           }
-        } catch (e) { probes.push({ tag: "JSERR:" + jf, err: String(e.message || e).slice(0, 90) }); }
-      }
-      const allPaths = [...hitPaths].slice(0, 60);
-      out.pagePaths = allPaths;
-      // 逐个试探（带 jwt）
-      for (const fp of allPaths.slice(0, 35)) {
-        const u = fp.startsWith("http") ? fp : "https://m.mcloud.139.com" + fp;
-        await P("hit:" + fp.slice(-34), u);
-      }
+        }
+        // 找所有形如 {xxxId:...} 的接收参数
+        const params = [...new Set((t.match(/\{[^{}]{0,120}?(?:prizeId|activityId|giftId|recordId)[^{}]{0,120}?\}/g) || []))].slice(0, 15);
+        out.jsParams = params;
+        out.jsCtx = ctx.join("\n\n");
+        probes.push({ tag: "JSCTX", status: 200, len: ctx.length, body: ctx.join("\n").slice(0, 9000) });
+      } catch (e) { probes.push({ tag: "JSCTXERR", err: String(e.message || e).slice(0, 100) }); }
       out.probes = probes;
       out.ok = true;
       out.msg = "会员日探测完成，共 " + probes.length + " 个请求";
