@@ -160,6 +160,8 @@
   <div class="card">
     <h2>① 账号</h2>
     <div class="accounts" id="accounts"></div>
+  <button class="btn ghost" id="btn_sync_repo" style="margin-top:8px">同步账号到仓库（定时任务用）</button>
+  <div class="hint">换设备或重抓令牌后点一次，定时任务（每天 09:05）就能用仓库里的最新账号，不再依赖已过期的 Secret。</div>
 
     <!-- 方式一 / 方式二：并排 tab 切换 -->
     <div class="tabs">
@@ -843,7 +845,7 @@
     (rows || []).forEach(function (r) {
       const tag = tagOf(r.phone);
       const em = String(r.error || "未知");
-      if (/令牌|鉴权|失效/.test(em)) {
+      if (/4006|does not exist|已过期|令牌|鉴权|失效/.test(em)) {
         log(tag + " 令牌已失效，请重新用「方式二」粘贴该号码的 authorization 更新后再试", "err");
         toast(tag + " 令牌失效，请重新粘贴更新", "err");
       } else {
@@ -899,6 +901,12 @@
     } catch (e) { /* 忽略 */ }
   }
   $("btn_save_cfg").onclick = saveCfg;
+  $("btn_sync_repo").onclick = async function () {
+    const b = this; const old = b.textContent; b.disabled = true; b.textContent = "同步中…";
+    try { await syncAccountsToRepo("手动同步"); toast("已提交同步，约 30 秒生效"); }
+    catch (e) { toast("同步失败", "err"); }
+    b.disabled = false; b.textContent = old;
+  };
   $("btn_copy_link").onclick = async function () {
     const pat = $("cfg_pat").value.trim() || localStorage.getItem(LS_TOKEN) || "";
     const key = $("cfg_key").value.trim() || localStorage.getItem(LS_KEY) || "";
