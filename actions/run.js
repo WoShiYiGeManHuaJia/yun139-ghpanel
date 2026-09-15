@@ -1642,6 +1642,33 @@ async function main() {
       out.ok = okCount > 0;
       out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个";
 
+      // ---- 收尾复检：逐号确认「可领已清零」，未清零记为问题并报警 ----
+      const rechecks = [];
+      for (const a of accounts) {
+        try {
+          const auth = await ensureAuth(a);
+          const jwt = await getJwt(auth, a.phone);
+          const st = await cloudStatus(jwt);
+          const pend = (st.list || []).filter(x => x && x.cloudType === 0 && x.recordId);
+          rechecks.push({ masked: maskPhone(a.phone), total: st.total,
+                          receivable: st.receivable || 0, pending: pend.length,
+                          clean: pend.length === 0 });
+          if (pend.length) {
+            okCount = Math.min(okCount, accounts.length - 1);
+          }
+        } catch (e) {
+          rechecks.push({ masked: maskPhone(a.phone), error: String(e.message || e).slice(0, 80), clean: false });
+        }
+        await new Promise(r => setTimeout(r, 1500));
+      }
+      out.recheck = rechecks;
+      const dirty = rechecks.filter(r => !r.clean);
+      out.allClean = dirty.length === 0;
+      if (!out.allClean) {
+        out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个；⚠ " +
+                  dirty.map(d => d.masked + "(剩" + (d.pending || "?") + ")").join("、") + " 仍有未领气泡";
+      }
+
       // ---- 钉钉推送每日报告（含任务完成情况）----
       try {
         const L = [];
@@ -1662,6 +1689,8 @@ async function main() {
             }
           }
           if (x.receive) L.push("- 云豆气泡：" + x.receive);
+          const rc = (out.recheck || []).find(r => r.masked === x.masked);
+          if (rc) L.push("- 领取核对：" + (rc.clean ? "可领已清零 ✅（余额 " + rc.total + "）" : "⚠ 仍剩 " + (rc.pending || "?") + " 个未领"));
           if (x.error) L.push("- 异常：" + x.error);
           L.push("");
         }
