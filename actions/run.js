@@ -1155,32 +1155,40 @@ async function main() {
           probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, 900) });
         } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 120) }); }
       }
-      // 1) 活动页面本身
+      // 1) 活动页面
       await P("page", "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay");
-      // 2) 常见活动接口猜测
-      const cands = [
-        ["memberday_info", "https://m.mcloud.139.com/ycloud/memberday/page/info?client=app"],
-        ["mCloudDay_info", "https://m.mcloud.139.com/ycloud/mcloudday/page/info?client=app"],
-        ["huiyuanri_info", "https://m.mcloud.139.com/ycloud/huiyuanri/page/info?client=app"],
-        ["activity_list", "https://m.mcloud.139.com/ycloud/activity/page/list?client=app"],
-        ["market_huiyuanri", "https://caiyun.feixin.10086.cn/market/huiyuanri/index?marketname=huiyuanri"],
-        ["market_memberday", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=member_day"],
-        ["market_mcloudday", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=mCloudDay"],
-        ["market_16", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=sign_in_16"],
-        ["vipday", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=vip_day"],
-        ["member_day2", "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=memberday"],
-      ];
-      for (const [tag, u] of cands) await P(tag, u);
-      // 3) 页面里挖到的接口路径，再探一轮
+      // 2) 从页面里找 JS bundle，下载后搜接口路径
       const pg = probes.find(x => x.tag === "page" && x.body);
-      if (pg) {
-        const found = [...new Set((pg.body.match(/["'`](\/[A-Za-z0-9_\-\.\/]{8,90})["'`]/g) || [])
-          .map(x => x.slice(1, -1))
-          .filter(x => /ycloud|market|huiyuan|member|activity|day|draw|lottery|gift/i.test(x)))].slice(0, 12);
-        out.pagePaths = found;
-        for (const fp of found) {
-          await P("found:" + fp.slice(-30), "https://m.mcloud.139.com" + fp);
+      const jsUrls = [];
+      if (pg && pg.body) {
+        for (const m of pg.body.matchAll(/(?:src|href)=["']([^"']+\.js(?:\?[^"']*)?)["']/g)) {
+          let u = m[1];
+          if (u.startsWith("//")) u = "https:" + u;
+          else if (u.startsWith("/")) u = "https://m.mcloud.139.com" + u;
+          else if (!u.startsWith("http")) u = "https://m.mcloud.139.com/huiyuanri/v1/" + u;
+          jsUrls.push(u);
         }
+      }
+      out.jsUrls = jsUrls.slice(0, 12);
+      const hitPaths = new Set();
+      for (const ju of jsUrls.slice(0, 10)) {
+        try {
+          const r = await fetchWithTimeout(ju, { headers: { "User-Agent": UA_CLOUD, "Referer": "https://m.mcloud.139.com/" } }, 30000);
+          const t = await r.text();
+          probes.push({ tag: "js:" + ju.split("/").pop().slice(0, 28), url: ju.slice(0, 110), status: r.status, len: t.length });
+          for (const m of t.matchAll(/["'`](\/[A-Za-z0-9_\-\.\/]{10,100})["'`]/g)) {
+            const v = m[1];
+            if (/(ycloud|market|huiyuan|member|mCloudDay|activity|draw|lottery|gift|task|signin|vip)/i.test(v)) hitPaths.add(v);
+          }
+          for (const m of t.matchAll(/["'`]([a-z][A-Za-z0-9_\/]{6,60}(?:Info|info|List|list|Draw|draw|Receive|receive|Gift|gift|Index|index))["'`]/g)) {
+            hitPaths.add("/" + m[1]);
+          }
+        } catch (e) { probes.push({ tag: "jserr", url: ju.slice(0, 90), err: String(e.message || e).slice(0, 80) }); }
+      }
+      const allPaths = [...hitPaths].filter(x => !x.includes(".png") && !x.includes(".css") && !x.includes(".js")).slice(0, 40);
+      out.pagePaths = allPaths;
+      for (const fp of allPaths.slice(0, 25)) {
+        await P("hit", "https://m.mcloud.139.com" + fp);
       }
       out.probes = probes;
       out.ok = true;
