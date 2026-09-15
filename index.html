@@ -150,7 +150,10 @@
         <button class="btn ghost" id="btn_save_cfg">保存配置</button>
         <button class="btn ghost" id="btn_gen_key">生成 DATA_KEY</button>
       </div>
-      <div class="hint">DATA_KEY 仅存本浏览器。连接令牌由分享链接自动带入、仅本次会话有效，页面上不展示也不落盘。</div>
+      <label>连接令牌 PAT（换浏览器后填一次即可，会记住）</label>
+      <input id="cfg_pat" type="password" value="" placeholder="github_pat_... 或 ghp_...">
+      <button class="btn ghost" id="btn_copy_link" style="margin-top:8px">复制分享链接（换设备用）</button>
+      <div class="hint">PAT 与 DATA_KEY 仅存本浏览器，填一次后长期有效。要搬到另一台设备，点「复制分享链接」在新设备打开即可。</div>
     </div>
   </details>
 
@@ -319,10 +322,12 @@
   function loadCfg() {
     $("cfg_repo").value = localStorage.getItem(LS_REPO) || REPO_DEFAULT;
     $("cfg_key").value = localStorage.getItem(LS_KEY) || "";
+  try { $("cfg_pat").value = localStorage.getItem(LS_TOKEN) || ""; } catch (e) {}
   }
   function saveCfg() {
     localStorage.setItem(LS_REPO, $("cfg_repo").value.trim() || REPO_DEFAULT);
     localStorage.setItem(LS_KEY, $("cfg_key").value.trim());
+  try { const pv = $("cfg_pat").value.trim(); if (pv) localStorage.setItem(LS_TOKEN, pv); } catch (e) {}
     log("配置已保存");
   }
   function genKey() {
@@ -874,6 +879,15 @@
     } catch (e) { /* 忽略 */ }
   }
   $("btn_save_cfg").onclick = saveCfg;
+  $("btn_copy_link").onclick = async function () {
+    const pat = $("cfg_pat").value.trim() || localStorage.getItem(LS_TOKEN) || "";
+    const key = $("cfg_key").value.trim() || localStorage.getItem(LS_KEY) || "";
+    const rp = $("cfg_repo").value.trim() || REPO_DEFAULT;
+    if (!pat) { toast("请先填写 PAT", "err"); return; }
+    const link = location.origin + "/yun139-ghpanel/#token=" + pat + "&key=" + key + "&repo=" + rp;
+    try { await navigator.clipboard.writeText(link); toast("分享链接已复制，在新设备打开即可"); }
+    catch (e) { log("分享链接： " + link, "warn"); toast("复制失败，已输出到日志", "err"); }
+  };
   $("btn_gen_key").onclick = genKey;
   $("tab_m1").onclick = function () { switchMethod(1); };
   $("tab_m2").onclick = function () { switchMethod(2); };
