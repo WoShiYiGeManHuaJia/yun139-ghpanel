@@ -1,37 +1,9 @@
 {
-  "ts": "2026-09-15 00:53:41",
+  "ts": "2026-09-15 00:55:40",
   "type": "status",
-  "ok": true,
-  "msg": "已查询 3 个账号",
+  "ok": false,
+  "msg": "已查询 1 个账号",
   "status": [
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": true,
-      "total": 960,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 38,
-      "list": [
-        {
-          "cloudType": 2,
-          "cloudNum": 38,
-          "recordId": null
-        }
-      ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
-    },
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": true,
-      "total": 253,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 0,
-      "list": [],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
-    },
     {
       "phone": "13717306553",
       "masked": "137****6553",
@@ -39,5 +11,5 @@
       "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired."
     }
   ],
-  "enc_accounts": "/oEUI3e2oPsk9GuCkVw961lGa4X77Frezbqo/z9j0jKrZCgbu4ATsyizQDyNznHBWHbcOrJqciGKi2e68J1wnt23XwvJ9TRJ6p+S889MC8QNpgnb0+FiiTMBsjCkak1cXQwxPMasCu6rSV2wLGdF3Kd89xGW123faC12MBtL6299i392wC9+JAM9CNSt/ezoGM9SQ5fvA17jbmekb8ALbGVh2fgMmU0QEtqU8PSoRuBZGd6rFW+8YzoV0Hj0Pi+T9SHUnJWRANzPRJh9jtZtXODhq9NvJNaEdzleKv4e8BRs2ekyphtp5kT2PwfZXipcnkJxGjNZj1KdW2nfgQomtHcNRUzkeZxkTgJybGPNekO49Jci5ScTqAwFZylkVlAmz3WqDZcgr92Gfu1K+zNSxccmXr3FHfp6hWxJNFYGgJvN8kD1HD+quiHMIpMnYWsoX8hd8QhPtgxLsALgYp6nkS1zizKMdy0yxC+MRmYaMoj2yvrxG64y30uRW44YT75Q85PTPFlxCg/9himBB6NUhBZMwuJpO2j4YZUir1dThAt0wLAsoFhHzLwxMXgYjFoKtknunO1Es2rU98t1tQMANvcryh+2tdZDJXEPWDPPy8L96zsnnJW5RX/q6fckKtR2onDmN1twIfMGhL1TtUnRUdJj94ptRwoWLZYH/3u6Eo55G7w2Bs3CfCbdJ40q8uWb6+Ig3jIAPL2nfSJwI/0dxjUZVYnHLDyZaYc0lPXWFCF1dbyWAu3tnMnirEE3cREbnwxJCHp2oVYzrfz32/Y/6OS+xnavLETK5jgfYArVDO3CKS1zQ+bTidVNHMtFtsDFkp3YuxtsNPBU1LNKCRs1AoGEyOkqvB3fzUFkRbqhwXd0u9VYJbXqvw93ECkHwcpBS8svGCSsJK8igZwj5LqOxcDCRkE8Fk+J3SRq0IbOFUoK4BJYEkT6WY8vshbZ5XbS9D+njljITY/SI4LqOlQMoUa4EZtgwkCXxRDgSH4JqHZIJfjug6WDKTdUij+8+Mnh6jOHv2e6lBNXUz7Q8TpODg/uzxlfx8Qk+DzX6Quba2eKZRpQlEY0ScP2T5Q27KRN5rVnUSKd/OVBVUDEQ0h4qWb+13zY8SR/Jz2jJdn+CkCqfKB8KkpJj86P9vWvtZtmvfQ24v27+tvhs8+nUOo73QWwhxvY5XQI4gSkOgezQBf6QM8gJmHp3G2OLFLdU2/Esxb1o2uPQ7SXYzS+IU0yIz9CVHTf5wq9MAQuH9grb1XXE5F6Fii0RfxhJOO5LPnUZ5Iuo6i5C+vKbCLtGg6Svwsw3UG2bYBxJVs99I99sngzeX3vD7mrJcFfuL7qY60Wd0mzPEgbpoeWibLnSS5ZyjhOZ/LXWDszxy1dudU9NCpjWAa0DSvxEHZOGWIH8W2lHhHysX6Gcgr4tnVntbe5IthKxSXw8KnnzkFIfRBt/Tbo7hStrqqDhXoO7ycgzhXI5b4GD0z4iNUYzV18ez6RaHL8s5K3A5Mm+cR8BbcUfCi6TmUFUaHxqsx/e6UNZ28E2vAFI/nwIgMWH7GKSiAweeqO16Ykpj1rCBfAkHvSAA1Z+zRb/1w0e6YWFSCb1/oDms2H3gNUMMvj9mBRz4zlE4LMAPt3XBeT4ez3UITBu3GHTNNIck3MXraQrrVQ9TTze4T+aznM9gZiBvapl4xoIaBCG99/EWWBfAdqFIL+ZJSkZ0/u1HfhJgIHONO761pg1/P/J/7L1iUQmpTCkgOrH0iEPPF1WfZGE7h2cdnypfwd/UDYYltMjfmPEL3jECBEzbT+mHr8JkswJGMRShU3jpYwwMY76UlECIREmCnJZdLfPqO1ZYKA0MRMNIFW8K2CpiBCPgSGKpseWSQTKn7UmOTLugY2pT9tkAIbb3F6K6zt5llNaSJfLQ3wB+lKZVB+CtURPSD8bDWlutD0xE86QKWfe9HJnNwVWKqBZ5qNYVdCWmk="
+  "enc_accounts": "eZMrRQOF01UES2ySyHPsHs2qDLazujllb+TFFz0Guw2pWprnMT2DDF63sCtwBwb4iL7ejZTMv6iAb/rb5NGBTJDOo5lr6KIoDscWUJv37BsurUxzaDbXtte6/y+VqP8mJy7pAOPnnoOpkNkVSwC8UGwvSDMLdz132p4ECsIvlZ0cZz+4lzt+yQ9trzBECj9z5Jwm7uaccLq8epaGZUDcAPsHTd/lpS30sgltw0YRJ1Pa3MzTDJ8AIFRq+7QWtIaIvveliswbNtGGMxvqYmjcHPvDhlx0ljiUezdNGhZBEq45siJI0WMKaDPKw0/MpnDwevh5f53iz4v+7nb2gH14aJcdrasXwHZuZTH5oTCMsLxZW3tGRk361HPVLxWJf8D7lyygVjh7B7kctkYwYIAYuR6XkBIO7fRggc9Lf/6Aj2BL6fUwtTHasUITaZkhYbRa3XtQFiDstW5sLh5OLUNSY+hHRJD96RI5QCo+phK3og8eDnk5CXY7JjTS"
 }
