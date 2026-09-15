@@ -1,37 +1,53 @@
 {
-  "ts": "2026-09-14 18:59:37",
-  "type": "receive",
+  "ts": "2026-09-15 00:10:06",
+  "type": "status",
   "ok": true,
-  "msg": "172****9953 960→960 +0",
-  "badAccounts": [],
-  "receiveList": [
+  "msg": "已查询 3 个账号",
+  "status": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "ok": true,
+      "total": 253,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 0,
+      "list": [],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "ok": true,
+      "total": 3,
+      "toReceive": 0,
+      "receivable": 200,
+      "nextMonth": 0,
+      "list": [
+        {
+          "cloudType": 3,
+          "cloudNum": 200,
+          "recordId": 550
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"\",\"cal\""
+    },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "ok": true,
-      "before": 960,
-      "after": 960,
-      "got": 0,
-      "steps": [
-        "页面 token: 已获取",
-        "初始云豆 960",
-        "最终云豆 960"
+      "total": 960,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 38,
+      "list": [
+        {
+          "cloudType": 2,
+          "cloudNum": 38,
+          "recordId": null
+        }
       ],
-      "error": ""
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
     }
-  ],
-  "receive": {
-    "phone": "17274079953",
-    "masked": "172****9953",
-    "ok": true,
-    "before": 960,
-    "after": 960,
-    "got": 0,
-    "steps": [
-      "页面 token: 已获取",
-      "初始云豆 960",
-      "最终云豆 960"
-    ],
-    "error": ""
-  }
+  ]
 }
