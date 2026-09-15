@@ -1,51 +1,45 @@
 {
-  "ts": "2026-09-15 04:51:55",
-  "requestId": "receive-1789447915599-wdvyoalv",
+  "ts": "2026-09-15 05:07:13",
+  "requestId": "receive-1789448833292-kpp513w7",
   "type": "receive",
   "ok": false,
-  "msg": "137****6553 失败:页面未加载出云豆数据（登录态失效或页面改版）",
-  "badAccounts": [
-    "137****6553"
-  ],
-  "enc_accounts": "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",
+  "msg": "137****6553 失败:检测到可领取气泡，但点击后云豆未增加",
+  "badAccounts": [],
+  "enc_accounts": "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",
   "receiveList": [
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "ok": false,
+      "before": 3,
+      "after": 3,
       "got": 0,
       "steps": [
         "页面 token: 已获取",
-        "首次未读到云豆，重载页面重试…",
-        "初始云豆 null",
-        "⚠ 页面未读到云豆，诊断：URL=https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1&token=YZsidssolgdc81de717db835d2f16646d5857ef3b7#/newsignin",
-        "   页面文本: 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 137****6553 奖 品 规 则 3 云盘专属AI豆 +200 可领取 +10 可领取 +10 可领取 +10 可领取 +20 可领取 戳我看看吧～ 本月已签到 1 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 未签 14 今天 16 17 18 19 20 热门活动 做任务 兑好礼 绑定公众号 +",
-        "   气泡元素: 共 5 个，可点击 5 个",
-        "   API 云豆: 3 / 可领 250 / 下月 0",
-        "第1次无变化（null→null）",
-        "第2次无变化（null→null）",
-        "最终云豆 null"
+        "云豆来源: page",
+        "初始云豆 3",
+        "第1次无变化（3→3）",
+        "第2次无变化（3→3）",
+        "最终云豆 3"
       ],
-      "error": "页面未加载出云豆数据（登录态失效或页面改版）"
+      "error": "检测到可领取气泡，但点击后云豆未增加"
     }
   ],
   "receive": {
     "phone": "13717306553",
     "masked": "137****6553",
     "ok": false,
+    "before": 3,
+    "after": 3,
     "got": 0,
     "steps": [
       "页面 token: 已获取",
-      "首次未读到云豆，重载页面重试…",
-      "初始云豆 null",
-      "⚠ 页面未读到云豆，诊断：URL=https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1&token=YZsidssolgdc81de717db835d2f16646d5857ef3b7#/newsignin",
-      "   页面文本: 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 137****6553 奖 品 规 则 3 云盘专属AI豆 +200 可领取 +10 可领取 +10 可领取 +10 可领取 +20 可领取 戳我看看吧～ 本月已签到 1 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 未签 14 今天 16 17 18 19 20 热门活动 做任务 兑好礼 绑定公众号 +",
-      "   气泡元素: 共 5 个，可点击 5 个",
-      "   API 云豆: 3 / 可领 250 / 下月 0",
-      "第1次无变化（null→null）",
-      "第2次无变化（null→null）",
-      "最终云豆 null"
+      "云豆来源: page",
+      "初始云豆 3",
+      "第1次无变化（3→3）",
+      "第2次无变化（3→3）",
+      "最终云豆 3"
     ],
-    "error": "页面未加载出云豆数据（登录态失效或页面改版）"
+    "error": "检测到可领取气泡，但点击后云豆未增加"
   }
 }
