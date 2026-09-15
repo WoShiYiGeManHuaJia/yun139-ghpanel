@@ -1571,11 +1571,14 @@ async function main() {
           L.push("#### " + x.masked + "　" + (x.ok ? "✅ 正常" : "❌ 异常"));
           if (x.refresh) L.push("- 令牌续期：" + x.refresh);
           if (x.tasks !== undefined) {
-            L.push("- 任务：执行 " + x.tasks + " 个，成功 " + (x.taskOk || 0) + " 个"
-              + (x.taskFail ? ("，失败 " + x.taskFail + " 个") : ""));
-            const det = (x.taskDetail || []).slice(0, 12);
-            for (const t of det) L.push("    - " + (t.ok ? "✔ " : "✘ ") + (t.name || "未命名任务"));
-            if ((x.taskDetail || []).length > 12) L.push("    - ……共 " + x.taskDetail.length + " 个");
+            const failed = (x.taskDetail || []).filter(t => !t.ok);
+            if (!failed.length) {
+              L.push("- 任务：" + (x.tasks || 0) + " 个全部完成 ✅");
+            } else {
+              L.push("- 任务：执行 " + x.tasks + " 个，成功 " + (x.taskOk || 0) + " 个，失败 " + failed.length + " 个 ❌");
+              for (const t of failed.slice(0, 10)) L.push("    - ✘ " + (t.name || "未命名任务"));
+              if (failed.length > 10) L.push("    - ……共失败 " + failed.length + " 个");
+            }
           }
           if (x.receive) L.push("- 云豆气泡：" + x.receive);
           if (x.error) L.push("- 异常：" + x.error);
