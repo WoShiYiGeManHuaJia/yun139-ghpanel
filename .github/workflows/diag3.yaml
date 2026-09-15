@@ -1,0 +1,33 @@
+name: yun139-diag3
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 安装 Playwright
+        run: |
+          npm i --no-audit --no-fund playwright@1.63.0
+          npx playwright install chromium
+      - name: 运行诊断
+        env:
+          DIAG_PHONE: "17274079953"
+          DIAG_AUTH: ${{ secrets.DIAG_AUTH_9953 }}
+        run: node actions/diag3.js
+      - name: 保存
+        run: |
+          mkdir -p data
+          cp /tmp/diag3/out.json data/diag3.json || echo none
+          git config user.name "bot"
+          git config user.email "bot@users.noreply.github.com"
+          git checkout -f -B main $(git rev-parse HEAD)
+          git add data/diag3.json
+          git diff --cached --quiet && echo "无变化" || git commit -m "diag3: 浏览器登录抓气泡"
+          git push origin main || echo skip
