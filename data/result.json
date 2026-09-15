@@ -1,142 +1,55 @@
 {
-  "ts": "2026-09-15 11:45:07",
-  "requestId": "probe16-1789472707094-ouv8gudq",
+  "ts": "2026-09-15 11:51:24",
+  "requestId": "probe16-1789473084667-bj58dbxv",
   "type": "probe16",
   "ok": true,
-  "msg": "会员日探测完成，共 18 个请求",
+  "msg": "会员日探测完成，共 6 个请求",
   "acctDiag": [
     "cipher失败:缺少加密数据或密钥",
     "store:3"
   ],
   "phone": "13787464642",
   "masked": "137****4642",
-  "marketTries": [],
   "probes": [
     {
-      "tag": "activityInfo:mCloudDay",
+      "tag": "activityInfo",
       "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/activityInfo?marketName=mCloudDay",
       "status": 200,
       "len": 6282,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"online\":false,\"extGiftOnline\":true,\"blindboxOnline\":false,\"inviteOnline\":false,\"countDownTimeStamp\":53086852,\"todayActivityOpenBefore\":false,\"activityDay\":false,\"reservationSwitch\":true,\"memberLevel\":\"2\",\"cloudPhoneLevel\":\"-1\",\"gotoneLevel\":\"-99\",\"gotonePopup\":false,\"isMember\":true,\"finalUserType\":\"2\",\"title\":\"https://img.mcloud.139.com//uop_prod/20260708/b221b30288554f418be164155af71355.png\",\"memo\":null,\"brilliantVipAdvanceToast\":null,\"showData\":{\"shareSetting\":{\"weixin\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"app\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"miniProgram\":{\"title\":\"会员独宠月月有礼\",\"title2\":\"每月16号会员宠爱礼享不停\",\"desc\":\"超多有料云盘福利！\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000&tokenType=ssoToken\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/bc40f5a89b214128b4114f810d25c95b.jpg\"},\"browser\":\"https://m.mcloud.139.com/portal/cloudCircle/index.html?path=mCloudDay&sourceid=1155&enableShare=1&token=#ssoToken#\"},\"moduleSetting\":[{\"name\":\"会员日宠爱礼活动专区\",\"component\":\"FansGift\",\"sort\":1,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImg2\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImgProv\":\"https://img.mcloud.139.com//uop_prod/20260708/714a0669cf0e4202acb26ba66032ebbb.png\"},{\"name\":\"会员日抽盲盒活动专区\",\"component\":\"FansDraw\",\"sort\":2,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/d93fed655b694b16aedad8d6d2337f24.png\"},{\"name\":\"惊喜助力礼\",\"component\":\"FansSurpriseBoost\",\"sort\":3,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260807/ae87c3ac8e9a4e1c84a9cbbefdcbc17d.png\"},{\"name\":\"会员低价购专区\",\"component\":\"FansPurchase\",\"sort\":4,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/dac6242d0a91494481d0114247a9e8e5.png\"},{\"name\":\"会员回馈礼活动专区\",\"component\":\"FansFeedback\",\"sort\":5,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/88d3ca"
+      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"online\":false,\"extGiftOnline\":true,\"blindboxOnline\":false,\"inviteOnline\":false,\"countDownTimeStamp\":52711738,\"todayActivityOpenBefore\":false,\"activityDay\":false,\"reservationSwitch\":true,\"memberLevel\":\"2\",\"cloudPhoneLevel\":\"-1\",\"gotoneLevel\":\"-99\",\"gotonePopup\":false,\"isMember\":true,\"finalUserType\":\"2\",\"title\":\"https://img.mcloud.139.com//uop_prod/20260708/b221b30288554f418be164155af71355.png\",\"memo\":null,\"brilliantVipAdvanceToast\":null,\"showData\":{\"shareSetting\":{\"weixin\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"app\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"miniProgram\":{\"title\":\"会员独宠月月有礼\",\"title2\":\"每月16号会员宠爱礼享不停\",\"desc\":\"超多有料云盘福利！\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000&tokenType=ssoToken\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/bc40f5a89b214128b4114f810d25c95b.jpg\"},\"browser\":\"https://m.mcloud.139.com/portal/cloudCircle/index.html?path=mCloudDay&sourceid=1155&enableShare=1&token=#ssoToken#\"},\"moduleSetting\":[{\"name\":\"会员日宠爱礼活动专区\",\"component\":\"FansGift\",\"sort\":1,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImg2\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImgProv\":\"https://img.mcloud.139.com//uop_prod/20260708/714a0669cf0e4202acb26ba66032ebbb.png\"},{\"name\":\"会员日抽盲盒活动专区\",\"component\":\"FansDraw\",\"sort\":2,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/d93fed655b694b16aedad8d6d2337f24.png\"},{\"name\":\"惊喜助力礼\",\"component\":\"FansSurpriseBoost\",\"sort\":3,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260807/ae87c3ac8e9a4e1c84a9cbbefdcbc17d.png\"},{\"name\":\"会员低价购专区\",\"component\":\"FansPurchase\",\"sort\":4,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/dac6242d0a91494481d0114247a9e8e5.png\"},{\"name\":\"会员回馈礼活动专区\",\"component\":\"FansFeedback\",\"sort\":5,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/88d3cadac0364f3781ad3ca3915c591a.png\",\"desc\":\"* 实际可领取奖品以所参与活动页面展示为准\"},{\"name\":\"其它精彩内容推荐专区\",\"component\":\"FansRecommend\",\"sort\":6,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/74d793c52f4145d6b13733b1421b827d.png\"},{\"name\":\"活动规则\",\"component\":\"FansRule\",\"sort\":7,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/52168d83681e4320901f3107d1e0a835.png\"}],\"modulelink2\":[{\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260910/ae1b19ae813c4c958c2cab1611758102.png\"},{"
     },
     {
-      "tag": "memberLevel:mCloudDay",
-      "url": "https://m.mcloud.139.com/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=mCloudDay",
+      "tag": "reservation?open=true",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservation?open=true&marketName=mCloudDay",
+      "err": "fetch failed"
+    },
+    {
+      "tag": "reservation?open=1",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservation?open=1&marketName=mCloudDay",
       "status": 200,
-      "len": 167,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"resultCode\":2,\"desc\":\"黄金会员\",\"endTime\":\"20991231235959\",\"hasMarkProduct\":false,\"hasWhiteProduct\":false,\"hasAllBlackProduct\":false}}"
+      "len": 29,
+      "body": "{\"code\":500,\"msg\":\"不支持该预约来源\"}"
     },
     {
-      "tag": "marketConfig:mCloudDay",
-      "url": "https://m.mcloud.139.com/market/manager/commonMarketconfig/getByMarketName?marketName=mCloudDay",
+      "tag": "gift/list",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/list",
       "status": 200,
-      "len": 26,
-      "body": "{\"code\":603,\"msg\":\"活动不存在\"}"
+      "len": 6496,
+      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"nationalPrizeList\":[{\"prizeId\":260615001,\"prizeName\":\"肯德基10元优惠满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/02567517a15b424f8e6b12dbb9581315.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":1},{\"prizeId\":260713003,\"prizeName\":\"喜茶15元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260713/912069efeeb24b81a39bd29b5828e24f.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":2},{\"prizeId\":260206017,\"prizeName\":\"霸王茶姬无门槛10元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a42bd7fa94b14e5a890866704b01e072.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":3},{\"prizeId\":260511002,\"prizeName\":\"星巴克15元会员礼包\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/b42229198bd04d279587b1c061920e22.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":4},{\"prizeId\":260104007,\"prizeName\":\"腾讯视频VIP会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/5acbeecb948146d390437d232c10c188.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":5},{\"prizeId\":260104009,\"prizeName\":\"爱奇艺黄金会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a17091d41a464a519362496cd52bb2d1.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":6},{\"prizeId\":260113002,\"prizeName\":\"优酷视频会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260910/7a7e0ae9a3d54ca18743adb3855c51d7.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":7},{\"prizeId\":260104014,\"prizeName\":\"芒果TV会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/4ae66e03a6234dfabc0b9358f87a78f3.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":8},{\"prizeId\":260907023,\"prizeName\":\"剪映VIP会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260907/77f25b5b72da4efdbe751c45878658a7.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":9},{\"prizeId\":260104016,\"prizeName\":\"作业帮VIP会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/9f0bfc47d8af4582bc834d6e1098fb43.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":10},{\"prizeId\":260113"
     },
     {
-      "tag": "activityInfo:huiyuanri",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/activityInfo?marketName=huiyuanri",
+      "tag": "myPrize",
+      "url": "https://m.mcloud.139.com/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2?pageNum=1&pageSize=20",
+      "status": 404,
+      "len": 548,
+      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+    },
+    {
+      "tag": "extGift",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/list?client=app&type=ext",
       "status": 200,
-      "len": 6282,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"online\":false,\"extGiftOnline\":true,\"blindboxOnline\":false,\"inviteOnline\":false,\"countDownTimeStamp\":53085596,\"todayActivityOpenBefore\":false,\"activityDay\":false,\"reservationSwitch\":true,\"memberLevel\":\"2\",\"cloudPhoneLevel\":\"-1\",\"gotoneLevel\":\"-99\",\"gotonePopup\":false,\"isMember\":true,\"finalUserType\":\"2\",\"title\":\"https://img.mcloud.139.com//uop_prod/20260708/b221b30288554f418be164155af71355.png\",\"memo\":null,\"brilliantVipAdvanceToast\":null,\"showData\":{\"shareSetting\":{\"weixin\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"app\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"miniProgram\":{\"title\":\"会员独宠月月有礼\",\"title2\":\"每月16号会员宠爱礼享不停\",\"desc\":\"超多有料云盘福利！\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000&tokenType=ssoToken\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/bc40f5a89b214128b4114f810d25c95b.jpg\"},\"browser\":\"https://m.mcloud.139.com/portal/cloudCircle/index.html?path=mCloudDay&sourceid=1155&enableShare=1&token=#ssoToken#\"},\"moduleSetting\":[{\"name\":\"会员日宠爱礼活动专区\",\"component\":\"FansGift\",\"sort\":1,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImg2\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImgProv\":\"https://img.mcloud.139.com//uop_prod/20260708/714a0669cf0e4202acb26ba66032ebbb.png\"},{\"name\":\"会员日抽盲盒活动专区\",\"component\":\"FansDraw\",\"sort\":2,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/d93fed655b694b16aedad8d6d2337f24.png\"},{\"name\":\"惊喜助力礼\",\"component\":\"FansSurpriseBoost\",\"sort\":3,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260807/ae87c3ac8e9a4e1c84a9cbbefdcbc17d.png\"},{\"name\":\"会员低价购专区\",\"component\":\"FansPurchase\",\"sort\":4,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/dac6242d0a91494481d0114247a9e8e5.png\"},{\"name\":\"会员回馈礼活动专区\",\"component\":\"FansFeedback\",\"sort\":5,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/88d3ca"
-    },
-    {
-      "tag": "memberLevel:huiyuanri",
-      "url": "https://m.mcloud.139.com/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=huiyuanri",
-      "status": 200,
-      "len": 167,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"resultCode\":2,\"desc\":\"黄金会员\",\"endTime\":\"20991231235959\",\"hasMarkProduct\":false,\"hasWhiteProduct\":false,\"hasAllBlackProduct\":false}}"
-    },
-    {
-      "tag": "marketConfig:huiyuanri",
-      "url": "https://m.mcloud.139.com/market/manager/commonMarketconfig/getByMarketName?marketName=huiyuanri",
-      "status": 200,
-      "len": 26,
-      "body": "{\"code\":603,\"msg\":\"活动不存在\"}"
-    },
-    {
-      "tag": "activityInfo:mcloudday",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/activityInfo?marketName=mcloudday",
-      "status": 200,
-      "len": 6282,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"online\":false,\"extGiftOnline\":true,\"blindboxOnline\":false,\"inviteOnline\":false,\"countDownTimeStamp\":53084944,\"todayActivityOpenBefore\":false,\"activityDay\":false,\"reservationSwitch\":true,\"memberLevel\":\"2\",\"cloudPhoneLevel\":\"-1\",\"gotoneLevel\":\"-99\",\"gotonePopup\":false,\"isMember\":true,\"finalUserType\":\"2\",\"title\":\"https://img.mcloud.139.com//uop_prod/20260708/b221b30288554f418be164155af71355.png\",\"memo\":null,\"brilliantVipAdvanceToast\":null,\"showData\":{\"shareSetting\":{\"weixin\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"app\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"miniProgram\":{\"title\":\"会员独宠月月有礼\",\"title2\":\"每月16号会员宠爱礼享不停\",\"desc\":\"超多有料云盘福利！\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000&tokenType=ssoToken\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/bc40f5a89b214128b4114f810d25c95b.jpg\"},\"browser\":\"https://m.mcloud.139.com/portal/cloudCircle/index.html?path=mCloudDay&sourceid=1155&enableShare=1&token=#ssoToken#\"},\"moduleSetting\":[{\"name\":\"会员日宠爱礼活动专区\",\"component\":\"FansGift\",\"sort\":1,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImg2\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImgProv\":\"https://img.mcloud.139.com//uop_prod/20260708/714a0669cf0e4202acb26ba66032ebbb.png\"},{\"name\":\"会员日抽盲盒活动专区\",\"component\":\"FansDraw\",\"sort\":2,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/d93fed655b694b16aedad8d6d2337f24.png\"},{\"name\":\"惊喜助力礼\",\"component\":\"FansSurpriseBoost\",\"sort\":3,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260807/ae87c3ac8e9a4e1c84a9cbbefdcbc17d.png\"},{\"name\":\"会员低价购专区\",\"component\":\"FansPurchase\",\"sort\":4,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/dac6242d0a91494481d0114247a9e8e5.png\"},{\"name\":\"会员回馈礼活动专区\",\"component\":\"FansFeedback\",\"sort\":5,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/88d3ca"
-    },
-    {
-      "tag": "memberLevel:mcloudday",
-      "url": "https://m.mcloud.139.com/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=mcloudday",
-      "status": 200,
-      "len": 167,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"resultCode\":2,\"desc\":\"黄金会员\",\"endTime\":\"20991231235959\",\"hasMarkProduct\":false,\"hasWhiteProduct\":false,\"hasAllBlackProduct\":false}}"
-    },
-    {
-      "tag": "marketConfig:mcloudday",
-      "url": "https://m.mcloud.139.com/market/manager/commonMarketconfig/getByMarketName?marketName=mcloudday",
-      "status": 200,
-      "len": 26,
-      "body": "{\"code\":603,\"msg\":\"活动不存在\"}"
-    },
-    {
-      "tag": "activityInfo:HUIYUANRI",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/activityInfo?marketName=HUIYUANRI",
-      "status": 200,
-      "len": 6282,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"online\":false,\"extGiftOnline\":true,\"blindboxOnline\":false,\"inviteOnline\":false,\"countDownTimeStamp\":53084315,\"todayActivityOpenBefore\":false,\"activityDay\":false,\"reservationSwitch\":true,\"memberLevel\":\"2\",\"cloudPhoneLevel\":\"-1\",\"gotoneLevel\":\"-99\",\"gotonePopup\":false,\"isMember\":true,\"finalUserType\":\"2\",\"title\":\"https://img.mcloud.139.com//uop_prod/20260708/b221b30288554f418be164155af71355.png\",\"memo\":null,\"brilliantVipAdvanceToast\":null,\"showData\":{\"shareSetting\":{\"weixin\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"app\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"miniProgram\":{\"title\":\"会员独宠月月有礼\",\"title2\":\"每月16号会员宠爱礼享不停\",\"desc\":\"超多有料云盘福利！\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000&tokenType=ssoToken\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/bc40f5a89b214128b4114f810d25c95b.jpg\"},\"browser\":\"https://m.mcloud.139.com/portal/cloudCircle/index.html?path=mCloudDay&sourceid=1155&enableShare=1&token=#ssoToken#\"},\"moduleSetting\":[{\"name\":\"会员日宠爱礼活动专区\",\"component\":\"FansGift\",\"sort\":1,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImg2\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImgProv\":\"https://img.mcloud.139.com//uop_prod/20260708/714a0669cf0e4202acb26ba66032ebbb.png\"},{\"name\":\"会员日抽盲盒活动专区\",\"component\":\"FansDraw\",\"sort\":2,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/d93fed655b694b16aedad8d6d2337f24.png\"},{\"name\":\"惊喜助力礼\",\"component\":\"FansSurpriseBoost\",\"sort\":3,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260807/ae87c3ac8e9a4e1c84a9cbbefdcbc17d.png\"},{\"name\":\"会员低价购专区\",\"component\":\"FansPurchase\",\"sort\":4,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/dac6242d0a91494481d0114247a9e8e5.png\"},{\"name\":\"会员回馈礼活动专区\",\"component\":\"FansFeedback\",\"sort\":5,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/88d3ca"
-    },
-    {
-      "tag": "memberLevel:HUIYUANRI",
-      "url": "https://m.mcloud.139.com/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=HUIYUANRI",
-      "status": 200,
-      "len": 167,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"resultCode\":2,\"desc\":\"黄金会员\",\"endTime\":\"20991231235959\",\"hasMarkProduct\":false,\"hasWhiteProduct\":false,\"hasAllBlackProduct\":false}}"
-    },
-    {
-      "tag": "marketConfig:HUIYUANRI",
-      "url": "https://m.mcloud.139.com/market/manager/commonMarketconfig/getByMarketName?marketName=HUIYUANRI",
-      "status": 200,
-      "len": 26,
-      "body": "{\"code\":603,\"msg\":\"活动不存在\"}"
-    },
-    {
-      "tag": "activityInfo:memberDay",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/activityInfo?marketName=memberDay",
-      "status": 200,
-      "len": 6282,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"online\":false,\"extGiftOnline\":true,\"blindboxOnline\":false,\"inviteOnline\":false,\"countDownTimeStamp\":53083721,\"todayActivityOpenBefore\":false,\"activityDay\":false,\"reservationSwitch\":true,\"memberLevel\":\"2\",\"cloudPhoneLevel\":\"-1\",\"gotoneLevel\":\"-99\",\"gotonePopup\":false,\"isMember\":true,\"finalUserType\":\"2\",\"title\":\"https://img.mcloud.139.com//uop_prod/20260708/b221b30288554f418be164155af71355.png\",\"memo\":null,\"brilliantVipAdvanceToast\":null,\"showData\":{\"shareSetting\":{\"weixin\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"app\":{\"title\":\"每月16号会员宠爱礼享不停\",\"desc\":\"免费领热门影音会员VIP等超多好礼\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/4b6a122fa16647b6b3beae2853d5eeb2.jpg\"},\"miniProgram\":{\"title\":\"会员独宠月月有礼\",\"title2\":\"每月16号会员宠爱礼享不停\",\"desc\":\"超多有料云盘福利！\",\"link\":\"https://m.mcloud.139.com/caiyunday/v1/index.html?path=mCloudDay&sourceid=1000&tokenType=ssoToken\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20250515/bc40f5a89b214128b4114f810d25c95b.jpg\"},\"browser\":\"https://m.mcloud.139.com/portal/cloudCircle/index.html?path=mCloudDay&sourceid=1155&enableShare=1&token=#ssoToken#\"},\"moduleSetting\":[{\"name\":\"会员日宠爱礼活动专区\",\"component\":\"FansGift\",\"sort\":1,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImg2\":\"https://img.mcloud.139.com//uop_prod/20260708/0967dc7abc194984b82f6c2efd058ef4.png\",\"titleImgProv\":\"https://img.mcloud.139.com//uop_prod/20260708/714a0669cf0e4202acb26ba66032ebbb.png\"},{\"name\":\"会员日抽盲盒活动专区\",\"component\":\"FansDraw\",\"sort\":2,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/d93fed655b694b16aedad8d6d2337f24.png\"},{\"name\":\"惊喜助力礼\",\"component\":\"FansSurpriseBoost\",\"sort\":3,\"show\":true,\"wxHide\":true,\"isMpHide\":false,\"isHarmonyHide\":false,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260807/ae87c3ac8e9a4e1c84a9cbbefdcbc17d.png\"},{\"name\":\"会员低价购专区\",\"component\":\"FansPurchase\",\"sort\":4,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/dac6242d0a91494481d0114247a9e8e5.png\"},{\"name\":\"会员回馈礼活动专区\",\"component\":\"FansFeedback\",\"sort\":5,\"show\":true,\"titleImg\":\"https://img.mcloud.139.com//uop_prod/20260708/88d3ca"
-    },
-    {
-      "tag": "memberLevel:memberDay",
-      "url": "https://m.mcloud.139.com/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=memberDay",
-      "status": 200,
-      "len": 167,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"resultCode\":2,\"desc\":\"黄金会员\",\"endTime\":\"20991231235959\",\"hasMarkProduct\":false,\"hasWhiteProduct\":false,\"hasAllBlackProduct\":false}}"
-    },
-    {
-      "tag": "marketConfig:memberDay",
-      "url": "https://m.mcloud.139.com/market/manager/commonMarketconfig/getByMarketName?marketName=memberDay",
-      "status": 200,
-      "len": 26,
-      "body": "{\"code\":603,\"msg\":\"活动不存在\"}"
-    },
-    {
-      "tag": "POST validate",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/validate",
-      "status": 200,
-      "len": 26,
-      "body": "{\"code\":0,\"msg\":\"success\"}"
-    },
-    {
-      "tag": "POST verify(260615001)",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/verify",
-      "status": 200,
-      "len": 39,
-      "body": "{\"code\":10005,\"msg\":\"抱歉，活动未开启，无法领取奖品！\"}"
-    },
-    {
-      "tag": "POST lotteryInfo",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/blindbox/lotteryInfo",
-      "status": 405,
-      "len": 552,
-      "body": "<html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
+      "len": 6496,
+      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"nationalPrizeList\":[{\"prizeId\":260615001,\"prizeName\":\"肯德基10元优惠满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/02567517a15b424f8e6b12dbb9581315.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":1},{\"prizeId\":260713003,\"prizeName\":\"喜茶15元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260713/912069efeeb24b81a39bd29b5828e24f.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":2},{\"prizeId\":260206017,\"prizeName\":\"霸王茶姬无门槛10元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a42bd7fa94b14e5a890866704b01e072.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":3},{\"prizeId\":260511002,\"prizeName\":\"星巴克15元会员礼包\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/b42229198bd04d279587b1c061920e22.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":4},{\"prizeId\":260104007,\"prizeName\":\"腾讯视频VIP会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/5acbeecb948146d390437d232c10c188.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":5},{\"prizeId\":260104009,\"prizeName\":\"爱奇艺黄金会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a17091d41a464a519362496cd52bb2d1.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":6},{\"prizeId\":260113002,\"prizeName\":\"优酷视频会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260910/7a7e0ae9a3d54ca18743adb3855c51d7.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":7},{\"prizeId\":260104014,\"prizeName\":\"芒果TV会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/4ae66e03a6234dfabc0b9358f87a78f3.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":8},{\"prizeId\":260907023,\"prizeName\":\"剪映VIP会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260907/77f25b5b72da4efdbe751c45878658a7.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":9},{\"prizeId\":260104016,\"prizeName\":\"作业帮VIP会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/9f0bfc47d8af4582bc834d6e1098fb43.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":10},{\"prizeId\":260113"
     }
   ]
 }
