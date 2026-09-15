@@ -1156,40 +1156,34 @@ async function main() {
           probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, cap) });
         } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 120) }); }
       }
-      // 1) 活动页面
-      await P("page", "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay");
-      // 2) 从页面里找 JS bundle，下载后搜接口路径
-      const pg = probes.find(x => x.tag === "page" && x.body);
-      const jsUrls = [];
-      if (pg && pg.body) {
-        for (const m of pg.body.matchAll(/(?:src|href)=["']([^"']+\.js(?:\?[^"']*)?)["']/g)) {
-          let u = m[1];
-          if (u.startsWith("//")) u = "https:" + u;
-          else if (u.startsWith("/")) u = "https://m.mcloud.139.com" + u;
-          else if (!u.startsWith("http")) u = "https://m.mcloud.139.com/huiyuanri/v1/" + u;
-          jsUrls.push(u);
-        }
-      }
-      out.jsUrls = jsUrls.slice(0, 12);
+      // 1) 会员日专属 JS（mCloudDay）
+      const JSBASE = "https://img.mcloud.139.com/portal/cloudCircle/public/js/";
+      const jsFiles = ["mCloudDay.61e70431.js", "mCDmkt.c46538b6.js", "caiyunviporder.4d3a717f.js"];
       const hitPaths = new Set();
-      for (const ju of jsUrls.slice(0, 10)) {
+      for (const jf of jsFiles) {
         try {
-          const r = await fetchWithTimeout(ju, { headers: { "User-Agent": UA_CLOUD, "Referer": "https://m.mcloud.139.com/" } }, 30000);
+          const r = await fetchWithTimeout(JSBASE + jf, { headers: { "User-Agent": UA_CLOUD, "Referer": "https://m.mcloud.139.com/" } }, 40000);
           const t = await r.text();
-          probes.push({ tag: "js:" + ju.split("/").pop().slice(0, 28), url: ju.slice(0, 110), status: r.status, len: t.length });
-          for (const m of t.matchAll(/["'`](\/[A-Za-z0-9_\-\.\/]{10,100})["'`]/g)) {
-            const v = m[1];
-            if (/(ycloud|market|huiyuan|member|mCloudDay|activity|draw|lottery|gift|task|signin|vip)/i.test(v)) hitPaths.add(v);
+          probes.push({ tag: "JS:" + jf, url: JSBASE + jf, status: r.status, len: t.length,
+                        body: t.slice(0, 3000) });
+          if (r.status === 200 && !t.trim().startsWith("{")) {
+            for (const m of t.matchAll(/["'`](\/[A-Za-z0-9_\-\.\/]{8,110})["'`]/g)) {
+              const v = m[1];
+              if (/\.(png|jpg|css|js|svg|gif|woff)$/i.test(v)) continue;
+              hitPaths.add(v);
+            }
+            for (const m of t.matchAll(/(?:get|post|request|url|api|path)\s*[:=]\s*["'`]([^"'`]{6,110})["'`]/gi)) {
+              hitPaths.add(m[1]);
+            }
           }
-          for (const m of t.matchAll(/["'`]([a-z][A-Za-z0-9_\/]{6,60}(?:Info|info|List|list|Draw|draw|Receive|receive|Gift|gift|Index|index))["'`]/g)) {
-            hitPaths.add("/" + m[1]);
-          }
-        } catch (e) { probes.push({ tag: "jserr", url: ju.slice(0, 90), err: String(e.message || e).slice(0, 80) }); }
+        } catch (e) { probes.push({ tag: "JSERR:" + jf, err: String(e.message || e).slice(0, 90) }); }
       }
-      const allPaths = [...hitPaths].filter(x => !x.includes(".png") && !x.includes(".css") && !x.includes(".js")).slice(0, 40);
+      const allPaths = [...hitPaths].slice(0, 60);
       out.pagePaths = allPaths;
-      for (const fp of allPaths.slice(0, 25)) {
-        await P("hit", "https://m.mcloud.139.com" + fp);
+      // 逐个试探（带 jwt）
+      for (const fp of allPaths.slice(0, 35)) {
+        const u = fp.startsWith("http") ? fp : "https://m.mcloud.139.com" + fp;
+        await P("hit:" + fp.slice(-34), u);
       }
       out.probes = probes;
       out.ok = true;
