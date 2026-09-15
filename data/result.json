@@ -1,6 +1,6 @@
 {
-  "ts": "2026-09-15 06:55:02",
-  "requestId": "rtask-1789455288668-356c89e8",
+  "ts": "2026-09-15 06:59:56",
+  "requestId": "rtask-1789455596135-2f59q0m7",
   "type": "rtask",
   "ok": true,
   "msg": "共 3 个账号，成功 3 个",
@@ -9,46 +9,46 @@
       "phone": "13787464642",
       "masked": "137****4642",
       "tasks": 12,
-      "receive": "失败：playwright 未安装且 API 未领到",
+      "receive": "+5（253→258）",
       "ok": true
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "tasks": 12,
-      "receive": "失败：playwright 未安装且 API 未领到",
+      "tasks": 13,
+      "receive": "失败：检测到可领取气泡，但点击后云豆未增加",
       "ok": true
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "tasks": 8,
-      "receive": "失败：playwright 未安装且 API 未领到",
+      "receive": "+0（960→960）",
       "ok": true
     }
   ],
-  "enc_accounts": "Ww/0K42r9qFlLNBaY8Aifa3k2OoGOVMbRI8g6kyUBLHUTcdDUAoc7rnJOisWMXeis4C3GKmHLOtkisvSPKM4eFQKDgL3rBE+sZ7NVYRjrUb3WVOiSKvWLylj2HQ731A6NjpYOc7mkzasmx7lkG9CbhgL1AbjoQXN6r7QYFoE9QQbe3UveQaBVMe6FgkvMJF60wft8t74LkPKpw3M1WiHxGaWiN099FKlrfNlRqg5mh9xgbEwssAl5f8VMob1dH0L79J0aBJ7yYU54m1KowhYi1U7V1KhQg9/CTHmLOyKSDzMZrs+sLPUqToJAKQlcbHG9n2/Lu/5I/QMz/AKZ1Diz7XPqLO9uUlKt1iYee+OgbV//iIsczz3mNm0nxjtAkOc8cjN8z/oLAza0oAs1YPrSbKFiJfgqvUUArgLaY8Khv2ussdmR28shW8Jc5QMPik0cT4gI+TIq2GFdZZt7Hb2pj9j+aCZ+7vwadVwpb0/yjyWhvyVklWAGW4CEHCMjXEYLV3opQpF6WsbuDfNUVRp0d4ky0/VLj+HJmhe8YOX6+I29B4PPmdiGoMwMiIQe5B9q0U9aF1uvKdespE1M5SyGdYADspTcKO71wSaa4xchsKdljvIiFu0CaMvv9GeSnvjpgEDb1fKO9GkfHzSBmbI4ymSLkoUFWf9Lfgwb2gdlNWjvpcelCZc+zogbLSVYNcWJmYBdImP14L5S+TMOTZL72WstJoPOLdfHaQNW7LELDeP5IVheVbfdB2TewvjeQ+0Aj/rpwP81l9gSb2m0p62Y7c5aW9aBQhDRP8Uq6v7/JXMYCaIBUkrcyfS6B02+Gbhivsa1/1E+WN4m3VpfkhPH6CT0XE0ig5rqOF4aeUHnJyboU4Pfsc0kgdvoSuR4mbdUtfGWwzRYc827xSqy0giRjOaTi2ra/CRSCh6jpKv0oD5oP4qbryoqxhbNeD6LTOhXIKcRMfDLiE0W7WYdpHjw91j06fiyjs0lYk29iq4V+upkEJkMG3nV7Rdt7aDP1E1GTbSDwR++V2Kuw3/jXtWMIbf8cwgOI4xuI4JvRHQlDbDBsbwhbkGJwqMxwHa2YOvpmTbA+NCA3D5bormsbDMXU+3y8EII3NhR1xqTXqSNjLDW1b2wMof5ewMPb4QSHoZJ8/92ydN8nI+6qKxYaBKi81/jMa547TadqB6h/8aC7hPMo3oEtd4w7Ztd4km8BayVPU2sOl28XQxg8QoTm6rNTaTnwjeIEZSTIebE/jt1VCgm1ivb3fSodlPOUk0SGRBhtd3Zw1foZLu2lZTBBP8msHZ9vqM2PI33Wf7js6BTqAMBU9ACo7eaAQrEs6YfsBjpNJKUf+Sf8Bm1zSvEqgvfUJUy4ontV7bFsWfvjgQ4WL7HWz97Ns6bgHs7NHxl+y96R9TbddAp0jTeCYbSFYeX7hWFyDMr6xKfw5gU3i/ekriNCmOJpXbQWy8IKaoCAC6/e+If+DIQaaPFbmE5H91RxRXdZdtAV/BsvJ4FqIZYeiiVbq7+eQOJ6dt+NPHU8/mgTYQXHEqE8qRXUt+FIRT+M6V//68CxcAANE06iApIxV0rleBlvb8oMudZpTz3wPnH+K6bgRcUGQUM40QaF9suLz6hdELMNPsxkrCLTKabzgMKSt4hCh7MQQNSqqqFTQ2yFtf+ONlfD/pGxgRkjp+XYIKZMq1F0aFSbqq9Z3PCrxTyph8Zp6re5Ckc4oZMikKB6iToPtkls4AY+9hsQUv8wN/0nAuweqscIRadjmPdG98ASgZdDCnbyK+DY6oZuDlCAOXWoRq5NdATtgdQgjBS9BtWk8IGPhDdLmMblQHbAugzKsKL1ktP7OLXRkqFg3dY+Of81f0MOGh2x0cEvkiMuZnT26Hk33GEHrfxFERaAJJ93aoLTc9MUKBFUAwA/Qs2TQuY4Y+4NmhecY4YbmxYUOCgbRL0NCtUk9dxL5HAK8=",
+  "enc_accounts": "BWv/MQ4nSz8pdtH+J9TPqLwXjjS3YpZOa9HxAQ+Owe/t0sMxk767tNjgVTPdMMQrgGkciZ8cR5fukymEMGpMkvsTLMT49azF1aAHf6vehjdY2eYkMNqWZwdTOb5A8SoRFBlNrUlsdwgw9SFexzZeTxxcVGX2acTm0DbCtPcXI5VJdCNcZullPHnLU8N01vWHDMHPl35HHv/kZVH6YPW6FO6905oSqZXa/Sj4GL3YP1OTlYq9owtrnGuJYrdCxW2ZwLZOGK92lv49QlJXHhmqQMQUFaS7QTeMxnx+IR00e2+2bMFIjoHOZK5J4Xe0i+GAqjU6hxXF9E0JJgc4gbRNezbNMlhdGpbJBsV7syjDlUgkbwrDs8mOyosSshix+j/RPSS/NqcqPJgR0l5tyOctmfNvHO4X50D5kaMCpV2VknuykMXNClrBI6tYdkJ3MDmB/0GSar9FKKOREmdWLsD0SNdfR1+7XpEuLVqceliOqrg+DAIQo0oFbTgd4I6B2pRZ3Ss9PinRkdgtLuqi1TT4yrhr26os8o9845O11fSK1L76XCj7MMdnk1PqtFvzot/YMgHSGjqxwYPSDvO+r+eSHbMQUXrqBkSTjH/3wn2slOePSLqWOzBC5PMihTgp3/S2XUIpxsfGQJcqjynA+DW/AY8uFOY0yz9qrDujEHD7OK3cow2vPM+pkGia/+iAItKKw1+0BQf1L8zAFJ6cbW2kmW8o38AA0kHl2oHknpyj00XHTvrNt19lI5BpSW9G7naIFAAXtJTY4w077Xi6LmuEyIYm7VI9Dv/scl5gQb1KXOJC9hxTBDU/2kW+3wmyqd6o14Z/H1T0HPyxPpH4rMmr7GKurmt9H7pkoMCF2ng1FOj2OEXyLFDVr/5zDty5zro8DZIIyipZ9o3d2YaayPB1NrVnXDuzMzKQ2FfluRY3fJhmT5Sn3RcvWpZ/4zkVT63OOAIueaPhsOtd62wlfJQEWWQmkQdRgF3Q+Ti7jjbno24lOjD6uotQHhP5oZqayg6PpveoTBnnAsjigTzIAIrVzrko+ij2S4LHfYKf2EKiaLaNdOoVJWEN0erS8nEhJyOvlNmwa99c+XTV5O9rLMeDwm0scbFUvSKgJlkYjJM3/dpzKcz7uQSlfQ/i0fq4r670wQPFEAdyPLyBqzAE7sAKc7jLjFGrmUkcG/43svGlKJLk86dNg59xx37N4S6seJZ8LVadEYj5mx1Se5qpAONe1VNiopIdHNHXsocg5KajbOTC4pThpbP51IcdPeXU1iqVHi8sXJd3BnVY7J7YO+PPQw+ph2KERRFwgxsf0D2Ru0WZgG8raUwCH682QwZQAayNFGAjqrmhl1kB01D0dbMNIvhBvJp9LXLZksnn6Bq1ERFj/+0uJ7gyDO87V1vC6HAt6ulm23AIxird2d+bLHb3xPv3Fg4m+s5asbNyVWfRd0qMKe5ckBF/46YhfjkRXgcagkzxFeoCSKQ/+djMDN5fpLdrkxieE1ALVozqSMV2Zhnl7a5KGctw3KHvqx/qVP1QGa9gogl6+HMlZNn5P3mJO3zy0YJvn4R9DC6Youn2c25ZEpWRvXLqzCTICu1ktQVO3/5xWwd4WtADTBDbVie78DQGxyrOAXQFG4WUvYuXgS6xYgJ4B1MWaUPe5xfw0xeGdsxE4jIedHwvuP7Yl4aaJC/SgLIJM6KK+rndfsjTxXShsO3/kcnR6cPLgH73EzE2x++uH4hebPM2XEChYetImxR08LrSRIYNEzXeGLp4RJekfbzpgWBFgD2VbtI3MP4OM5gK+lMn8AxYFe7AGdYhzXG2QaSd0lbeZOq+YECM3SN7cb6vOoh2SpAtNYe7KM50PvmKEVZjM8aFpKo75eq5mCMtUkZVx/tQkAmjB/wsZjL3Jk9cw8vuGswKWCFF3WLC8twLxpawhfGsD++E9eHucmGrsHkd+IaBB+RviEoDuOs=",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
       "ok": true,
-      "message": "任务12个；气泡失败：playwright 未安装且 API 未领到"
+      "message": "任务12个；气泡+5（253→258）"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
       "ok": true,
-      "message": "任务12个；气泡失败：playwright 未安装且 API 未领到"
+      "message": "任务13个；气泡失败：检测到可领取气泡，但点击后云豆未增加"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
       "ok": true,
-      "message": "任务8个；气泡失败：playwright 未安装且 API 未领到"
+      "message": "任务8个；气泡+0（960→960）"
     }
   ]
 }
