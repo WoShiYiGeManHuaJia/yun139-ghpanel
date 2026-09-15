@@ -1,6 +1,7 @@
 {
-  "ts": "2026-09-15 01:07:03",
-  "type": "list",
+  "ts": "2026-09-15 01:11:28",
+  "type": "sync",
   "ok": false,
-  "msg": "querySpecToken 失败 code=1010010015 msg=鉴权失效 raw={\"success\":false,\"code\":\"1010010015\",\"message\":\"鉴权失效\",\"data\":{\"result\":{\"resultCode\":\"05050006\",\"resultDesc\":\"暂无权限！\"},\"resultCode\":null,\"token\":null}}"
+  "msg": "写入仓库文件失败",
+  "synced": 1
 }
