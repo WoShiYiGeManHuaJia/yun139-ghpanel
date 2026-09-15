@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-15 00:36:13",
+  "ts": "2026-09-15 00:37:44",
   "type": "status",
   "ok": false,
   "msg": "已查询 1 个账号",
@@ -8,7 +8,7 @@
       "phone": "13717306553",
       "masked": "137****6553",
       "ok": false,
-      "message": "fetch failed"
+      "message": "querySpecToken 失败 code=1010010015 msg=鉴权失效"
     }
   ]
 }
