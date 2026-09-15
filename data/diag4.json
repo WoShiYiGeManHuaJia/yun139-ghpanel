@@ -1,0 +1,7 @@
+{
+  "ts": "2026-09-15T15:57:54.728Z",
+  "phone": "17274079953",
+  "probe": {},
+  "login": {},
+  "error": "page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1\", waiting until \"domcontentloaded\"\n"
+}
