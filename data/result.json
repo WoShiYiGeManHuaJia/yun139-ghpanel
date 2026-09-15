@@ -1,31 +1,69 @@
 {
-  "ts": "2026-09-15 08:39:05",
-  "requestId": "sign-1789461531026-02a1056c",
-  "type": "sign",
-  "ok": false,
-  "msg": "签到完成",
-  "results": [
+  "ts": "2026-09-15 08:53:05",
+  "requestId": "status-1789462385739-5epbf0yb",
+  "type": "status",
+  "ok": true,
+  "msg": "已查询 3 个账号",
+  "acctDiag": [
+    "cipher失败:缺少加密数据或密钥",
+    "store:3"
+  ],
+  "status": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "name": "137-4642",
-      "ok": false,
-      "message": "签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx</center> </body> </html> "
+      "ok": true,
+      "total": 258,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 0,
+      "list": [],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "name": "137-6553",
-      "ok": false,
-      "message": "签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx</center> </body> </html> "
+      "ok": true,
+      "total": 218,
+      "toReceive": 40,
+      "receivable": 40,
+      "nextMonth": 0,
+      "list": [
+        {
+          "cloudType": 0,
+          "cloudNum": 10,
+          "recordId": 2344309249
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 10,
+          "recordId": 2344309138
+        },
+        {
+          "cloudType": 0,
+          "cloudNum": 20,
+          "recordId": 2344309118
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"完成任务\",\""
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "name": "139-9953",
-      "ok": false,
-      "message": "签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body> <center><h1>405 Not Allowed</h1></center> <hr><center>nginx</center> </body> </html> "
+      "ok": true,
+      "total": 960,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 38,
+      "list": [
+        {
+          "cloudType": 2,
+          "cloudNum": 38,
+          "recordId": null
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
     }
   ],
-  "enc_accounts": "QamOB3SIFNi1cL60Fh27xOVSbpDZLYEQC9b1fqgno9/r61VBIqD0+ijnqY+yuBk6BTHc0SUEwd2cCQ4JaRZKzt9JlYbg/LIwKDWJIUKgP06g0wJezm1E5SiHSddw7gyKg/d8zlpJwetjvIAu9xuxJ89p6H9VGf/vNkD5ui5YrSQ8RYnsgxv/U8TIXiqxP+WYhFYNdgwWs8j/Rk6v6zwQZt2RzNmMdK+zNhoGreErB9yrkyoKTHdJxiNJ661JxWP+5+eUkKVCkCYmxoO86Z016bcNNIuGdkSqypRYQVtoTTwZNmA2TbubhVXmOflPLtbF1wWp3Sh8uHrmwxBBWojuyuAfDPFpQL/n0dZoYyZnntV3QuwpyLpwtgi0sz3vXSTg9V1rgaMYh7vR+K42v2QaDx7mIiTZeM5/kHmUuQfIRn1e9LwmPIwSD6JZjTVlTWcwzen0D/kmx5FbAK5Ojx8dqhnbB0LOrK223XMeP24p7S5A41R39mHowJFvI8gLaZC+Vz7pmEj5r1soY0E/EamD6uIxXsff6txLqcTaKoYr1gv74iPIsXc5JYsH2u+zwpjR9VdiRnhbUM3IhQZRRASnY9enrE3bzwkaAWyaSs+yCN2alEITFp9+SURJ2l6eEVo/VPD7ZBsW7yYg5IGpDvrpllOtSpY1MeYrc/NsDiTn2iozVLvPuSto8rhBaXFc9M5T1ikSmrJVEIAzgZrylMvRcz/uTi4hL+Locbm8PemdsgAYnW+Umtvj0QPiEN2fpwo9baNnyJKoSldgOcGQyCH4zQgDbYhT6M5hutZpPxBrA2vnSM2rYA21+vklXleSzGDBrXVLsrVwJ8kGnkjovtZZnWe5mx72XYDnykaPoCPN6RJ/3vb6q+rd0QI4d+rtW9v2+LKFy8yA6lENSumgkK2QJn5qvs/RYHBZM7O3gJi2FbQpT/MO6TUcaHQQB2bODigsHuMml8+o/TOzi8FYmuI4l0xXmA5un4JaPYlByUe8Pani7ZtBnUUtjMMtjokxSlqiaEejDmyMVWyXux5J64gxJ3//h06oJF/bF6d9YfMjuNGa486kRKK8wzKUt4x4lWRGDsCyyr0dymLnjBzwgwPDSAvDqvswGkm8MByXuNO0EE+nzpVSqh13L5cW08GdEp7O6nex+Mwchum/37YZ6vkb+tNUpj8gsNpgDGJxC4/8H6HaCxYxLggg7OSz79thxLDV0oHGszBc75xDYgvaDERVQSgDPBWtTcXGKqWT3112flkshXchtNLP+T4JzgTE56Bc6dLGgcyvunAtC2Fvtj1xH6qd6BRer2o1rwhj2H95m9j32rn5QAhNJ/qkn2HIn2ECWGbywvolhSHwvAXSX9dcDk7SbNnRHWoegpwOk/7a07FwDonhSg80SK7/Edbt8ArUUdMJjy9WyKjQz77YoM0obdhoDw1rhuxgSOaCJmESaxX/NhK4uFKb/DH+IHtmfUAwkQcvQF0RTNhBu0AwAImYVuLl75jueqrkC4a+DoytXPTTFwm1wVTFlAOsafZpDyACycfPrl+q0De6L+6g1bLIgVTyl7pL2UF8E94vPEuFCmsLPLpkwBWD2AJAR3GnrZZFr0NrpYM5nDkgO7xPNvIhtBta2vG7u5DSI3NHhIIEJ5NeppU+10/8kNUfLDoSltCJ1lyUf6OUQ3ASocUYBXVaWWvf0GnQwveCk/U7d+4Q+ytUIHa09y4iowDZm21amtPtrca4Jh9PsOpBL2vecMoypXAG/ySMhETSZY0Ni11xx8WBnJgc4QsjvXRk1l0Sa1yK9qGWms1i7sj5TlJwCPjwpb5oHNNd+n5kj/mmkuigVsgqxqJ4XSZTjQnCPnOAntsHybnWWT9UMR4g03+jzIeRk9T98mFnAFChRMO+0ZbEBoPuRkCEr1MU+bvtSeHVEmIR8yG8BcNHzJuMcQABGKZ5VdXGhSv7dR8la4Y/Em6FU48="
+  "enc_accounts": "iz3yhINFnxgktsFHU2+CC1rSFW+MZT3WELNnRC8fSZxDqyDaoRJ7LLG6TVLuLRvnwCkjtZw2sN1InTudU3L0SXIxYw2xZWVf4eTSJATMY5co2xg0hgZBKenwxVT2BivFLppPt/40wLXWj/jBaqMgkyt1XJEDysjy3AF3uiAM/2tI1jCsxir4Q1k+uT0x3fmVRsmwev3nBWHD8u2kKpsALgye79nEwk2DPT5B22v+5ThJ6x/vuLfwHICWViP4AcyrHuiRBmcVFH/Rl5GM5NQQ1bbOQcuZBYUJPfSAX9yELhsblzSA8zi0cpn2UniTom0CuNUKTmDOTr8Zc/913JJC8agafsiecLTfsHtXUY94XYqz4w3s5BxQhL3qbUiFBjmOtzmRAmd/SY9w7+mSendJJ8pIVoWiw7GweVu8pCaDpA/cEF99yFBdFhBfvZKmE7Bg2TVfEIVOJo+ntk2iLXOrNPuFZ0VmONBxDmtegh7dmNiBy07enXcWEYDshX7mfbHlW0S4SCzjX9LLxCgOkAdOeTFmdr2hOUuL7ckpE3IxJBKA/52jXOaMGs8xwjNks19oCACvkSTLiTd1TecTRGFe+A/9oCOq49AS03EQ6mBSEeps0IhzBIWMF0Bx2sI0rtluySrkU/7IDYD64INhAASq+t/TVVnFelZAPtDN8pNHh/6spqxzIWEeJRPOSvM4U9qqQ2reZIxrhyPeVfofL51Vu7WYu2Mo2t/szTFcofVfb5gnDTNkxzkOGiqOAdhuuaW2M0mkAjHXupLsmK8X4qCIbbbpiUGk3+YRhd2KDNBxSaNehB10NiBlWVUAvjKMS3vk6Jh/2IdSUSjcNQ3/jUVfqLixdsT1pzc+ahLu3kU5u09MrauUGP50d/E4KJgTG18djP3doc9THNrFbHnwyTahThBLGNyVDTFZkDPojBPldckd0Ca1XuAyofbzS05b0qtJ1fDca8QKVM3nbgh3J7T5KJbGq1uyUbYjX4VopP4baDAJ/QM6DqWEX22mEJLD0G3VyR0RYHwwNgmFDxaQwujQiHC93+0hHqmGcMcfTOqI6q1QF1+WguKaX5dXQCNjyTl+9e1kuf9z3PQ+tRUDfy+2yefNSsDnayzx36I39nVspsDdd0qe8PY4AEDDK0Y0iQw2u0zgxzpziy8eZtOS4uWNSPB8teSwhe6X4bVGUlzFIspd5tdUPgh/vMy62Ltc1RAMjyapkURyJUFv9Ya/XcoUW9R7/ZkV50ONwM9g50VlEn+onX+VlQbCme3a/lVGA2O1/8J409BWFVu9lthTaawxmUnzdDBv0A4UJq7hBNOyMT1P+Zsg0T1+8DbRnLQl2MobkS9BeXqE3qcgUXrVurhPKwH6Q1SuSMk39//xj58sB7dmvFh4pUyACTRdC+EEuAQSf7iAX8KLLfs6sq0NjBKSspDb1TOeiN41drLrgYyu4OSfNgmEyGhjzrOu9ucCcZosAvOdrgSWmdhe253UNLDUy4kDp2kFVOxzynjocGK1QWFci3guJrnpewtY2TEf72JJqMbnu3IFP5iJjYHFYIValbG2KXsZTUHFAJ00T9Ghxw4ELiq9d+avfjANyODQ+bqX+C7DhmtrXNbj5RSDCev3ubp0hCG1BIDoLZQz3st5X2CE3vIWAf2d5WQMdcTMtiOa6o5CKXWcieRVGKZlezwhCiuJvAqll31PSqaTjg0Li7M+yJe+UJNtdJTS+gQT0hU9nstvB92f+bXGGfNJ2QbHOEQwv6v/GfXCY1bOkANrhUZQ4kmEA3TH0B7zTMzYSMh/gzYm7lwjYNkI6KHeFoj7o7TfJsynjIvciOGz2uZj7m9RwQ8E4Gk3QctQDSE6HkKFXTRcgrDA6D7xQoXDLwjR8xBG+9J5a685DuBti8It5tNTHX9Bjx6Ez/11/QdXoWKnzNApbXU0qo2bfK/ek0744IhMItxay3w7dvh4L2aQA28="
 }
