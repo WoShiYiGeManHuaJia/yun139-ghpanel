@@ -1,0 +1,7 @@
+{
+  "steps": [
+    "目标: 137****6553",
+    "FATAL: fetch failed",
+    "STACK: TypeError: fetch failed\n    at node:internal/deps/undici/undici:14976:13\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async fetchWithTimeout (/home/runner/work/yun139-ghpanel/yun139-ghpanel/actions/run.js:28:12)\n    at async getJwtOnce (/home/runner/work/yun139-ghpanel/yun139-ghpanel/actions/run.js:278:13)\n    at async getJwt (/home/runner/work/yun139-gh"
+  ]
+}
