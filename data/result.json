@@ -1,7 +1,23 @@
 {
-  "ts": "2026-09-15 01:11:28",
-  "type": "sync",
+  "ts": "2026-09-15 01:12:19",
+  "type": "daily",
   "ok": false,
-  "msg": "写入仓库文件失败",
-  "synced": 1
+  "msg": "共 1 个账号，成功 0 个",
+  "perAccount": [
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "ok": false,
+      "error": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The token does not exist or has expired.</desc> "
+    }
+  ],
+  "results": [
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "name": "",
+      "ok": false,
+      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The token does not exist or has expired.</desc> "
+    }
+  ]
 }
