@@ -1,30 +1,43 @@
 {
-  "ts": "2026-09-15 00:53:05",
-  "type": "refresh",
+  "ts": "2026-09-15 00:53:41",
+  "type": "status",
   "ok": true,
-  "msg": "续期完成",
-  "results": [
+  "msg": "已查询 3 个账号",
+  "status": [
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "name": "139-9953",
       "ok": true,
-      "message": "续期成功, 剩余 30 天"
+      "total": 960,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 38,
+      "list": [
+        {
+          "cloudType": 2,
+          "cloudNum": 38,
+          "recordId": null
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
     },
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "name": "137-4642",
       "ok": true,
-      "message": "续期成功, 剩余 30 天"
+      "total": 253,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 0,
+      "list": [],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "name": "137-6553",
       "ok": false,
-      "message": "续期失败 return=4006 desc=The token does not exist or has expired."
+      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired."
     }
   ],
-  "enc_accounts": "/A+Q3wkfor4D2I4Sf/NjKcaW33EYdZJ8n9kHr8AI8QFP5oEGN3G776cSxSb5zXtJnMH4nhNtVnzMbk5R+EjlOzT5nDocblDLq1XKoa23Vuzu/hOr1cZJ2dPWXTj92NWn5FZj1LX//vOTNIpQh4Q0pDGfgtMha93rX2RS0z+hqKUPQFvQvI1oUDLWD+apX++xhN7eJgov/KBdR5Ox9Z8nXxd3vMMpodDcoZdwUrX291Ai+HSW47CtBmj3oykVqTSaYF3q6vhIIUswlEtcNpKQX6S5lTWKWZEy/rjtcxszMK5A5pR3lnIqno4fL5i91DSXo3OXbEMjPn2WpVZniXz5zqk2cweW2tf0qHaoZW4GjupfwcxvOODW2Na4AS6Exy5uSEw60BpWJaP3Zb0RrfaSTZWe+Eloe/SnKbIUZV2pbwqRUzaDSZH+hfOJ3b9iPXpClSONZYR0cL67Y1GcHYzUi0m35M/rZ7mhwh9rnguYtb8Vd6NHPyUuJZGQ3bAfamOGIS7ihT25dXMGwAhHjuXwPLtUGlK0uMLnh0ygWZ5WQ+HPqMzKbsQ6RX3aMTLDZ7bWuV1tIpHUFBnHo5pyW0Gg+4+jOdHBsErvW9zhCu8ffrdS0oyrh+flmA0Eh7hszR9NEjRqlkwyOvIiXLOOZg8kgj+JWgDm2X5CicYBfZGiGqplzWjL6BeKeu2OguUtgEtHf0dbRsR+B9AaFwxgOOIAyy9XOdfdBq0M7cqJqOFEekeGgiX6Dreh5UMscc06//YNMUtWYPIlcW+fzVEe9f1ob/x9qTi/6A2udLfKPfyuLfjdkaPKOOLhirab5eDNbLF3UJR/khBhlQC4EHiYM/FSA9k5xyEdC86BCYOONSgK6fAFgkFRqnor4j5J+i2LQ7JrxEoM5rpiHCb+WWAMK1DW/Rpw0utKlVvLGVBBzfEhxqMVd/Nne5sHSeHfmsH8p80TloZ4GDHfYwpg3B5JjnsEthrBd/U9mlxG2O7G4SQZba/HDvHewGYK6JQuvcjn7A4OeuqjBjyrY0DuJXdNadkIUQnNql8XupeOzPfdLG86gOVH0DeDTDdKlhX8azV2zlQuej8ChhOW5MPJKeszc24kx4NbQ5cQThEVLv9r2tAltrQV3FNvtfjePa01MF0DCBL0kIP6Lc1YDIdyoKHlp4nH/onfD42hesOHdIaJQQk8rsEcgGSOr+mCTPt4qal9s3z2oEU9pVTonIUWqH9Dd2JOfM395U+UF3MGBh7zsdbffuBPOGxwjdIoyoEJn5iGzE9DhxunFcOx+OozpxFZUNvTqzkGWeW/B7r2E8Hyv9bzOCVtxDgYsHXlA0g8yW7VgMoMqXEuawfHZqh+HDgxb0ksbqLmDSox8bMMzEFL4FF5QvDjhZxzpzyQpy/QGqrpi2Jw3nB/rY6qLDjblSxKBw96nCQFYDaeWycGfFLZpe5moFij9E1k0wfSZU/OMJkQTCo+nygg3zDohlo9+BeZm6aCbcpTAHyynheSr+0L45O1YobgmZ+3juSUGfMebdG1GbscpllkuMNvry+x7f1U1PEd9+13/iOlYmfgkhjcTIgKVgQ/8zT1LrfJ6NpMox765LYtccAs5p8CizzRZrABWCj2PAQdkztWfo1QtpvXPfarwa1ecBuObA5aa2wLimAfexlFh6qW2rJcr/ZRWzVCM7VvJlZm7QETEDxmkR1anb+KkP+ujqWCo/jGkssNKJBvX7uQxsUj8nKheD0zD3ABzA+rjzo1bDSnY9DsPV4wcgNpKKmraARtzXXcS8zVkD3pXAnFwwNJbxNaUUETcJtZEkICDYf+yjvObFtsMAZyXwTP4dEWgOnxUTv+dsv3r2D2wgorAqMNMBIATmMz0mdaASZ/d4fJ444KbicD1xiiEJ65dolgUU9FSgEWP9Ze8wtr3y+OhLDpgtLcGKnkLUUOJxTF8iLI/77flXwa6SV0LSrqB4LSeA0="
+  "enc_accounts": "/oEUI3e2oPsk9GuCkVw961lGa4X77Frezbqo/z9j0jKrZCgbu4ATsyizQDyNznHBWHbcOrJqciGKi2e68J1wnt23XwvJ9TRJ6p+S889MC8QNpgnb0+FiiTMBsjCkak1cXQwxPMasCu6rSV2wLGdF3Kd89xGW123faC12MBtL6299i392wC9+JAM9CNSt/ezoGM9SQ5fvA17jbmekb8ALbGVh2fgMmU0QEtqU8PSoRuBZGd6rFW+8YzoV0Hj0Pi+T9SHUnJWRANzPRJh9jtZtXODhq9NvJNaEdzleKv4e8BRs2ekyphtp5kT2PwfZXipcnkJxGjNZj1KdW2nfgQomtHcNRUzkeZxkTgJybGPNekO49Jci5ScTqAwFZylkVlAmz3WqDZcgr92Gfu1K+zNSxccmXr3FHfp6hWxJNFYGgJvN8kD1HD+quiHMIpMnYWsoX8hd8QhPtgxLsALgYp6nkS1zizKMdy0yxC+MRmYaMoj2yvrxG64y30uRW44YT75Q85PTPFlxCg/9himBB6NUhBZMwuJpO2j4YZUir1dThAt0wLAsoFhHzLwxMXgYjFoKtknunO1Es2rU98t1tQMANvcryh+2tdZDJXEPWDPPy8L96zsnnJW5RX/q6fckKtR2onDmN1twIfMGhL1TtUnRUdJj94ptRwoWLZYH/3u6Eo55G7w2Bs3CfCbdJ40q8uWb6+Ig3jIAPL2nfSJwI/0dxjUZVYnHLDyZaYc0lPXWFCF1dbyWAu3tnMnirEE3cREbnwxJCHp2oVYzrfz32/Y/6OS+xnavLETK5jgfYArVDO3CKS1zQ+bTidVNHMtFtsDFkp3YuxtsNPBU1LNKCRs1AoGEyOkqvB3fzUFkRbqhwXd0u9VYJbXqvw93ECkHwcpBS8svGCSsJK8igZwj5LqOxcDCRkE8Fk+J3SRq0IbOFUoK4BJYEkT6WY8vshbZ5XbS9D+njljITY/SI4LqOlQMoUa4EZtgwkCXxRDgSH4JqHZIJfjug6WDKTdUij+8+Mnh6jOHv2e6lBNXUz7Q8TpODg/uzxlfx8Qk+DzX6Quba2eKZRpQlEY0ScP2T5Q27KRN5rVnUSKd/OVBVUDEQ0h4qWb+13zY8SR/Jz2jJdn+CkCqfKB8KkpJj86P9vWvtZtmvfQ24v27+tvhs8+nUOo73QWwhxvY5XQI4gSkOgezQBf6QM8gJmHp3G2OLFLdU2/Esxb1o2uPQ7SXYzS+IU0yIz9CVHTf5wq9MAQuH9grb1XXE5F6Fii0RfxhJOO5LPnUZ5Iuo6i5C+vKbCLtGg6Svwsw3UG2bYBxJVs99I99sngzeX3vD7mrJcFfuL7qY60Wd0mzPEgbpoeWibLnSS5ZyjhOZ/LXWDszxy1dudU9NCpjWAa0DSvxEHZOGWIH8W2lHhHysX6Gcgr4tnVntbe5IthKxSXw8KnnzkFIfRBt/Tbo7hStrqqDhXoO7ycgzhXI5b4GD0z4iNUYzV18ez6RaHL8s5K3A5Mm+cR8BbcUfCi6TmUFUaHxqsx/e6UNZ28E2vAFI/nwIgMWH7GKSiAweeqO16Ykpj1rCBfAkHvSAA1Z+zRb/1w0e6YWFSCb1/oDms2H3gNUMMvj9mBRz4zlE4LMAPt3XBeT4ez3UITBu3GHTNNIck3MXraQrrVQ9TTze4T+aznM9gZiBvapl4xoIaBCG99/EWWBfAdqFIL+ZJSkZ0/u1HfhJgIHONO761pg1/P/J/7L1iUQmpTCkgOrH0iEPPF1WfZGE7h2cdnypfwd/UDYYltMjfmPEL3jECBEzbT+mHr8JkswJGMRShU3jpYwwMY76UlECIREmCnJZdLfPqO1ZYKA0MRMNIFW8K2CpiBCPgSGKpseWSQTKn7UmOTLugY2pT9tkAIbb3F6K6zt5llNaSJfLQ3wB+lKZVB+CtURPSD8bDWlutD0xE86QKWfe9HJnNwVWKqBZ5qNYVdCWmk="
 }
