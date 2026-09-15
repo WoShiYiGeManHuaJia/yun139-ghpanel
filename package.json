@@ -1,0 +1,21 @@
+{
+  "name": "yun139-ghpanel",
+  "version": "2.0.1",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node tests/smoke.js",
+    "check": "node --check actions/run.js && node --check server.js && node --check tests/smoke.js && node --check tools/rotate-data-key.js"
+  },
+  "keywords": ["139yun", "github-actions", "panel"],
+  "author": "",
+  "license": "ISC",
+  "description": "139云盘自动签到与任务面板（GitHub Pages + GitHub Actions）",
+  "private": true,
+  "dependencies": {
+    "playwright": "1.63.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

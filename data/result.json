@@ -1,54 +1,7 @@
 {
-  "ts": "2026-09-15 03:14:30",
-  "type": "daily",
-  "ok": true,
-  "msg": "共 3 个账号，成功 2 个",
-  "perAccount": [
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": false,
-      "error": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The token does not exist or has expired.</desc> "
-    },
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 13,
-      "receive": "+0（253→253）",
-      "ok": true
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 18,
-      "receive": "失败：页面未加载出云豆数据（登录态失效或页面改版）",
-      "ok": true
-    }
-  ],
-  "enc_accounts": "O+G3lV9C1z6P9cKMpIaGumne1DLj+bxJYeOwzP4lPxhvevcs1Jy5yiYwSuy30p+PglnKY24Jdy+NyuJ0YE/fCAzszpOft5Eqs7cvZYyXSEqzqkzj0UYIIE5mj8RazGVTbioDJWYgPs4x2r+H9G7uqF2CzVZCpcK/IVpz2PhqGcv1aP0EzaTCpUbKZFvG8DZhJ98dH4TnjbMPFE71m61IYKuEEda9MHITSNKqh1cv/kFkHeKDWzzAhRzJ1LK9p+sF4rRNDc1KkQU/Kz+0i5Awy0ScbWnQ9g9WoMfJIdrVcDI0DE0/4YIogzsxS8OSyzN9uUlES/53nEJTSIhACSFdVyPMBo43OoSO7fpvrDOyi1udr80i4mxXASF2feKa7mjeQALrEAmVcXpyvVg7uqBr+/n3H/lAILejlX/N3lfK9gvTN68BzM7XVz6RwJN1+zp9e94NSHa6hakaDgh/l3aM4cQ8m+3CF81SLw1mlehPXlUvIELlbProPOcrFvgvvQEjt+arUmRjnyYPRY63d8OP/fwbVBcjPQdVA+yVHh3ke7zv0pre+3eKRowhTjbsV90uFjWssbEh27wIrxM34ciz6AlbfhlhqYcaG6u9bzs7ZWGkGLxbyv9kErIMgqEqqbpMPOV8SZ21WfGDZICcNIjgTi9y2O2N3A7uigyajZ6ZUVqIkDOJ9+jUSlCYfH04k/on16Mmryjk4wYpf5Zc2E3O7muOEq5/GRHmWVzHrBa4vULT5pV3NvJ67lZyQ74dl32rZ9ehae0U3zzMzzfyLdVm6KzlHnIEaodoGQGgsWpBNZi6FTwlLLJTYtI631Fq7rBsqk1ipeygQTQsFir2pTYaaLIfnuNM4Im5IIQdUz5N4i5Cd4KpMVwhZbeXx92OhsTEpyib/4+lyvHiIpHW7SovdYZHPPuwAPsWRm9CEud1aPsA48i4wLVPEJukYyOgLCW/xPkQLyNUo1EZn4o+L24xkEPkzU/ohQtPGgrJqIjbElaprSK77Gfq6ER6vd2iBmwRBaOccH7my+beWilEVq+zBZpxP6MhB2BHM161dwb2kvv99phJK2+fzzqjLtN0xJQe80hxUbr3fecFOLY5i+zLO6MnmVOdTqWvfb72JpkTFgZE5WbTNzCvJpo7D9XAEs8WLc8g9DNUq2vol48RLvg5UY8nf+fLAYSw0zlP6zxaVXv786RC0OraFrz88TmC/JlwmaOrLvv2U6tWLUiqtaBK8w6/zaqruF7Pv1/6y70GipDeqXR2qUzAsVeDc/DVXisM6O+acVNdQbG5eN1lILZcaKK9t3VornUOGEOevZUbl0NJoq7uKBDBHk3+3/govoICONHrzSXriOcyzxWyde4dCPTGxU4BmgfVwFce9CGcgYUtJJFbfK6ZR2kAAw7UZU/CRoYctOpA64dhLi6jQy1EHkeokD00XJfRtdxF9O0PAmLv0xot1yquBD0oQcGu/yz+tHQc/PxHqrkCwb+JiJzgXfuU+U0Ubzy+SsASB6k3Bp+byzZQlYFuKVsuUf9WYvKCzNSm4QetF7X4GVKCFwWPD+KXC38Ji4/9GI3YVrvbuxQKn2IsjN05YssVtjv9KYYim+/MJm/uvWnZVg82NBtKfkFOobTtoH4ciT/Cmt1Z+m2H/8f2O1DzDn02i+XjuoJriM1UGQxF7KP5Rf9RNKk/Gh76xa18LcH41/vk8hQkgd50aQHmpPq1Ns/jYljhsuf9YcV9mo3jalR44DTHp5OrPp0QVsvI6ipWhRt698wfFB09zgxsV7mdN6uF48sV2vU+lpBe6fBOfCMeLrTjiH/JqsdrZ+cr66byH7zlOJ7yor6G1ntXikFKUU23hsu2PwgLiahxoj6+HHGVJ5G8zN1tmiHjlufWKJkegOq4CgyvAVKs7qywugvq5Vocb+ueMsgkrK+zCwrommDJgAzz+bdPvDDikTIYcRAjYabKyTfBOi7Q27wFDDwrzFR6oVKZRL/UAzxH1kNTjs60/pK8jsAVGEPHYpuo",
-  "results": [
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "name": "",
-      "ok": false,
-      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The token does not exist or has expired.</desc> "
-    },
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务13个；气泡+0（253→253）"
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务18个；气泡失败：页面未加载出云豆数据（登录态失效或页面改版）"
-    }
-  ]
+  "ts": "2026-09-15 00:00:00",
+  "requestId": "bootstrap",
+  "type": "bootstrap",
+  "ok": false,
+  "msg": "等待第一次任务结果"
 }

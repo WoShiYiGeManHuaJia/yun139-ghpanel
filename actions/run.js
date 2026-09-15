@@ -11,7 +11,43 @@ const KEY_HEX_2 = "7150714477323633586746674c337538";                   // 16字
 const SMS_RSA_N = "9ec3874c5b705b9aeaffc80684f94ce59dd13dd78dfddf856081dbe4999c7c1382a335ee4fc73ed1a9efc6d923ce0862c703659e606e84df0e61f4bbf3d62e1ffa917906c70bb39d962b0b8a574d58f1d135461c3dad16de55d21b7fbcd425caec50d73ef5e8e6e6f0d86a956c8b1c70c6ab2357727d7762e084e2097be633dc1805d52cf725eda28ae1969c98508d8657c1cdb108d62bd3f94191d3de8c79432fa68d19afbfa4541492cf38c90e4bfa466740f00b5ca9159071b2d5b4fdfb55ba974e9865af5bb276fdedddab703f52f2240b861463f7622f5c22821271d46f4c89144e2128cd32f372503493a8f272e75ebe977b201c46dcd3aed0209c7635";
 const SMS_RSA_E = 65537;
 
-import fs from "fs";
+const fs = require("node:fs");
+const path = require("node:path");
+const crypto = require("node:crypto").webcrypto;
+
+const FETCH_TIMEOUT_MS = 30000;
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+function base64Utf8Encode(str) { return Buffer.from(String(str), "utf8").toString("base64"); }
+function parseJsonSafe(text) { try { return JSON.parse(text); } catch { return null; } }
+async function fetchWithTimeout(url, options = {}, timeoutMs = FETCH_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const signal = options.signal;
+    return await fetch(url, { ...options, signal: signal || controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+async function responseTextChecked(r, label) {
+  const text = await r.text();
+  if (!r.ok) throw new Error(`${label} HTTP ${r.status}: ${text.replace(/\s+/g, " ").slice(0, 180)}`);
+  return text;
+}
+async function responseJsonChecked(r, label) {
+  const text = await responseTextChecked(r, label);
+  const j = parseJsonSafe(text);
+  if (j === null) throw new Error(`${label} 返回非 JSON: ${text.replace(/\s+/g, " ").slice(0, 180)}`);
+  return j;
+}
+function getSetCookies(headers) {
+  try {
+    if (typeof headers.getSetCookie === "function") return headers.getSetCookie();
+  } catch {}
+  const one = headers.get("set-cookie");
+  return one ? [one] : [];
+}
 
 // ---------------- 通用工具 ----------------
 function b64encode(bytes) { return Buffer.from(bytes).toString("base64"); }
@@ -22,11 +58,15 @@ function cleanAuth(raw) {
   return raw;
 }
 function decodeAuth(raw) {
+  const b64 = cleanAuth(raw);
+  if (!b64 || !/^[A-Za-z0-9+/]+={0,2}$/.test(b64) || b64.length % 4 !== 0) throw new Error("authorization 不是合法 Base64");
   let decoded;
-  try { decoded = Buffer.from(cleanAuth(raw), "base64").toString("utf8"); } catch (e) { throw new Error("authorization 不是合法 Base64"); }
+  try { decoded = Buffer.from(b64, "base64").toString("utf8"); } catch { throw new Error("authorization 不是合法 Base64"); }
   const parts = decoded.split(":");
   if (parts.length < 3) throw new Error("authorization 解码后缺少字段(应为 pc:手机号:token)");
-  return { prefix: parts[0], phone: parts[1], token: parts.slice(2).join(":") };
+  const prefix = parts[0].trim(), phone = parts[1].trim(), token = parts.slice(2).join(":").trim();
+  if (!prefix || !/^\d{6,15}$/.test(phone) || !token) throw new Error("authorization 字段格式错误");
+  return { prefix, phone, token };
 }
 function fmtDate(d) {
   const p = n => String(n).padStart(2, "0");
@@ -58,8 +98,8 @@ function rsaEncrypt(nHex, e, text) {
   const k = nHex.length / 2;
   const msgBytes = Array.from(new TextEncoder().encode(text));
   const psLen = k - msgBytes.length - 3;
-  const ps = [];
-  for (let i = 0; i < psLen; i++) ps.push(1 + Math.floor(Math.random() * 255));
+  if (psLen < 8) throw new Error("RSA 明文过长");
+  const ps = Array.from(crypto.getRandomValues(new Uint8Array(psLen)), b => b || 1);
   const em = [0, 2, ...ps, 0, ...msgBytes];
   let m = 0n;
   for (const b of em) m = (m << 8n) | BigInt(b);
@@ -84,7 +124,9 @@ async function aesGcmEncryptText(key, plain) {
   return Buffer.from(all).toString("base64");
 }
 async function aesGcmDecryptText(key, b64) {
-  const raw = Buffer.from(b64, "base64");
+  let raw;
+  try { raw = Buffer.from(String(b64 || ""), "base64"); } catch { throw new Error("加密数据 Base64 无效"); }
+  if (raw.length < 13) throw new Error("加密数据长度无效");
   const iv = new Uint8Array(raw.slice(0, 12));
   const ct = new Uint8Array(raw.slice(12));
   const dec = await crypto.subtle.decrypt({ name: "AES-GCM", iv }, key, ct);
@@ -93,19 +135,20 @@ async function aesGcmDecryptText(key, b64) {
 
 // ---------------- 短信登录链路 (含会话cookie修复 + RSA发码) ----------------
 async function getJsession() {
-  const r = await fetch("https://mail.10086.cn/Login/Login.ashx", {
+  const r = await fetchWithTimeout("https://mail.10086.cn/Login/Login.ashx", {
     redirect: "manual",
     headers: { "User-Agent": UA_EDGE, "Accept": "text/html,application/xhtml+xml" },
   });
-  const sc = r.headers.get("set-cookie") || "";
-  const m = sc.match(/JSESSIONID=([^;]+)/);
+  if (!r.ok && r.status !== 302 && r.status !== 301) throw new Error(`获取 JSESSIONID 失败 HTTP ${r.status}`);
+  const sc = getSetCookies(r.headers).join(";");
+  const m = sc.match(/(?:^|[;,]\s*)JSESSIONID=([^;]+)/i);
   return m ? m[1] : "";
 }
 async function sendSmsCodeByScene(phone) {
   const encPhone = rsaEncrypt(SMS_RSA_N, SMS_RSA_E, phone);
   const cguid = Date.now();
   const body = `<object><string name="loginName">${encPhone}</string><string name="fv">4</string><string name="clientId">1003</string><string name="eMode">1</string><string name="loginFailureUrl"></string><string name="loginSuccessUrl"></string><string name="verifyCode"></string><string name="version">1.0</string><string name="scene">5</string></object>`;
-  const r = await fetch(`https://mail.10086.cn/s?func=login:sendSmsCodeByScene&cguid=${cguid}`, {
+  const r = await fetchWithTimeout(`https://mail.10086.cn/s?func=login:sendSmsCodeByScene&cguid=${cguid}`, {
     method: "POST",
     headers: {
       "User-Agent": UA_EDGE,
@@ -116,8 +159,9 @@ async function sendSmsCodeByScene(phone) {
     },
     body,
   });
-  const text = await r.text();
-  let j; try { j = JSON.parse(text); } catch { j = { code: text.slice(0, 200) }; }
+  const text = await responseTextChecked(r, "发送验证码");
+  const j = parseJsonSafe(text);
+  if (!j) throw new Error("发送验证码返回非 JSON");
   return j;
 }
 async function smsPasswordLogin(phone, smsCode) {
@@ -130,7 +174,7 @@ async function smsPasswordLogin(phone, smsCode) {
   form.set("UserName", phone); form.set("passOld", ""); form.set("auto", "on");
   form.set("Password", password); form.set("webIndexPagePwdLogin", "1");
   form.set("pwdType", "1"); form.set("clientId", "1003"); form.set("authType", "2");
-  const r = await fetch("https://mail.10086.cn/Login/Login.ashx", {
+  const r = await fetchWithTimeout("https://mail.10086.cn/Login/Login.ashx", {
     method: "POST", redirect: "manual",
     headers: {
       "User-Agent": UA_EDGE, "Content-Type": "application/x-www-form-urlencoded",
@@ -141,10 +185,13 @@ async function smsPasswordLogin(phone, smsCode) {
     },
     body: form.toString(),
   });
+  if (!r.ok && r.status !== 302 && r.status !== 301) {
+    const txt = await r.text();
+    throw new Error(`短信登录 HTTP ${r.status}: ${txt.replace(/\s+/g, " ").slice(0, 160)}`);
+  }
   const cj = {};
-  const scAll = r.headers.get("set-cookie") || "";
-  for (const seg of scAll.split(",")) {
-    const mm = seg.match(/([^=;]+)=([^;]*)/);
+  for (const cookie of getSetCookies(r.headers)) {
+    const mm = cookie.match(/^\s*([^=;]+)=([^;]*)/);
     if (mm) cj[mm[1].trim()] = mm[2].trim();
   }
   const loc = r.headers.get("location") || "";
@@ -159,12 +206,12 @@ async function smsPasswordLogin(phone, smsCode) {
 async function exchangeArtifact(sid, rmkey) {
   const cguid = String(Date.now());
   const url = `https://smsrebuild1.mail.10086.cn/setting/s?func=${encodeURIComponent("umc:getArtifact")}&sid=${encodeURIComponent(sid)}&cguid=${cguid}`;
-  const r = await fetch(url, {
+  const r = await fetchWithTimeout(url, {
     method: "POST",
     headers: { "Host": "smsrebuild1.mail.10086.cn", "Cookie": `RMKEY=${rmkey}`, "Content-Type": "text/xml; charset=utf-8", "User-Agent": "okhttp/4.12.0" },
   });
-  const text = await r.text();
-  let j; try { j = JSON.parse(text); } catch { j = {}; }
+  const text = await responseTextChecked(r, "换 artifact");
+  const j = parseJsonSafe(text) || {};
   const artifact = (j.var && j.var.artifact) || "";
   if (!artifact) throw new Error(`换 artifact 失败: code=${j.code || "?"} summary=${j.summary || text.slice(0, 100)}`);
   return artifact;
@@ -181,7 +228,7 @@ async function thirdPartyLogin(phone, dycpwd) {
   const iv = crypto.getRandomValues(new Uint8Array(16));
   const enc = await aesCbcEncrypt(new TextEncoder().encode(plainJson), key1, iv);
   const payload = b64encode(mergeU8([iv, enc]));
-  const r = await fetch("https://user-njs.yun.139.com/user/thirdlogin", {
+  const r = await fetchWithTimeout("https://user-njs.yun.139.com/user/thirdlogin", {
     method: "POST",
     headers: {
       "hcy-cool-flag": "1", "x-huawei-channelSrc": "10246600", "x-MM-Source": "0",
@@ -191,7 +238,7 @@ async function thirdPartyLogin(phone, dycpwd) {
     },
     body: payload,
   });
-  const text = await r.text();
+  const text = await responseTextChecked(r, "thirdlogin");
   let layer1;
   if (text.replace(/\s/g, "").startsWith("{")) {
     try { layer1 = JSON.parse(text); } catch { layer1 = { data: "" }; }
@@ -208,13 +255,14 @@ async function thirdPartyLogin(phone, dycpwd) {
   const hexInner = layer1.data || "";
   if (!hexInner) throw new Error(`thirdlogin 失败: ${text.slice(0, 80)}`);
   const innerBytes = hexBytes(hexInner);
+  if (!innerBytes.length || innerBytes.length % 16 !== 0) throw new Error("thirdlogin 内层密文长度无效");
   const key2 = hexToBytes(KEY_HEX_2);
   const dec = await aesEcbDecrypt(innerBytes, key2);
   const finalJson = new TextDecoder().decode(pkcs7Unpad(dec));
   let fj; try { fj = JSON.parse(finalJson); } catch { fj = {}; }
   const authToken = fj.authToken || ""; const account = fj.account || "";
   if (!authToken || !account) throw new Error(`thirdlogin 结果缺少 token: ${finalJson.slice(0, 80)}`);
-  const authorization = btoa(unescape(encodeURIComponent(`pc:${account}:${authToken}`)));
+  const authorization = base64Utf8Encode(`pc:${account}:${authToken}`);
   return { account, authorization };
 }
 async function loginBySms(phone, smsCode) {
@@ -227,20 +275,20 @@ async function loginBySms(phone, smsCode) {
 // ---------------- 签到 / 续期 ----------------
 async function getJwtOnce(authorization, phone) {
   const auth = "Basic " + cleanAuth(authorization);
-  const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
+  const r = await fetchWithTimeout("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
     method: "POST",
     headers: { "Authorization": auth, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
     body: JSON.stringify({ account: phone, toSourceId: "001005" }),
   });
-  const j = await r.json();
+  const j = await responseJsonChecked(r, "querySpecToken");
   if (String(j.code) !== "0") throw new Error(`querySpecToken 失败 code=${j.code} msg=${j.message || ""} raw=${JSON.stringify(j).slice(0, 200)}`);
   const ssoToken = j.data.token;
   for (const h of CY_HOSTS) {
     try {
-      const r2 = await fetch(`${h}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(ssoToken)}`, {
+      const r2 = await fetchWithTimeout(`${h}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(ssoToken)}`, {
         headers: { "Host": h.replace("https://", ""), "Accept": "*/*" }, signal: AbortSignal.timeout(20000),
       });
-      const j2 = await r2.json();
+      const j2 = await responseJsonChecked(r2, "tyrzLogin");
       if (j2 && j2.result && j2.result.token) return j2.result.token;
     } catch (e) { /* 换下一个主机 */ }
   }
@@ -248,12 +296,12 @@ async function getJwtOnce(authorization, phone) {
 }
 async function getSsoToken(authorization, phone) {
   const auth = "Basic " + cleanAuth(authorization);
-  const r = await fetch("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
+  const r = await fetchWithTimeout("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
     method: "POST",
     headers: { "Authorization": auth, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
     body: JSON.stringify({ account: phone, toSourceId: "001005" }),
   });
-  const j = await r.json();
+  const j = await responseJsonChecked(r, "querySpecToken");
   if (String(j.code) !== "0") throw new Error("querySpecToken 失败 code=" + j.code);
   return j.data.token;
 }
@@ -277,7 +325,7 @@ async function ensureAuth(a) {
     try { d = decodeAuth(a.authorization); } catch (e2) { throw e; }
     const r = await refreshToken(a.phone, d.token);
     if (!r.ok) throw new Error("自动续期失败: " + r.error + (r.raw ? " | 原始: " + r.raw.replace(/\s+/g, " ").slice(0, 160) : ""));
-    const newAuth = btoa(unescape(encodeURIComponent(`${d.prefix}:${a.phone}:${r.data.new_token}`)));
+    const newAuth = base64Utf8Encode(`${d.prefix}:${a.phone}:${r.data.new_token}`);
     a.authorization = newAuth;
     a.expires_at = r.data.new_expires_at;
     a.remaining_days = r.data.remaining_days;
@@ -291,25 +339,26 @@ async function ensureAuth(a) {
 async function signOne(authorization, phone) {
   try {
     const jwt = await getJwt(authorization, phone);
-    const r = await fetch(`https://m.mcloud.139.com/ycloud/signin/page/startSignIn?client=app&deviceId=${encodeURIComponent(DEFAULT_DEVICE)}`, {
+    const r = await fetchWithTimeout(`https://m.mcloud.139.com/ycloud/signin/page/startSignIn?client=app&deviceId=${encodeURIComponent(DEFAULT_DEVICE)}`, {
       method: "POST",
       headers: { "Host": "m.mcloud.139.com", "jwtToken": jwt, "Origin": "https://m.mcloud.139.com", "Referer": "https://m.mcloud.139.com/", "Accept": "application/json, text/plain, */*", "Content-Type": "application/json" },
       body: "{}",
     });
-    const j = await r.json();
-    return { ok: true, message: j.msg || "已提交签到", data: { code: j.code, result: String(j.result || "").slice(0, 200) } };
+    const j = await responseJsonChecked(r, "签到");
+    const ok = String(j.code) === "0" || String(j.code).toLowerCase() === "success" || j.success === true;
+    return { ok, message: j.msg || j.message || (ok ? "已提交签到" : "签到接口返回失败"), data: { code: j.code, result: String(j.result || "").slice(0, 200) } };
   } catch (e) {
     return { ok: false, message: String(e.message || e).slice(0, 300) };
   }
 }
 async function refreshToken(phone, token) {
   const body = `<root><token>${token}</token><account>${phone}</account><clienttype>656</clienttype></root>`;
-  const r = await fetch("https://aas.caiyun.feixin.10086.cn:443/tellin/authTokenRefresh.do", {
+  const r = await fetchWithTimeout("https://aas.caiyun.feixin.10086.cn:443/tellin/authTokenRefresh.do", {
     method: "POST",
     headers: { "Content-Type": "application/xml;charset=UTF-8", "User-Agent": "okhttp/4.12.0", "Accept": "application/xml" },
     body,
   });
-  const text = await r.text();
+  const text = await responseTextChecked(r, "续期");
   const mRet = text.match(/<return[^>]*>([^<]*)<\/return>/);
   const mTok = text.match(/<token[^>]*>([^<]*)<\/token>/);
   const mDesc = text.match(/<desc[^>]*>([^<]*)<\/desc>/);
@@ -398,6 +447,8 @@ function gmul(a, b) {
   return p;
 }
 function aesEcbDecryptBytes(cipherBytes, keyBytes) {
+  if (!cipherBytes.length || cipherBytes.length % 16 !== 0) throw new Error("AES-ECB 密文长度无效");
+  if (![16, 24, 32].includes(keyBytes.length)) throw new Error("AES 密钥长度无效");
   const w = aesExpandKey(keyBytes);
   const n = cipherBytes.length / 16;
   const out = new Uint8Array(n * 16);
@@ -412,12 +463,15 @@ function mergeU8(arrs) {
   return out;
 }
 function pkcs7Unpad(b) {
-  if (!b.length) return b;
+  if (!b.length || b.length % 16 !== 0) throw new Error("PKCS#7 数据长度无效");
   const pad = b[b.length - 1];
-  if (pad > 0 && pad <= 16 && pad <= b.length) return b.slice(0, b.length - pad);
-  return b;
+  if (pad < 1 || pad > 16 || pad > b.length) throw new Error("PKCS#7 填充无效");
+  for (let i = b.length - pad; i < b.length; i++) if (b[i] !== pad) throw new Error("PKCS#7 填充无效");
+  return b.slice(0, b.length - pad);
 }
 function hexToBytes(hex) {
+  hex = String(hex || "").trim();
+  if (!hex || hex.length % 2 !== 0 || !/^[0-9a-f]+$/i.test(hex)) throw new Error("十六进制数据无效");
   const out = new Uint8Array(hex.length / 2);
   for (let i = 0; i < out.length; i++) out[i] = parseInt(hex.substr(i * 2, 2), 16);
   return out;
@@ -445,14 +499,15 @@ async function fetchTaskListOnce(jwt) {
   let j = null, lastErr = null;
   for (const h of CY_HOSTS) {
     try {
-      const r = await fetch(h + "/market/signin/task/taskList?marketname=sign_in_3", { headers: cyHeaders(jwt, h), signal: AbortSignal.timeout(20000) });
+      const r = await fetchWithTimeout(h + "/market/signin/task/taskList?marketname=sign_in_3", { headers: cyHeaders(jwt, h), signal: AbortSignal.timeout(20000) });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
       j = await r.json();
       if (String(j.code) === "0") break;
       j = null;
     } catch (e) { lastErr = e; }
   }
   if (!j) throw new Error("所有主机均不可用: " + String((lastErr && lastErr.message) || "未知"));
-  if (String(j.code) !== "0") throw new Error("任务列表获取失败: " + j.msg);
+  if (String(j.code) !== "0") throw new Error("任务列表获取失败: " + (j.msg || j.message || "未知错误"));
   const list = [];
   for (const arr of Object.values(j.result || {})) {
     if (!Array.isArray(arr)) continue;
@@ -476,8 +531,8 @@ async function clickTask(jwt, id) {
   let txt = "", got = false, lastErr = null;
   for (const h of CY_HOSTS) {
     try {
-      const r = await fetch(h + "/market/signin/task/click?key=task&id=" + id, { headers: cyHeaders(jwt, h), signal: AbortSignal.timeout(20000) });
-      txt = await r.text(); got = true; break;
+      const r = await fetchWithTimeout(h + "/market/signin/task/click?key=task&id=" + id, { headers: cyHeaders(jwt, h), signal: AbortSignal.timeout(20000) });
+      txt = await responseTextChecked(r, "点击任务"); got = true; break;
     } catch (e) { lastErr = e; }
   }
   if (!got) throw new Error("点击失败: " + String((lastErr && lastErr.message) || "未知"));
@@ -496,7 +551,7 @@ async function mcloudGet(jwt, path) {
   let lastErr = null;
   for (const t of tries) {
     try {
-      const r = await fetch(MCLOUD + path, { headers: t.headers, signal: AbortSignal.timeout(20000) });
+      const r = await fetchWithTimeout(MCLOUD + path, { headers: t.headers }, 20000);
       const txt = await r.text();
       let j = null; try { j = JSON.parse(txt); } catch { j = null; }
       if (j) return j;
@@ -530,9 +585,10 @@ async function cloudStatus(jwt) {
     out.raw = JSON.stringify(j2).slice(0, 200);
   } catch (e) { out.errInfo = String(e.message || e).slice(0, 80); }
   for (const it of out.list) {
-    if (it.cloudType === 2) out.nextMonth += (it.cloudNum || 0);
+    if (String(it.cloudType) === "2") out.nextMonth += (it.cloudNum || 0);
     else out.receivable += (it.cloudNum || 0);
   }
+  out.ok = out.total !== null || out.toReceive !== null || out.list.length > 0;
   return out;
 }
 
@@ -540,14 +596,12 @@ async function cloudStatus(jwt) {
 const MOBILE_UA_FALLBACK = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
 const SIGNIN_PAGE = "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427&enableShare=1#/newsignin";
 const MOBILE_UA = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
-const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-
 async function readCloudNum(page) {
   // 优先：在页面上下文里直接调官方接口，避免文案变化导致读不到
   try {
     const v = await page.evaluate(async () => {
       try {
-        const r = await fetch("/ycloud/signin/page/getCloudNum", { headers: { Accept: "application/json, text/plain, */*" }, credentials: "include" });
+        const r = await fetchWithTimeout("/ycloud/signin/page/getCloudNum", { headers: { Accept: "application/json, text/plain, */*" }, credentials: "include" });
         const j = await r.json();
         const n = (j && j.result !== undefined && j.result !== null) ? j.result : (j && j.data && j.data.cloudNum);
         return n === undefined || n === null ? null : Number(n);
@@ -577,7 +631,7 @@ async function receiveBubbles(authorization, phone, dev) {
   const steps = [];
   dev = dev || {};
   let chromium = null;
-  try { const pw = await import("playwright"); chromium = pw.chromium; }
+  try { const pw = require("playwright"); chromium = pw.chromium; }
   catch (e) { return { ok: false, error: "playwright 未安装", got: 0, steps }; }
   let jwt;
   try { jwt = await getJwt(authorization, phone); }
@@ -637,9 +691,11 @@ async function receiveBubbles(authorization, phone, dev) {
       } catch (e) { steps.push("   API 读取失败: " + String(e.message || e).slice(0, 60)); }
     }
     let noChange = 0;
+    let eligible = false;
     for (let round = 0; round < 6; round++) {
       const n = await page.locator(".AIPoints:not(.is-next-month)").count();
       if (!n) break;
+      eligible = true;
       const b0 = await readCloudNum(page);
       let clicked = false, err = "";
       try { await page.locator(".AIPoints:not(.is-next-month)").first().click({ force: true, timeout: 8000 }); clicked = true; }
@@ -659,6 +715,10 @@ async function receiveBubbles(authorization, phone, dev) {
     if (before === null && after === null) {
       return { ok: false, error: "页面未加载出云豆数据（登录态失效或页面改版）", got: 0, steps };
     }
+    if (before !== null && after !== null && after > before && got === 0) got = after - before;
+    if (eligible && got === 0 && before !== null && after !== null && after <= before) {
+      return { ok: false, before, after, got: 0, error: "检测到可领取气泡，但点击后云豆未增加", recv: recv.slice(0, 6), steps };
+    }
     return { ok: true, before, after, got, recv: recv.slice(0, 6), steps };
   } finally {
     try { await browser.close(); } catch (e) {}
@@ -666,38 +726,67 @@ async function receiveBubbles(authorization, phone, dev) {
 }
 
 async function main() {
-  const type = process.env.EVENT_TYPE || "";
+  const type = String(process.env.EVENT_TYPE || "").trim();
   let payload = {};
-  try { payload = JSON.parse(process.env.PAYLOAD || "{}"); } catch {}
+  try { payload = JSON.parse(process.env.PAYLOAD || "{}"); } catch { throw new Error("PAYLOAD 不是合法 JSON"); }
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error("PAYLOAD 必须是 JSON 对象");
   const dataKey = process.env.PANEL_DATA_KEY || "";
+  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily"]);
+  if (!allowedTypes.has(type)) throw new Error("未知命令: " + type);
   const key = dataKey ? await deriveKey(dataKey) : null;
 
-  let out = { ts: nowStr(), type, ok: false, msg: "" };
+  const requestId = String(payload.requestId || `${type}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`).slice(0, 100);
+  let out = { ts: nowStr(), requestId, type, ok: false, msg: "" };
 
+  function normalizeAccounts(arr) {
+    if (!Array.isArray(arr)) throw new Error("账号列表格式错误");
+    const seen = new Set();
+    return arr.map((a, i) => {
+      if (!a || typeof a !== "object") throw new Error(`第 ${i + 1} 个账号格式错误`);
+      const phone = String(a.phone || "").trim();
+      const authorization = String(a.authorization || "").trim();
+      if (!/^\d{6,15}$/.test(phone)) throw new Error(`第 ${i + 1} 个账号手机号格式错误`);
+      decodeAuth(authorization);
+      if (seen.has(phone)) throw new Error(`账号重复: ${maskPhone(phone)}`);
+      seen.add(phone);
+      return { ...a, phone, authorization };
+    });
+  }
   async function decryptAccounts() {
     if (!key || !payload.cipher) throw new Error("缺少加密数据或密钥");
+    if (typeof payload.cipher !== "string" || payload.cipher.length > 2_000_000) throw new Error("加密账号数据过大或格式错误");
     const plain = await aesGcmDecryptText(key, payload.cipher);
     const arr = JSON.parse(plain);
-    if (!Array.isArray(arr)) throw new Error("解密结果不是账号列表");
-    return arr;
+    return normalizeAccounts(arr);
   }
   // ---- 账号仓库文件：data/accounts.enc（用 DATA_KEY 加密，续期后自动回写，供定时任务使用）----
-  const STORE_PATH = new URL("../data/accounts.enc", import.meta.url);
+  const STORE_PATH = path.join(__dirname, "../data/accounts.enc");
   let saveStoreErr = "";
   async function loadStore() {
+    if (!key) return null;
     try {
       const b = fs.readFileSync(STORE_PATH, "utf8").trim();
       if (!b) return null;
       const arr = JSON.parse(await aesGcmDecryptText(key, b));
-      return Array.isArray(arr) && arr.length ? arr : null;
-    } catch (e) { return null; }
+      if (!Array.isArray(arr)) throw new Error("账号仓库不是数组");
+      return arr.length ? arr : null;
+    } catch (e) {
+      saveStoreErr = "读取账号仓库失败: " + String(e.message || e);
+      return null;
+    }
   }
   async function saveStore(list) {
     try {
-      const payloadStr = await aesGcmEncryptText(key, JSON.stringify(list));
-      fs.writeFileSync(STORE_PATH, payloadStr);
+      if (!key) throw new Error("未配置 PANEL_DATA_KEY");
+      const payloadStr = await aesGcmEncryptText(key, JSON.stringify(normalizeAccounts(list)));
+      const tmp = path.join(__dirname, "../data/accounts.enc.tmp");
+      fs.writeFileSync(tmp, payloadStr, { encoding: "utf8", mode: 0o600 });
+      fs.renameSync(tmp, STORE_PATH);
       return true;
-    } catch (e) { saveStoreErr = String(e.message || e); return false; }
+    } catch (e) {
+      try { fs.unlinkSync(path.join(__dirname, "../data/accounts.enc.tmp")); } catch {}
+      saveStoreErr = String(e.message || e); return false;
+    }
   }
   // 统一解析账号来源：前端 cipher > 仓库文件 > Secret 兜底
   async function resolveAccounts() {
@@ -723,11 +812,14 @@ async function main() {
       if (!/^1\d{10}$/.test(phone)) throw new Error("手机号格式错误");
       const j = await sendSmsCodeByScene(phone);
       out.phone = phone;
-      out.msg = (j.summary || j.code || "unknown");
-      out.ok = true;
+      out.msg = j.summary || j.message || j.msg || String(j.code ?? "unknown");
+      out.ok = String(j.code) === "0" || String(j.code).toLowerCase() === "success" || j.success === true;
+      if (!out.ok) out.msg = `发送验证码失败: ${out.msg}`;
     } else if (type === "do_login") {
       const phone = String(payload.phone || "").trim();
       const code = String(payload.code || "").trim();
+      if (!/^1\d{10}$/.test(phone)) throw new Error("手机号格式错误");
+      if (!/^\d{4,8}$/.test(code)) throw new Error("验证码格式错误");
       if (!key) throw new Error("未配置 PANEL_DATA_KEY, 无法回传新令牌");
       const authorization = await loginBySms(phone, code);
       const accounts = await decryptAccounts();
@@ -743,7 +835,8 @@ async function main() {
         remaining_days: expMs ? Math.round((expMs - Date.now()) / 86400000 * 10) / 10 : null,
         created_at: nowStr(),
       };
-      accounts.push(newAcc);
+      const existing = accounts.findIndex(a => String(a.phone) === phone);
+      if (existing >= 0) accounts[existing] = newAcc; else accounts.push(newAcc);
       out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
       out.phone = phone;
       out.msg = "登录成功, 已抓取令牌";
@@ -772,7 +865,7 @@ async function main() {
           } else {
             const r = await refreshToken(phone, decodeAuth(a.authorization).token);
             if (r.ok) {
-              const newAuth = btoa(unescape(encodeURIComponent(`${decodeAuth(a.authorization).prefix}:${phone}:${r.data.new_token}`)));
+              const newAuth = base64Utf8Encode(`${decodeAuth(a.authorization).prefix}:${phone}:${r.data.new_token}`);
               a.authorization = newAuth; a.expires_at = r.data.new_expires_at; a.remaining_days = r.data.remaining_days; a.last_refresh = nowStr();
               row.ok = true; row.message = `续期成功, 剩余 ${r.data.remaining_days} 天`;
             } else { row.ok = false; row.message = r.error; }
@@ -785,11 +878,11 @@ async function main() {
        if (key) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(updated));
        if (ra.trusted) await saveStore(updated);   // 续期后回写仓库
       out.msg = type === "sign" ? "签到完成" : "续期完成";
-      out.ok = true;
+      out.ok = results.some(r => r.ok);
     } else if (type === "task") {
       const ra = await resolveAccounts();
       const accounts = ra.list;
-      const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks : ["sign"];
+      const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks.slice(0, 100).map(x => String(x).slice(0, 80)) : ["sign"];
       const results = [];
       for (const a of accounts) {
         const phone = a.phone;
@@ -827,7 +920,7 @@ async function main() {
       }
       out.results = results;
       out.msg = "云朵任务执行完成";
-      out.ok = true;
+      out.ok = results.some(r => r.ok);
     } else if (type === "status") {
       const ra = await resolveAccounts();
       const accounts = ra.list;
@@ -839,7 +932,7 @@ async function main() {
           if (a.auto_refreshed) { row.refreshed = true; a.auto_refreshed = false; }
           const jwt = await getJwt(auth, a.phone);
           const st = await cloudStatus(jwt);
-          row.ok = true;
+          row.ok = !!st.ok;
           row.total = st.total;
           row.toReceive = st.toReceive;
           row.receivable = st.receivable;
@@ -913,7 +1006,7 @@ async function main() {
             const rr = await refreshToken(a.phone, decodeAuth(auth).token);
             if (rr.ok) {
               const d = decodeAuth(auth);
-              a.authorization = btoa(unescape(encodeURIComponent(`${d.prefix}:${a.phone}:${rr.data.new_token}`)));
+              a.authorization = base64Utf8Encode(`${d.prefix}:${a.phone}:${rr.data.new_token}`);
               a.expires_at = rr.data.new_expires_at;
               a.remaining_days = rr.data.remaining_days;
               a.last_refresh = nowStr();
@@ -926,12 +1019,12 @@ async function main() {
           // 2) 推进可点击任务
           const jwt = await getJwt(a.authorization, a.phone);
           const before = await fetchTaskList(jwt);
-          const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks.map(String) : [];
+          const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks.slice(0, 100).map(x => String(x).slice(0, 80)) : [];
           const results = [];
           for (const t of before) {
             if (wanted.length && !wanted.includes(String(t.id))) continue;
             if (t.state === "FINISH") continue;
-            if (t.steps.indexOf("click") < 0) continue;
+            if (!Array.isArray(t.steps) || !t.steps.includes("click")) continue;
             const r = await clickTask(jwt, t.id);
             results.push({ id: t.id, name: t.name, ok: r.ok });
             await new Promise(x => setTimeout(x, 600));
@@ -944,7 +1037,8 @@ async function main() {
             item.receive = rb.ok ? ("+" + rb.got + "（" + rb.before + "→" + rb.after + "）") : ("失败：" + (rb.error || "未知"));
           } catch (e) { item.receive = "异常：" + String(e.message || e).slice(0, 80); }
 
-          item.ok = true; okCount++;
+          item.ok = !item.refresh || !String(item.refresh).startsWith("失败：");
+          if (item.ok) okCount++;
         } catch (e) {
           item.ok = false; item.error = String(e.message || e).slice(0, 160);
         }
@@ -966,8 +1060,10 @@ async function main() {
     out.msg = String(e.message || e).slice(0, 300);
   }
 
-  fs.writeFileSync(new URL("../data/result.json", import.meta.url), JSON.stringify(out, null, 2));
+  fs.writeFileSync(path.join(__dirname, "../data/result.json"), JSON.stringify(out, null, 2));
   console.log(JSON.stringify(out));
 }
 
-main().catch(e => { console.error("FATAL:", e); process.exit(1); });
+module.exports = { decodeAuth, cleanAuth, maskPhone, rsaEncrypt, pkcs7Unpad, hexToBytes, aesGcmEncryptText, aesGcmDecryptText, deriveKey, stableJsonStringify };
+
+if (require.main === module) main().catch(e => { console.error("FATAL:", e); process.exit(1); });

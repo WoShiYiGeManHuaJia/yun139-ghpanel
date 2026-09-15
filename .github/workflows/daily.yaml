@@ -22,7 +22,7 @@ jobs:
           node-version: "20"
       - name: 安装 Playwright（气泡领取需要真实浏览器）
         run: |
-          npm i playwright@1.49.1
+          npm i --no-audit --no-fund playwright@1.63.0
           npx playwright install chromium
       - name: 自动续期令牌 + 执行云朵任务 + 领取气泡
         env:
@@ -31,7 +31,7 @@ jobs:
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
           YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
           YUN139_PHONE: ${{ secrets.YUN139_PHONE }}
-        run: node actions/run.mjs
+        run: node actions/run.js
       - name: 回写结果
         run: |
           set -e

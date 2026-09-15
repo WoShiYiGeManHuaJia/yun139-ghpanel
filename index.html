@@ -150,10 +150,10 @@
         <button class="btn ghost" id="btn_save_cfg">保存配置</button>
         <button class="btn ghost" id="btn_gen_key">生成 DATA_KEY</button>
       </div>
-      <label>连接令牌 PAT（换浏览器后填一次即可，会记住）</label>
+      <label>连接令牌 PAT（仅当前浏览器会话保存）</label>
       <input id="cfg_pat" type="password" value="" placeholder="github_pat_... 或 ghp_...">
       <button class="btn ghost" id="btn_copy_link" style="margin-top:8px">复制分享链接（换设备用）</button>
-      <div class="hint">PAT 与 DATA_KEY 仅存本浏览器，填一次后长期有效。要搬到另一台设备，点「复制分享链接」在新设备打开即可。</div>
+      <div class="hint">PAT 仅存当前浏览器会话；DATA_KEY 存在当前浏览器本地。复制分享链接只会分享仓库地址，不会携带 PAT 或 DATA_KEY。换设备后请重新填写凭据。</div>
     </div>
   </details>
 
@@ -233,7 +233,7 @@
       <code>ec=S001 / 风控</code>），验证码能发出但登录会被拦。这是运营商风控，换登录次数通常无效；
       请优先用「方式二 粘贴 authorization」，签到 / 续期不受影响。<br><br>
       <b>抓到的令牌在哪？</b><br>
-      自动存在本页「① 账号」列表里，明文只存本机浏览器 localStorage，刷新、重开页面都还在；不会上传任何服务器。
+      账号授权信息在本机浏览器中加密保存，并可加密同步到 GitHub 仓库供 Actions 使用。
   </div>
   </details>
 
@@ -304,13 +304,20 @@
 
 <script>
 (function(){
-  const REPO_DEFAULT = "WoShiYiGeManHuaJia/yun139-ghpanel";
+  const REPO_DEFAULT = "";
   const LS_REPO = "gh139_repo", LS_TOKEN = "gh139_token", LS_KEY = "gh139_key", LS_ACC = "gh139_acc";
-
-
+  const LS_CLOUD = "gh139_cloud", LS_TIP = "gh139_tasktip_off";
   const $ = id => document.getElementById(id);
-  const log = (msg, cls) => { const box = $("log"); const line = document.createElement("div"); line.className = "l-" + (cls || ""); line.textContent = "[" + new Date().toLocaleTimeString() + "] " + msg; box.prepend(line); };
+  const log = (msg, cls) => { const box = $("log"); if (!box) return; const line = document.createElement("div"); line.className = "l-" + (cls || ""); line.textContent = "[" + new Date().toLocaleTimeString() + "] " + String(msg); box.prepend(line); };
   const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+  const newRequestId = type => `${type}-${Date.now()}-${crypto.randomUUID ? crypto.randomUUID().slice(0,8) : Math.random().toString(36).slice(2,10)}`;
+  function repoParts() {
+    const raw = ($("cfg_repo").value.trim() || REPO_DEFAULT).replace(/^https?:\/\/github\.com\//i, "").replace(/\.git$/i, "").replace(/^\/+|\/+$/g, "");
+    const m = raw.match(/^([A-Za-z0-9_.-]+)\/([A-Za-z0-9_.-]+)$/);
+    if (!m) throw new Error("仓库格式错误，应为 owner/repository");
+    return { owner: m[1], repo: m[2] };
+  }
 
   let toastTimer = null;
   function toast(msg, cls) {
@@ -324,12 +331,12 @@
   function loadCfg() {
     $("cfg_repo").value = localStorage.getItem(LS_REPO) || REPO_DEFAULT;
     $("cfg_key").value = localStorage.getItem(LS_KEY) || "";
-  try { $("cfg_pat").value = localStorage.getItem(LS_TOKEN) || ""; } catch (e) {}
+    try { $("cfg_pat").value = sessionStorage.getItem(LS_TOKEN) || ""; } catch (e) {}
   }
   function saveCfg() {
     localStorage.setItem(LS_REPO, $("cfg_repo").value.trim() || REPO_DEFAULT);
     localStorage.setItem(LS_KEY, $("cfg_key").value.trim());
-  try { const pv = $("cfg_pat").value.trim(); if (pv) localStorage.setItem(LS_TOKEN, pv); } catch (e) {}
+    try { const pv = $("cfg_pat").value.trim(); if (pv) sessionStorage.setItem(LS_TOKEN, pv); else sessionStorage.removeItem(LS_TOKEN); } catch (e) {}
     log("配置已保存");
   }
   function genKey() {
@@ -350,10 +357,16 @@
     const enc = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, new TextEncoder().encode(plain));
     const all = new Uint8Array(iv.length + enc.byteLength);
     all.set(iv); all.set(new Uint8Array(enc), 12);
-    return btoa(String.fromCharCode(...all));
+    let bin = "";
+    const CHUNK = 0x8000;
+    for (let i = 0; i < all.length; i += CHUNK) bin += String.fromCharCode(...all.subarray(i, i + CHUNK));
+    return btoa(bin);
   }
   async function decText(b64) {
-    const key = await kdf(); const raw = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const key = await kdf();
+    if (!/^[A-Za-z0-9+/]*={0,2}$/.test(String(b64 || ""))) throw new Error("加密数据格式错误");
+    const raw = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    if (raw.length < 13) throw new Error("加密数据长度无效");
     const dec = await crypto.subtle.decrypt({ name: "AES-GCM", iv: raw.slice(0, 12) }, key, raw.slice(12));
     return new TextDecoder().decode(dec);
   }
@@ -362,7 +375,17 @@
     if (!s) return [];
     try { return JSON.parse(await decText(s)); } catch (e) { log("本地账号解密失败（DATA_KEY 可能已变更）", "err"); return []; }
   }
-  async function saveAccounts(list) { localStorage.setItem(LS_ACC, await encText(JSON.stringify(list))); }
+  async function saveAccounts(list) {
+    if (!Array.isArray(list)) throw new Error("账号数据必须是数组");
+    const seen = new Set();
+    for (const a of list) {
+      const phone = String(a && a.phone || "");
+      if (!/^\d{6,15}$/.test(phone)) throw new Error("账号手机号格式错误");
+      if (seen.has(phone)) throw new Error("存在重复账号: " + tagOf(phone));
+      seen.add(phone);
+    }
+    localStorage.setItem(LS_ACC, await encText(JSON.stringify(list)));
+  }
 
   // ---- GitHub API ----
   // 把本地账号列表同步到仓库文件 data/accounts.enc（供定时任务使用）
@@ -376,23 +399,35 @@
     } catch (e) { log("同步账号到仓库失败：" + (e.message || e), "err"); }
   }
 
-  function owner() { return ($("cfg_repo").value.trim() || REPO_DEFAULT).split("/")[0]; }
-  function repo() { return ($("cfg_repo").value.trim() || REPO_DEFAULT).split("/")[1]; }
+  function owner() { return repoParts().owner; }
+  function repo() { return repoParts().repo; }
   async function api(url, opts) {
-    const token = sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || "";
+    const token = sessionStorage.getItem(LS_TOKEN) || "";
     if (!token) throw new Error("未设置 PAT");
-    opts = opts || {}; opts.headers = Object.assign({ Authorization: "token " + token, Accept: "application/vnd.github+json" }, opts.headers || {});
-    const r = await fetch(url, opts);
-    if (r.status === 401 || r.status === 403) { try { const e = await r.json(); throw new Error("API " + r.status + ": " + (e.message || "权限不足/被限流")); } catch (er) { if (er.message) throw er; throw new Error("API " + r.status); } }
-    if (!r.ok) throw new Error("API " + r.status);
-    return r;
+    opts = opts || {};
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 30000);
+    try {
+      opts.headers = Object.assign({ Authorization: "Bearer " + token, Accept: "application/vnd.github+json" }, opts.headers || {});
+      const r = await fetch(url, { ...opts, signal: opts.signal || controller.signal });
+      if (!r.ok) {
+        let msg = "";
+        try { const e = await r.json(); msg = e && e.message ? e.message : ""; } catch {}
+        throw new Error("GitHub API " + r.status + (msg ? ": " + msg : ""));
+      }
+      return r;
+    } catch (e) {
+      if (e.name === "AbortError") throw new Error("GitHub API 请求超时");
+      throw e;
+    } finally { clearTimeout(timer); }
   }
   function dispatch(type, payload) {
-    // 用 workflow_dispatch 触发：只要求 Actions write（细致令牌可配只读+触发），不要求 contents 写
-    return api(`https://api.github.com/repos/${owner()}/${repo()}/actions/workflows/panel.yaml/dispatches`, {
+    const body = Object.assign({}, payload || {});
+    body.requestId = body.requestId || (pending && pending.requestId) || newRequestId(type);
+    return api(`https://api.github.com/repos/${encodeURIComponent(owner())}/${encodeURIComponent(repo())}/actions/workflows/panel.yaml/dispatches`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ref: "main", inputs: { event_type: type, payload: JSON.stringify(payload || {}) } }),
+      body: JSON.stringify({ ref: "main", inputs: { event_type: type, payload: JSON.stringify(body) } }),
     });
   }
 
@@ -404,17 +439,16 @@
     return p || "未知";
   }
 
-  const LS_CLOUD = "gh139_cloud";
   function loadCloud() { try { return JSON.parse(localStorage.getItem(LS_CLOUD) || "{}"); } catch (e) { return {}; } }
   function saveCloud(m) { try { localStorage.setItem(LS_CLOUD, JSON.stringify(m)); } catch (e) {} }
   function cloudHtml(phone) {
     const c = loadCloud()[String(phone)];
     if (!c) return '<span class="dim">云豆 —</span><span class="dim">待领 —</span>'
-      + '<button class="btn sm" data-rec="' + phone + '">领气泡</button>';
-    const bean = (c.total != null ? '<span class="num">' + c.total + '</span><span class="dim">云豆</span>' : '<span class="dim">云豆 —</span>');
-    const bub = (c.receivable > 0 ? '<span class="bb">🎁 ' + c.receivable + ' 豆可领</span>' : '<span class="dim">无可领</span>');
-    const nx = (c.nextMonth > 0 ? '<span class="dim">下月 ' + c.nextMonth + '</span>' : '');
-    return bean + bub + nx + '<button class="btn sm" data-rec="' + phone + '">领气泡</button>';
+      + '<button class="btn sm" data-rec="' + esc(phone) + '">领气泡</button>';
+    const bean = (c.total != null ? '<span class="num">' + esc(c.total) + '</span><span class="dim">云豆</span>' : '<span class="dim">云豆 —</span>');
+    const bub = (c.receivable > 0 ? '<span class="bb">🎁 ' + esc(c.receivable) + ' 豆可领</span>' : '<span class="dim">无可领</span>');
+    const nx = (c.nextMonth > 0 ? '<span class="dim">下月 ' + esc(c.nextMonth) + '</span>' : '');
+    return bean + bub + nx + '<button class="btn sm" data-rec="' + esc(phone) + '">领气泡</button>';
   }
   function refreshCloudUI() {
     document.querySelectorAll("[data-cloud]").forEach(function (box) {
@@ -430,6 +464,7 @@
     });
   }
   async function runStatus() {
+    if (pending) { toast("有任务执行中，请稍候", "err"); return; }
     const list = await loadAccounts();
     if (!list.length) { toast("无账号", "err"); return; }
     setBusy($("btn_status"), true, "查询中…");
@@ -443,23 +478,23 @@
   async function renderAccounts(flashIdx) {
     const list = await loadAccounts();
     const box = $("accounts");
-    if (!list.length) { box.innerHTML = '<div class="empty">暂无账号，请用下方「方式一 / 方式二」添加</div>'; return; }
+    if (!list.length) { box.textContent = ""; const d = document.createElement("div"); d.className = "empty"; d.textContent = "暂无账号，请用下方「方式一 / 方式二」添加"; box.appendChild(d); return; }
     box.innerHTML = "";
     list.forEach(function (a, i) {
       const el = document.createElement("div"); el.className = "acc";
       const days = a.remaining_days;
       const badge = a.status === "error" ? '<span class="badge err">异常</span>'
-        : (days != null && days < 7 ? '<span class="badge exp">' + days + '天</span>' : '<span class="badge ok">正常</span>');
+        : (days != null && days < 7 ? '<span class="badge exp">' + esc(days) + '天</span>' : '<span class="badge ok">正常</span>');
       el.innerHTML =
-        '<div class="top"><span class="phone">' + tagOf(a.phone) + '</span>' + badge + '</div>' +
-        '<div class="meta">' + String(a.phone).replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2") + (a.expires_at ? " · 到期 " + a.expires_at : "") + '</div>' +
-        '<div class="cloud" data-cloud="' + a.phone + '">' + cloudHtml(a.phone) + '</div>' +
+        '<div class="top"><span class="phone">' + esc(tagOf(a.phone)) + '</span>' + badge + '</div>' +
+        '<div class="meta">' + esc(String(a.phone).replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")) + (a.expires_at ? " · 到期 " + esc(a.expires_at) : "") + '</div>' +
+        '<div class="cloud" data-cloud="' + esc(a.phone) + '">' + cloudHtml(a.phone) + '</div>' +
         '<div class="ops"><button class="btn sm danger" data-idx="' + i + '">删除</button></div>';
       box.appendChild(el);
     });
     if (flashIdx != null && box.children[flashIdx]) { box.children[flashIdx].classList.add("flash"); box.children[flashIdx].scrollIntoView({ behavior: "smooth", block: "center" }); }
     box.querySelectorAll("[data-idx]").forEach(function (b) {
-      b.onclick = async function () { const lst = await loadAccounts(); lst.splice(+b.dataset.idx, 1); await saveAccounts(lst); renderAccounts(); syncAccountsToRepo("删除账号"); log("已删除账号"); };    });
+      b.onclick = async function () { const lst = await loadAccounts(); lst.splice(+b.dataset.idx, 1); await saveAccounts(lst); await renderAccounts(); await syncAccountsToRepo("删除账号"); log("已删除账号"); };    });
   }
 
   // ---- 方式一 / 方式二 tab 切换 ----
@@ -478,6 +513,7 @@
   }
   let sendCd = null;
   function startSendCountdown() {
+    if (sendCd) clearInterval(sendCd);
     const b = $("btn_send"); let sec = 60;
     b.disabled = true;
     b.innerHTML = "60s 后重发";
@@ -505,14 +541,16 @@
     status: 3 * 60 * 1000,
     receive: 6 * 60 * 1000,
     task: 4 * 60 * 1000,
+    rtask: 4 * 60 * 1000,
     sign: 3 * 60 * 1000,
     refresh: 3 * 60 * 1000,
     do_login: 3 * 60 * 1000,
     list: 3 * 60 * 1000,
   };
   function armPending(p) {
+    if (pending) throw new Error("已有任务执行中，请稍候");
     if (pendingTimer) clearTimeout(pendingTimer);
-    pending = p;
+    pending = Object.assign({}, p, { requestId: p.requestId || newRequestId(p.type) });
     const ms = TIMEOUT_MS[p.type] || (3 * 60 * 1000);
     pendingTimer = setTimeout(function () {
       if (!pending) return;
@@ -604,7 +642,7 @@
       else { list.push(acc); $("pasteStatus").textContent = "已添加账号 +" + phone.slice(-4); }
       $("pasteStatus").className = "status ok";
       await saveAccounts(list); renderAccounts(); log("已添加账号 " + phone.replace(/^(\d{3})\d{4}(\d{4})$/, "$1****$2")); toast("账号已添加 ✓");
-    syncAccountsToRepo("新增账号");
+    await syncAccountsToRepo("新增账号");
       setTimeout(closePasteDialog, 700);
     } catch (e) {
       $("pasteStatus").textContent = "解析失败：" + (e.message || "格式不对") + "，请确认复制内容是否完整";
@@ -617,7 +655,7 @@
   // ---- 云朵任务列表渲染 ----
   function renderTaskPlaceholder(text) {
     const box = $("tasklist");
-    box.innerHTML = '<div class="empty">' + (text || '点「拉取真实任务」从官方接口获取') + '</div>';
+    box.textContent = ''; const d = document.createElement('div'); d.className = 'empty'; d.textContent = text || '点「拉取真实任务」从官方接口获取'; box.appendChild(d);
   }
 
   let REAL_TASKS = [];
@@ -637,14 +675,14 @@
     if (t.process) sub += " · 进度 " + t.process;
     if (!auto) sub += " · 需在 App 内操作";
     lb.innerHTML =
-      '<input type="checkbox" data-id="' + t.id + '"' + (auto && !done ? " checked" : "") + (auto && !done ? "" : " disabled") + '>'
-      + '<span class="tn">' + (t.name || ("任务" + t.id))
-      + '<small>' + sub + '</small>'
+      '<input type="checkbox" data-id="' + esc(t.id) + '"' + (auto && !done ? " checked" : "") + (auto && !done ? "" : " disabled") + '>'
+      + '<span class="tn">' + esc(t.name || ("任务" + t.id))
+      + '<small>' + esc(sub) + '</small>'
       + (pct !== null && !done ? '<div class="bar"><span style="width:' + pct + '%"></span></div>' : '')
       + '</span>'
       + (done ? '<span class="pill fin">已完成</span>' : (auto ? '<span class="pill auto">可自动</span>' : '<span class="pill manual">需手动</span>'))
       + (t.limit === "DAY" ? '<span class="pill day">日</span>' : t.limit === "MONTH" ? '<span class="pill mon">月</span>' : '')
-      + (t.reward ? '<i>' + t.reward + '</i>' : '');
+      + (t.reward ? '<i>' + esc(t.reward) + '</i>' : '');
     return lb;
   }
   function renderReal(tasks) {
@@ -693,7 +731,7 @@
   function resolvePending(j) {
     if (j.tasks && j.tasks.length) renderReal(j.tasks);
     if (!pending) return;
-    if (j.type !== pending.type) return;
+    if (j.type !== pending.type || !j.requestId || j.requestId !== pending.requestId) return;
     const kind = pending.kind;
     if (kind === "login") {
       setBusy($("btn_login"), false);
@@ -709,6 +747,12 @@
     } else if (kind === "task") {
       setBusy($("btn_tasks"), false);
       toast("云朵任务执行完成", j.ok ? "" : "err");
+    } else if (kind === "list") {
+      setBusy($("btn_list"), false);
+      toast(j.ok ? "真实任务列表已更新" : "任务列表获取失败", j.ok ? "" : "err");
+    } else if (kind === "send") {
+      stopSendCountdown();
+      toast(j.ok ? "验证码已发送，请查收短信" : (friendlyMsg(j.msg) || "验证码发送失败"), j.ok ? "" : "err");
     } else if (kind === "receive") {
       setBusy($("btn_receive"), false);
       if (j.receiveList) renderReceiveRows(j.receiveList);
@@ -726,13 +770,15 @@
   async function pollResult() {
     try {
       const r = await fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`, {
-        headers: { Authorization: "token " + (sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag },
+        headers: { Authorization: "Bearer " + (sessionStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag },
       });
       if (r.status === 304) return;
       if (!r.ok) { log("读取结果失败 " + r.status, "err"); return; }
       lastETag = r.headers.get("etag") || "";
       const j = await r.json();
-      if (!j || j.ts === lastTs) return;
+      if (!j) return;
+      if (pending && (j.type !== pending.type || j.requestId !== pending.requestId)) return;
+      if (!pending && j.ts === lastTs) return;
       lastTs = j.ts;
       if (j.enc_accounts) {
         try {
@@ -760,7 +806,6 @@
         });
       }
       log("[" + j.type + "] " + friendlyMsg(j.msg) + (j.ok ? "" : " ❌"), j.ok ? "ok" : "err");
-      if (j.type === "send_code" && j.ok) toast("验证码已发送，请查收短信");
       resolvePending(j);
     } catch (e) { /* 静默，继续轮询 */ }
   }
@@ -768,6 +813,7 @@
 
   // ---- 触发 Actions ----
   async function runSign() {
+    if (pending) { toast("有任务执行中，请稍候", "err"); return; }
     if (batchBusy) { toast("有任务执行中，请稍候", "err"); return; }
     const list = await loadAccounts();
     if (!list.length) { log("无账号，请先在上方添加", "err"); toast("无账号", "err"); return; }
@@ -778,6 +824,7 @@
     catch (e) { setBusy($("btn_sign"), false); setBusy($("btn_refresh"), false); batchBusy = false; clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
   async function runRefresh() {
+    if (pending) { toast("有任务执行中，请稍候", "err"); return; }
     if (batchBusy) { toast("有任务执行中，请稍候", "err"); return; }
     const list = await loadAccounts();
     if (!list.length) { log("无账号，请先在上方添加", "err"); toast("无账号", "err"); return; }
@@ -788,13 +835,16 @@
     catch (e) { setBusy($("btn_sign"), false); setBusy($("btn_refresh"), false); batchBusy = false; clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
   async function runSend() {
+    if (pending) { toast("有任务执行中，请稍候", "err"); return; }
     const phone = $("inp_phone").value.trim();
     if (!/^1\d{10}$/.test(phone)) { log("请输入正确手机号", "err"); toast("请输入正确手机号", "err"); return; }
+    armPending({ type: "send_code", kind: "send" });
     startSendCountdown();
     try { await dispatch("send_code", { phone }); log("验证码请求已触发，等待结果…", "warn"); lastTs = ""; startWatch(); }
     catch (e) { stopSendCountdown(); log("发送失败：" + e.message, "err"); toast("发送失败：" + e.message, "err"); }
   }
   async function runLogin() {
+    if (pending) { toast("有任务执行中，请稍候", "err"); return; }
     const phone = $("inp_phone").value.trim(), code = $("inp_code").value.trim();
     if (!/^1\d{10}$/.test(phone) || !code) { log("请填写手机号和验证码", "err"); toast("请先填写手机号和验证码", "err"); return; }
     openBusy();
@@ -810,6 +860,7 @@
     }
   }
   async function runReceive(phone, btn) {
+    if (pending) { toast("有任务执行中，请稍候", "err"); return; }
     const list = await loadAccounts();
     if (!list.length) { toast("无账号，请先添加", "err"); return; }
     if (btn) setBusy(btn, true, "领取中…");
@@ -843,24 +894,23 @@
   }
   function renderReceiveRows(rows) {
     (rows || []).forEach(function (r) {
-      const tag = tagOf(r.phone);
-      const em = String(r.error || "未知");
-      if (/4006|does not exist|已过期|令牌|鉴权|失效/.test(em)) {
-        log(tag + " 令牌已失效，请重新用「方式二」粘贴该号码的 authorization 更新后再试", "err");
-        toast(tag + " 令牌失效，请重新粘贴更新", "err");
+      const tag = esc(tagOf(r.phone));
+      const em = String(r.error || "");
+      if (!r.ok) {
+        if (/4006|does not exist|已过期|令牌|鉴权|失效/.test(em)) {
+          log(tag + " 令牌已失效，请重新用「方式二」粘贴授权更新后再试", "err");
+          toast(tag + " 令牌失效，请重新粘贴更新", "err");
+        } else { log(tag + " 领取失败：" + em, "err"); }
       } else {
-        log(tag + " 领取失败：" + em, "err");
+        applyCloudCache(r.phone, { total: r.after });
+        log(tag + " 云豆 " + r.before + " → " + r.after + (r.got > 0 ? "（+" + r.got + "）" : "（无可领）"), r.got > 0 ? "ok" : "");
       }
-      (r.steps || []).forEach(function (x) { log("   · " + x, /⚠|失败|错误|err=/.test(x) ? "err" : ""); });
-      return;
-      applyCloudCache(r.phone, { total: r.after });
-      log(tag + " 云豆 " + r.before + " → " + r.after + (r.got > 0 ? "（+" + r.got + "）" : "（无可领）"), r.got > 0 ? "ok" : "");
-      (r.steps || []).forEach(function (x) { log("   · " + x, x.indexOf("+") >= 0 ? "ok" : ""); });
+      (r.steps || []).forEach(function (x) { log("   · " + x, /⚠|失败|错误|err=/.test(String(x)) ? "err" : ""); });
     });
+    refreshCloudUI();
     document.querySelectorAll("[data-rec]").forEach(function (b) { if (b.disabled) setBusy(b, false); });
   }
 
-  const LS_TIP = "gh139_tasktip_off";
   function tipOff() { try { return localStorage.getItem(LS_TIP) === "1"; } catch (e) { return false; } }
   function askTaskTip() {
     if (tipOff()) { runTasks(); return; }
@@ -869,20 +919,22 @@
   function closeTaskTip() { $("maskTaskTip").classList.remove("show"); }
 
   async function runTasks() {
+    if (pending) { toast("有任务执行中，请稍候", "err"); return; }
     const tasks = selectedTasks();
     if (!tasks.length) { toast("请至少勾选一个任务", "err"); return; }
     const list = await loadAccounts();
     if (!list.length) { log("无账号，请先在上方添加", "err"); toast("无账号", "err"); return; }
     setBusy($("btn_tasks"), true, "任务执行中…");
-    armPending({ type: "task", kind: "task"  });
+    armPending({ type: "rtask", kind: "task"  });
     try { await dispatch("rtask", { tasks, cipher: await encText(JSON.stringify(list)) }); log("云朵任务已触发，等待结果…", "warn"); lastTs = ""; startWatch(); }
     catch (e) { setBusy($("btn_tasks"), false); clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
 
   async function fetchTaskList() {
+    if (pending) { toast("有任务执行中，请稍候", "err"); return; }
     const list = await loadAccounts();
     setBusy($("btn_list"), true, "拉取中…");
-    armPending({ type: "list", kind: "task"  });
+    armPending({ type: "list", kind: "list"  });
     try { await dispatch("list", { cipher: await encText(JSON.stringify(list)) }); log("已触发拉取…", "warn"); lastTs = ""; startWatch(); }
     catch (e) { setBusy($("btn_list"), false); clearPending(); log(e.message, "err"); toast(e.message, "err"); }
   }
@@ -908,13 +960,11 @@
     b.disabled = false; b.textContent = old;
   };
   $("btn_copy_link").onclick = async function () {
-    const pat = $("cfg_pat").value.trim() || localStorage.getItem(LS_TOKEN) || "";
-    const key = $("cfg_key").value.trim() || localStorage.getItem(LS_KEY) || "";
     const rp = $("cfg_repo").value.trim() || REPO_DEFAULT;
-    if (!pat) { toast("请先填写 PAT", "err"); return; }
-    const link = location.origin + "/yun139-ghpanel/#token=" + pat + "&key=" + key + "&repo=" + rp;
+    if (!$("cfg_key").value.trim()) { toast("请先设置 DATA_KEY", "err"); return; }
+    const link = location.origin + location.pathname + "#repo=" + encodeURIComponent(rp);
     try { await navigator.clipboard.writeText(link); toast("分享链接已复制，在新设备打开即可"); }
-    catch (e) { log("分享链接： " + link, "warn"); toast("复制失败，已输出到日志", "err"); }
+    catch (e) { toast("复制失败，请手动复制安全分享链接", "err"); }
   };
   $("btn_gen_key").onclick = genKey;
   $("tab_m1").onclick = function () { switchMethod(1); };
@@ -941,10 +991,10 @@
   $("btn_list").onclick = fetchTaskList;
   $("btn_receive").onclick = function () { runReceive("", $("btn_receive")); };
   $("btn_status").onclick = runStatus;
+  try { localStorage.removeItem(LS_TOKEN); } catch (e) {}
   loadCfg(); applyUrlCfg(); renderAccounts(); renderTaskPlaceholder(); startWatch();
   pollResult().then(function () {
-    fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`,
-      { headers: { Authorization: "token " + (sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json" } })
+    api(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`)
       .then(r => r.ok ? r.json() : null).then(j => { if (j && j.receiveList) renderReceiveRows(j.receiveList); }).catch(function () {});
   });
 })();

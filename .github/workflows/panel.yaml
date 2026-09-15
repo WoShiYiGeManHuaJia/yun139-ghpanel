@@ -39,7 +39,7 @@ jobs:
           ET: ${{ github.event.action || inputs.event_type }}
         run: |
           if [ "$ET" = "receive" ] || [ "$ET" = "daily" ]; then
-            npm i playwright@1.49.1
+            npm i --no-audit --no-fund playwright@1.63.0
             npx playwright install chromium
           else
             echo "跳过 playwright 安装"
@@ -52,7 +52,7 @@ jobs:
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
           YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
           YUN139_PHONE: ${{ secrets.YUN139_PHONE }}
-        run: node actions/run.mjs
+        run: node actions/run.js
 
       - name: Commit result
         run: |
