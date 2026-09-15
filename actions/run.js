@@ -897,11 +897,16 @@ async function main() {
 
   // 定时运行时没有前端 cipher，回退读仓库 Secret
   async function pickCreds() {
+    // 优先用面板/仓库的账号文件；Secret 仅作最后兜底（旧令牌常已作废，优先用会导致鉴权失败）
+    try {
+      const accounts = await decryptAccounts();
+      if (accounts.length) return { authorization: accounts[0].authorization, phone: accounts[0].phone };
+    } catch (e) {}
+    const st = await loadStore();
+    if (st && st.length) return { authorization: st[0].authorization, phone: st[0].phone };
     const ea = process.env.YUN139_AUTHORIZATION, ep = process.env.YUN139_PHONE;
     if (ea && ep) return { authorization: ea, phone: ep };
-    const accounts = await decryptAccounts();
-    if (!accounts.length) throw new Error("无可用的账号令牌");
-    return { authorization: accounts[0].authorization, phone: accounts[0].phone };
+    throw new Error("无可用的账号令牌");
   }
 
   try {
@@ -1084,10 +1089,14 @@ async function main() {
       out.ok = rows.some(r => r.ok);
       out.msg = rows.map(r => r.masked + " " + (r.ok ? (r.before + "→" + r.after + " +" + r.got) : ("失败:" + r.error))).join("；");
     } else if (type === "list") {
-      const c = await pickCreds();
+      const ra = await resolveAccounts();
+      out.acctDiag = ra.diag;
+      const c = ra.list[0] || await pickCreds();
+      out.phone = c.phone;
+      out.masked = maskPhone(c.phone);
       const jwt = await getJwt(c.authorization, c.phone);
       out.tasks = await fetchTaskList(jwt);
-      out.msg = "已获取 " + out.tasks.length + " 个真实任务";
+      out.msg = "已获取 " + out.tasks.length + " 个真实任务（" + maskPhone(c.phone) + "）";
       out.ok = true;
     } else if (type === "srefresh") {
       const c = await pickCreds();
