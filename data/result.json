@@ -1,320 +1,92 @@
 {
-  "ts": "2026-09-15 11:14:03",
-  "requestId": "probe16-1789470843576-0ek461l7",
+  "ts": "2026-09-15 11:38:24",
+  "requestId": "probe16-1789472304400-jo3wb9r6",
   "type": "probe16",
   "ok": true,
-  "msg": "会员日探测完成，共 38 个请求",
+  "msg": "会员日探测完成，共 10 个请求",
   "acctDiag": [
     "cipher失败:缺少加密数据或密钥",
     "store:3"
   ],
   "phone": "13787464642",
   "masked": "137****4642",
-  "pagePaths": [
-    "/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2",
-    "/ycloud/mcloudday/blindbox/listCloudRecord",
-    "/market/prizeApi/userdraw/countPrize",
-    "/ycloud/mcloudday/common/validate",
-    "/market/prizeApi/checkPrize/receivePrizeDetailsV2",
-    "/ycloud/api/cloud/userdomain/v2/querySpecToken",
-    "/ycloud/mcloudday/blindbox/getPosterData",
-    "/ycloud/mcloudday/common/gotone/popup",
-    "/ycloud/mcloudday/invite/acceptInvite",
-    "/ycloud/mcloudday/gift/nationalPrizeList",
-    "/ycloud/mcloudday/gift/provPrizeList",
-    "/ycloud/mcloudday/gift/list",
-    "/ycloud/mcloudday/gift/verify",
-    "/ycloud/mcloudday/gift/receive",
-    "/ycloud/mcloudday/blindbox/lotteryInfo",
-    "/ycloud/mcloudday/blindbox/lottery",
-    "/ycloud/mcloudday/invite/generateInviteCode",
-    "/market/market-advert/advert/getAdvertInfo",
-    "/market/api/file/upload/temp/base64",
-    "/ycloud/api/cloud/share/IOutLink/getRandomOpenLink",
-    "/ycloud/api/cloud/share/task/createOpenLinkBatchTask",
-    "/ycloud/mcloudday/blindbox/receiveSurprisePrize",
-    "/portal/hcyview/",
-    "/v3/projects/",
-    ").concat(encodeURIComponent(a));c[",
-    ").concat(encodeURIComponent(r));c[",
-    "+encodeURIComponent(v.value.httpUrl):s.$toast(",
-    "https://img.mcloud.139.com/material_prod/material_media/20250314/1741940892200.jpg",
-    "https://img.mcloud.139.com/material_prod/material_media/20250409/1744176044459.png",
-    "https://gp.mcloud.139.com/material_grey/material_media/20250402/1743563278908.png",
-    ").concat(x.value,",
-    "/market/infiniteCloud/queryLevel",
-    "/market/infiniteCloud/queryBinding",
-    "/portal/auth/getTyrzToken.action",
-    "/ycloud/api/smsVerCode/getVerCode",
-    "/market/infiniteCloud/openVip",
-    "/market/infiniteCloud/openVipv2",
-    "/market/infiniteCloud/openCaiYunVipSms/",
-    "/ycloud/infiniteCloud/spacePrizeStatus",
-    "/ycloud/infiniteCloud/notifyTask",
-    "/caiyunvipDetail",
-    ").concat(encodeURIComponent(o));s[",
-    ").concat(encodeURIComponent(r));s[",
-    ").concat(encodeURIComponent(r));K[",
-    ").concat(j.value,"
+  "jsParams": [
+    "{prizeId:r.clickPrize.prizeId}",
+    "{prizeId:e}",
+    "{2===i.uorder&&(console.log(\"item.prizeId\",\"\".concat(i.mark),\"\".concat(e)),\"\".concat(e)!=\"\".concat(i.prizeId)&&\"\".concat(e)!=\"\".concat(i.mark)||(i.showBtn=!0,i.posterUrl=\"\".concat(t[e])))}",
+    "{marketId:r.marketName,prizeId:e.prizeId,drawRecode:e.oId}",
+    "{activityId:S,type:\"phoneMessage\"}"
   ],
+  "jsCtx": "### gift/receive @18931\neturn a[\"a\"].get(\"/ycloud/mcloudday/gift/nationalPrizeList\")},getPrizeListProv:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/provPrizeList\")},getPrizeListNew:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/list\")},verify:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/verify\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",showLoading:!0}})},getPrize:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/receive\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})}},h={getLotteryInfo:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/lotteryInfo\")},getLottery:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/blindbox/lottery\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},generateInviteCode:function(e){return a[\"a\"].pos\n\n### gift/verify @18764\nturn a[\"a\"].post(\"/ycloud/mcloudday/common/reservation?open=\".concat(e.open,\"&marketName=\").concat(e.marketName),{headers:{showLoading:!0}})},getPrizeList:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/nationalPrizeList\")},getPrizeListProv:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/provPrizeList\")},getPrizeListNew:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/list\")},verify:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/verify\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",showLoading:!0}})},getPrize:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/receive\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})}},h={getLotteryInfo:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/lotteryInfo\")},getLottery:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/blindbox\n\n### common/validate @16784\nreturn a[\"a\"].get(\"\")},getMyPrizeList:function(e){return a[\"a\"].get(\"/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2\",{params:e})},listCloudRecord:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/listCloudRecord\")},getCountPrize:function(e){return a[\"a\"].post(\"/market/prizeApi/userdraw/countPrize\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getValidate:function(){return a[\"a\"].post(\"/ycloud/mcloudday/common/validate\",{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getPrizeDetail:function(e){return a[\"a\"].get(\"/market/prizeApi/checkPrize/receivePrizeDetailsV2\",{params:e})},getTyrzToken:function(){var e=Object(r[\"a\"])(Object(n[\"a\"])().mark((function e(t){var i,r,o,p,u,h,d;return Object(n[\"a\"])().wrap((function(e){while(1)switch(e.prev=e.next){case 0:return e.next=2,l();case 2:return i=e.sent,r=String.fromCodePoint.apply(String,[11\n\n### blindbox/lottery @19121\nget(\"/ycloud/mcloudday/gift/list\")},verify:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/verify\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",showLoading:!0}})},getPrize:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/receive\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})}},h={getLotteryInfo:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/lotteryInfo\")},getLottery:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/blindbox/lottery\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},generateInviteCode:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/invite/generateInviteCode\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},getInviteRecords:function(e){retu\n\n### blindbox/lottery @19206\nloudday/gift/verify\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",showLoading:!0}})},getPrize:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/receive\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})}},h={getLotteryInfo:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/lotteryInfo\")},getLottery:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/blindbox/lottery\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},generateInviteCode:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/invite/generateInviteCode\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},getInviteRecords:function(e){return a[\"a\"].get(\"/ycloud/mcloudday/invite/queryInviteRecords?flag=\".concat(e.flag))},ge\n\n### mcloudday @16210\nll,r&&r.result&&(t=r.result),e.abrupt(\"return\",t);case 7:case\"end\":return e.stop()}}),e)}))),p.apply(this,arguments)}t[\"a\"]={getMarketConfig:function(e){return a[\"a\"].get(\"/market/manager/commonMarketconfig/getByMarketName?marketName=\".concat(e),{headers:{showLoading:!0}})},getMemberLevel:function(e){return a[\"a\"].get(\"/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=\".concat(e))},getUserInfo:function(e){return a[\"a\"].get(\"/ycloud/mcloudday/common/activityInfo?marketName=\".concat(e.marketName),{headers:{showLoading:!0}})},getModuleRenderList:function(){return a[\"a\"].get(\"\")},getMyPrizeList:function(e){return a[\"a\"].get(\"/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2\",{params:e})},listCloudRecord:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/listCloudRecord\")},getCountPrize:function(e){return a[\"a\"].post(\"/market/prizeApi/userdraw/countPrize\",JSON.stringify(e)\n\n### mcloudday @16521\n\"a\"].get(\"/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=\".concat(e))},getUserInfo:function(e){return a[\"a\"].get(\"/ycloud/mcloudday/common/activityInfo?marketName=\".concat(e.marketName),{headers:{showLoading:!0}})},getModuleRenderList:function(){return a[\"a\"].get(\"\")},getMyPrizeList:function(e){return a[\"a\"].get(\"/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2\",{params:e})},listCloudRecord:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/listCloudRecord\")},getCountPrize:function(e){return a[\"a\"].post(\"/market/prizeApi/userdraw/countPrize\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getValidate:function(){return a[\"a\"].post(\"/ycloud/mcloudday/common/validate\",{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getPrizeDetail:function(e){return a[\"a\"].get(\"/market/prizeApi/checkPrize/receivePrizeDetailsV2\",{params:e})",
   "probes": [
     {
-      "tag": "JS:mCloudDay.61e70431.js",
-      "url": "https://img.mcloud.139.com/portal/cloudCircle/public/js/mCloudDay.61e70431.js",
-      "status": 200,
-      "len": 816093,
-      "body": "(window[\"webpackJsonp\"]=window[\"webpackJsonp\"]||[]).push([[\"mCloudDay\"],{\"0196\":function(e,t,i){const n=i(\"bbf0\");function r(e){this.mode=n.BYTE,this.data=\"string\"===typeof e?(new TextEncoder).encode(e):new Uint8Array(e)}r.getBitsLength=function(e){return 8*e},r.prototype.getLength=function(){return this.data.length},r.prototype.getBitsLength=function(){return r.getBitsLength(this.data.length)},r.prototype.write=function(e){for(let t=0,i=this.data.length;t<i;t++)e.put(this.data[t],8)},e.exports=r},\"01a6\":function(e,t,i){\"use strict\";i(\"96f3\")},\"01ea\":function(e,t,i){},\"0362\":function(e,t,i){\"use strict\";i.d(t,\"a\",(function(){return l})),i.d(t,\"b\",(function(){return p}));var n=i(\"c7eb\"),r=i(\"1da1\"),a=(i(\"caad\"),i(\"b64b\"),i(\"ac1f\"),i(\"2532\"),i(\"5319\"),i(\"7a23\")),o=i(\"f727\"),s=i(\"be92\"),c=i(\"493c\");function l(e){var t=Object(a[\"ref\"])(\"\"),i=Object(a[\"ref\"])(\"\"),n=Object(a[\"ref\"])(\"\"),r=Object(a[\"ref\"])({});return o[\"a\"].getMarketConfig(e).then((function(e){var a=e.data;if(0===a.code){var o=a.result,s=new Date(o.endtime).getTime(),c=(new Date).getTime();t.value=o.appRule,i.value=o.miniRule,n.value=o.rule;var l=o.webConfig;l&&(r.value=JSON.parse(l));var p=o.pageTitle;if(p&&(document.title=p),!o.onlineflag||c>s){var u=location.origin.includes(\"gp.mcloud\")?\"https://caiyun.feixin.10086.cn:7071\":location.origin;location.replace(u+\"/portal/templateView/initve.html?id=102&marketName=commonPage\")}}})),{appRule:t,miniRule:i,comRule:n,webConfig:r}}function p(e){return u.apply(this,arguments)}function u(){return u=Object(r[\"a\"])(Object(n[\"a\"])().mark((function e(t){var i,r,a,l,p,u,h,d;return Object(n[\"a\"])().wrap((function(e){while(1)switch(e.prev=e.next){case 0:return i=Object(c[\"a\"])(),r=Object(s[\"c\"])(i),a=r.isMp,l=r.isApp,l.value?(p=\"app\",u=\"appRule\"):a.value?(p=\"mini\",u=\"miniRule\"):(p=\"normal\",u=\"rule\"),e.next=5,o[\"a\"].getRuleInfo(t,p);case 5:if(h=e.sent,d=h.data,0!==d.code){e.next=9;break}return e.abrupt(\"return\",d.result[u]);case 9:case\"end\":return e.stop()}}),e)}))),u.apply(this,arguments)}},\"0425\":function(e,t){const i=\"[0-9]+\",n=\"[A-Z $%*+\\\\-./:]+\";let r=\"(?:[u3000-u303F]|[u3040-u309F]|[u30A0-u30FF]|[uFF00-uFFEF]|[u4E00-u9FAF]|[u2605-u2606]|[u2190-u2195]|u203B|[u2010u2015u2018u2019u2025u2026u201Cu201Du2225u2260]|[u0391-u0451]|[u00A7u00A8u00B1u00B4u00D7u00F7])+\";r=r.replace(/u/g,\"\\\\u\");const a=\"(?:(?![A-Z0-9 $%*+\\\\-./:]|\"+r+\")(?:.|[\\r\\n]))+\";t.KANJI=new RegExp(r,\"g\"),t.BYTE_KANJI=new RegExp(\"[^A-Z0-9 $%*+\\\\-./:]+\",\"g\"),t.BYTE=new RegExp(a,\"g\"),t.NUMERIC=new RegExp(i,\"g\"),t.ALPHANUMERIC=new RegExp(n,\"g\");const o=new RegExp(\"^\"+r+\"$\"),s=new RegExp(\"^\"+i+\"$\"),c=new RegExp(\"^[A-Z0-9 $%*+\\\\-./:]+$\");t.testKanji=function(e){return o.test(e)},t.testNumeric=function(e){return s.test(e)},t.testAlphanumeric=function(e){return c.test(e)}},\"05e7\":function(e,t,i){e.exports=i.p+\"public/img/icon0.ca5b7950.png\"},\"0676\":function(e,t,i){function n(){throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must hav"
-    },
-    {
-      "tag": "JS:mCDmkt.c46538b6.js",
-      "url": "https://img.mcloud.139.com/portal/cloudCircle/public/js/mCDmkt.c46538b6.js",
-      "status": 200,
-      "len": 21400,
-      "body": "(window[\"webpackJsonp\"]=window[\"webpackJsonp\"]||[]).push([[\"mCDmkt\"],{\"015c\":function(e,t,n){\"use strict\";n(\"de85\")},\"0fac\":function(e,t,n){\"use strict\";n(\"669a\")},\"28f8\":function(e,t,n){\"use strict\";n.d(t,\"c\",(function(){return d})),n.d(t,\"b\",(function(){return p}));var r=n(\"c7eb\"),a=n(\"1da1\"),c=(n(\"d401\"),n(\"99af\"),n(\"e9c4\"),n(\"d3b7\"),n(\"25f0\"),n(\"f6d6\"),n(\"6cac\")),o=n(\"f727\"),i=n(\"11c1\"),u=n(\"3452\");function s(){return l.apply(this,arguments)}function l(){return l=Object(a[\"a\"])(Object(r[\"a\"])().mark((function e(){var t,n,a;return Object(r[\"a\"])().wrap((function(e){while(1)switch(e.prev=e.next){case 0:return t=(new Date).getTime(),e.next=3,o[\"a\"].opRequest({op:\"currentTimeMillis\"});case 3:return n=e.sent,a=n.data||null,a&&a.result&&(t=a.result),e.abrupt(\"return\",t);case 7:case\"end\":return e.stop()}}),e)}))),l.apply(this,arguments)}t[\"a\"]={getMarketConfig:function(e){return c[\"a\"].get(\"/market/manager/commonMarketconfig/getByMarketName?marketName=\".concat(e),{headers:{showLoading:!0}})},getMemberLevel:function(e){return c[\"a\"].get(\"/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=\".concat(e))},getUserInfo:function(e){return c[\"a\"].get(\"/ycloud/mcloudday/common/activityInfo?marketName=\".concat(e.marketName),{headers:{showLoading:!0}})},getModuleRenderList:function(){return c[\"a\"].get(\"\")},getMyPrizeList:function(e){return c[\"a\"].get(\"/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2\",{params:e})},listCloudRecord:function(){return c[\"a\"].get(\"/ycloud/mcloudday/blindbox/listCloudRecord\")},getCountPrize:function(e){return c[\"a\"].post(\"/market/prizeApi/userdraw/countPrize\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getValidate:function(){return c[\"a\"].post(\"/ycloud/mcloudday/common/validate\",{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getPrizeDetail:function(e){return c[\"a\"].get(\"/market/prizeApi/checkPrize/receivePrizeDetailsV2\",{params:e})},getTyrzToken:function(){var e=Object(a[\"a\"])(Object(r[\"a\"])().mark((function e(t){var n,a,o,l,d,p,f;return Object(r[\"a\"])().wrap((function(e){while(1)switch(e.prev=e.next){case 0:return e.next=2,s();case 2:return n=e.sent,a=String.fromCodePoint.apply(String,[115,101,107,97,77,100,89,89,76,73,90,102,98,67,102,109]),o=Object(i[\"v4\"])(),l=n,d=Object(i[\"v4\"])(),p={\"x-request-id\":o,\"x-timestamp\":l,\"x-nonce\":d,\"x-signature\":Object(u[\"MD5\"])(a+o+l+d+a).toString()},f=Object.assign(p,{showLoading:!0,\"content-Type\":\"application/json\"}),t&&t.sourceId&&(t.targetSourceId=t.sourceId,delete t.sourceId),e.abrupt(\"return\",c[\"a\"].get(\"/ycloud/api/cloud/userdomain/v2/querySpecToken\",{params:t,headers:f}));case 11:case\"end\":return e.stop()}}),e)})));function t(t){return e.apply(this,arguments)}return t}(),receiveNotify:function(){return c[\"a\"].post(\"/ycloud/mcloudday/common/receiveNotify?client=3\")},getPosterData:function(){return c[\"a\"].get(\"/ycloud/mcloudday/blindbox/getPosterData\")},getGotonePopup:function(){return c[\"a\"].post(\"/ycloud/mcloudday/common/gotone"
-    },
-    {
-      "tag": "JS:caiyunviporder.4d3a717f.js",
-      "url": "https://img.mcloud.139.com/portal/cloudCircle/public/js/caiyunviporder.4d3a717f.js",
-      "status": 200,
-      "len": 188185,
-      "body": "(window[\"webpackJsonp\"]=window[\"webpackJsonp\"]||[]).push([[\"caiyunviporder\"],{\"01bc\":function(e,t,n){e.exports=n.p+\"public/img/card_silver.cb947591.png\"},\"0676\":function(e,t,n){function i(){throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\")}n(\"d9e2\"),n(\"d401\"),e.exports=i,e.exports.__esModule=!0,e.exports[\"default\"]=e.exports},\"09e0\":function(e,t,n){e.exports=n.p+\"public/img/notice_tip.35f8c217.png\"},\"09ed\":function(e,t,n){\"use strict\";n(\"68ef\"),n(\"8270\")},\"0b23\":function(e,t){e.exports=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAA0CAYAAADxAdr3AAAIiklEQVRogXVZv8ttRxVdc3OMPwikUEx4gTSif4AI2giCkOI19kmK4CtErEMIBDtFxICNYpGgtqkeKYwggrGysbFIIVZR+NBaXzAhe8mZ2T/Wnnv93rvfd+85c2b2XnvttffMHR/+9SGufnj+57pK/8XzCj8PjBdB3if5BYBP+uA1nv6e8Sz9+vnWci7KnDGGls/8h7S/kHgI8NcgP5xjzts03DBYFh1h8Pz8HRA/AfhEjMnF3LicGNbuqxPz72l8GL5+AUZYzmsx5/swfpvg78PByy10z59Rtp/o/BjgLwB7gr5QGDrXM+bCY15dnhbqcd8wNmNPB050wzEgjT3vPUvwtwSfn2NMDaYaGHafBtgPB8fLsfYIRHyxHOn3LRCkzuljTJx09Edb2LqDa41jkL8E8OVz0EWtpSDh114h8WoEfgwJv1oEEwNW2K14X5TIv+ldRxrBFo3KHPM4aT89xxzhXIXSxwHfBcaPFPo16eihEIoMQ4U2+H2VgD3pKvwdOHKLIvl1EF85MJjry5sXAfwM+wIxxiQ5fcFBNqWoiGkSoSMn6CCVoijX3q9nv3EsMSiUAHxrgL/ipBd3R1YYZaE0KhbdpKvk0SnTUZPxNS6Npaxzkox49hjBnXXjmwDeIvGYpEqfeLAofpKIa7IrZLdIzCgkrhQQrRxqxlLsjjX52SPAGeBXCbwN4PFd3NXwRLL4cMXLFrHU4BtGoKK0FAjXz2WeLMcOj/PniPEQ5GcgE+3JgN2oDKFyvOSrUKtoo3F957kkJgp9ShQO9+Y10J6eOkHlaMlU4hycT0UQbiZXu7GtgPwfY/W6AlBq4QYP8hMkXqrcOn+NvvCeABk/pcQ2TqIQCsLQeNFlKKpCF5o6WNcPkl8D8OQy5czEIYkgspNJxrrkclZcQEcPG8qePISO6Qk3r5iJ6nTULwS+WP3AWLU+o2OiIHyH5D0u+AfJMTg1Y0wv/UV/zcmIe+s5y7JbKtETTpuo4G9zwu26gPykCnSpRpbn4PEDkHdRhaoa2XKM7NFYRtyReNBrweK/0TM//joFkgpCl5E9iC2VWKHdZEwW2K+3xLAQvaBAUCvpwaLHrhyaeK7nifrKgSF9SSAs3sQiWgiS92+AfJpbWJtGz1ysXhjgMyTfLIvMI8ZsmALF64Tt+hxzHI1LKZgQJyJZeB/A3VwoE2c0jSxq9l5Ak7MQZSndJnW3dDocOjTqqX2i9ClJ4Yn2EkkLd22TuYlkU4sbkRGHqqSzrMhKuf4eAf9kUJOx3qQ02qgsqcZmI7WFOiKiRsxksqu1WhNUCpWIHyUhSLE3LbXNcNHZKAoi7GFsRqi1i1tUaN4biSPWE7H1EsHhmYWtFPYkCo0crOwNA0ZTg9Ls3rSUsoS2j0zmTpdqejSReiN1XE/eeabGql6rM2HsEInK+Sbnu+pY8htb9CLKVr0KUIoSSdfKauMplmgPCvFVi7VY1NmBzpfaqvLXqNOjtret+5oXh0FI77U8F8ytyyzNoHkZtlWGvUxrWea8t16L5jZglmMgz2CV+HswvNOlrbi+tv7rei8crXZ3FDBLs93RQ7TThVEMBO1JEaNsKvwp61EhT33nA26cTxtiJw14P5wTKC1EvCVC1a2JdiZvqzrByTA07K3zsl3KSio02kqlLM3Ko1ZlGlffAFZpTg4G50JxVSEszh02XW7GJnDPgHxzNUGKmwLC6Ic3kWY3XpLg/tmtNerssrRNfmun0c7smpxpYVGrJaFnL9GaHg1Z1X01bOw8b5Ik1yx2HMJLKUZ5hjbkBAiytvYxcuVQbrX3qpO+4mioonoFSqibI7qYF4w4VGlVrQzTqFztEw3erel2RX1qZ7pSMHZnbqhL0sngp5bF+zlG9oTaWm7nJBm5aMIuTfyj9p8omModUocNdra8tSVatcX1VvX1LFi5VRqMMb7FGuccFpruWylXFkZDltSxdPBSCbeaa7PytmgykX4w+2FjY1jTS6ETzTIy+c8qEvSGyxG/m/OzUyz4H4ifhh+lqeEZrwgfvOpyeVspNNsDJaVI8F5Ltc/P662/0wTVh1+WJvoLJptAf8BcG08d9sOWhXKVy3yplPlcUikBxuYT/fAE8K2UkLZFrY7zji5XkmCtKZk3zi9i7qrslfd7o69IwZunftK+dYZ5DOGRUZmUisnZrZkc4mi10nBJSaIY2dRCC0MqidMgDDTUiZ8iqXUg+YrWm4Sjx77YVZefiKyHRztcqWSFgKpzDsT3HqVE2kKygbFdK6VN4A4Ved46SY+eVpKhhTON9BMjbPu0pqcdjKHzlLcCwH7dOVyh7wZd9RntXu8RsI9tvUE3PqqW"
-    },
-    {
-      "tag": "hit:i/checkPrize/getUserPrizeLogPageV2",
-      "url": "https://m.mcloud.139.com/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2",
-      "status": 404,
-      "len": 548,
-      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
-    },
-    {
-      "tag": "hit:mcloudday/blindbox/listCloudRecord",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/blindbox/listCloudRecord",
-      "status": 200,
-      "len": 38,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":[]}"
-    },
-    {
-      "tag": "hit:arket/prizeApi/userdraw/countPrize",
-      "url": "https://m.mcloud.139.com/market/prizeApi/userdraw/countPrize",
-      "status": 405,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "hit:/ycloud/mcloudday/common/validate",
+      "tag": "validate",
       "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/validate",
       "status": 405,
-      "len": 27,
-      "body": "{\"code\":502,\"msg\":\"请求方法异常\"}"
+      "len": 453,
+      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
     },
     {
-      "tag": "hit:i/checkPrize/receivePrizeDetailsV2",
-      "url": "https://m.mcloud.139.com/market/prizeApi/checkPrize/receivePrizeDetailsV2",
-      "status": 404,
-      "len": 548,
-      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
-    },
-    {
-      "tag": "hit:cloud/userdomain/v2/querySpecToken",
-      "url": "https://m.mcloud.139.com/ycloud/api/cloud/userdomain/v2/querySpecToken",
-      "status": 200,
-      "len": 32,
-      "body": "{\"code\":402,\"msg\":\"非法请求, 缺少请求头\"}"
-    },
-    {
-      "tag": "hit:d/mcloudday/blindbox/getPosterData",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/blindbox/getPosterData",
-      "status": 200,
-      "len": 2270,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"260113029\":\"https://img.mcloud.139.com//uop_prod/20250317/9ce24fc2cf2143fb9be137794e28151b.png\",\"260113026\":\"https://img.mcloud.139.com//uop_prod/20240808/8d312d7cf8f84a3d9100fee8004be60a.png\",\"241231046\":\"https://img.mcloud.139.com//uop_prod/20240808/78b91eea480f4a8e9d4c77d4a91aa4df.png\",\"260908014\":\"https://img.mcloud.139.com//uop_prod/20260909/da35f5acd2a6427b974f5d4a6bd05937.png\",\"260113030\":\"https://img.mcloud.139.com//uop_prod/20250317/6e237bd3594a49e1bbfb60c3d84fa50c.png\",\"260113025\":\"https://img.mcloud.139.com//uop_prod/20240808/e7cd8bd42ccb47d7bed359f13a280cb9.png\",\"260113013\":\"https://img.mcloud.139.com//uop_prod/20250317/5a900c4e1c344e66b8c9133"
-    },
-    {
-      "tag": "hit:loud/mcloudday/common/gotone/popup",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/gotone/popup",
-      "status": 405,
-      "len": 27,
-      "body": "{\"code\":502,\"msg\":\"请求方法异常\"}"
-    },
-    {
-      "tag": "hit:loud/mcloudday/invite/acceptInvite",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/invite/acceptInvite",
+      "tag": "validate?client=app",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/validate?client=app",
       "status": 405,
       "len": 453,
       "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
     },
     {
-      "tag": "hit:d/mcloudday/gift/nationalPrizeList",
+      "tag": "gift/list",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/list",
+      "status": 200,
+      "len": 6496,
+      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"nationalPrizeList\":[{\"prizeId\":260615001,\"prizeName\":\"肯德基10元优惠满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/02567517a15b424f8e6b12dbb9581315.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":1},{\"prizeId\":260713003,\"prizeName\":\"喜茶15元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260713/912069efeeb24b81a39bd29b5828e24f.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":2},{\"prizeId\":260206017,\"prizeName\":\"霸王茶姬无门槛10元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a42bd7fa94b14e5a890866704b01e072.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":3},{\"prizeId\":260511002,\"prizeName\":\"星巴克15元会员礼包\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/b42229198bd04d279587b1c061920e22.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":4},{\"prizeId\":260104007,\"prizeName\":\"腾讯视频VIP会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/5acbeecb948146d390437d232c10c188.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":5},{\"prizeId\":260104009,\"prizeName\":\"爱奇艺黄金会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a17091d41a464a519362496cd52bb2d1.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":6},{\"prizeId\":260113002,\"prizeName\":\"优酷视频会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260910/7a7e0ae9a3d54ca18743adb3855c51d7.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":7},{\"prizeId\":260104014,\"prizeName\":\"芒果TV会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/4ae66e03a6234dfabc0b9358f87a78f3.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":8},{\"prizeId\":260907023,\"prizeName\":\"剪映VIP会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260907/77f25b5b72da4efdbe751c45878658a7.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":9},{\"prizeId\":260104016,\"prizeName\":\"作业帮VIP会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/9f0bfc47d8af4582bc834d6e1098fb43.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":10},{\"prizeId\":260113019,\"prizeName\":\"腾讯视频会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/133f55a42f2b4feda75b889a3fa2d9d5.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":11},{\"prizeId\":260609003,\"prizeName\":\"优酷视频会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260910/006308ab0e274e3c9999df5801b47e56.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":12},{\"prizeId\":260609007,\"prizeName\":\"酷狗音乐会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/68aacd525df5413fa9186db9a7d06a08.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":13},{\"prizeId\":260609006,\"prizeName\":\"网易云音乐黑胶VIP周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a5186363f84642eca060d1359979cb89.png\",\"to"
+    },
+    {
+      "tag": "gift/list?client=app",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/list?client=app",
+      "status": 200,
+      "len": 6496,
+      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"nationalPrizeList\":[{\"prizeId\":260615001,\"prizeName\":\"肯德基10元优惠满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/02567517a15b424f8e6b12dbb9581315.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":1},{\"prizeId\":260713003,\"prizeName\":\"喜茶15元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260713/912069efeeb24b81a39bd29b5828e24f.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":2},{\"prizeId\":260206017,\"prizeName\":\"霸王茶姬无门槛10元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a42bd7fa94b14e5a890866704b01e072.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":3},{\"prizeId\":260511002,\"prizeName\":\"星巴克15元会员礼包\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/b42229198bd04d279587b1c061920e22.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":4},{\"prizeId\":260104007,\"prizeName\":\"腾讯视频VIP会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/5acbeecb948146d390437d232c10c188.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":5},{\"prizeId\":260104009,\"prizeName\":\"爱奇艺黄金会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a17091d41a464a519362496cd52bb2d1.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":6},{\"prizeId\":260113002,\"prizeName\":\"优酷视频会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260910/7a7e0ae9a3d54ca18743adb3855c51d7.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":7},{\"prizeId\":260104014,\"prizeName\":\"芒果TV会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/4ae66e03a6234dfabc0b9358f87a78f3.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":8},{\"prizeId\":260907023,\"prizeName\":\"剪映VIP会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260907/77f25b5b72da4efdbe751c45878658a7.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":9},{\"prizeId\":260104016,\"prizeName\":\"作业帮VIP会员月卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/9f0bfc47d8af4582bc834d6e1098fb43.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":10},{\"prizeId\":260113019,\"prizeName\":\"腾讯视频会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/133f55a42f2b4feda75b889a3fa2d9d5.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":11},{\"prizeId\":260609003,\"prizeName\":\"优酷视频会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260910/006308ab0e274e3c9999df5801b47e56.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":12},{\"prizeId\":260609007,\"prizeName\":\"酷狗音乐会员周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/68aacd525df5413fa9186db9a7d06a08.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":0,\"sort\":13},{\"prizeId\":260609006,\"prizeName\":\"网易云音乐黑胶VIP周卡\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/a5186363f84642eca060d1359979cb89.png\",\"to"
+    },
+    {
+      "tag": "gift/nationalPrizeList",
       "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/nationalPrizeList",
       "status": 404,
       "len": 453,
       "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
     },
     {
-      "tag": "hit:cloud/mcloudday/gift/provPrizeList",
+      "tag": "gift/provPrizeList",
       "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/provPrizeList",
       "status": 404,
       "len": 453,
       "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
     },
     {
-      "tag": "hit:/ycloud/mcloudday/gift/list",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/list",
-      "status": 200,
-      "len": 6496,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"nationalPrizeList\":[{\"prizeId\":260615001,\"prizeName\":\"肯德基10元优惠满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260709/02567517a15b424f8e6b12dbb9581315.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":1},{\"prizeId\":260713003,\"prizeName\":\"喜茶15元满减券\",\"imageUrl\":\"https://img.mcloud.139.com//uop_prod/20260713/912069efeeb24b81a39bd29b5828e24f.png\",\"totalCount\":0,\"hasStock\":true,\"receiveFlag\":false,\"prizeType\":0,\"provFlag\":true,\"prov\":\"全网\",\"limit\":0,\"maskLayer\":null,\"poolPrizeGroup\":188,\"sort\":2},{\"prizeId\":260206017,\"prizeName\":\"霸王茶姬无门槛10元满减券\",\"imageUrl"
-    },
-    {
-      "tag": "hit:/ycloud/mcloudday/gift/verify",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/verify",
-      "status": 405,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "hit:/ycloud/mcloudday/gift/receive",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/gift/receive",
-      "status": 405,
-      "len": 27,
-      "body": "{\"code\":502,\"msg\":\"请求方法异常\"}"
-    },
-    {
-      "tag": "hit:oud/mcloudday/blindbox/lotteryInfo",
+      "tag": "blindbox/lotteryInfo",
       "url": "https://m.mcloud.139.com/ycloud/mcloudday/blindbox/lotteryInfo",
       "status": 200,
       "len": 810,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"lotteryCount\":0,\"isBuy\":false,\"buyLotteryLimit\":5,\"buyCount\":0,\"nonInvite\":false,\"associateMemberType\":\"-1\",\"associateMember\":false,\"associateLotteryCount\":0,\"totalInviteCount\":0,\"surpriseBoxPrizeList\":[],\"surpriseBoxPrizeStatusList\":[{\"inviteCount\":1,\"status\":-1,\"type\":\"manual\",\"hasStock\":true,\"images\":\"https://img.mcloud.139.com//uop_prod/20260903/0ec90327ca394f968c8d15bc1bfb26e0.png\"},{\"inviteCount\":4,\"status\":-1,\"type\":\"manual\",\"hasStock\":true,\"images\":\"https://img.mcloud.139.com//uop_prod/20260903/d85568f6ff9d48ddaa68737f5718294a.png\"},{\"inviteCount\":10,\"status\":-1,\"type\":\"manual\",\"hasStock\":true,\"images\":\"https://img.mcloud.139.com//uop_prod/2026090"
+      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"lotteryCount\":0,\"isBuy\":false,\"buyLotteryLimit\":5,\"buyCount\":0,\"nonInvite\":false,\"associateMemberType\":\"-1\",\"associateMember\":false,\"associateLotteryCount\":0,\"totalInviteCount\":0,\"surpriseBoxPrizeList\":[],\"surpriseBoxPrizeStatusList\":[{\"inviteCount\":1,\"status\":-1,\"type\":\"manual\",\"hasStock\":true,\"images\":\"https://img.mcloud.139.com//uop_prod/20260903/0ec90327ca394f968c8d15bc1bfb26e0.png\"},{\"inviteCount\":4,\"status\":-1,\"type\":\"manual\",\"hasStock\":true,\"images\":\"https://img.mcloud.139.com//uop_prod/20260903/d85568f6ff9d48ddaa68737f5718294a.png\"},{\"inviteCount\":10,\"status\":-1,\"type\":\"manual\",\"hasStock\":true,\"images\":\"https://img.mcloud.139.com//uop_prod/20260903/ca575b15fc40446f97381b56e9bd1e5f.png\"}],\"hasReceiveSurpriseBoxPrize\":false,\"hasAnySurprisePrizeStock\":true}}"
     },
     {
-      "tag": "hit:/ycloud/mcloudday/blindbox/lottery",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/blindbox/lottery",
-      "status": 405,
-      "len": 27,
-      "body": "{\"code\":502,\"msg\":\"请求方法异常\"}"
+      "tag": "blindbox/listCloudRecord",
+      "url": "https://m.mcloud.139.com/ycloud/mcloudday/blindbox/listCloudRecord",
+      "status": 200,
+      "len": 38,
+      "body": "{\"code\":0,\"msg\":\"success\",\"result\":[]}"
     },
     {
-      "tag": "hit:cloudday/invite/generateInviteCode",
+      "tag": "invite/generateInviteCode",
       "url": "https://m.mcloud.139.com/ycloud/mcloudday/invite/generateInviteCode",
       "status": 405,
       "len": 453,
       "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
     },
     {
-      "tag": "hit:market-advert/advert/getAdvertInfo",
-      "url": "https://m.mcloud.139.com/market/market-advert/advert/getAdvertInfo",
-      "status": 405,
-      "len": 141,
-      "body": "{\"timestamp\":\"2026-09-15T11:14:15.296+00:00\",\"path\":\"/advert/getAdvertInfo\",\"status\":405,\"error\":\"Method Not Allowed\",\"requestId\":\"15b0438a\"}"
-    },
-    {
-      "tag": "hit:market/api/file/upload/temp/base64",
-      "url": "https://m.mcloud.139.com/market/api/file/upload/temp/base64",
-      "status": 405,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "hit:d/share/IOutLink/getRandomOpenLink",
-      "url": "https://m.mcloud.139.com/ycloud/api/cloud/share/IOutLink/getRandomOpenLink",
-      "status": 500,
-      "len": 42,
-      "body": "{\"code\":500,\"msg\":\"Internal server error\"}"
-    },
-    {
-      "tag": "hit:share/task/createOpenLinkBatchTask",
-      "url": "https://m.mcloud.139.com/ycloud/api/cloud/share/task/createOpenLinkBatchTask",
-      "status": 500,
-      "len": 42,
-      "body": "{\"code\":500,\"msg\":\"Internal server error\"}"
-    },
-    {
-      "tag": "hit:dday/blindbox/receiveSurprisePrize",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/blindbox/receiveSurprisePrize",
-      "status": 405,
-      "len": 27,
-      "body": "{\"code\":502,\"msg\":\"请求方法异常\"}"
-    },
-    {
-      "tag": "hit:/portal/hcyview/",
-      "url": "https://m.mcloud.139.com/portal/hcyview/",
+      "tag": "JSCTX",
       "status": 200,
-      "len": 6108,
-      "body": "<!DOCTYPE html><html lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta content=\"width=device-width,user-scalable=no,initial-scale=1\" name=\"viewport\"><meta name=\"format-detection\" content=\"telephone=no\"><meta content=\"always\" name=\"referrer\"><meta http-equiv=\"Pragma\" content=\"no-cache\"><meta http-equiv=\"Cache-Control\" content=\"no-cache\"><meta http-equiv=\"Expires\" content=\"0\"><link rel=\"icon\" href=\"/favicon.ico\"><title></title><script>const scripts = [\n                '/portal/js/vue3_include/jsencrypt.js',\n                '/portal/js/vue3_include/autotrack.js',\n                '/portal/js/vue3_include/jssdk.min.js',\n            ];\n            let h"
-    },
-    {
-      "tag": "hit:/v3/projects/",
-      "url": "https://m.mcloud.139.com/v3/projects/",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "hit:).concat(encodeURIComponent(a));c[",
-      "url": "https://m.mcloud.139.com).concat(encodeURIComponent(a));c[",
-      "err": "Failed to parse URL from https://m.mcloud.139.com).concat(encodeURIComponent(a));c["
-    },
-    {
-      "tag": "hit:).concat(encodeURIComponent(r));c[",
-      "url": "https://m.mcloud.139.com).concat(encodeURIComponent(r));c[",
-      "err": "Failed to parse URL from https://m.mcloud.139.com).concat(encodeURIComponent(r));c["
-    },
-    {
-      "tag": "hit:mponent(v.value.httpUrl):s.$toast(",
-      "url": "https://m.mcloud.139.com+encodeURIComponent(v.value.httpUrl):s.$toast(",
-      "err": "Failed to parse URL from https://m.mcloud.139.com+encodeURIComponent(v.value.httpUrl):s.$toast("
-    },
-    {
-      "tag": "hit:l_media/20250314/1741940892200.jpg",
-      "url": "https://img.mcloud.139.com/material_prod/material_media/20250314/1741940892200.jpg",
-      "status": 200,
-      "len": 914758,
-      "body": "����\fXICC_PROFILE\u0000\u0001\u0001\u0000\u0000\fHLino\u0002\u0010\u0000\u0000mntrRGB XYZ \u0007�\u0000\u0002\u0000\t\u0000\u0006\u00001\u0000\u0000acspMSFT\u0000\u0000\u0000\u0000IEC sRGB\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000��\u0000\u0001\u0000\u0000\u0000\u0000�-HP  \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0011cprt\u0000\u0000\u0001P\u0000\u0000\u00003desc\u0000\u0000\u0001�\u0000\u0000\u0000lwtpt\u0000\u0000\u0001�\u0000\u0000\u0000\u0014bkpt\u0000\u0000\u0002\u0004\u0000\u0000\u0000\u0014rXYZ\u0000\u0000\u0002\u0018\u0000\u0000\u0000\u0014gXYZ\u0000\u0000\u0002,\u0000\u0000\u0000\u0014bXYZ\u0000\u0000\u0002@\u0000\u0000\u0000\u0014dmnd\u0000\u0000\u0002T\u0000\u0000\u0000pdmdd\u0000\u0000\u0002�\u0000\u0000\u0000�vued\u0000\u0000\u0003L\u0000\u0000\u0000�view\u0000\u0000\u0003�\u0000\u0000\u0000$lumi\u0000\u0000\u0003�\u0000\u0000\u0000\u0014meas\u0000\u0000\u0004\f\u0000\u0000\u0000$tech\u0000\u0000\u00040\u0000\u0000\u0000\frTRC\u0000\u0000\u0004<\u0000\u0000\b\fgTRC\u0000\u0000\u0004<\u0000\u0000\b\fbTRC\u0000\u0000\u0004<\u0000\u0000\b\ftext\u0000\u0000\u0000\u0000Copyright (c) 1998 Hewlett-Packard Company\u0000\u0000desc\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0012sRGB IEC61966-2.1\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0012sRGB IEC61966-2.1\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000XYZ \u0000\u0000\u0000\u0000\u0000\u0000�Q\u0000\u0001\u0000\u0000\u0000\u0001\u0016�XYZ \u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000XYZ \u0000\u0000\u0000\u0000\u0000\u0000o�\u0000\u00008�\u0000\u0000\u0003�XYZ \u0000\u0000\u0000\u0000\u0000\u0000b�\u0000\u0000��\u0000\u0000\u0018�XYZ \u0000\u0000\u0000\u0000\u0000\u0000$�\u0000\u0000\u000f�\u0000\u0000��desc\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0016IEC http://www.iec.ch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0016IEC http://www.iec.ch\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
-    },
-    {
-      "tag": "hit:l_media/20250409/1744176044459.png",
-      "url": "https://img.mcloud.139.com/material_prod/material_media/20250409/1744176044459.png",
-      "status": 200,
-      "len": 28795,
-      "body": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0002�\u0000\u0000\u0000X\b\u0006\u0000\u0000\u0000�\u0011r�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000\tpHYs\u0000\u0000\u000b\u0011\u0000\u0000\u000b\u0011\u0001d_�\u0000\u0000\u0001�iTXtXML:com.adobe.xmp\u0000\u0000\u0000\u0000\u0000<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>\r\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"><rdf:Description rdf:about=\"uuid:faf5bdd5-ba3d-11da-ad31-d33d75182f1b\" xmlns:tiff=\"http://ns.adobe.com/tiff/1.0/\"><tiff:Orientation>1</tiff:Orientation></rdf:Description></rdf:RDF></x:xmpmeta>\r\n<?xpacket end='w'?>,��\u000b\u0000\u0000t�IDATx^��w�\u001dU���:gʭ�w�\u001b�\u0012 @��Nh\u0001��\b�\u0010�\u0014�(���(<�\"�\u0013\u0011D�G�\t\u0004\u0010\u0010�WAZh�\u0010Z\bI m�}o�r��;3��ِ\u0005���`r�Νr�̼�g>�sD�PЬ!���\u001ah_!D�U11111��g�����|�\u0011�ﯱ���z�>Lb�\u001e\u0013\u0013\u0013\u0013\u0013\u0013\u0013\u0013\u0013SA���Ɣ�g\u0011�\u0003���r�����������/\u0012kT�\u000f$�\u0007�@\"}�u1111111111���Q�\u001e�����"
-    },
-    {
-      "tag": "hit:l_media/20250402/1743563278908.png",
-      "url": "https://gp.mcloud.139.com/material_grey/material_media/20250402/1743563278908.png",
-      "status": 200,
-      "len": 28795,
-      "body": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0002�\u0000\u0000\u0000X\b\u0006\u0000\u0000\u0000�\u0011r�\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000\tpHYs\u0000\u0000\u000b\u0011\u0000\u0000\u000b\u0011\u0001d_�\u0000\u0000\u0001�iTXtXML:com.adobe.xmp\u0000\u0000\u0000\u0000\u0000<?xpacket begin='﻿' id='W5M0MpCehiHzreSzNTczkc9d'?>\r\n<x:xmpmeta xmlns:x=\"adobe:ns:meta/\"><rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"><rdf:Description rdf:about=\"uuid:faf5bdd5-ba3d-11da-ad31-d33d75182f1b\" xmlns:tiff=\"http://ns.adobe.com/tiff/1.0/\"><tiff:Orientation>1</tiff:Orientation></rdf:Description></rdf:RDF></x:xmpmeta>\r\n<?xpacket end='w'?>,��\u000b\u0000\u0000t�IDATx^��w�\u001dU���:gʭ�w�\u001b�\u0012 @��Nh\u0001��\b�\u0010�\u0014�(���(<�\"�\u0013\u0011D�G�\t\u0004\u0010\u0010�WAZh�\u0010Z\bI m�}o�r��;3��ِ\u0005���`r�Νr�̼�g>�sD�PЬ!���\u001ah_!D�U11111��g�����|�\u0011�ﯱ���z�>Lb�\u001e\u0013\u0013\u0013\u0013\u0013\u0013\u0013\u0013\u0013SA���Ɣ�g\u0011�\u0003���r�����������/\u0012kT�\u000f$�\u0007�@\"}�u1111111111���Q�\u001e�����"
-    },
-    {
-      "tag": "hit:).concat(x.value,",
-      "url": "https://m.mcloud.139.com).concat(x.value,",
-      "err": "fetch failed"
-    },
-    {
-      "tag": "hit:/market/infiniteCloud/queryLevel",
-      "url": "https://m.mcloud.139.com/market/infiniteCloud/queryLevel",
-      "status": 200,
-      "len": 157,
-      "body": "{\"code\":0,\"msg\":\"success\",\"result\":{\"isBuy\":\"false\",\"hasActiveSeasonCard\":\"false\",\"level\":\"1\",\"hasClaimedSeasonCard\":\"true\",\"hasReceivedSeasonCard\":\"false\"}}"
-    },
-    {
-      "tag": "hit:/market/infiniteCloud/queryBinding",
-      "url": "https://m.mcloud.139.com/market/infiniteCloud/queryBinding",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "hit:/portal/auth/getTyrzToken.action",
-      "url": "https://m.mcloud.139.com/portal/auth/getTyrzToken.action",
-      "status": 200,
-      "len": 26,
-      "body": "{\"code\":0,\"msg\":\"success\"}"
-    },
-    {
-      "tag": "hit:/ycloud/api/smsVerCode/getVerCode",
-      "url": "https://m.mcloud.139.com/ycloud/api/smsVerCode/getVerCode",
-      "status": 405,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
+      "len": 7,
+      "body": "### gift/receive @18931\neturn a[\"a\"].get(\"/ycloud/mcloudday/gift/nationalPrizeList\")},getPrizeListProv:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/provPrizeList\")},getPrizeListNew:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/list\")},verify:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/verify\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",showLoading:!0}})},getPrize:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/receive\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})}},h={getLotteryInfo:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/lotteryInfo\")},getLottery:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/blindbox/lottery\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},generateInviteCode:function(e){return a[\"a\"].pos\n### gift/verify @18764\nturn a[\"a\"].post(\"/ycloud/mcloudday/common/reservation?open=\".concat(e.open,\"&marketName=\").concat(e.marketName),{headers:{showLoading:!0}})},getPrizeList:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/nationalPrizeList\")},getPrizeListProv:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/provPrizeList\")},getPrizeListNew:function(){return a[\"a\"].get(\"/ycloud/mcloudday/gift/list\")},verify:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/verify\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",showLoading:!0}})},getPrize:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/receive\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})}},h={getLotteryInfo:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/lotteryInfo\")},getLottery:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/blindbox\n### common/validate @16784\nreturn a[\"a\"].get(\"\")},getMyPrizeList:function(e){return a[\"a\"].get(\"/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2\",{params:e})},listCloudRecord:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/listCloudRecord\")},getCountPrize:function(e){return a[\"a\"].post(\"/market/prizeApi/userdraw/countPrize\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getValidate:function(){return a[\"a\"].post(\"/ycloud/mcloudday/common/validate\",{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getPrizeDetail:function(e){return a[\"a\"].get(\"/market/prizeApi/checkPrize/receivePrizeDetailsV2\",{params:e})},getTyrzToken:function(){var e=Object(r[\"a\"])(Object(n[\"a\"])().mark((function e(t){var i,r,o,p,u,h,d;return Object(n[\"a\"])().wrap((function(e){while(1)switch(e.prev=e.next){case 0:return e.next=2,l();case 2:return i=e.sent,r=String.fromCodePoint.apply(String,[11\n### blindbox/lottery @19121\nget(\"/ycloud/mcloudday/gift/list\")},verify:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/verify\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",showLoading:!0}})},getPrize:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/receive\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})}},h={getLotteryInfo:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/lotteryInfo\")},getLottery:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/blindbox/lottery\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},generateInviteCode:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/invite/generateInviteCode\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},getInviteRecords:function(e){retu\n### blindbox/lottery @19206\nloudday/gift/verify\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",showLoading:!0}})},getPrize:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/gift/receive\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})}},h={getLotteryInfo:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/lotteryInfo\")},getLottery:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/blindbox/lottery\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},generateInviteCode:function(e){return a[\"a\"].post(\"/ycloud/mcloudday/invite/generateInviteCode\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\",isDeviceId:!0,showLoading:!0}})},getInviteRecords:function(e){return a[\"a\"].get(\"/ycloud/mcloudday/invite/queryInviteRecords?flag=\".concat(e.flag))},ge\n### mcloudday @16210\nll,r&&r.result&&(t=r.result),e.abrupt(\"return\",t);case 7:case\"end\":return e.stop()}}),e)}))),p.apply(this,arguments)}t[\"a\"]={getMarketConfig:function(e){return a[\"a\"].get(\"/market/manager/commonMarketconfig/getByMarketName?marketName=\".concat(e),{headers:{showLoading:!0}})},getMemberLevel:function(e){return a[\"a\"].get(\"/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=\".concat(e))},getUserInfo:function(e){return a[\"a\"].get(\"/ycloud/mcloudday/common/activityInfo?marketName=\".concat(e.marketName),{headers:{showLoading:!0}})},getModuleRenderList:function(){return a[\"a\"].get(\"\")},getMyPrizeList:function(e){return a[\"a\"].get(\"/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2\",{params:e})},listCloudRecord:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/listCloudRecord\")},getCountPrize:function(e){return a[\"a\"].post(\"/market/prizeApi/userdraw/countPrize\",JSON.stringify(e)\n### mcloudday @16521\n\"a\"].get(\"/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=\".concat(e))},getUserInfo:function(e){return a[\"a\"].get(\"/ycloud/mcloudday/common/activityInfo?marketName=\".concat(e.marketName),{headers:{showLoading:!0}})},getModuleRenderList:function(){return a[\"a\"].get(\"\")},getMyPrizeList:function(e){return a[\"a\"].get(\"/ycloud/prizeApi/checkPrize/getUserPrizeLogPageV2\",{params:e})},listCloudRecord:function(){return a[\"a\"].get(\"/ycloud/mcloudday/blindbox/listCloudRecord\")},getCountPrize:function(e){return a[\"a\"].post(\"/market/prizeApi/userdraw/countPrize\",JSON.stringify(e),{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getValidate:function(){return a[\"a\"].post(\"/ycloud/mcloudday/common/validate\",{headers:{\"Content-Type\":\"application/json;charset=UTF-8\"}})},getPrizeDetail:function(e){return a[\"a\"].get(\"/market/prizeApi/checkPrize/receivePrizeDetailsV2\",{params:e})"
     }
   ]
 }
