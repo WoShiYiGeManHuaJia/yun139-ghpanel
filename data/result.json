@@ -1,19 +1,148 @@
 {
-  "ts": "2026-09-15 12:13:34",
-  "requestId": "mday16-1789474414147-xyck137t",
+  "ts": "2026-09-15 12:17:43",
+  "requestId": "mday16-1789474663452-rw9ddmy3",
   "type": "mday16",
   "ok": true,
-  "msg": "会员日抢购完成，未抢到（3 个账号）",
+  "msg": "会员日资格查询完成（3 个账号）",
   "acctDiag": [
     "cipher失败:缺少加密数据或密钥",
     "store:3"
   ],
-  "mode": "grab",
+  "mode": "query",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "err": "fetch failed"
+      "memberLevel": "2",
+      "isMember": true,
+      "online": false,
+      "activityDay": false,
+      "countdownMs": 51126795,
+      "memberDesc": "黄金会员",
+      "prizeCount": 22,
+      "prizes": [
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713003,
+          "name": "喜茶15元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104007,
+          "name": "腾讯视频VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104009,
+          "name": "爱奇艺黄金会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113002,
+          "name": "优酷视频会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104014,
+          "name": "芒果TV会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907023,
+          "name": "剪映VIP会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104016,
+          "name": "作业帮VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113019,
+          "name": "腾讯视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609003,
+          "name": "优酷视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609007,
+          "name": "酷狗音乐会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609006,
+          "name": "网易云音乐黑胶VIP周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609010,
+          "name": "肯德基5元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206018,
+          "name": "优酷视频会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206019,
+          "name": "QQ音乐绿钻会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206020,
+          "name": "酷狗音乐会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907014,
+          "name": "5元支付宝话费红包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260908026,
+          "name": "3元支付宝话费红包",
+          "stock": true,
+          "got": false
+        }
+      ],
+      "reservation": "预约成功"
     },
     {
       "phone": "13717306553",
@@ -33,10 +162,132 @@
       "isMember": true,
       "online": false,
       "activityDay": false,
-      "countdownMs": 51378467,
+      "countdownMs": 51121368,
       "memberDesc": "白银会员",
-      "coarseSleepSec": 20,
-      "result": "等待超时未开闸（已等 20s，查了 0 次）"
+      "prizeCount": 22,
+      "prizes": [
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713003,
+          "name": "喜茶15元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104007,
+          "name": "腾讯视频VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104009,
+          "name": "爱奇艺黄金会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113002,
+          "name": "优酷视频会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104014,
+          "name": "芒果TV会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907023,
+          "name": "剪映VIP会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104016,
+          "name": "作业帮VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113019,
+          "name": "腾讯视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609003,
+          "name": "优酷视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609007,
+          "name": "酷狗音乐会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609006,
+          "name": "网易云音乐黑胶VIP周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609010,
+          "name": "肯德基5元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206018,
+          "name": "优酷视频会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206019,
+          "name": "QQ音乐绿钻会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206020,
+          "name": "酷狗音乐会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907014,
+          "name": "5元支付宝话费红包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260908026,
+          "name": "3元支付宝话费红包",
+          "stock": true,
+          "got": false
+        }
+      ],
+      "reservation": "预约成功"
     }
   ]
 }
