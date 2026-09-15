@@ -855,7 +855,7 @@ async function main() {
   try { payload = JSON.parse(process.env.PAYLOAD || "{}"); } catch { throw new Error("PAYLOAD 不是合法 JSON"); }
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error("PAYLOAD 必须是 JSON 对象");
   const dataKey = process.env.PANEL_DATA_KEY || "";
-  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily","probe16"]);
+  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily","probe16","mday16"]);
   if (!allowedTypes.has(type)) throw new Error("未知命令: " + type);
   const key = dataKey ? await deriveKey(dataKey) : null;
 
@@ -1135,74 +1135,137 @@ async function main() {
       out.tasks = await fetchTaskList(jwt);
       out.msg = "已获取 " + out.tasks.length + " 个真实任务（" + maskPhone(c.phone) + "）";
       out.ok = true;
-    } else if (type === "probe16") {
-      // 星动日 / 16号会员日 活动接口探测（只读，不领取）
+    } else if (type === "mday16" || type === "probe16") {
+      // ── 16号会员日（星动日）：资格查询 / 自动抢奖品 ──
+      const mode = String(payload.mode || (type === "probe16" ? "query" : "grab")).trim();
+      const MAX_WAIT_MS = Number(payload.maxWaitSec || 3300) * 1000;   // 最多轮询多久
+      const POLL_MS = Number(payload.pollSec || 8) * 1000;
+      const M = "https://m.mcloud.139.com/ycloud/mcloudday";
+
       const ra = await resolveAccounts();
       out.acctDiag = ra.diag;
-      const c = ra.list[0] || await pickCreds();
-      out.phone = c.phone; out.masked = maskPhone(c.phone);
-      let jwt = "";
-      try { jwt = await getJwt(c.authorization, c.phone); }
-      catch (e) { out.ok = false; out.msg = "jwt 获取失败: " + String(e.message || e).slice(0,150); 
-                  out.probes = []; fs.writeFileSync(path.join(__dirname, "../data/result.json"), JSON.stringify(out, null, 2)); return console.log(JSON.stringify(out)); }
-      const H = { "User-Agent": UA_CLOUD, "jwtToken": jwt, "Cookie": "jwtToken=" + jwt,
-                  "Accept": "*/*", "X-Requested-With": "XMLHttpRequest", "Referer": "https://m.mcloud.139.com/" };
-      const probes = [];
-      async function P(tag, url, opt) {
+      out.mode = mode;
+      const accounts = ra.list;
+      const results = [];
+      let anyGot = false;
+
+      for (const acct of accounts) {
+        const it = { phone: acct.phone, masked: maskPhone(acct.phone) };
         try {
-          const r = await fetchWithTimeout(url, Object.assign({ headers: H }, opt || {}), 25000);
-          const t = await r.text();
-          const cap = (tag === "page") ? 20000 : 700;
-          probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, cap) });
-        } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 120) }); }
+          let jwt = "";
+          try { jwt = await getJwt(acct.authorization, acct.phone); }
+          catch (e) { it.err = "jwt失败:" + String(e.message || e).slice(0, 70); results.push(it); continue; }
+
+          const H = {
+            "User-Agent": UA_CLOUD, "jwtToken": jwt, "Cookie": "jwtToken=" + jwt,
+            "Accept": "application/json, text/plain, */*", "X-Requested-With": "XMLHttpRequest",
+            "Referer": "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay",
+            "Content-Type": "application/json;charset=UTF-8",
+          };
+          if (acct.ud_id) H["deviceId"] = acct.ud_id;
+
+          async function api(path, body) {
+            const opt = { headers: H };
+            if (body !== undefined) { opt.method = "POST"; opt.body = JSON.stringify(body); }
+            const r = await fetchWithTimeout(M + path, opt, 30000);
+            const t = await r.text();
+            let j = null; try { j = JSON.parse(t); } catch { j = { raw: t.slice(0, 150) }; }
+            return j || {};
+          }
+
+          // 1) 资格 / 状态
+          const info = await api("/common/activityInfo?marketName=mCloudDay");
+          const R = info.result || {};
+          it.memberLevel = R.memberLevel;
+          it.isMember = R.isMember;
+          it.online = R.online;
+          it.activityDay = R.activityDay;
+          it.countdownMs = R.countDownTimeStamp;
+          try {
+            const ml = await fetchWithTimeout(
+              "https://m.mcloud.139.com/ycloud/caiyun-service/isbo/openApi/queryMemberLevel?marketName=mCloudDay",
+              { headers: H }, 30000);
+            const mj = await ml.json().catch(() => ({}));
+            it.memberDesc = (mj.result || {}).desc || "";
+          } catch (e) {}
+
+          if (mode === "query") {
+            // 只读：清单 + 预约尝试
+            const gl = await api("/gift/list");
+            const gr = gl.result || {};
+            const all = [].concat(gr.nationalPrizeList || [], gr.provPrizeList || [], gr.extGiftList || []);
+            it.prizeCount = all.length;
+            it.prizes = all.slice(0, 20).map(x => ({ id: x.prizeId, name: x.prizeName, stock: x.hasStock, got: x.receiveFlag }));
+            try {
+              const rv = await fetchWithTimeout(M + "/common/reservation?open=true&marketName=mCloudDay",
+                { method: "POST", headers: H, body: "{}" }, 30000);
+              const rj = await rv.json().catch(() => ({}));
+              it.reservation = (rj.code === 0) ? "预约成功" : (rj.msg || ("code=" + rj.code));
+            } catch (e) { it.reservation = "异常:" + String(e.message || e).slice(0, 50); }
+            results.push(it);
+            continue;
+          }
+
+          // 2) grab 模式：轮询等开闸
+          let open = !!(R.online && R.activityDay);
+          if (!open) {
+            const t0 = Date.now();
+            let waited = 0;
+            while (Date.now() - t0 < MAX_WAIT_MS) {
+              await new Promise(r => setTimeout(r, POLL_MS));
+              waited = Math.round((Date.now() - t0) / 1000);
+              const i2 = await api("/common/activityInfo?marketName=mCloudDay").catch(() => ({}));
+              const R2 = i2.result || {};
+              if (R2.online && R2.activityDay) {
+                open = true; it.waitedSec = waited;
+                it.online = R2.online; it.activityDay = R2.activityDay;
+                break;
+              }
+            }
+            if (!open) { it.result = "等待超时未开闸（已等 " + waited + "s）"; results.push(it); continue; }
+          }
+
+          // 3) 开抢：按 sort 顺序逐个 verify + receive
+          const gl = await api("/gift/list");
+          const gr = gl.result || {};
+          const all = [].concat(gr.nationalPrizeList || [], gr.provPrizeList || [], gr.extGiftList || [])
+            .filter(x => x && x.prizeId)
+            .sort((a, b) => (a.sort || 99) - (b.sort || 99));
+          it.prizeCount = all.length;
+          const got = [], tried = [];
+          for (const pz of all) {
+            for (let round = 0; round < 3; round++) {
+              const vf = await api("/gift/verify", { prizeId: pz.prizeId }).catch(() => ({}));
+              if (String(vf.code) === "0") {
+                const rc = await api("/gift/receive", { prizeId: pz.prizeId }).catch(() => ({}));
+                tried.push({ id: pz.prizeId, name: pz.prizeName, code: rc.code, msg: rc.msg || "" });
+                if (String(rc.code) === "0") { got.push(pz.prizeName || ("#" + pz.prizeId)); break; }
+                if (String(rc.code) === "10005") break;      // 未开启
+                if (/已领取|领取过|已达上限/.test(String(rc.msg || ""))) break;
+              } else {
+                if (String(vf.code) === "10005") { tried.push({ id: pz.prizeId, name: pz.prizeName, code: vf.code, msg: vf.msg }); break; }
+                if (/已领取|领取过|已达上限|无资格|不符合/.test(String(vf.msg || ""))) {
+                  tried.push({ id: pz.prizeId, name: pz.prizeName, code: vf.code, msg: vf.msg }); break;
+                }
+              }
+              await new Promise(r => setTimeout(r, 900));
+            }
+            await new Promise(r => setTimeout(r, 600));
+          }
+          it.tried = tried.slice(0, 25);
+          it.got = got;
+          it.result = got.length ? ("抢到 " + got.length + " 件：" + got.join("、")) : "未抢到（已试 " + tried.length + " 件）";
+          if (got.length) anyGot = true;
+        } catch (e) {
+          it.err = String(e.message || e).slice(0, 140);
+        }
+        results.push(it);
       }
-      const M = "https://m.mcloud.139.com/ycloud/mcloudday";
-      const H2 = { "User-Agent": UA_CLOUD, "jwtToken": jwt, "Cookie": "jwtToken=" + jwt,
-                   "Accept": "application/json, text/plain, */*", "X-Requested-With": "XMLHttpRequest",
-                   "Referer": "https://m.mcloud.139.com/huiyuanri/v1/index.html?path=mCloudDay",
-                   "Content-Type": "application/json;charset=UTF-8" };
-      async function P2(tag, url, opt) {
-        try {
-          const r = await fetchWithTimeout(url, Object.assign({ headers: H2 }, opt || {}), 30000);
-          const t = await r.text();
-          probes.push({ tag, url: url.slice(0, 150), status: r.status, len: t.length, body: t.slice(0, 1200) });
-        } catch (e) { probes.push({ tag, url: url.slice(0, 150), err: String(e.message || e).slice(0, 110) }); }
-      }
-      const post = (b) => ({ method: "POST", body: JSON.stringify(b || {}) });
-      // A) 预约：带 sourceid 各种组合
-      for (const sid of ["1000", "1427", "1"]) {
-        await P2("resv_sid" + sid, M + "/common/reservation?open=true&marketName=mCloudDay&sourceid=" + sid, post({}));
-      }
-      await P2("resv_body_sid", M + "/common/reservation", post({ marketName: "mCloudDay", open: true, sourceid: "1000" }));
-      await P2("resv_body_src", M + "/common/reservation", post({ marketName: "mCloudDay", open: true, source: "app" }));
-      await P2("resv_client", M + "/common/reservation?open=true&marketName=mCloudDay&client=app&sourceid=1000", post({}));
-      // B) 预约状态查询
-      await P2("resv_status", M + "/common/reservationStatus?marketName=mCloudDay&sourceid=1000");
-      await P2("resv_query", M + "/common/queryReservation?marketName=mCloudDay");
-      await P2("resv_info", M + "/common/reservationInfo?marketName=mCloudDay");
-      // C) 遍历全部账号查会员等级 + 活动资格
-      const ra2 = await resolveAccounts();
-      out.levels = [];
-      for (const ac of (ra2.list || [])) {
-        try {
-          const jj = await getJwt(ac.authorization, ac.phone);
-          const tk2 = jj.data && jj.data.token;
-          if (!tk2) { out.levels.push({ phone: maskPhone(ac.phone), err: "jwt失败" }); continue; }
-          const hh = { ...H2, jwtToken: tk2, Cookie: "jwtToken=" + tk2 };
-          const r1 = await fetchWithTimeout(M + "/common/activityInfo?marketName=mCloudDay", { headers: hh }, 30000);
-          const j1 = await r1.json();
-          const rs = j1.result || {};
-          out.levels.push({ phone: maskPhone(ac.phone), memberLevel: rs.memberLevel,
-            finalUserType: rs.finalUserType, isMember: rs.isMember,
-            online: rs.online, activityDay: rs.activityDay, reservationSwitch: rs.reservationSwitch,
-            gotoneLevel: rs.gotoneLevel, cloudPhoneLevel: rs.cloudPhoneLevel });
-        } catch (e) { out.levels.push({ phone: maskPhone(ac.phone), err: String(e.message || e).slice(0, 80) }); }
-        await new Promise(r => setTimeout(r, 1500));
-      }
-      out.probes = probes;
-      out.ok = true;
-      out.msg = "会员日探测完成，共 " + probes.length + " 个请求";
-    } else if (type === "srefresh") {
+      out.results = results;
+      out.ok = results.some(x => !x.err);
+      out.msg = (mode === "query" ? "会员日资格查询完成" : (anyGot ? "会员日抢购完成，有收获" : "会员日抢购完成，未抢到"))
+        + "（" + results.length + " 个账号）";
+    } else if (type === "srefresh") {    } else if (type === "srefresh") {
       const c = await pickCreds();
       const rr = await refreshToken(c.phone, decodeAuth(c.authorization).token);
       out.ok = !!rr.ok;
