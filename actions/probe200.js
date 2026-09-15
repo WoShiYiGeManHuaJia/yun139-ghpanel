@@ -1,11 +1,11 @@
-// 探针：定位 cloudType=3 的 200 豆为什么领不了
+// 探针 v2：验证 200 豆（cloudType=3, recordId=550 开启APP通知）的领取路径
 const path = require("node:path");
 const fs = require("node:fs");
 const { deriveKey, aesGcmDecryptText, cleanAuth } = require("./run.js");
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
-const out = { steps: [], compare: {} };
-function log(s) { out.steps.push(String(s).slice(0, 400)); }
+const out = { steps: [], data: {} };
+function log(s) { out.steps.push(String(s).slice(0, 500)); }
 
 const FETCH_TIMEOUT_MS = 30000;
 async function fetchWithTimeout(url, options = {}, timeoutMs = FETCH_TIMEOUT_MS) {
@@ -15,52 +15,80 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = FETCH_TIMEOUT_MS)
   finally { clearTimeout(timer); }
 }
 
-async function getSsoToken(authorization, phone) {
-  const auth = "Basic " + cleanAuth(authorization);
-  const r = await fetchWithTimeout("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
-    method: "POST",
-    headers: { "Authorization": auth, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
-    body: JSON.stringify({ account: phone, toSourceId: "001005" }),
-  });
-  const j = await r.json();
-  if (String(j.code) !== "0") throw new Error("querySpecToken " + j.code);
-  return j.data.token;
-}
+const CY_HOSTS = ["https://caiyun.feixin.10086.cn:7071", "https://caiyun.feixin.10086.cn", "https://yun.139.com"];
+const UA_CLOUD = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
+const MCLOUD = "https://m.mcloud.139.com";
+const cyHeaders = (jwt, host) => ({ "User-Agent": UA_CLOUD, "Host": host.replace("https://", ""), "jwtToken": jwt, "Accept": "*/*", "X-Requested-With": "XMLHttpRequest" });
+const H1 = (jwt) => ({ "User-Agent": UA_CLOUD, "jwtToken": jwt, "Accept": "application/json, text/plain, */*", "X-Requested-With": "XMLHttpRequest", "Referer": MCLOUD + "/", "Cookie": "jwtToken=" + jwt });
 
+async function getSsoToken(authorization, phone) {
+  let last;
+  for (let i = 0; i < 4; i++) {
+    try {
+      const auth = "Basic " + cleanAuth(authorization);
+      const r = await fetchWithTimeout("https://orches.yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken", {
+        method: "POST",
+        headers: { "Authorization": auth, "Content-Type": "application/json", "Host": "orches.yun.139.com" },
+        body: JSON.stringify({ account: phone, toSourceId: "001005" }),
+      });
+      const j = await r.json();
+      if (String(j.code) === "0") return j.data.token;
+      last = "code=" + j.code;
+    } catch (e) { last = e.message; }
+    await sleep(2500);
+  }
+  throw new Error("querySpecToken 失败: " + last);
+}
 async function getJwt(authorization, phone) {
   const sso = await getSsoToken(authorization, phone);
-  for (const h of ["https://caiyun.feixin.10086.cn:7071", "https://caiyun.feixin.10086.cn", "https://yun.139.com"]) {
-    try {
-      const r = await fetchWithTimeout(`${h}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(sso)}`,
-        { headers: { Host: h.replace("https://", ""), Accept: "*/*" } });
-      const j = await r.json();
-      if (j && j.result && j.result.token) return j.result.token;
-    } catch (e) {}
+  let last;
+  for (let i = 0; i < 3; i++) {
+    for (const h of CY_HOSTS) {
+      try {
+        const r = await fetchWithTimeout(`${h}/portal/auth/tyrzLogin.action?ssoToken=${encodeURIComponent(sso)}`,
+          { headers: { Host: h.replace("https://", ""), Accept: "*/*" } });
+        const j = await r.json();
+        if (j && j.result && j.result.token) return j.result.token;
+      } catch (e) { last = e.message; }
+    }
+    await sleep(2500);
   }
-  throw new Error("tyrzLogin 失败");
+  throw new Error("tyrzLogin 失败: " + last);
 }
-
-const MCLOUD = "https://m.mcloud.139.com";
-const MOBILE_UA_FALLBACK = "Mozilla/5.0 (Linux; Android 12; Mi 10 Pro Build/SKQ1.211006.001; wv) AppleWebKit/537.36 Chrome/99.0.4844.88 Mobile Safari/537.36 MCloudApp/10.3.0";
-const H1 = (jwt) => ({ "User-Agent": MOBILE_UA_FALLBACK, "jwtToken": jwt, "Accept": "application/json, text/plain, */*",
-  "X-Requested-With": "XMLHttpRequest", "Referer": MCLOUD + "/", "Cookie": "jwtToken=" + jwt });
 async function mcloudGet(jwt, p) {
-  for (const hh of [H1(jwt), { "User-Agent": MOBILE_UA_FALLBACK, "Accept": "application/json, text/plain, */*", "Cookie": "jwtToken=" + jwt, "Referer": MCLOUD + "/" }]) {
+  for (const hh of [H1(jwt), { "User-Agent": UA_CLOUD, "Accept": "application/json, text/plain, */*", "Cookie": "jwtToken=" + jwt, "Referer": MCLOUD + "/" }]) {
     try {
       const r = await fetchWithTimeout(MCLOUD + p, { headers: hh }, 20000);
       const t = await r.text();
       try { const j = JSON.parse(t); if (j) return j; } catch {}
     } catch (e) {}
   }
-  return { _err: "请求失败" };
+  return null;
 }
 async function postReceive(jwt, body) {
-  const r = await fetchWithTimeout(MCLOUD + "/ycloud/signin/page/receiveV3", {
-    method: "POST",
-    headers: { ...H1(jwt), "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  }, 20000);
-  return (await r.text()).replace(/\s+/g, " ").slice(0, 200);
+  try {
+    const r = await fetchWithTimeout(MCLOUD + "/ycloud/signin/page/receiveV3", {
+      method: "POST", headers: { ...H1(jwt), "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }, 20000);
+    return (await r.text()).replace(/\s+/g, " ").slice(0, 220);
+  } catch (e) { return "异常 " + String(e.message).slice(0, 60); }
+}
+async function clickTask(jwt, id) {
+  for (const h of CY_HOSTS) {
+    try {
+      const r = await fetchWithTimeout(h + "/market/signin/task/click?key=task&id=" + id, { headers: cyHeaders(jwt, h) }, 20000);
+      const t = await r.text();
+      let j = {}; try { j = JSON.parse(t); } catch { j = { msg: t.slice(0, 100) }; }
+      return "code=" + j.code + " msg=" + (j.msg || j.message || "");
+    } catch (e) { return "异常 " + String(e.message).slice(0, 60); }
+  }
+  return "全部主机失败";
+}
+function parseList(info) {
+  const res = (info && (info.result || info.data)) || {};
+  const arr = res.receiveList || res.taskList || res.list || [];
+  return { toReceive: res.toReceive, arr };
 }
 
 async function main() {
@@ -73,63 +101,54 @@ async function main() {
   for (const a of accounts) {
     const phone = String(a.phone);
     const masked = phone.slice(0, 3) + "****" + phone.slice(-4);
-    log("===== " + masked + " =====");
+    log("========== " + masked + " ==========");
     let jwt;
-    try { jwt = await getJwt(a.authorization, phone); }
-    catch (e) { log("  JWT 失败: " + String(e.message).slice(0, 120)); continue; }
+    try { jwt = await getJwt(a.authorization, phone); log("JWT: OK"); }
+    catch (e) { log("JWT 失败: " + String(e.message).slice(0, 140)); continue; }
 
-    // 1) 完整 infoV3
-    const info = await mcloudGet(jwt, "/ycloud/signin/page/infoV3?client=app");
-    log("  infoV3 原始: " + JSON.stringify(info).slice(0, 400));
-    const res = (info && (info.result || info.data)) || {};
-    log("  toReceive=" + res.toReceive + " receiveNum=" + res.receiveNum);
-    const arr = res.receiveList || res.taskList || res.list || [];
-    log("  receiveList 条数: " + arr.length);
-    for (const it of arr.slice(0, 10)) {
-      log("    · " + JSON.stringify(it).slice(0, 220));
-    }
-    out.compare[masked] = arr.slice(0, 10);
+    // ① 领取前快照
+    const i0 = await mcloudGet(jwt, "/ycloud/signin/page/infoV3?client=app");
+    const s0 = parseList(i0);
+    log("领取前 toReceive=" + s0.toReceive + " 条数=" + s0.arr.length);
+    s0.arr.slice(0, 8).forEach(x => log("   · " + JSON.stringify(x).slice(0, 200)));
+    const n0 = await mcloudGet(jwt, "/ycloud/signin/page/getCloudNum");
+    log("领取前云豆=" + JSON.stringify(n0 && (n0.result !== undefined ? n0.result : n0.data)).slice(0, 60));
 
-    // 2) 找 cloudType=3 的项，尝试各种领取参数
-    const c3 = arr.filter(x => String(x.cloudType) === "3");
-    log("  cloudType=3 条数: " + c3.length);
-    for (const it of c3) {
+    // ② 先点击 recordId=550（开启APP通知，200豆）
+    log("点击任务 550 前先 click → " + await clickTask(jwt, 550));
+    await sleep(3000);
+
+    // ③ 再看 list 是否变化
+    const i1 = await mcloudGet(jwt, "/ycloud/signin/page/infoV3?client=app");
+    const s1 = parseList(i1);
+    log("点击后 toReceive=" + s1.toReceive + " 条数=" + s1.arr.length);
+    s1.arr.slice(0, 8).forEach(x => log("   · " + JSON.stringify(x).slice(0, 200)));
+
+    // ④ 对每一项尝试领取
+    for (const it of s1.arr.slice(0, 6)) {
       const cloudId = it.recordId !== undefined ? it.recordId : it.cloudId;
       const num = it.cloudNum !== undefined ? it.cloudNum : it.num;
-      log("  尝试领取: cloudId=" + cloudId + " cloudNum=" + num + " cloudType=" + it.cloudType);
-
+      const ct = Number(it.cloudType);
+      log("尝试领取 cloudId=" + cloudId + " num=" + num + " cloudType=" + ct);
       const variants = [
-        { label: "数字cloudId+cloudType", body: { client: "app", cloudId: Number(cloudId), cloudType: 3 } },
-        { label: "字符串cloudId", body: { client: "app", cloudId: String(cloudId), cloudType: 3 } },
-        { label: "cloudType=0", body: { client: "app", cloudId: Number(cloudId), cloudType: 0 } },
-        { label: "带cloudNum", body: { client: "app", cloudId: Number(cloudId), cloudType: 3, cloudNum: num } },
-        { label: "recordId字段名", body: { client: "app", recordId: Number(cloudId), cloudType: 3 } },
+        { client: "app", cloudId: Number(cloudId), cloudType: ct },
+        { client: "app", cloudId: String(cloudId), cloudType: ct },
+        { client: "app", cloudId: Number(cloudId), cloudType: 0 },
       ];
       for (const v of variants) {
-        try {
-          const t = await postReceive(jwt, v.body);
-          log("    [" + v.label + "] " + t);
-        } catch (e) { log("    [" + v.label + "] 异常 " + String(e.message).slice(0, 60)); }
-        await sleep(900);
+        const t = await postReceive(jwt, v);
+        log("   " + JSON.stringify(v) + " → " + t);
+        await sleep(1000);
       }
     }
 
-    // 3) 若没有 cloudType=3，试列表中每一项
-    if (!c3.length) {
-      for (const it of arr.slice(0, 4)) {
-        const cloudId = it.recordId !== undefined ? it.recordId : it.cloudId;
-        try {
-          const t = await postReceive(jwt, { client: "app", cloudId: Number(cloudId), cloudType: Number(it.cloudType) });
-          log("    尝试 cloudId=" + cloudId + " type=" + it.cloudType + " → " + t);
-        } catch (e) { log("    尝试异常 " + String(e.message).slice(0, 60)); }
-        await sleep(900);
-      }
-    }
+    // ⑤ 领取后快照
+    const n1 = await mcloudGet(jwt, "/ycloud/signin/page/getCloudNum");
+    log("领取后云豆=" + JSON.stringify(n1 && (n1.result !== undefined ? n1.result : n1.data)).slice(0, 60));
     await sleep(1500);
   }
 
   fs.writeFileSync(path.join(__dirname, "../data/probe200.json"), JSON.stringify(out, null, 2));
   console.log(JSON.stringify(out, null, 2));
 }
-
 main().catch(e => { out.steps.push("FATAL: " + e.message); console.log(JSON.stringify(out, null, 2)); });
