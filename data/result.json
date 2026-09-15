@@ -1,55 +1,305 @@
 {
-  "ts": "2026-09-15 13:07:04",
-  "requestId": "receive-1789477624068-covqr6z6",
-  "type": "receive",
+  "ts": "2026-09-15 13:21:25",
+  "requestId": "mday16-1789478485457-mfy9p7nx",
+  "type": "mday16",
   "ok": true,
-  "msg": "137****6553 218→258 +40",
-  "badAccounts": [],
-  "enc_accounts": "OqqSEmIgRUEomV5KgWG+pacClTUnjA3b38jSLJZPkGV0wmkWp9eanFn/rDOwnX9CSTcTE5snUmgYdcXE6eQYcV199Dcgf2tFzK0M5iUK2PnG+sDqomVRZ4qRK4lZO3bBgAnK3GT1qZRSa2cO6ziikzJo0Z0tzFv32tkGONDiVQN6+j7RpeLvM8uDG+5zoA+rUBl3hvi5BbXj6YQNGjKRM2L6JPXPixmas4Q0FB7TTWhw98IipGTFkQXYjC0IEiEh1e0aMM8FXfpX2sZwq0TaLsonZbog8dbTBbXwLNkB7Ac+Sa9JemVSgS6SnR1WiDAWoXGH+4MVEYItp4HFedsQdXsNVqIivsixVFiBOOY0Hl9hku4u/CctNPDn6hUET3G4LBn/ZOi1nx4gMMd0Sg0YnA2Mph44pmyc3XSCCtM16nWVXA07VCdsS8UYdlGPwHRt7RPYmME1e4D1+pvpCuAuXBev7d/TV8W34H11VXl2xDcN/5a4DSgj7JghBRNSV6T+h1d6JgmHsFXNfMA3MAOLwYrpuxuIq4hDJbIDvIuNi7TvbUNa693QktzpgbFpwgeXc1rnh//YMlHJGOcrca+/IqpdoLDzdk5FvuomEuh7NoKw+2nsEnSGqlVW8dTtnebar82SPKFEx50VAYRj4DPH5F5Js3IggxrZqhNCn62VgY7IBpRQ8xwQxZm19AoO1ylnfFgQ3rJcGlCkGgTP4FCqzKh/HIjK4CH1/ASQ4ivSTAE61DDA+uUP4lPHyUYNDp6wsCQ4Mv68R9g+ZAEXEgri1cuOshgK2YjnFTmuLJe6yMqOfD7NeoTjV8RDeESWddCZYVQA++Xv/3kyFd+7uPzs4eLsrLjkjx1SDEgT2T7BvioAi3m88Uc6oS5LMXnC35c2c6l59Fx+FxHDnCzol71MwcpvPr3QPs3Z8QIZNlNFful6TWxI7MJYMaar2A1DvqmIxqI7LwZGOxTXmaWCCsX9e22EaojPkhXrGCoLmQp1aLJISZzSGZzm81nrABMV+KBHAk2nKs8L32jCq6JL4ropYlmgNZE8LY/qVFnK5jT9m8UEyiCuEAHKJoq7MBkdDqvzGFFfWrF6ddtslk17xA5UXmeT3XSoOa/E5qyFwgGJwMBJDsOzWmfLuJoun9q/WZoJIwIqa+FY3L3D8pQeK0nQPUkzmhVT5Olw7jeCVS9b7YD9MVOy3SaEg+PNLTkcGa2tWfbxYMvw4j0koq+uIQgmoZfyWtT14e+BZuz8UFC68mlHxDHU3CxovVB6+7eeCK8YZWSkvempzanXP+5/hdCntz33OVIm2Su1o6xtSR6NHvdaOurueFoSXZzsBOwWmaebfkLw6KMjaPUjvqag3/LKTHnpUb9IkZq7xjlQw5OSEWQnV5sY9N7WVXnAqER5sIY/UibFi7PA6UTojSQIbG7etSLq2bPHqahXdsrqXiAT7gdmQAruMGOkvogWhs3xP5AFmJcXyrqmMZa2Z7POgWO4H3OhenGiuu/mgJ4o7aU+cMdBDWvpeeOkeR27j0ySozPGYE5ZNJyILXjks4zedQ0jeAVYY76qnl3RWaAvPD6v/ajojfM7cSeftZC4nh6nEuR2MLh2+GSKNlLBG3ZwTeVStUhO1n8yisFij7h/sO6DYumBFA1volYbH2yeQW1muABv3WmBHtdS2dJ87wZYRqjKSgISF6LzStWer5VSfU4k6ihRmx4JTC3VRvNkqIZISA9n2tWxCaiPc/Gi0EfDNtoCLu4dTXkK7L26iJAgLvK6uNvw028L8FcJO3bELm7phjvDAuCdRFyA3MAStC4WojxNR6qDVP+vveUiUPRL2NISm89ZQKAVdMJvkWiOs+0vMWx5+PKcVQJvMRnZJfU56R8+a+Q1jZ65Jbm0BpmgzRr2WtmYVSZSEcALtEM7y7jNq8tX9y/6TZBa6ycXQQhlVzBYa2tVoSNDXusVvfDQ/Q1uQ7c=",
-  "receiveList": [
+  "msg": "会员日资格查询完成（3 个账号）",
+  "acctDiag": [
+    "cipher失败:缺少加密数据或密钥",
+    "store:3"
+  ],
+  "mode": "query",
+  "results": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "memberLevel": "2",
+      "isMember": true,
+      "online": false,
+      "activityDay": false,
+      "countdownMs": 47309964,
+      "memberDesc": "黄金会员",
+      "prizeCount": 22,
+      "prizes": [
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713003,
+          "name": "喜茶15元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104007,
+          "name": "腾讯视频VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104009,
+          "name": "爱奇艺黄金会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113002,
+          "name": "优酷视频会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104014,
+          "name": "芒果TV会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907023,
+          "name": "剪映VIP会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104016,
+          "name": "作业帮VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113019,
+          "name": "腾讯视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609003,
+          "name": "优酷视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609007,
+          "name": "酷狗音乐会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609006,
+          "name": "网易云音乐黑胶VIP周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609010,
+          "name": "肯德基5元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206018,
+          "name": "优酷视频会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206019,
+          "name": "QQ音乐绿钻会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206020,
+          "name": "酷狗音乐会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907014,
+          "name": "5元支付宝话费红包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260908026,
+          "name": "3元支付宝话费红包",
+          "stock": true,
+          "got": false
+        }
+      ],
+      "reservation": "预约成功",
+      "name": "会员日",
+      "message": "等级黄金；已预约；奖品22件；倒计时13小时8分",
+      "ok": true
+    },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "ok": true,
-      "before": 218,
-      "after": 258,
-      "got": 40,
-      "steps": [
-        "[API] ✗ cloudId=2344309249 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
-        "[API] ✗ cloudId=2344309138 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
-        "[API] ✗ cloudId=2344309118 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
-        "API 未领到（可能无可领或被风控），回退浏览器点击…",
-        "页面 token: 已获取",
-        "云豆来源: page",
-        "初始云豆 218",
-        "第1次领取 +10（218→228）",
-        "第2次领取 +10（228→238）",
-        "第3次领取 +20（238→258）",
-        "最终云豆 258"
+      "memberLevel": "-1",
+      "isMember": false,
+      "online": false,
+      "activityDay": false,
+      "countdownMs": 0,
+      "memberDesc": "非会员",
+      "result": "非会员，无资格参加会员日",
+      "name": "会员日",
+      "message": "等级非会员；非会员，无资格参加会员日",
+      "ok": false
+    },
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "memberLevel": "1",
+      "isMember": true,
+      "online": false,
+      "activityDay": false,
+      "countdownMs": 47303672,
+      "memberDesc": "白银会员",
+      "prizeCount": 22,
+      "prizes": [
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713003,
+          "name": "喜茶15元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104007,
+          "name": "腾讯视频VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104009,
+          "name": "爱奇艺黄金会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113002,
+          "name": "优酷视频会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104014,
+          "name": "芒果TV会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907023,
+          "name": "剪映VIP会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104016,
+          "name": "作业帮VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113019,
+          "name": "腾讯视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609003,
+          "name": "优酷视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609007,
+          "name": "酷狗音乐会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609006,
+          "name": "网易云音乐黑胶VIP周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609010,
+          "name": "肯德基5元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206018,
+          "name": "优酷视频会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206019,
+          "name": "QQ音乐绿钻会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206020,
+          "name": "酷狗音乐会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907014,
+          "name": "5元支付宝话费红包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260908026,
+          "name": "3元支付宝话费红包",
+          "stock": true,
+          "got": false
+        }
       ],
-      "error": ""
+      "reservation": "预约成功",
+      "name": "会员日",
+      "message": "等级白银；已预约；奖品22件；倒计时13小时8分",
+      "ok": true
     }
   ],
-  "receive": {
-    "phone": "13717306553",
-    "masked": "137****6553",
-    "ok": true,
-    "before": 218,
-    "after": 258,
-    "got": 40,
-    "steps": [
-      "[API] ✗ cloudId=2344309249 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
-      "[API] ✗ cloudId=2344309138 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
-      "[API] ✗ cloudId=2344309118 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
-      "API 未领到（可能无可领或被风控），回退浏览器点击…",
-      "页面 token: 已获取",
-      "云豆来源: page",
-      "初始云豆 218",
-      "第1次领取 +10（218→228）",
-      "第2次领取 +10（228→238）",
-      "第3次领取 +20（238→258）",
-      "最终云豆 258"
-    ],
-    "error": ""
+  "dingtalk": {
+    "skipped": true
   }
 }
