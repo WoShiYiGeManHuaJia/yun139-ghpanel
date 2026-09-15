@@ -1604,6 +1604,123 @@ async function main() {
       } catch (e) {
         out.dingtalk = { ok: false, error: String(e.message || e).slice(0, 120) };
       }
+    } else if (type === "diag") {
+      // 深度诊断：不跳过任何一个气泡，逐步点击并记录每次请求/响应
+      const ra = await resolveAccounts();
+      const only = String(payload.phone || "").trim();
+      const targets = only ? ra.list.filter(a => String(a.phone) === only) : ra.list;
+      const diagOut = [];
+      for (const a of targets) {
+        const D = { phone: a.phone, masked: maskPhone(a.phone), steps: [], attempts: [] };
+        try {
+          const auth = await ensureAuth(a);
+          const jwt = await getJwt(auth, a.phone);
+          const st = await cloudStatus(jwt);
+          D.api = { total: st.total, receivable: st.receivable, toReceive: st.toReceive, nextMonth: st.nextMonth, list: st.list };
+          D.steps.push("API 云豆=" + st.total + " 可领=" + st.receivable + " 待领=" + st.toReceive + " 下月=" + st.nextMonth);
+
+          // 逐个 API 尝试，记录每条返回
+          for (const it of (st.list || [])) {
+            try {
+              const r = await receiveViaApi(jwt, [it]);
+              D.attempts.push({ via: "api", item: it, got: r.got, steps: r.steps });
+            } catch (e) {
+              D.attempts.push({ via: "api", item: it, err: String(e.message || e).slice(0, 100) });
+            }
+            await sleep(1200);
+          }
+
+          // 浏览器：抓取页面上所有气泡元素
+          let chromium = null;
+          try { chromium = require("playwright").chromium; } catch (e) { D.steps.push("playwright 未安装"); }
+          if (chromium) {
+            const browser = await chromium.launch({ args: ["--no-sandbox", "--disable-dev-shm-usage", "--disable-blink-features=AutomationControlled"] });
+            try {
+              let pageUrl = SIGNIN_PAGE;
+              try { const sso = await getSsoToken(auth, a.phone); if (sso) pageUrl = SIGNIN_PAGE.replace("#/newsignin", "&token=" + encodeURIComponent(sso) + "#/newsignin"); } catch (e) {}
+              const ctx = await browser.newContext({ userAgent: MOBILE_UA, viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true, locale: "zh-CN", timezoneId: "Asia/Shanghai" });
+              await ctx.addCookies([
+                { name: "jwtToken", value: jwt, domain: "m.mcloud.139.com", path: "/" },
+                { name: "NATION_CODE", value: "86", domain: "m.mcloud.139.com", path: "/" },
+                { name: "platform", value: "2", domain: "m.mcloud.139.com", path: "/" },
+              ].concat(a.ud_id ? [{ name: "ud_id", value: String(a.ud_id), domain: "m.mcloud.139.com", path: "/" }] : [])
+               .concat(a.a_k ? [{ name: "a_k", value: String(a.a_k), domain: "m.mcloud.139.com", path: "/" }] : []));
+              const page = await ctx.newPage();
+              const net = [];
+              page.on("request", r => { if (/receive|signin|cloud/i.test(r.url())) net.push({ t: "REQ", u: r.url().slice(0, 130), m: r.method() }); });
+              page.on("response", async r => {
+                if (/receive|cloud/i.test(r.url())) {
+                  let b = ""; try { b = (await r.text()).slice(0, 200); } catch (e) {}
+                  net.push({ t: "RES", u: r.url().slice(0, 130), b });
+                }
+              });
+              await page.goto(pageUrl, { waitUntil: "domcontentloaded", timeout: 45000 });
+              await sleep(12000);
+
+              // 枚举页面上所有气泡元素
+              const els = await page.evaluate(() => {
+                const all = Array.from(document.querySelectorAll(".AIPoints"));
+                const out = all.map((el, i) => {
+                  const cs = getComputedStyle(el);
+                  const rc = el.getBoundingClientRect();
+                  return { i, cls: el.className, text: (el.innerText || "").replace(/\s+/g, " ").slice(0, 40),
+                    display: cs.display, visibility: cs.visibility, opacity: cs.opacity,
+                    x: Math.round(rc.x), y: Math.round(rc.y), w: Math.round(rc.width), h: Math.round(rc.height),
+                    inView: rc.y >= 0 && rc.y < window.innerHeight };
+                });
+                // 额外找其它可能的气泡选择器
+                const alt = {};
+                for (const sel of [".bubble", ".cloud-bubble", ".points-item", "[class*=bubble]", "[class*=ubble]", ".signin-bubble"]) {
+                  try { alt[sel] = document.querySelectorAll(sel).length; } catch (e) { alt[sel] = "err"; }
+                }
+                return { count: all.length, items: out, alt, bodyLen: document.body.innerText.length,
+                  bodySnippet: document.body.innerText.replace(/\s+/g, " ").slice(0, 300) };
+              });
+              D.page = els;
+              D.steps.push("页面气泡元素: " + els.count + " 个");
+
+              // 逐个点击（不因连续无变化而提前退出）
+              for (let k = 0; k < Math.min(els.count, 12); k++) {
+                const b0 = (await readCloudNumSafe(page, jwt)).v;
+                const res = await page.evaluate((idx) => {
+                  const all = Array.from(document.querySelectorAll(".AIPoints"));
+                  const el = all[idx];
+                  if (!el) return "no-el";
+                  el.scrollIntoView({ block: "center" });
+                  const rc = el.getBoundingClientRect();
+                  // 直接派发坐标级事件序列，模拟真实触摸
+                  const fire = (type, x, y) => {
+                    const ev = new PointerEvent(type, { bubbles: true, cancelable: true, clientX: x, clientY: y, pointerType: "touch", isPrimary: true });
+                    el.dispatchEvent(ev);
+                  };
+                  const cx = rc.x + rc.width / 2, cy = rc.y + rc.height / 2;
+                  fire("pointerdown", cx, cy); fire("pointerup", cx, cy); fire("click", cx, cy);
+                  el.click();
+                  const inner = el.querySelector("div,span,img");
+                  if (inner) { inner.click(); }
+                  return "ok";
+                }, k);
+                await sleep(6000);
+                const b1 = (await readCloudNumSafe(page, jwt)).v;
+                D.attempts.push({ via: "browser", idx: k, res, before: b0, after: b1, delta: (b0 !== null && b1 !== null) ? (b1 - b0) : null });
+                D.steps.push("点击#" + (k + 1) + " " + res + " " + b0 + "→" + b1);
+              }
+              const fin = (await readCloudNumSafe(page, jwt)).v;
+              D.final = fin;
+              D.steps.push("最终云豆 " + fin);
+              D.net = net.slice(-40);
+            } finally { try { await browser.close(); } catch (e) {} }
+          }
+        } catch (e) {
+          D.fatal = String(e.message || e).slice(0, 200);
+        }
+        diagOut.push(D);
+        await sleep(2500);
+      }
+      out.diag = diagOut;
+      out.ok = true;
+      out.msg = "诊断完成（" + diagOut.length + " 个账号）";
+      try { fs.writeFileSync(path.join(__dirname, "../data/diag.json"), JSON.stringify(diagOut, null, 2)); } catch (e) {}
     } else {
       throw new Error("未知命令: " + type);
     }

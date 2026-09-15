@@ -1,0 +1,63 @@
+name: yun139-manual
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        description: "命令: status / receive / rtask / diag"
+        required: true
+        default: "status"
+      phone:
+        description: "指定号码(留空=全部)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    concurrency:
+      group: yun139-panel-result
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 安装 Playwright
+        run: |
+          npm i --no-audit --no-fund playwright@1.63.0
+          npx playwright install chromium
+      - name: 执行
+        env:
+          EVENT_TYPE: ${{ github.event.inputs.type }}
+          PAYLOAD: ${{ github.event.inputs.phone && format('{{"phone":"{0}"}}', github.event.inputs.phone) || '{}' }}
+          PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
+          DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
+          DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
+        run: node actions/run.js
+      - name: Commit result
+        run: |
+          set -e
+          git config user.name "yun139-bot"
+          git config user.email "yun139-bot@users.noreply.github.com"
+          mkdir -p /tmp/out
+          cp data/result.json /tmp/out/result.json
+          [ -f data/diag.json ] && cp data/diag.json /tmp/out/diag.json || true
+          [ -f data/accounts.enc ] && cp data/accounts.enc /tmp/out/accounts.enc || true
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git checkout -f -B main FETCH_HEAD
+            cp /tmp/out/result.json data/result.json
+            [ -f /tmp/out/diag.json ] && cp /tmp/out/diag.json data/diag.json || true
+            [ -f /tmp/out/accounts.enc ] && cp /tmp/out/accounts.enc data/accounts.enc || true
+            git add data/result.json data/diag.json data/accounts.enc
+            git diff --cached --quiet && { echo "无变化"; exit 0; }
+            git commit -m "manual: ${{ github.event.inputs.type }} $(date -u +%Y%m%d%H%M%S)"
+            git push origin main && { echo "提交成功"; exit 0; }
+            echo "第 $i 次失败，重试"; sleep 8
+          done
+          exit 1
