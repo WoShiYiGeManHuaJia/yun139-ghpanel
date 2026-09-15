@@ -1,92 +1,416 @@
 {
-  "ts": "2026-09-15 11:58:02",
-  "requestId": "probe16-1789473482790-h9rsoquy",
-  "type": "probe16",
+  "ts": "2026-09-15 12:02:00",
+  "requestId": "mday16-1789473720079-vsnpnhut",
+  "type": "mday16",
   "ok": true,
-  "msg": "会员日探测完成，共 9 个请求",
+  "msg": "会员日资格查询完成（3 个账号）",
   "acctDiag": [
     "cipher失败:缺少加密数据或密钥",
     "store:3"
   ],
-  "phone": "13787464642",
-  "masked": "137****4642",
-  "levels": [
+  "mode": "query",
+  "results": [
     {
-      "phone": "137****4642",
-      "err": "jwt失败"
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "memberLevel": "2",
+      "isMember": true,
+      "online": false,
+      "activityDay": false,
+      "countdownMs": 52073911,
+      "memberDesc": "黄金会员",
+      "prizeCount": 22,
+      "prizes": [
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713003,
+          "name": "喜茶15元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104007,
+          "name": "腾讯视频VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104009,
+          "name": "爱奇艺黄金会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113002,
+          "name": "优酷视频会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104014,
+          "name": "芒果TV会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907023,
+          "name": "剪映VIP会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104016,
+          "name": "作业帮VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113019,
+          "name": "腾讯视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609003,
+          "name": "优酷视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609007,
+          "name": "酷狗音乐会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609006,
+          "name": "网易云音乐黑胶VIP周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609010,
+          "name": "肯德基5元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206018,
+          "name": "优酷视频会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206019,
+          "name": "QQ音乐绿钻会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206020,
+          "name": "酷狗音乐会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907014,
+          "name": "5元支付宝话费红包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260908026,
+          "name": "3元支付宝话费红包",
+          "stock": true,
+          "got": false
+        }
+      ],
+      "reservation": "不支持该预约来源"
     },
     {
-      "phone": "137****6553",
-      "err": "jwt失败"
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "memberLevel": "-1",
+      "isMember": false,
+      "online": false,
+      "activityDay": false,
+      "countdownMs": 0,
+      "memberDesc": "非会员",
+      "prizeCount": 26,
+      "prizes": [
+        {
+          "id": 260415002,
+          "name": "肯德基20元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713002,
+          "name": "喜茶15元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609001,
+          "name": "霸王茶姬15元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260511001,
+          "name": "星巴克15元会员礼包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104006,
+          "name": "腾讯视频VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104008,
+          "name": "爱奇艺黄金会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113001,
+          "name": "优酷视频会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104013,
+          "name": "芒果TV会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713006,
+          "name": "剪映VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713004,
+          "name": "WPS大会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104015,
+          "name": "作业帮VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104019,
+          "name": "美图秀秀粉钻VIP月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104018,
+          "name": "网易云音乐黑胶SVIP月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104020,
+          "name": "哔哩哔哩月度大会员",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104021,
+          "name": "QQ音乐绿钻会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104023,
+          "name": "酷狗音乐会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104024,
+          "name": "喜马拉雅会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206004,
+          "name": "腾讯视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609002,
+          "name": "优酷视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609004,
+          "name": "酷狗音乐会员周卡",
+          "stock": true,
+          "got": false
+        }
+      ],
+      "reservation": "不支持该预约来源"
     },
     {
-      "phone": "172****9953",
-      "err": "jwt失败"
-    }
-  ],
-  "probes": [
-    {
-      "tag": "resv_sid1000",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservation?open=true&marketName=mCloudDay&sourceid=1000",
-      "status": 200,
-      "len": 29,
-      "body": "{\"code\":500,\"msg\":\"不支持该预约来源\"}"
-    },
-    {
-      "tag": "resv_sid1427",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservation?open=true&marketName=mCloudDay&sourceid=1427",
-      "status": 200,
-      "len": 29,
-      "body": "{\"code\":500,\"msg\":\"不支持该预约来源\"}"
-    },
-    {
-      "tag": "resv_sid1",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservation?open=true&marketName=mCloudDay&sourceid=1",
-      "status": 200,
-      "len": 29,
-      "body": "{\"code\":500,\"msg\":\"不支持该预约来源\"}"
-    },
-    {
-      "tag": "resv_body_sid",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservation",
-      "status": 200,
-      "len": 26,
-      "body": "{\"code\":0,\"msg\":\"success\"}"
-    },
-    {
-      "tag": "resv_body_src",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservation",
-      "status": 200,
-      "len": 26,
-      "body": "{\"code\":0,\"msg\":\"success\"}"
-    },
-    {
-      "tag": "resv_client",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservation?open=true&marketName=mCloudDay&client=app&sourceid=1000",
-      "status": 200,
-      "len": 29,
-      "body": "{\"code\":500,\"msg\":\"不支持该预约来源\"}"
-    },
-    {
-      "tag": "resv_status",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservationStatus?marketName=mCloudDay&sourceid=1000",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "resv_query",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/queryReservation?marketName=mCloudDay",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "resv_info",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/common/reservationInfo?marketName=mCloudDay",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "memberLevel": "1",
+      "isMember": true,
+      "online": false,
+      "activityDay": false,
+      "countdownMs": 52069289,
+      "memberDesc": "白银会员",
+      "prizeCount": 22,
+      "prizes": [
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260713003,
+          "name": "喜茶15元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104007,
+          "name": "腾讯视频VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104009,
+          "name": "爱奇艺黄金会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113002,
+          "name": "优酷视频会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104014,
+          "name": "芒果TV会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907023,
+          "name": "剪映VIP会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260104016,
+          "name": "作业帮VIP会员月卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260113019,
+          "name": "腾讯视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609003,
+          "name": "优酷视频会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609007,
+          "name": "酷狗音乐会员周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609006,
+          "name": "网易云音乐黑胶VIP周卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260609010,
+          "name": "肯德基5元优惠满减券",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206018,
+          "name": "优酷视频会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206019,
+          "name": "QQ音乐绿钻会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260206020,
+          "name": "酷狗音乐会员日卡",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260907014,
+          "name": "5元支付宝话费红包",
+          "stock": true,
+          "got": false
+        },
+        {
+          "id": 260908026,
+          "name": "3元支付宝话费红包",
+          "stock": true,
+          "got": false
+        }
+      ],
+      "reservation": "不支持该预约来源"
     }
   ]
 }
