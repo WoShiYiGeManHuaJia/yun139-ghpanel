@@ -1,8 +1,7 @@
 {
-  "ts": "2026-09-15 06:51:26",
-  "requestId": "send_code-1789455071709-97b75632",
-  "type": "send_code",
+  "ts": "2026-09-15 06:51:49",
+  "requestId": "do_login-1789455095250-d03b8de6",
+  "type": "do_login",
   "ok": false,
-  "msg": "发送验证码失败: successed to process!",
-  "phone": "17274079953"
+  "msg": "The operation failed for an operation-specific reason"
 }
