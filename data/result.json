@@ -1,31 +1,55 @@
 {
-  "ts": "2026-09-15 05:34:27",
-  "requestId": "receive-1789450467848-gtcnllap",
+  "ts": "2026-09-15 05:37:29",
+  "requestId": "receive-1789450649705-t5sb9vse",
   "type": "receive",
   "ok": false,
-  "msg": "137****6553 失败:fetch failed",
+  "msg": "137****6553 失败:检测到可领取气泡，但点击后云豆未增加",
   "badAccounts": [],
-  "enc_accounts": "zCMIuXaqh/9ORQPQHqzhfJEtlHMuUKYKcgETL2kUj6xEGBeoTi1sFts0CeGTFJBOAGQ1w933g0LVsYH3rBx80BGI5l9OYmjMFVDVq8la9RTC3wyWkyuQ3uS4F4L2+j0Oh6T+Tc6lo/XGte/9AZkyjCtPu5NW148cBzorTXER6+qczExVkY4h9O5jbevtfw2EznhpIefo7vsrl6RHa9GnKBm+D7pyaudLGZPO67DMqCjamxUiDqqaYIPEJmo33Yg1XNd7dOKBtmSo4YmLNjj5lFYhr7g1Gfw9orplhadN1APDPGgUwz9Grd+aiYgxf8HVeUWn2+njyVe5p12Wkgx6NpfcwEKXmYSeJ2gqx1e+25XdTvn8imoiZPpaqrt72exij3bHRLqcAPrIIEE9kJbDc5Wjft6jQs9IpwmRC+tOI77srXi3xsxcY2YHI8oMhw6TMxnaTGTgP3h6zJ52KF6PGkmaFKfeNGyXBbmI5vJvmpKwXLcGG1z3/1vfQzGhIulu5ogaeVLMMdRLCVsQOurCgz/1x/V/YGB7y/NZ/vAq2qCIeuAQoNSFCJYCaxER+lOQCmlg8xy6mpvj7TgWc2SUPXKGYIb+hXHnP6VXFf/9nh1PLBeJAlCcrjxKf69M6OvHud3HbcDA7o1fz2ax+HCLgIrJT7U3mQYC1dauuzVoD++cIBo27ap695wryZOMJQ7TOcFDLhds3gxcjBJJQMif+y7wFyIunwOKzJ5ELmXViy6qAnzxhZ9aSh6Ef4VXcZ9KXQ0PW1/SfkGLkvAqp6BgOa+y49YJtUQNp39dm4hNChLarcKV6mn/gw3y8h1644DfA6fL/nI9+sikrTVu5VSxgOja+rVY2GGN76zPzdT4sefaAB/Tu1C09BSUfqzxlttfsJjD9FBh87EyWQ57ohZkGyZkzanPExJIw7PmnHnOHpp0JHsp+/C3kDE4K6+QMgxw57CgbLouhzzznMNAbyxArNI+0uNBfNG0ehah1DoNtHN+fWF7L3YcNmtbCzru2Bb7ok68fH7wdruo5ruQp60zorz3E57WwpBkbJyUI2n99uJhCcMoCdBxeWfZ59Ny1qualIVBTXNV7R/W8V5jBy7/wjOp3plG7WSoyrN5M8GGz6f/+J3gYDh2TEj0fv9MXdsOiP7tXrrXMBKdoWz/E2TE/2Br1n0N3CDxphO2AJUchOHvu72FbOtZXJK/Eykdb+id4S3SOS9fYb6ctUG+S4g3Re9fnwEScGwFrtLOcsCGklsnjzaiB+hzgjFysv6WiFfVrFsQTmUvF88l9GhNVh8LXU3RLDsaN3BU629GM5MSnWeKv6DjnZP/cbAdRDnuDEOnrYFMrz1AC+aBWdc=",
+  "enc_accounts": "hh0wqp0le42fuOto47WZ00RjRhE8cwWSCWt/GaUcIhkLU6CEm262bohkli5Sp9HgbHs2s44rR+rT14R77ZbzvNdPHjIQ5nMdLlD66oko8g7cSagiJM91Bgun9GDTfmaNfN5vkgYmyUHNxxSxZcVp3Rje/A02SAzM3frqDz23jJe//5z6SM+XPqYx8xjsXoMbMpjD+WhfMUwo3gV1Ylyc0pmtx9prTTs83769e8KAw9WrvAhqUEpervc/uqRW4vpVMwlhPtwxIbaJDVc1t8jpLGmU6OhXgr8AQ7dVeQmPxtngTFcsQtxPbVevb+Rj06YGkTVIa1tv0yqzdZg+g3AQSfxVeNnikFxq7cTpOrJ3ITLzJPDlQQ8N8WAI0P/xHSAbDKiK2GRgNT6/lEjYzAHLjc+bZPT+W/35h4+MfXx3lAHCdNk+FzgV1I+j9ses6Xbs0XwFDPn+v+s798C5L+uIzRiKxTME2E4AF2d4n9d64lMk2APm+ngsRnAq1A2urE2+gJqUYfpRMPxeldl6pJNSYN4AURf5ZCpS8LGa1iRbw54LWAsQRTzdT1/GNoojxOe5cMXrUi1qnAOR7J0AorXSg6t8mBOden0Spu26TWWIvQkpOY136zdyl5Hv6DuGQjRq7YWhmmahAr9Oll22Q6hvAglqNIKWDaFEfKzjf7bu+sKRUFTahL+oXk0h3vs4cKxaoAQNlYkjZzyz7anfE/GbAnDBA/G+4WmDoS5yx24ge4HugyvxVQ22R5YcaU+AlujbsrTgtEhsqWANpgHNQbqXS5KTR+zQoD9DKHcTS4JFIdQ3IBoZ7YN3JlyXEo0hZpMSevm+oIpoBKpu5DhiEbxxUX3Cb1yfa2UQciOVxLktCrgTwyNJs9CDcOPTXMArDFw9WcxhZyPkb2b322yNajbZ1aXoWzcLSAyFeG3Y0sEg4altMFlHDMt4wOLGCntvUUBW3fhZkw1WmCq4fF5xr522vOthh/FSNzxtGFKPhQMKO4toukz3nG8XYU5iYzee25Z9UyDTlyBHjP0ielfDuvX9A2qvxjM5DLa6cSbpHsi4woYpffYXjFjOkfs8QHAMOqA3FzQ1/hcYg+BBymkChgcHk4F+7olBeAtAFaewFi5euufTHYcnCemrK5GPytNjHiwYvpM1mAm/S11ZnvHJ4KdQItmb8hJX8asP9dIACenrtwQCX8OT8o2rKwLjesPyCUwkP7VAvZfecmfHPxfqFELYh8cmIJ7GxIGdu9ZK2eg5d9H7muqoDrkEK2QpZmz6kb02hhLu0jqPfgH/ZtD6nLLt7e/U9bgiH1hyH9PAQCu4xABOy2EDKE+0PJU16EjGQHuMhsg3C+ei76F05gg=",
   "receiveList": [
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "ok": false,
+      "before": 203,
+      "after": 203,
       "got": 0,
       "steps": [
-        "异常中断"
+        "[API] ✗ cloudId=2344309273 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+        "[API] ✗ cloudId=2344309249 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+        "[API] ✗ cloudId=2344309138 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+        "[API] ✗ cloudId=2344309118 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+        "API 未领到，回退浏览器点击…",
+        "页面 token: 已获取",
+        "云豆来源: page",
+        "初始云豆 203",
+        "第1次无变化（203→203）",
+        "第2次无变化（203→203）",
+        "最终云豆 203"
       ],
-      "error": "fetch failed"
+      "error": "检测到可领取气泡，但点击后云豆未增加"
     }
   ],
   "receive": {
     "phone": "13717306553",
     "masked": "137****6553",
     "ok": false,
+    "before": 203,
+    "after": 203,
     "got": 0,
     "steps": [
-      "异常中断"
+      "[API] ✗ cloudId=2344309273 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+      "[API] ✗ cloudId=2344309249 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+      "[API] ✗ cloudId=2344309138 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+      "[API] ✗ cloudId=2344309118 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+      "API 未领到，回退浏览器点击…",
+      "页面 token: 已获取",
+      "云豆来源: page",
+      "初始云豆 203",
+      "第1次无变化（203→203）",
+      "第2次无变化（203→203）",
+      "最终云豆 203"
     ],
-    "error": "fetch failed"
+    "error": "检测到可领取气泡，但点击后云豆未增加"
   }
 }
