@@ -1,69 +1,55 @@
 {
-  "ts": "2026-09-15 12:57:35",
-  "requestId": "verify123",
-  "type": "status",
+  "ts": "2026-09-15 13:07:04",
+  "requestId": "receive-1789477624068-covqr6z6",
+  "type": "receive",
   "ok": true,
-  "msg": "已查询 3 个账号",
-  "acctDiag": [
-    "cipher失败:缺少加密数据或密钥",
-    "store:3"
-  ],
-  "status": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": true,
-      "total": null,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 0,
-      "list": [],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
-    },
+  "msg": "137****6553 218→258 +40",
+  "badAccounts": [],
+  "enc_accounts": "OqqSEmIgRUEomV5KgWG+pacClTUnjA3b38jSLJZPkGV0wmkWp9eanFn/rDOwnX9CSTcTE5snUmgYdcXE6eQYcV199Dcgf2tFzK0M5iUK2PnG+sDqomVRZ4qRK4lZO3bBgAnK3GT1qZRSa2cO6ziikzJo0Z0tzFv32tkGONDiVQN6+j7RpeLvM8uDG+5zoA+rUBl3hvi5BbXj6YQNGjKRM2L6JPXPixmas4Q0FB7TTWhw98IipGTFkQXYjC0IEiEh1e0aMM8FXfpX2sZwq0TaLsonZbog8dbTBbXwLNkB7Ac+Sa9JemVSgS6SnR1WiDAWoXGH+4MVEYItp4HFedsQdXsNVqIivsixVFiBOOY0Hl9hku4u/CctNPDn6hUET3G4LBn/ZOi1nx4gMMd0Sg0YnA2Mph44pmyc3XSCCtM16nWVXA07VCdsS8UYdlGPwHRt7RPYmME1e4D1+pvpCuAuXBev7d/TV8W34H11VXl2xDcN/5a4DSgj7JghBRNSV6T+h1d6JgmHsFXNfMA3MAOLwYrpuxuIq4hDJbIDvIuNi7TvbUNa693QktzpgbFpwgeXc1rnh//YMlHJGOcrca+/IqpdoLDzdk5FvuomEuh7NoKw+2nsEnSGqlVW8dTtnebar82SPKFEx50VAYRj4DPH5F5Js3IggxrZqhNCn62VgY7IBpRQ8xwQxZm19AoO1ylnfFgQ3rJcGlCkGgTP4FCqzKh/HIjK4CH1/ASQ4ivSTAE61DDA+uUP4lPHyUYNDp6wsCQ4Mv68R9g+ZAEXEgri1cuOshgK2YjnFTmuLJe6yMqOfD7NeoTjV8RDeESWddCZYVQA++Xv/3kyFd+7uPzs4eLsrLjkjx1SDEgT2T7BvioAi3m88Uc6oS5LMXnC35c2c6l59Fx+FxHDnCzol71MwcpvPr3QPs3Z8QIZNlNFful6TWxI7MJYMaar2A1DvqmIxqI7LwZGOxTXmaWCCsX9e22EaojPkhXrGCoLmQp1aLJISZzSGZzm81nrABMV+KBHAk2nKs8L32jCq6JL4ropYlmgNZE8LY/qVFnK5jT9m8UEyiCuEAHKJoq7MBkdDqvzGFFfWrF6ddtslk17xA5UXmeT3XSoOa/E5qyFwgGJwMBJDsOzWmfLuJoun9q/WZoJIwIqa+FY3L3D8pQeK0nQPUkzmhVT5Olw7jeCVS9b7YD9MVOy3SaEg+PNLTkcGa2tWfbxYMvw4j0koq+uIQgmoZfyWtT14e+BZuz8UFC68mlHxDHU3CxovVB6+7eeCK8YZWSkvempzanXP+5/hdCntz33OVIm2Su1o6xtSR6NHvdaOurueFoSXZzsBOwWmaebfkLw6KMjaPUjvqag3/LKTHnpUb9IkZq7xjlQw5OSEWQnV5sY9N7WVXnAqER5sIY/UibFi7PA6UTojSQIbG7etSLq2bPHqahXdsrqXiAT7gdmQAruMGOkvogWhs3xP5AFmJcXyrqmMZa2Z7POgWO4H3OhenGiuu/mgJ4o7aU+cMdBDWvpeeOkeR27j0ySozPGYE5ZNJyILXjks4zedQ0jeAVYY76qnl3RWaAvPD6v/ajojfM7cSeftZC4nh6nEuR2MLh2+GSKNlLBG3ZwTeVStUhO1n8yisFij7h/sO6DYumBFA1volYbH2yeQW1muABv3WmBHtdS2dJ87wZYRqjKSgISF6LzStWer5VSfU4k6ihRmx4JTC3VRvNkqIZISA9n2tWxCaiPc/Gi0EfDNtoCLu4dTXkK7L26iJAgLvK6uNvw028L8FcJO3bELm7phjvDAuCdRFyA3MAStC4WojxNR6qDVP+vveUiUPRL2NISm89ZQKAVdMJvkWiOs+0vMWx5+PKcVQJvMRnZJfU56R8+a+Q1jZ65Jbm0BpmgzRr2WtmYVSZSEcALtEM7y7jNq8tX9y/6TZBa6ycXQQhlVzBYa2tVoSNDXusVvfDQ/Q1uQ7c=",
+  "receiveList": [
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "ok": true,
-      "total": null,
-      "toReceive": 40,
-      "receivable": 40,
-      "nextMonth": 0,
-      "list": [
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309249
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 10,
-          "recordId": 2344309138
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 20,
-          "recordId": 2344309118
-        }
+      "before": 218,
+      "after": 258,
+      "got": 40,
+      "steps": [
+        "[API] ✗ cloudId=2344309249 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+        "[API] ✗ cloudId=2344309138 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+        "[API] ✗ cloudId=2344309118 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+        "API 未领到（可能无可领或被风控），回退浏览器点击…",
+        "页面 token: 已获取",
+        "云豆来源: page",
+        "初始云豆 218",
+        "第1次领取 +10（218→228）",
+        "第2次领取 +10（228→238）",
+        "第3次领取 +20（238→258）",
+        "最终云豆 258"
       ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":1,\"maxType\":\"完成任务\",\""
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": true,
-      "total": 960,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 38,
-      "list": [
-        {
-          "cloudType": 2,
-          "cloudNum": 38,
-          "recordId": null
-        }
-      ],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
+      "error": ""
     }
   ],
-  "enc_accounts": "eWMlxFGw6+7j8kLaOzPxEXElYiN4KqdcAJyZDLPwEFEW2spxn9Tvlcw5+j/ar5vvY8EIxMM0lU+5yq0d1ZsOBKrgNS/0yAs32GqZF6kUf7ZlcFVuG0/v52svB0ZUclvWASzHatZGs829KvNowywM7TskwISwRolJz84A7cWkOGflwbetJPHGM4r7+eGWDw9/e5auXffuEH+F0qzf9DjY/h0WCm9oHJoJj+eLvqFtPkqnEfM6CGStqWaFW49GkhxePXujahQHvwOzbqeSpLlTKNLDEn/A55BjMnnoyyCv6GgJ3IdhO1gmMMY3+7jmo3+HZ21jQi3dO5bwlQnszkeq9f2ZVhFg31zeucP+AG/+AzfUxOCK029sCvyeQixy96FaMsqofZ//VFvYvLtFuiaJN0VblbrDQTqDCuvxS7D4UnDBXO4Kh8E3OWaHFmm59+ZxeC2LRPRYWXXSwlJLiC8uwkqsyK2cI0LY0McZcS8R1tvGDBLg7ENa107gleU+3Sz8GYf+wzGIm2CO1n9C6EDYMvsOtVsjO2/9SpvIjXPnO/Xpq9Z91Oxoez6LTEOk/gkmVUJSvOjkEyQ9Ta2OoBVbQxwT4LUHWbVJJviYpZyiNH/Y6qx31LvS/bwdz2XsMNFRqJ65tekEkS2cCo/Kq8DXRdqRMEBYQMn18WHw0O23R2Wmd7EVJiA6e5ef48TUtzOV1ih/fnijJiaX+bI2OOhePmxhGK+l0MRMsGU7vIPP3kz4fkoUd3gmX3Cnw98B7jdJlgDL9pkfO1ABfqx1mOOybpJlO6HaVjKcfFiGqkjieHgiMlafQqyLsjXHf5amEnIqFbdZplsfeEfrTj/8WbzxystpY58vcT6+m1+olgGM5mqFyhvONJGDOV9+mr5ZtWtHUV+RbALygtTh/9dt6QvAQuUWT2SUY8kI2dxEj0BKIc5GofPZ/jKqaL177tDq08rPxKeOZj4G6a5YNNs8KW5Vl0iqVXE/A/uSVWLZF8Yz85P0TA594KG4Rm1w8gs2Ax7pdlGLZHVc0JgNWd74js+lW1PfoQ4z7uR8c1XjjBmygW4bac0xroLAYomP9yDxsNHDKJZ+nCjKDeV1hZ7Ey+RU8AkenH5nUHG9oi4iHbq9auaqozKPJm8Rs00fIdkxGpNycc0thffjMxRlyApdLHB+ACx+qG4bBcax9IIDK6pfheTdJaQWlg4reQAU6x9dPj+Jq4Fei6oNracIupk+dh3ftBDwUUegtyKvFvut+FgF8j5DjytQeYo7dj4wymsSrGUXxseGQIvGSCSOkUAii8/sGzNKJAyOY8bwE4Es5Axg2Ty2B765bJNCNwMSiZelUSlgGt658hjXo7gIEUVWWjFmiNNDnvrSjfNFrY1qjunVxuFjtu1tHxNax3sTVVZrOmvJ9G5dDPNYx5GpjE35yOqM3TI8M1Guj7me9+KpgLISyHicuK7JzY7EP6mkxHqBEcA3Ktr/jErVkwfGrK6cd3D+2V1kO0eWJxaSmv+oB2MhLabVSnUsrJPGMT1zf+bnrhQ7Mu+XokH/IyMFU2rFyTg/86H2WvQva94BE/2eu6BWwL0A6D0oE28UFDAB2i4og/WGN7o3dCTtvMfjcLEpFpmq+qOww2RjV/LX4RgHRdby4X4yC3UHWl+vhA10BgFAahpq/TxNB0w43g2bfBqQAIwhcwoJDd3/05pz+MfuytBFdTTjCYv6EgKv7chJZGcgStx83MQ34g/e3MxlNWjiK/OsrEq8NMmImnNP+JFzWqFAW4M/9/cO2ZiExHbWxZXYCYDnByewbgcZRKZJM1R1wbAMJpsqUvajJdsLDXBV/Aa68xBTHrcc9SKyYnfAEFZAKktoqQDlPeJoEvDb9H27SMpL2ZTlcAlutYAW4LHYeUsEY78NOJ0KAyBErYzdMnTPH5HWTqgm6igABzHGjYB+J+WpvUkJCfb0SeXD0plUUytZPfw="
+  "receive": {
+    "phone": "13717306553",
+    "masked": "137****6553",
+    "ok": true,
+    "before": 218,
+    "after": 258,
+    "got": 40,
+    "steps": [
+      "[API] ✗ cloudId=2344309249 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+      "[API] ✗ cloudId=2344309138 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+      "[API] ✗ cloudId=2344309118 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧",
+      "API 未领到（可能无可领或被风控），回退浏览器点击…",
+      "页面 token: 已获取",
+      "云豆来源: page",
+      "初始云豆 218",
+      "第1次领取 +10（218→228）",
+      "第2次领取 +10（228→238）",
+      "第3次领取 +20（238→258）",
+      "最终云豆 258"
+    ],
+    "error": ""
+  }
 }
