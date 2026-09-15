@@ -95,8 +95,11 @@ async function main() {
     await sleep(2000);
   }
 
+  dump();
+}
+function dump() {
   const p = path.join(__dirname, "../data/probe_6553.json");
-  fs.writeFileSync(p, JSON.stringify(out, null, 2));
+  try { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, JSON.stringify(out, null, 2)); } catch (e) {}
   console.log(JSON.stringify(out, null, 2));
 }
-main().catch(e => { out.steps.push("FATAL: " + e.message); console.log(JSON.stringify(out, null, 2)); });
+main().then(dump).catch(e => { out.steps.push("FATAL: " + String(e && e.message || e)); out.steps.push("STACK: " + String(e && e.stack || "").slice(0, 400)); dump(); });
