@@ -1,7 +1,24 @@
 {
-  "ts": "2026-09-15 01:28:09",
-  "type": "sync",
-  "ok": true,
-  "msg": "已同步 1 个账号到仓库（定时任务将使用）",
-  "synced": 1
+  "ts": "2026-09-15 01:32:01",
+  "type": "daily",
+  "ok": false,
+  "msg": "共 1 个账号，成功 0 个",
+  "perAccount": [
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "ok": false,
+      "error": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The token does not exist or has expired.</desc> "
+    }
+  ],
+  "enc_accounts": "U1wszfQoaoq6XOPk6heFpxuFgtzNgv7FV3FZ+S+TIUPRwW75D9GglBiVDTF8fWYO0Kr1AE+Nw9tkMq8l8BsgT7EKQpOnu1wvQrqNA18omgEOBENzedMXiHC4KhAhu6wWnMeBZw8Tz4vy620yqb5aQJzDAKsYyb7Q7efKWXJ3pHBuL5h62PDOQcjY9FwR0iIpbcDA9d4KhwYGEUBT1GgibE0iLIl1hsvPfdHNzaD4LHCTWcQvnscVM0aFFiTgT+fFQDthWMKD4Pzu07RHFbHtQPDFLmCJeNGJMCbvxMZMKdkMAl1jvdRJjN0Fs1wUaQQI4vnR8OCd9eMqx/QnYkDtrEv1v3Cs6Cea8NttCe5ugBL9A8jX/4Hq5y8LCYPnFD5OeO9X+b6/T91V16LsucuTcbVEwbGEuWCUGlZXVeflG+xicIxXG6vqXlyQ0bURx/ppaxVkLz8+/TmxVqfDTI62NjVNJjkxU00QINRYFCMJZ5pop6GSseYusqvv",
+  "results": [
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "name": "",
+      "ok": false,
+      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The token does not exist or has expired.</desc> "
+    }
+  ]
 }
