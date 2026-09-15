@@ -12,6 +12,9 @@ jobs:
   daily:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    concurrency:
+      group: yun139-panel-result
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,13 +28,35 @@ jobs:
         env:
           EVENT_TYPE: daily
           PAYLOAD: "{}"
+          PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
           YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
           YUN139_PHONE: ${{ secrets.YUN139_PHONE }}
         run: node actions/run.mjs
       - name: 回写结果
         run: |
+          set -e
           git config user.name "yun139-panel-bot"
           git config user.email "yun139-panel-bot@users.noreply.github.com"
           git add data/result.json
-          git commit -m "daily: $(date -u +%Y%m%d%H%M%S)" || echo "no change"
-          git push
+          # 续期后的新令牌写入加密账号文件，下次定时任务才能用上
+          if [ -f data/accounts.enc ]; then git add data/accounts.enc; fi
+          if git diff --cached --quiet; then
+            echo "结果无变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "daily: $(date -u +%Y%m%d%H%M%S)"
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            if git rebase origin/main; then
+              if git push origin HEAD:main; then
+                echo "提交成功"
+                exit 0
+              fi
+            else
+              git rebase --abort || true
+            fi
+            echo "第 $i 次提交失败，重试…"
+            sleep 8
+          done
+          echo "提交失败：已达到最大重试次数"
+          exit 1
