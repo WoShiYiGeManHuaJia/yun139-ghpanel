@@ -1,32 +1,7 @@
 {
-  "ts": "2026-09-15 02:55:47",
-  "type": "status",
+  "ts": "2026-09-15 03:02:44",
+  "type": "sync",
   "ok": true,
-  "msg": "已查询 3 个账号",
-  "status": [
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": false,
-      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The toke"
-    },
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": true,
-      "total": 253,
-      "toReceive": 0,
-      "receivable": 0,
-      "nextMonth": 0,
-      "list": [],
-      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":1,\"maxType\":\"\",\"cal"
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "ok": false,
-      "message": "自动续期失败: 续期失败 return=4006 desc=The token does not exist or has expired. | 原始: <root> <return>4006</return> <desc>The toke"
-    }
-  ],
-  "enc_accounts": "6NkgJiExtNkVr6doSime82QaX54+jjEDfOIyqqUTcKuioehbSTH0v0vOV89p5KRwAdRYH4D8WFGLlr6xuFvxZun0ZNavNHAATmvTCV/sNbYb1MuXfn/VKKwKsyKdaqzxvfMKLbjWUPDxLZQd0RfjmyESlUoYBqTSzVbvyHKsNfAPCB7oysLgNFWOKI38YdHW5MeRFgVtP7natV8tAiPdp2Tv6ImQmOyX1noq9hmPloESYncVSic/AeFH7nQb9kAetpn31t27xhzDDPrZjHukY/GaFV12sz5wO/lrbPYj85EB9AIfSz99IyuQvtHwPf6yDrX+AEzrFY+lvbHzqhTunsrbhEPwgmJtHoyM9Y/kj6jLJR/RZbh9akd0hg30baLBkz24HfZE/dYuKvXIZJC4klbrCHH0ru9rXMCr1Z4Wb3FQCSb89jLaR/S70zv7p/iRFi/Gs6zKCaBVezCn5arHW+98TO+VYCpsQK2B4KmH831XpdE3CJ3VYV+vKoU+7c1yRPWv7vCuBN7uS8hpuSicP0ModiIZW11SDXiQIvoXG5aqMIq1QMt1rbViNdXWQAZljTKcmQo6OcLSvcWyRrPqJ5NhyRCtb3zsqXkzUqeYd1/TOQYak90CErzRt1WM2gSO2kux9bo2D19iK601wP170IeADLrJSu//ZFBjJP9IWs/Hj6FouzdMqVP4zHyJgrhDi3hNH2MjxDqd4qKDk31lCaxTa2eVFD2AA6VdIgLyRZZN+ctznT92IsFfefqLS/FvCPQHR3K+Nx7rWtjuvuYT2LAYQVmY4/bX6wTSoWY00VNabLsGEyXEZYz0EiIpZESysz3Teu37xGgh7T33kYe5rIYPhfTKgG6bvVNSZEsgZT2kp5EoYFGIcOocsD1Dtg8r7IzgfHi69AllGlzZhPBmbiuac0GQbMexBo0e6oFvuk2tq19gY4KinUUK8vsLzZQOKuS6u4vtll2fwpVHKcisG2WfzGG6bUDN/PanfPNo0hTgGN7vwwecRU9yzEvPLuLzJcnQ8PfS6tjkbYRVyX8KD7PYvNyQ3Y+tZIfargZAmBvTzvSmSWnFy6S4pPL4xR8E86P6N/C+zEzgOCytjLOgTJ+6jAqLfBSE6aOiRyC5EHPYmVyL4GtzXVZ1RclsSmdNddO3kHy+M5UBjMz+5EVkeJV+42YLTKTPP9vieLeEybVXjqlvLLNB4COqsNu7aQ4VwcsE2U4KpVnRAPytzTTDx0afqNDsaOLUyEWfe6EmftG0tVCwfBH5YLasCi8vSPnh1pQQHaj3R+lWvpfD5+cJFniGpb3ZfF2eg2Vs/YxQiy3nxhwh9aVxt1lxt+i7lx1CCBLFaDEAuMOvJgJBuWwpcDJDnbKxdsPuJElYoVLpZJTNaPmiviirIBEM1LPm3u7vlzn1k1k9VuJIEaWW6QFYoaEr8DcJDFWyH/xOudcD8ve830l9hxcmICFdpnwNCMJ+caOJAHxFWTUN5pzYoiU5f+CKnz15tdk0TGS4TjGOpuASnwUSB3CGUgrskwAhJONsUfvn0ag5kzEZY48qydouPnIyZ/EWEw37JTWnICccmzY5UCVhgUnMilWjBh8zf0lz2n7KHsrdUwCcvcqyv6lyMZFSzIAbdgFSuRYl0fCPs5K4UWL5XHpH858gIXioGZOgR6m9yukaXqJo+PMmH2xXAzAADiC9sErsUi+lS8ocgB2lx/RW1NVOyAqMJpn/p9if0oj/t7dkZGCHYgF1+LnRwZpSGxKOm0Sugt3NFD86fJOQe42aR2846FCT4Ij5Dkx8RBKOHz+aQWkeJb0fs6lOjAs7DPHz4fzWoe3r8d2Pn0NFJgXGZvqrhY3VROpi1hHv5jmcr0EW8qo0KKxCMpNYs9z5WA7DA9OYRt+nXaTJY87AcI2A8uQo3rNPV4XHBautmKyZQAkbutYRR+CNhZvfpPqbaimMzBp9cn7WEsA="
+  "msg": "已同步 2 个账号到仓库（定时任务将使用）",
+  "synced": 2
 }
