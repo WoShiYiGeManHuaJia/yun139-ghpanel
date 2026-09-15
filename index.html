@@ -464,12 +464,13 @@
   async function dispatch(type, payload) {
     const body = Object.assign({}, payload || {});
     body.requestId = body.requestId || (pending && pending.requestId) || newRequestId(type);
-    // repository_dispatch API 只认顶层 event_type + client_payload。
-    // 旧的 inputs 写法是 workflow_dispatch 的用法，GitHub 会因缺少 event_type 直接返回 422，导致所有按钮无法触发。
-    return api(`https://api.github.com/repos/${encodeURIComponent(owner())}/${encodeURIComponent(repo())}/actions/workflows/panel.yaml/dispatches`, {
+    // 注意端点：panel.yaml 由 repository_dispatch 触发，必须走 /dispatches
+    // （若走 /actions/workflows/xxx/dispatches，那是 workflow_dispatch 端点，只认 ref+inputs，
+    //   传 event_type/client_payload 会被判为非法字段 → 422 "not permitted keys"）
+    return api(`https://api.github.com/repos/${encodeURIComponent(owner())}/${encodeURIComponent(repo())}/dispatches`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ref: await defaultBranch(), event_type: type, client_payload: body }),
+      body: JSON.stringify({ event_type: type, client_payload: body }),
     });
   }
 
