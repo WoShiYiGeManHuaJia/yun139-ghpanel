@@ -1228,6 +1228,10 @@ async function main() {
       const MAX_WAIT_MS = Number(payload.maxWaitSec || 3300) * 1000;   // 最多轮询多久
       const POLL_MS = Number(payload.pollSec || 8) * 1000;
       const M = "https://m.mcloud.139.com/ycloud/mcloudday";
+      // 优先目标（默认星巴克）：排到最前、加强重试、开闸前抢跑
+      const PRIORITY = String(payload.priority || "星巴克").trim();
+      const GRAB_ROUNDS = Number(payload.grabRounds || 8);            // 优先奖品重试轮数
+      const FAST_LANE_MS = Number(payload.fastLaneMs || 180000);      // 开闸前多久开始抢跑探测
 
       const ra = await resolveAccounts();
       out.acctDiag = ra.diag;
@@ -1309,8 +1313,21 @@ async function main() {
             it.reservation = (String(rj0.code) === "0") ? "预约成功" : (rj0.msg || ("code=" + rj0.code));
           } catch (e) { it.reservation = "预约异常:" + String(e.message || e).slice(0, 50); }
 
+          // 先取一次清单，锁定优先奖品的 prizeId（后面轮询要用）
+          let PRIO_ID = "";
+          try {
+            const g0 = await api("/gift/list");
+            const r0 = g0.result || {};
+            const a0 = [].concat(r0.nationalPrizeList || [], r0.provPrizeList || [], r0.extGiftList || []);
+            const hit = a0.find(x => x && PRIORITY && String(x.prizeName || "").includes(PRIORITY));
+            if (hit) PRIO_ID = hit.prizeId;
+            it.priority = PRIORITY;
+            it.prioId = PRIO_ID || "清单中未找到";
+          } catch (e) { it.prioId = "取清单失败:" + String(e.message || e).slice(0, 40); }
+
           // 轮询等开闸
           let open = !!(R.online && R.activityDay);
+          let fastGot = false;
           if (!open) {
             const t0 = Date.now();
             // 智能前置休眠：倒计时还远就先粗睡，临近开闸再密集轮询（避免请求过多被限流）
@@ -1334,6 +1351,22 @@ async function main() {
                 it.online = R2.online; it.activityDay = R2.activityDay;
                 break;
               }
+              // 快车道：临近开闸时直接探测优先奖品，verify 一放行就立刻领取
+              // （比等 online 标志更快，服务端有时先放行 verify）
+              if (PRIO_ID && !fastGot && (R2.countDownTimeStamp || 0) < FAST_LANE_MS) {
+                const vf = await api("/gift/verify", { prizeId: PRIO_ID }).catch(() => ({}));
+                it.fastLaneTries = (it.fastLaneTries || 0) + 1;
+                if (String(vf.code) === "0") {
+                  const rc = await api("/gift/receive", { prizeId: PRIO_ID }).catch(() => ({}));
+                  it.fastLaneCode = rc.code; it.fastLaneMsg = rc.msg || "";
+                  if (String(rc.code) === "0") {
+                    fastGot = true; open = true; it.waitedSec = waited; it.checked = checked;
+                    it.fastLane = "快车道抢到（verify 放行即领）";
+                    it.got = [PRIORITY]; it.fastGot = true;
+                    break;
+                  }
+                }
+              }
               if ((R2.countDownTimeStamp || 0) > 300000) {
                 await new Promise(r => setTimeout(r, 60000));
               } else {
@@ -1347,13 +1380,16 @@ async function main() {
           // 3) 开抢：按 sort 顺序逐个 verify + receive
           const gl = await api("/gift/list");
           const gr = gl.result || {};
+          const prioOf = (x) => (PRIO_ID && String(x.prizeId) === String(PRIO_ID)) ? 0 : 1;
           const all = [].concat(gr.nationalPrizeList || [], gr.provPrizeList || [], gr.extGiftList || [])
             .filter(x => x && x.prizeId)
-            .sort((a, b) => (a.sort || 99) - (b.sort || 99));
+            .sort((a, b) => (prioOf(a) - prioOf(b)) || ((a.sort || 99) - (b.sort || 99)));
           it.prizeCount = all.length;
           const got = [], tried = [];
           for (const pz of all) {
-            for (let round = 0; round < 3; round++) {
+            const isPrio = PRIO_ID && String(pz.prizeId) === String(PRIO_ID);
+            const rounds = isPrio ? GRAB_ROUNDS : 3;
+            for (let round = 0; round < rounds; round++) {
               const vf = await api("/gift/verify", { prizeId: pz.prizeId }).catch(() => ({}));
               if (String(vf.code) === "0") {
                 const rc = await api("/gift/receive", { prizeId: pz.prizeId }).catch(() => ({}));
