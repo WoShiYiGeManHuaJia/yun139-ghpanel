@@ -26,7 +26,10 @@ assert.equal(stableJsonStringify({b:1,a:2}), '{"a":2,"b":1}');
 
 const html = fs.readFileSync(require('node:path').join(__dirname, '../index.html'), 'utf8');
 assert.match(html, /requestId/);
-assert.doesNotMatch(html, /localStorage\.setItem\(LS_TOKEN/);
+// PAT 只允许在用户勾选「记住」后写入 localStorage，不允许无条件写入
+assert.doesNotMatch(html, /localStorage\.setItem\(LS_TOKEN,\s*\$\("cfg_pat"\)/);
+assert.match(html, /if \(remember\) localStorage\.setItem\(LS_TOKEN/);
+assert.match(html, /cfg_remember/);
 assert.doesNotMatch(html, /return;\s*applyCloudCache/);
 assert.match(html, /armPending\(\{ type: "rtask"/);
 assert.match(html, /armPending\(\{ type: "send_code", kind: "send" \}/);

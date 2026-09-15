@@ -152,6 +152,10 @@
       </div>
       <label>连接令牌 PAT（仅当前浏览器会话保存）</label>
       <input id="cfg_pat" type="password" value="" placeholder="github_pat_... 或 ghp_...">
+      <label style="display:flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--mut);cursor:pointer">
+        <input id="cfg_remember" type="checkbox" style="width:auto;height:16px;accent-color:var(--acc);flex:none;margin:0">
+        <span>记住 PAT（存本机浏览器，换设备/清缓存需重填）</span>
+      </label>
       <button class="btn ghost" id="btn_copy_link" style="margin-top:8px">复制分享链接（换设备用）</button>
       <div class="hint">PAT 仅存当前浏览器会话；DATA_KEY 存在当前浏览器本地。复制分享链接只会分享仓库地址，不会携带 PAT 或 DATA_KEY。换设备后请重新填写凭据。</div>
     </div>
@@ -331,12 +335,25 @@
   function loadCfg() {
     $("cfg_repo").value = localStorage.getItem(LS_REPO) || REPO_DEFAULT;
     $("cfg_key").value = localStorage.getItem(LS_KEY) || "";
-    try { $("cfg_pat").value = sessionStorage.getItem(LS_TOKEN) || ""; } catch (e) {}
+    try {
+      const pat = localStorage.getItem(LS_TOKEN) || sessionStorage.getItem(LS_TOKEN) || "";
+      $("cfg_pat").value = pat;
+      if ($("cfg_remember")) $("cfg_remember").checked = !!localStorage.getItem(LS_TOKEN);
+    } catch (e) {}
   }
   function saveCfg() {
     localStorage.setItem(LS_REPO, $("cfg_repo").value.trim() || REPO_DEFAULT);
     localStorage.setItem(LS_KEY, $("cfg_key").value.trim());
-    try { const pv = $("cfg_pat").value.trim(); if (pv) sessionStorage.setItem(LS_TOKEN, pv); else sessionStorage.removeItem(LS_TOKEN); } catch (e) {}
+    try {
+      const pv = $("cfg_pat").value.trim();
+      const remember = $("cfg_remember") && $("cfg_remember").checked;
+      sessionStorage.removeItem(LS_TOKEN);
+      localStorage.removeItem(LS_TOKEN);
+      if (pv) {
+        if (remember) localStorage.setItem(LS_TOKEN, pv);
+        else sessionStorage.setItem(LS_TOKEN, pv);
+      }
+    } catch (e) {}
     log("配置已保存");
   }
   function genKey() {
@@ -402,7 +419,7 @@
   function owner() { return repoParts().owner; }
   function repo() { return repoParts().repo; }
   async function api(url, opts) {
-    const token = sessionStorage.getItem(LS_TOKEN) || "";
+    const token = localStorage.getItem(LS_TOKEN) || sessionStorage.getItem(LS_TOKEN) || "";
     if (!token) throw new Error("未设置 PAT");
     opts = opts || {};
     const controller = new AbortController();
@@ -770,7 +787,7 @@
   async function pollResult() {
     try {
       const r = await fetch(`https://api.github.com/repos/${owner()}/${repo()}/contents/data/result.json?ref=main`, {
-        headers: { Authorization: "Bearer " + (sessionStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag },
+        headers: { Authorization: "Bearer " + (localStorage.getItem(LS_TOKEN) || sessionStorage.getItem(LS_TOKEN) || ""), Accept: "application/vnd.github.raw+json", "If-None-Match": lastETag },
       });
       if (r.status === 304) return;
       if (!r.ok) { log("读取结果失败 " + r.status, "err"); return; }
