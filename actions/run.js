@@ -302,7 +302,10 @@ async function getSsoToken(authorization, phone) {
     body: JSON.stringify({ account: phone, toSourceId: "001005" }),
   });
   const j = await responseJsonChecked(r, "querySpecToken");
-  if (String(j.code) !== "0") throw new Error("querySpecToken 失败 code=" + j.code);
+  if (String(j.code) !== "0") {
+    const inner = (j.data && j.data.result && (j.data.result.resultCode + " " + j.data.result.resultDesc)) || "";
+    throw new Error("querySpecToken 失败 code=" + j.code + " msg=" + (j.message || "") + " inner=" + inner);
+  }
   return j.data.token;
 }
 // 风控码：命中说明被临时限流/拒绝，需要更长的退避等待（不是令牌真的失效）
@@ -881,11 +884,15 @@ async function main() {
   }
   // 统一解析账号来源：前端 cipher > 仓库文件 > Secret 兜底
   async function resolveAccounts() {
-    try { const l = await decryptAccounts(); if (l.length) return { list: l, trusted: true }; } catch (e) {}
+    const diag = [];
+    try { const l = await decryptAccounts(); if (l.length) { diag.push("cipher:" + l.length); return { list: l, trusted: true, diag }; } }
+    catch (e) { diag.push("cipher失败:" + String(e.message || e).slice(0, 60)); }
     const st = await loadStore();
-    if (st) return { list: st, trusted: true };
+    if (st) { diag.push("store:" + st.length); return { list: st, trusted: true, diag }; }
+    diag.push("store失败:" + (saveStoreErr || "空"));
     const c = await pickCreds();
-    return { list: [c], trusted: false };
+    diag.push("secret兜底:" + String(c.phone).slice(0, 3) + "****" + String(c.phone).slice(-4));
+    return { list: [c], trusted: false, diag };
   }
 
   // 定时运行时没有前端 cipher，回退读仓库 Secret
@@ -1019,6 +1026,7 @@ async function main() {
     } else if (type === "status") {
       const ra = await resolveAccounts();
       const accounts = ra.list;
+      out.acctDiag = ra.diag;
       const rows = [];
       for (let ai = 0; ai < accounts.length; ai++) {
         const a = accounts[ai];
