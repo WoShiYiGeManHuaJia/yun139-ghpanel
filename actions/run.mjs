@@ -231,7 +231,7 @@ async function getJwtOnce(authorization, phone) {
     body: JSON.stringify({ account: phone, toSourceId: "001005" }),
   });
   const j = await r.json();
-  if (String(j.code) !== "0") throw new Error(`querySpecToken 失败 code=${j.code} msg=${j.message}`);
+  if (String(j.code) !== "0") throw new Error(`querySpecToken 失败 code=${j.code} msg=${j.message || ""} raw=${JSON.stringify(j).slice(0, 200)}`);
   const ssoToken = j.data.token;
   for (const h of CY_HOSTS) {
     try {
@@ -274,7 +274,7 @@ async function ensureAuth(a) {
     let d;
     try { d = decodeAuth(a.authorization); } catch (e2) { throw e; }
     const r = await refreshToken(a.phone, d.token);
-    if (!r.ok) throw new Error("自动续期失败: " + r.error);
+    if (!r.ok) throw new Error("自动续期失败: " + r.error + (r.raw ? " | 原始: " + r.raw.replace(/\s+/g, " ").slice(0, 160) : ""));
     const newAuth = btoa(unescape(encodeURIComponent(`${d.prefix}:${a.phone}:${r.data.new_token}`)));
     a.authorization = newAuth;
     a.expires_at = r.data.new_expires_at;
@@ -311,7 +311,7 @@ async function refreshToken(phone, token) {
   const mRet = text.match(/<return[^>]*>([^<]*)<\/return>/);
   const mTok = text.match(/<token[^>]*>([^<]*)<\/token>/);
   const mDesc = text.match(/<desc[^>]*>([^<]*)<\/desc>/);
-  if (!mRet || mRet[1] !== "0" || !mTok) return { ok: false, error: `续期失败 return=${mRet ? mRet[1] : "?"} desc=${mDesc ? mDesc[1] : "未知"}` };
+  if (!mRet || mRet[1] !== "0" || !mTok) return { ok: false, error: `续期失败 return=${mRet ? mRet[1] : "?"} desc=${mDesc ? mDesc[1] : "未知"}`, raw: text.slice(0, 300) };
   const newTok = mTok[1];
   const strs = newTok.split("|");
   let exp = null, remain = null;
