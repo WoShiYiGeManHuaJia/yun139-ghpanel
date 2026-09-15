@@ -1,54 +1,291 @@
 {
-  "ts": "2026-09-15 06:59:56",
-  "requestId": "rtask-1789455596135-2f59q0m7",
-  "type": "rtask",
+  "ts": "2026-09-15 07:10:17",
+  "requestId": "list-1789456202571-ca67079a",
+  "type": "list",
   "ok": true,
-  "msg": "共 3 个账号，成功 3 个",
-  "perAccount": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "tasks": 12,
-      "receive": "+5（253→258）",
-      "ok": true
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "tasks": 13,
-      "receive": "失败：检测到可领取气泡，但点击后云豆未增加",
-      "ok": true
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "tasks": 8,
-      "receive": "+0（960→960）",
-      "ok": true
-    }
+  "msg": "已获取 18 个真实任务（137****4642）",
+  "acctDiag": [
+    "cipher:3"
   ],
-  "enc_accounts": "BWv/MQ4nSz8pdtH+J9TPqLwXjjS3YpZOa9HxAQ+Owe/t0sMxk767tNjgVTPdMMQrgGkciZ8cR5fukymEMGpMkvsTLMT49azF1aAHf6vehjdY2eYkMNqWZwdTOb5A8SoRFBlNrUlsdwgw9SFexzZeTxxcVGX2acTm0DbCtPcXI5VJdCNcZullPHnLU8N01vWHDMHPl35HHv/kZVH6YPW6FO6905oSqZXa/Sj4GL3YP1OTlYq9owtrnGuJYrdCxW2ZwLZOGK92lv49QlJXHhmqQMQUFaS7QTeMxnx+IR00e2+2bMFIjoHOZK5J4Xe0i+GAqjU6hxXF9E0JJgc4gbRNezbNMlhdGpbJBsV7syjDlUgkbwrDs8mOyosSshix+j/RPSS/NqcqPJgR0l5tyOctmfNvHO4X50D5kaMCpV2VknuykMXNClrBI6tYdkJ3MDmB/0GSar9FKKOREmdWLsD0SNdfR1+7XpEuLVqceliOqrg+DAIQo0oFbTgd4I6B2pRZ3Ss9PinRkdgtLuqi1TT4yrhr26os8o9845O11fSK1L76XCj7MMdnk1PqtFvzot/YMgHSGjqxwYPSDvO+r+eSHbMQUXrqBkSTjH/3wn2slOePSLqWOzBC5PMihTgp3/S2XUIpxsfGQJcqjynA+DW/AY8uFOY0yz9qrDujEHD7OK3cow2vPM+pkGia/+iAItKKw1+0BQf1L8zAFJ6cbW2kmW8o38AA0kHl2oHknpyj00XHTvrNt19lI5BpSW9G7naIFAAXtJTY4w077Xi6LmuEyIYm7VI9Dv/scl5gQb1KXOJC9hxTBDU/2kW+3wmyqd6o14Z/H1T0HPyxPpH4rMmr7GKurmt9H7pkoMCF2ng1FOj2OEXyLFDVr/5zDty5zro8DZIIyipZ9o3d2YaayPB1NrVnXDuzMzKQ2FfluRY3fJhmT5Sn3RcvWpZ/4zkVT63OOAIueaPhsOtd62wlfJQEWWQmkQdRgF3Q+Ti7jjbno24lOjD6uotQHhP5oZqayg6PpveoTBnnAsjigTzIAIrVzrko+ij2S4LHfYKf2EKiaLaNdOoVJWEN0erS8nEhJyOvlNmwa99c+XTV5O9rLMeDwm0scbFUvSKgJlkYjJM3/dpzKcz7uQSlfQ/i0fq4r670wQPFEAdyPLyBqzAE7sAKc7jLjFGrmUkcG/43svGlKJLk86dNg59xx37N4S6seJZ8LVadEYj5mx1Se5qpAONe1VNiopIdHNHXsocg5KajbOTC4pThpbP51IcdPeXU1iqVHi8sXJd3BnVY7J7YO+PPQw+ph2KERRFwgxsf0D2Ru0WZgG8raUwCH682QwZQAayNFGAjqrmhl1kB01D0dbMNIvhBvJp9LXLZksnn6Bq1ERFj/+0uJ7gyDO87V1vC6HAt6ulm23AIxird2d+bLHb3xPv3Fg4m+s5asbNyVWfRd0qMKe5ckBF/46YhfjkRXgcagkzxFeoCSKQ/+djMDN5fpLdrkxieE1ALVozqSMV2Zhnl7a5KGctw3KHvqx/qVP1QGa9gogl6+HMlZNn5P3mJO3zy0YJvn4R9DC6Youn2c25ZEpWRvXLqzCTICu1ktQVO3/5xWwd4WtADTBDbVie78DQGxyrOAXQFG4WUvYuXgS6xYgJ4B1MWaUPe5xfw0xeGdsxE4jIedHwvuP7Yl4aaJC/SgLIJM6KK+rndfsjTxXShsO3/kcnR6cPLgH73EzE2x++uH4hebPM2XEChYetImxR08LrSRIYNEzXeGLp4RJekfbzpgWBFgD2VbtI3MP4OM5gK+lMn8AxYFe7AGdYhzXG2QaSd0lbeZOq+YECM3SN7cb6vOoh2SpAtNYe7KM50PvmKEVZjM8aFpKo75eq5mCMtUkZVx/tQkAmjB/wsZjL3Jk9cw8vuGswKWCFF3WLC8twLxpawhfGsD++E9eHucmGrsHkd+IaBB+RviEoDuOs=",
-  "results": [
+  "phone": "13787464642",
+  "masked": "137****4642",
+  "tasks": [
     {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "name": "",
-      "ok": true,
-      "message": "任务12个；气泡+5（253→258）"
+      "id": 431,
+      "group": "cloudEmail",
+      "name": "去使用移动云手机",
+      "reward": "+20豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "processbindtask",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 3
     },
     {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "name": "",
-      "ok": true,
-      "message": "任务13个；气泡失败：检测到可领取气泡，但点击后云豆未增加"
+      "id": 409,
+      "group": "month",
+      "name": "从固定入口访问云朵中心",
+      "reward": "+6豆",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 1
     },
     {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "name": "",
-      "ok": true,
-      "message": "任务8个；气泡+0（960→960）"
+      "id": 113,
+      "group": "month",
+      "name": "使用PC客户端",
+      "reward": "+60豆",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "nda",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 1
+    },
+    {
+      "id": 434,
+      "group": "month",
+      "name": "分享文件领好礼0/7",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "checktime",
+        "nda",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 607,
+      "group": "month",
+      "name": "下月签到领惊喜福利",
+      "reward": "+50豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "reservationstep",
+        "finish",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 3
+    },
+    {
+      "id": 604,
+      "group": "month",
+      "name": "去云盘图书馆阅读书籍",
+      "reward": "+10豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 118,
+      "group": "hidden",
+      "name": "调查问卷",
+      "reward": "",
+      "state": "FINISH",
+      "limit": "EVER",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 1
+    },
+    {
+      "id": 319,
+      "group": "hiddenabc",
+      "name": "小云互动礼",
+      "reward": "",
+      "state": "FINISH",
+      "limit": "DAY",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 105,
+      "group": "time",
+      "name": "绑定公众号",
+      "reward": "+200豆",
+      "state": "WAIT",
+      "limit": "EVER",
+      "steps": [
+        "sendcloud",
+        "wechatbinding",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 1
+    },
+    {
+      "id": 548,
+      "group": "time",
+      "name": "开启备份领好礼",
+      "reward": "首月+400豆",
+      "state": "WAIT",
+      "limit": "EVER",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 549,
+      "group": "time",
+      "name": "开启备份领好礼",
+      "reward": "+200豆",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 550,
+      "group": "time",
+      "name": "开启云盘APP通知领好礼",
+      "reward": "+200豆",
+      "state": "WAIT",
+      "limit": "EVER",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 551,
+      "group": "time",
+      "name": "连续31天开启云盘APP通知",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 522,
+      "group": "time",
+      "name": "当月上传文件满100个",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "sendsms",
+        "interfacecallback"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 0
+    },
+    {
+      "id": 585,
+      "group": "time",
+      "name": "去体验AI相机",
+      "reward": "",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click",
+        "interfacecallback"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 609,
+      "group": "time",
+      "name": "和AI助手对话",
+      "reward": "+20豆",
+      "state": "WAIT",
+      "limit": "MONTH",
+      "steps": [
+        "cloudtasklogstep",
+        "sendcloud",
+        "processbindtask",
+        "click",
+        "interfacecallback"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 3
+    },
+    {
+      "id": 547,
+      "group": "time",
+      "name": "加入一个知识库",
+      "reward": "+10豆",
+      "state": "FINISH",
+      "limit": "MONTH",
+      "steps": [
+        "sendcloud",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 2
+    },
+    {
+      "id": 106,
+      "group": "day",
+      "name": "手动上传一个文件",
+      "reward": "+6豆",
+      "state": "WAIT",
+      "limit": "DAY",
+      "steps": [
+        "sendcloud",
+        "nda",
+        "click"
+      ],
+      "process": 0,
+      "currDay": 0,
+      "currstep": 1
     }
   ]
 }
