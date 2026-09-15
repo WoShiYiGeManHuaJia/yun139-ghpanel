@@ -971,7 +971,7 @@ async function main() {
   try { payload = JSON.parse(process.env.PAYLOAD || "{}"); } catch { throw new Error("PAYLOAD 不是合法 JSON"); }
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error("PAYLOAD 必须是 JSON 对象");
   const dataKey = process.env.PANEL_DATA_KEY || "";
-  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily","probe16","mday16"]);
+  const allowedTypes = new Set(["send_code","do_login","sync","sign","refresh","task","status","receive","list","srefresh","rtask","daily","probe16","mday16","diag"]);
   if (!allowedTypes.has(type)) throw new Error("未知命令: " + type);
   const key = dataKey ? await deriveKey(dataKey) : null;
 
