@@ -305,11 +305,23 @@ async function getSsoToken(authorization, phone) {
   if (String(j.code) !== "0") throw new Error("querySpecToken 失败 code=" + j.code);
   return j.data.token;
 }
+// 风控码：命中说明被临时限流/拒绝，需要更长的退避等待（不是令牌真的失效）
+function isRateLimited(msg) {
+  return /1010010015|鉴权失效|05050006|暂无权限|1010199999/.test(String(msg || ""));
+}
 async function getJwt(authorization, phone) {
   let last;
-  for (let i = 0; i < 4; i++) {
+  // 普通错误快速重试；风控错误退避更久（2s→5s→12s→25s→40s），避免加重限流
+  const waits = [2000, 5000, 12000, 25000, 40000];
+  for (let i = 0; i < waits.length + 1; i++) {
     try { return await getJwtOnce(authorization, phone); }
-    catch (e) { last = e; await new Promise(r => setTimeout(r, 1500 * (i + 1))); }
+    catch (e) {
+      last = e;
+      if (i < waits.length) {
+        const w = isRateLimited(e.message) ? waits[i] : Math.min(waits[i], 3000);
+        await new Promise(r => setTimeout(r, w));
+      }
+    }
   }
   throw last;
 }
@@ -934,7 +946,9 @@ async function main() {
       const accounts = ra.list;
       const results = [];
       const updated = [];
-      for (const a of accounts) {
+      for (let ai = 0; ai < accounts.length; ai++) {
+        const a = accounts[ai];
+        if (ai > 0) await new Promise(r => setTimeout(r, 3500));
         const phone = a.phone;
         const row = { phone, masked: maskPhone(phone), name: a.name || "" };
         try {
@@ -963,7 +977,9 @@ async function main() {
       const accounts = ra.list;
       const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks.slice(0, 100).map(x => String(x).slice(0, 80)) : ["sign"];
       const results = [];
-      for (const a of accounts) {
+      for (let ai = 0; ai < accounts.length; ai++) {
+        const a = accounts[ai];
+        if (ai > 0) await new Promise(r => setTimeout(r, 3500));
         const phone = a.phone;
         for (const t of wanted) {
           const row = { phone, masked: maskPhone(phone), name: a.name || "", task: t };
@@ -1004,7 +1020,9 @@ async function main() {
       const ra = await resolveAccounts();
       const accounts = ra.list;
       const rows = [];
-      for (const a of accounts) {
+      for (let ai = 0; ai < accounts.length; ai++) {
+        const a = accounts[ai];
+        if (ai > 0) await new Promise(r => setTimeout(r, 3500));
         const row = { phone: a.phone, masked: maskPhone(a.phone) };
         try {
           const auth = await ensureAuth(a);
@@ -1075,7 +1093,9 @@ async function main() {
       const accounts = ra.list;
       const perAccount = [];
       let okCount = 0;
-      for (const a of accounts) {
+      for (let ai = 0; ai < accounts.length; ai++) {
+        const a = accounts[ai];
+        if (ai > 0) await new Promise(r => setTimeout(r, 3500));
         const item = { phone: a.phone, masked: maskPhone(a.phone) };
         try {
           const auth = await ensureAuth(a);
