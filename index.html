@@ -724,8 +724,17 @@
       if (j.enc_accounts) {
         try {
           const list = JSON.parse(await decText(j.enc_accounts));
-          await saveAccounts(list);
           const isNew = j.type === "do_login";
+          if (isNew || (Array.isArray(list) && list.length >= 1 && /login|add/.test(String(j.type)))) {
+            await saveAccounts(list);
+          } else if (Array.isArray(list) && list.length) {
+            // 查询/领取返回的是增量：按手机号合并，绝不整体覆盖（防止账号被清掉）
+            const cur = await loadAccounts();
+            const map = {};
+            cur.forEach(function (a) { if (a && a.phone) map[String(a.phone)] = a; });
+            list.forEach(function (a) { if (a && a.phone) map[String(a.phone)] = Object.assign({}, map[String(a.phone)] || {}, a); });
+            await saveAccounts(Object.keys(map).map(function (k) { return map[k]; }));
+          }
           renderAccounts(isNew ? list.length - 1 : null);
           if (isNew) { log("登录成功，新令牌已保存到上方账号列表", "ok"); }
           else log("账号数据已回写本地（含最新令牌/到期时间）", "ok");

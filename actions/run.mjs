@@ -789,7 +789,8 @@ async function main() {
       out.ok = true;
     } else if (type === "status") {
       let accounts = [];
-      try { accounts = await decryptAccounts(); } catch (e) { accounts = []; }
+      let fromCipher = false;
+      try { accounts = await decryptAccounts(); fromCipher = true; } catch (e) { accounts = []; }
       if (!accounts.length) { const c = await pickCreds(); accounts = [c]; }
       const rows = [];
       for (const a of accounts) {
@@ -814,10 +815,12 @@ async function main() {
       out.status = rows;
       out.ok = rows.some(r => r.ok);
       out.msg = "已查询 " + rows.length + " 个账号";
-      if (key) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
+      // 仅当账号来自前端加密数据才回写，避免用 Secret 兜底的单个号覆盖用户全部账号
+      if (key && fromCipher) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
     } else if (type === "receive") {
       let accounts = [];
-      try { accounts = await decryptAccounts(); } catch (e) { accounts = []; }
+      let recvFromCipher = false;
+      try { accounts = await decryptAccounts(); recvFromCipher = true; } catch (e) { accounts = []; }
       if (!accounts.length) { const c = await pickCreds(); accounts = [c]; }
       const only = String(payload.phone || "").trim();
       const targets = only ? accounts.filter(a => String(a.phone) === only) : accounts;
@@ -838,7 +841,7 @@ async function main() {
       }
       // 令牌失效的账号在结果中明确标注，方便前端提示用户重新粘贴
       out.badAccounts = rows.filter(r => !r.ok && /令牌|鉴权|失效/.test(String(r.error || ""))).map(r => r.masked || r.phone);
-      if (key) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
+      if (key && recvFromCipher) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
       out.receiveList = rows;
       out.receive = rows.length === 1 ? rows[0] : null;
       out.ok = rows.some(r => r.ok);
