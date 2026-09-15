@@ -1,15 +1,16 @@
 {
-  "ts": "2026-09-15 11:02:51",
-  "requestId": "probe16-1789470171600-iynuehyo",
+  "ts": "2026-09-15 11:06:20",
+  "requestId": "probe16-1789470380246-n7zr3sll",
   "type": "probe16",
   "ok": true,
-  "msg": "会员日探测完成，共 11 个请求",
+  "msg": "会员日探测完成，共 1 个请求",
   "acctDiag": [
     "cipher失败:缺少加密数据或密钥",
     "store:3"
   ],
   "phone": "13787464642",
   "masked": "137****4642",
+  "jsUrls": [],
   "pagePaths": [],
   "probes": [
     {
@@ -18,74 +19,6 @@
       "status": 200,
       "len": 13427,
       "body": "<!DOCTYPE html><html lang=\"\"><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta content=\"width=device-width,user-scalable=no,initial-scale=1\" name=\"viewport\"><meta content=\"always\" name=\"referrer\"><meta http-equiv=\"Pragma\" content=\"no-cache\"><meta http-equiv=\"Cache-Control\" content=\"no-cache\"><meta http-equiv=\"Expires\" content=\"0\"><link rel=\"icon\" href=\"https://img.mcloud.139.com/portal/cloudCircle/favicon.ico\"><title>loading...</title><script>(function() {\n                window._smReadyFuncs = [];\n                window.SMSdk = {\n                    onBoxDataReady: (boxData) => {\n                        console.log('此时拿到boxData或者缓存的boxId');\n                    },\n                    ready: (fn) => {\n                        fn && _smReadyFuncs.push(fn);\n                    }\n                };\n                window._smConf = {\n                    org"
-    },
-    {
-      "tag": "memberday_info",
-      "url": "https://m.mcloud.139.com/ycloud/memberday/page/info?client=app",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "mCloudDay_info",
-      "url": "https://m.mcloud.139.com/ycloud/mcloudday/page/info?client=app",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "huiyuanri_info",
-      "url": "https://m.mcloud.139.com/ycloud/huiyuanri/page/info?client=app",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "activity_list",
-      "url": "https://m.mcloud.139.com/ycloud/activity/page/list?client=app",
-      "status": 404,
-      "len": 453,
-      "body": "<!DOCTYPE html>\n<html>\n<head>\n<title>Error</title>\n<style>\n    body {\n        width: 35em;\n        margin: 0 auto;\n        font-family: Tahoma, Verdana, Arial, sans-serif;\n    }\n</style>\n</head>\n<body>\n<h1>An error occurred.</h1>\n<p>Sorry, the page you are looking for is currently unavailable.<br/>\nPlease try again later.</p>\n<p>If you are the system administrator of this resource then you should check\nthe error log for details.</p>\n</body>\n</html>\n"
-    },
-    {
-      "tag": "market_huiyuanri",
-      "url": "https://caiyun.feixin.10086.cn/market/huiyuanri/index?marketname=huiyuanri",
-      "err": "This operation was aborted"
-    },
-    {
-      "tag": "market_memberday",
-      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=member_day",
-      "status": 404,
-      "len": 548,
-      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
-    },
-    {
-      "tag": "market_mcloudday",
-      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=mCloudDay",
-      "status": 404,
-      "len": 548,
-      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
-    },
-    {
-      "tag": "market_16",
-      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=sign_in_16",
-      "status": 404,
-      "len": 548,
-      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
-    },
-    {
-      "tag": "vipday",
-      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=vip_day",
-      "status": 404,
-      "len": 548,
-      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
-    },
-    {
-      "tag": "member_day2",
-      "url": "https://caiyun.feixin.10086.cn/market/signin/task/taskList?marketname=memberday",
-      "status": 404,
-      "len": 548,
-      "body": "<html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>\r\n<hr><center>nginx</center>\r\n</body>\r\n</html>\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n<!-- a padding to disable MSIE and Chrome friendly error page -->\r\n"
     }
   ]
 }
