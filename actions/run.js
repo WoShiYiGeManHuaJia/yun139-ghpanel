@@ -1152,7 +1152,8 @@ async function main() {
         try {
           const r = await fetchWithTimeout(url, Object.assign({ headers: H }, opt || {}), 25000);
           const t = await r.text();
-          probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, 900) });
+          const cap = (tag === "page") ? 20000 : 700;
+          probes.push({ tag, url: url.slice(0, 130), status: r.status, len: t.length, body: t.slice(0, cap) });
         } catch (e) { probes.push({ tag, url: url.slice(0, 130), err: String(e.message || e).slice(0, 120) }); }
       }
       // 1) 活动页面
