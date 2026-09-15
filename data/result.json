@@ -1,6 +1,6 @@
 {
-  "ts": "2026-09-15 12:33:08",
-  "requestId": "mday16-1789475588950-sold1jmk",
+  "ts": "2026-09-15 12:36:30",
+  "requestId": "mday16-1789475790938-6lqrd51b",
   "type": "mday16",
   "ok": true,
   "msg": "会员日资格查询完成（3 个账号）",
@@ -17,7 +17,7 @@
       "isMember": true,
       "online": false,
       "activityDay": false,
-      "countdownMs": 50204354,
+      "countdownMs": 49999731,
       "memberDesc": "黄金会员",
       "prizeCount": 22,
       "prizes": [
@@ -144,7 +144,7 @@
       ],
       "reservation": "预约成功",
       "name": "会员日",
-      "message": "等级黄金；预约预约成功；奖品22件；倒计时13小时56分",
+      "message": "等级黄金；已预约；奖品22件；倒计时13小时53分",
       "ok": true
     },
     {
@@ -159,7 +159,7 @@
       "result": "非会员，无资格参加会员日",
       "name": "会员日",
       "message": "等级非会员；非会员，无资格参加会员日",
-      "ok": true
+      "ok": false
     },
     {
       "phone": "17274079953",
@@ -168,7 +168,7 @@
       "isMember": true,
       "online": false,
       "activityDay": false,
-      "countdownMs": 50199868,
+      "countdownMs": 49995780,
       "memberDesc": "白银会员",
       "prizeCount": 22,
       "prizes": [
@@ -295,7 +295,7 @@
       ],
       "reservation": "预约成功",
       "name": "会员日",
-      "message": "等级白银；预约预约成功；奖品22件；倒计时13小时56分",
+      "message": "等级白银；已预约；奖品22件；倒计时13小时53分",
       "ok": true
     }
   ]
