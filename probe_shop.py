@@ -23,8 +23,8 @@ with sync_playwright() as pw:
     pg=ctx.new_page()
     apis={}
     def on_resp(r):
-        u=r.url()
-        if "/v1/" in u or "json" in (r.headers().get("content-type") or ""):
+        u=r.url
+        if "/v1/" in u or "json" in ((r.headers or {}).get("content-type") or ""):
             apis[u]=r.status
     pg.on("response", on_resp)
     for name,u in TARGETS:
