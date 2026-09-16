@@ -1,0 +1,27 @@
+Cookie 长度=1258
+
+===== A. 个人中心页面候选（看是否 SSR 出数字）=====
+  [0] www.10086.cn/my/                              字节=114     命中=无
+  [0] www.10086.cn/my/index.html                    字节=114     命中=无
+  [0] www.10086.cn/personal/                        字节=114     命中=无
+  [0] www.10086.cn/personal/index.html              字节=114     命中=无
+  [0] www.10086.cn/index.html                       字节=114     命中=无
+  [0] www.10086.cn/                                 字节=114     命中=无
+  [200] shop.10086.cn/i/?f=home                       字节=20874   命中=无
+  [200] shop.10086.cn/i/                              字节=20874   命中=无
+
+===== B. touch 掌厅 v1 接口（带新 Cookie 重试）=====
+  [200] /v1/fee/real/17274079953
+       {"data":{"outParam":"S1RPNGhzaVFEN21OY1VzWkx4QXdXdytGcHBSa0pKTFkvZGlzVkhpL3hCMFF5ZUhtQ1F1QkxGVWZMamw1MnJER1gxeDdjc1BRaEg5NApFaDV1Z0FSeVN0S1gxWEJRa0hjWmpHNVlJUjNRNXo3eHA3Zzl2dHBMYmtXMWJPUEFzNkJkeU5nYVFHWllUM0hLcGw4anhvbDB
+  [200] /v1/fee/planbal/17274079953
+       {"data":{"outParam":"Um5Jd2tKVjB5TXBQYVg4ditVa2xacGRFZnl6UlFTdVVjNUdCTWJXakhUTXFLUWNVbEEwSFBwMDBRMzZjcS9zT250YUVhTVlKWEdMWgp4dzg4eTIydmtDeTN2V2IrQWFYT2t4OFN0T1JqRXp6N2RlMTJLTHhnU2ZZSUJBSFhBRlE4Z21jWEIyMjRIRkhHMDlSNzBzaGp
+  [200] /v1/cust/flowbalance/17274079953?channel=0705
+       {"data":null,"retCode":"999999","retMsg":"系统异常","sOperTime":null}
+  [200] /v1/cust/userFlowInfoQry/17274079953
+       <!DOCTYPE html> <html xmlns="http://www.w3.org/1999/xhtml"> 	<head> 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 	<title>404页面—中国移动网上商城</title> 	<script>         (function (doc, win) {     
+
+===== C. 10086.cn 自有余量接口探测 =====
+  [0] www.10086.cn/api/my/balance                        ERR <urlopen error [SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled (_ssl.c:1000)>
+  [0] www.10086.cn/my/api/balance                        ERR <urlopen error [SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled (_ssl.c:1000)>
+  [0] www.10086.cn/rest/my/balance                       ERR <urlopen error [SSL: UNSAFE_LEGACY_RENEGOTIATION_DISABLED] unsafe legacy renegotiation disabled (_ssl.c:1000)>
+  [200] shop.10086.cn/i/v1/fee/real/17274079953            {"data":{"outParam":"S1RPNGhzaVFEN21OY1VzWkx4QXdXdytGcHBSa0pKTFkvZGlzVkhpL3hCMFF5ZUhtQ1F1QkxGVWZMamw1MnJER1gxeDdjc1BRaEg5NApFaDV1Z0FSeVN0S1gxWEJRa0hjW
