@@ -1320,7 +1320,9 @@ async function main() {
       // 疯狂抢：开闸前 RUSH_BEFORE_MS 起，每 RUSH_INTERVAL_MS 直打优先奖品
       const RUSH_BEFORE_MS = Number(payload.rushBeforeSec || 20) * 1000;   // 提前 20 秒
       const RUSH_INTERVAL_MS = Number(payload.rushIntervalMs || 500);      // 每 0.5 秒一次
-      const RUSH_WINDOW_MS = Number(payload.rushWindowSec || 300) * 1000;  // 最长 5 分钟，之后回归常规轮询
+      const RUSH_WINDOW_MS = Number(payload.rushWindowSec || 600) * 1000;  // 最长 10 分钟
+      //   （原 5 分钟太短：GitHub cron 常延迟 5-15 分钟，启动即已开闸，
+      //     窗口过期后退回 5s 轮询，错过开闸瞬间）
 
       const ra = await resolveAccounts();
       out.acctDiag = ra.diag;
@@ -1519,6 +1521,8 @@ async function main() {
           it.excludedCount = excludedCount;
           it.prizeCount = all.length;
           const got = [], tried = [];
+          let exhaust415 = 0;
+          const EXHAUST_ABORT = Number(payload.exhaustAbort || 5);   // 连续 5 个 415 即判定当天已空
           // 统计每次 verify 的真实返回码 —— 之前异常被 catch 吞成 {}，
           // 既不记录也不报错，于是 tried 一直是 0，看不出到底为什么失败。
           const codeStat = {};
@@ -1555,12 +1559,24 @@ async function main() {
             }
             // 兜底：一轮都没记录过（说明 verify 一直返回未知码）也要留痕
             if (!pushed) tried.push({ id: pz.prizeId, name: pz.prizeName, code: lastCode, msg: lastMsg });
+            // 415 = 奖品单日已耗尽（不是"库存不足"，是当天配额发完了）。
+            // 连续遇到 EXHAUST_ABORT 个 415 说明整体已空，再刷只会浪费请求并招致限流。
+            if (String(lastCode) === "415") {
+              exhaust415++;
+              if (exhaust415 >= EXHAUST_ABORT) {
+                it.exhausted = true;
+                it.exhaustAt = exhaust415;
+                break;
+              }
+            }
             await new Promise(r => setTimeout(r, 600));
           }
           it.tried = tried.slice(0, 25);
           it.verifyCodes = codeStat;
           it.got = got;
-          it.result = got.length ? ("抢到 " + got.length + " 件：" + got.join("、")) : "未抢到（已试 " + tried.length + " 件）";
+          it.result = got.length ? ("抢到 " + got.length + " 件：" + got.join("、"))
+            : (it.exhausted ? ("未抢到（当天配额已空：连续 " + it.exhaustAt + " 件返回415「单日已耗尽」，已停止）")
+                            : ("未抢到（已试 " + tried.length + " 件）"));
           if (got.length) anyGot = true;
         } catch (e) {
           it.err = String(e.message || e).slice(0, 140);
