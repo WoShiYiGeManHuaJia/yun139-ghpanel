@@ -1,0 +1,36 @@
+== 1. 取完整 outParam ==
+HTTP=200  len=323
+outParam 长度=232
+前200: S1RPNGhzaVFEN21OY1VzWkx4QXdXdytGcHBSa0pKTFkvZGlzVkhpL3hCMFF5ZUhtQ1F1QkxGVWZMamw1MnJER1gxeDdjc1BRaEg5NApFaDV1Z0FSeVN0S1gxWEJRa0hjWmpHNVlJUjNRNXo3eHA3Zzl2dHBMYmtXMWJPUEFzNkJkeU5nYVFHWllUM0hLcGw4anhvbDBt
+
+== 2. 基础解码尝试 ==
+  base64 -> 174 字节, 前80: b'KTO4hsiQD7mNcUsZLxAwWw+FppRkJJLY/disVHi/xB0QyeHmCQuBLFUfLjl52rDGX1x7csPQhH94\nEh5'
+  base64+urlsafe -> 174 字节, 前80: b'KTO4hsiQD7mNcUsZLxAwWw+FppRkJJLY/disVHi/xB0QyeHmCQuBLFUfLjl52rDGX1x7csPQhH94\nEh5'
+
+== 3. 抓掌厅 JS 找 AES 密钥/算法 ==
+  common.js OK 2294 字节
+     含 iv
+     含 padding
+  aes.js OK 2294 字节
+     含 iv
+     含 padding
+  crypto.js OK 2294 字节
+     含 iv
+     含 padding
+  config.js OK 2294 字节
+     含 iv
+     含 padding
+  app.js OK 2294 字节
+     含 iv
+     含 padding
+
+== 4. 掌厅首页 HTML 里的 JS 引用 ==
+首页 HTTP=200 len=24194
+   https://res.wx.qq.com/open/js/jweixin-1.3.2.js
+   /i/mobile/component/gdp-full-H5.js
+   /i/mobile/pkg/requirepkg_46fe383.js
+   /i/mobile/pkg/requiretool_3713415.js
+   https://res.app.coc.10086.cn/appother/js/public/leadeon.js?t=
+   /i/mobile/component/qaria1.0.7.js
+   https://www.cmpassport.com/NumberAbility/jssdk/jssdk.min.js
+   /i/mobile/component/lc_search_b4e7d49.js
