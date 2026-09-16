@@ -1,11 +1,18 @@
 name: yun139-mday16
 
 # 每月16号会员日（星动日）自动抢奖品 —— 优先目标：星巴克
-# 北京 09:20 启动（UTC 01:20），轮询等开闸，黄金/白银场 10:30
-# GitHub cron 用 UTC，且可能延迟数分钟，故提前启动并长时等待
+#
+# 官方规则（活动规则页）：每月16日10点开启，奖品分三场补货
+#   钻石会员 / 云手机至尊版：10:00、12:00、15:00
+#   黄金 / 白银会员：        10:30、12:30、15:30   ← 我们的号是黄金+白银
+# 所以一天有三枪，不是只有早上一次。
+#
+# 三场各提前 5 分钟启动（预热+等开闸）；GitHub cron 用 UTC 且可能延迟数分钟。
 on:
   schedule:
-    - cron: '20 1 16 * *'
+    - cron: '20 1 16 * *'    # 北京 09:20 → 抢 10:30 场
+    - cron: '25 4 16 * *'    # 北京 12:25 → 抢 12:30 场（第一次补货）
+    - cron: '25 7 16 * *'    # 北京 15:25 → 抢 15:30 场（第二次补货）
   workflow_dispatch:
     inputs:
       mode:
@@ -29,10 +36,24 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+      # 按 UTC 小时判断场次，设定不同的等待上限：
+      #   09:20 场要等到 10:30（约 70 分钟）→ 5100s
+      #   12:25 / 15:25 场只需等 5 分钟 → 2400s（留足 cron 延迟余量）
+      - name: 计算本场等待上限
+        id: cfg
+        run: |
+          H=$(date -u +%H)
+          case "$H" in
+            01|00) W=5100 ;;   # 09:20 场
+            *)     W=2400 ;;   # 12:25 / 15:25 场
+          esac
+          echo "maxWaitSec=$W" >> "$GITHUB_OUTPUT"
+          echo "本场 UTC 小时=$H 等待上限=${W}s"
+
       - name: Run mday16
         env:
           EVENT_TYPE: mday16
-          PAYLOAD: ${{ github.event.inputs.mode && format('{{"mode":"{0}","priority":"星巴克","maxWaitSec":5100,"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000}}', github.event.inputs.mode) || '{"mode":"grab","priority":"星巴克","maxWaitSec":5100,"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000}' }}
+          PAYLOAD: ${{ github.event.inputs.mode && format('{{"mode":"{0}","priority":"星巴克","maxWaitSec":{1},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000}}', github.event.inputs.mode, steps.cfg.outputs.maxWaitSec) || format('{{"mode":"grab","priority":"星巴克","maxWaitSec":{0},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000}}', steps.cfg.outputs.maxWaitSec) }}
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
           DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
