@@ -1,0 +1,22 @@
+name: probe-cloud
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir -p data && python3 probe_cloud.py 2>&1 | tee data/probe_cloud.txt
+        env:
+          CLOUD139_COOKIE: ${{ secrets.CLOUD139_COOKIE }}
+      - name: commit
+        run: |
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add -f data/probe_cloud.txt
+          git commit -m pc || echo no-change
+          git push || echo nothing
