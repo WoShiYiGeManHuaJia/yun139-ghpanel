@@ -1,0 +1,26 @@
+name: probe-pw
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install playwright -q && python3 -m playwright install chromium --with-deps
+      - run: mkdir -p data && python3 probe_pw.py 2>&1 | tee data/probe_pw.txt
+        env:
+          CMCC_COOKIE: ${{ secrets.CMCC_COOKIE }}
+          CMCC_PHONE: ${{ secrets.CMCC_PHONE }}
+      - name: commit
+        run: |
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add -f data/probe_pw.txt
+          git commit -m pp || echo no-change
+          git push || echo nothing
