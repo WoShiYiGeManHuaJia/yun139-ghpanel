@@ -1,0 +1,36 @@
+name: probe-persist
+on:
+  workflow_dispatch:
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install playwright -q && python3 -m playwright install chromium --with-deps
+      - name: run
+        env:
+          CMCC_COOKIE: ${{ secrets.CMCC_COOKIE }}
+        run: python3 probe_persist.py 2>&1 | tee run_out.txt
+      - name: upload
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python3 - <<'EOF'
+          import os,json,base64,urllib.request
+          tok=os.environ["GH_TOKEN"]
+          R="https://api.github.com/repos/WoShiYiGeManHuaJia/yun139-ghpanel/"
+          H={"Authorization":f"Bearer {tok}","User-Agent":"v","Accept":"application/vnd.github+json","Content-Type":"application/json"}
+          try: content=open("run_out.txt","rb").read().decode("utf-8","ignore")
+          except Exception: content="NO OUTPUT"
+          body={"message":"persist result","content":base64.b64encode(content.encode()).decode()}
+          try:
+              old=json.loads(urllib.request.urlopen(urllib.request.Request(R+"contents/data/probe_persist.txt",headers=H),timeout=60).read().decode())
+              body["sha"]=old["sha"]
+          except Exception: pass
+          print(urllib.request.urlopen(urllib.request.Request(R+"contents/data/probe_persist.txt",data=json.dumps(body).encode(),headers=H,method="PUT"),timeout=120).status)
+          EOF
