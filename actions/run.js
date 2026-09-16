@@ -1519,28 +1519,46 @@ async function main() {
           it.excludedCount = excludedCount;
           it.prizeCount = all.length;
           const got = [], tried = [];
+          // 统计每次 verify 的真实返回码 —— 之前异常被 catch 吞成 {}，
+          // 既不记录也不报错，于是 tried 一直是 0，看不出到底为什么失败。
+          const codeStat = {};
+          const noteCode = (c) => { const k = String(c); codeStat[k] = (codeStat[k] || 0) + 1; };
           for (const pz of all) {
             const isPrio = PRIO_ID && String(pz.prizeId) === String(PRIO_ID);
             const rounds = isPrio ? GRAB_ROUNDS : 3;
+            let pushed = false;
+            let lastCode = "unset", lastMsg = "";
             for (let round = 0; round < rounds; round++) {
-              const vf = await api("/gift/verify", { prizeId: pz.prizeId }).catch(() => ({}));
+              // ★ 不再吞异常：把错误记下来，否则永远查不到真实原因
+              const vf = await api("/gift/verify", { prizeId: pz.prizeId })
+                .catch(e => ({ __err: String(e && e.message || e).slice(0, 120) }));
+              lastCode = String(vf.code);
+              lastMsg = String(vf.msg || vf.__err || "");
+              noteCode(vf.code);
               if (String(vf.code) === "0") {
-                const rc = await api("/gift/receive", { prizeId: pz.prizeId }).catch(() => ({}));
-                tried.push({ id: pz.prizeId, name: pz.prizeName, code: rc.code, msg: rc.msg || "" });
+                const rc = await api("/gift/receive", { prizeId: pz.prizeId })
+                  .catch(e => ({ __err: String(e && e.message || e).slice(0, 120) }));
+                tried.push({ id: pz.prizeId, name: pz.prizeName, code: rc.code, msg: String(rc.msg || rc.__err || "") });
+                pushed = true;
                 if (String(rc.code) === "0") { got.push(pz.prizeName || ("#" + pz.prizeId)); break; }
                 if (String(rc.code) === "10005") break;      // 未开启
                 if (/已领取|领取过|已达上限/.test(String(rc.msg || ""))) break;
               } else {
-                if (String(vf.code) === "10005") { tried.push({ id: pz.prizeId, name: pz.prizeName, code: vf.code, msg: vf.msg }); break; }
+                if (String(vf.code) === "10005") { tried.push({ id: pz.prizeId, name: pz.prizeName, code: vf.code, msg: String(vf.msg || "") }); pushed = true; break; }
                 if (/已领取|领取过|已达上限|无资格|不符合/.test(String(vf.msg || ""))) {
-                  tried.push({ id: pz.prizeId, name: pz.prizeName, code: vf.code, msg: vf.msg }); break;
+                  tried.push({ id: pz.prizeId, name: pz.prizeName, code: vf.code, msg: String(vf.msg || "") }); pushed = true; break;
                 }
+                // 未知返回码：第一轮就记一笔，保证 tried 不会是 0
+                if (round === 0) { tried.push({ id: pz.prizeId, name: pz.prizeName, code: vf.code, msg: lastMsg }); pushed = true; }
               }
               await new Promise(r => setTimeout(r, 900));
             }
+            // 兜底：一轮都没记录过（说明 verify 一直返回未知码）也要留痕
+            if (!pushed) tried.push({ id: pz.prizeId, name: pz.prizeName, code: lastCode, msg: lastMsg });
             await new Promise(r => setTimeout(r, 600));
           }
           it.tried = tried.slice(0, 25);
+          it.verifyCodes = codeStat;
           it.got = got;
           it.result = got.length ? ("抢到 " + got.length + " 件：" + got.join("、")) : "未抢到（已试 " + tried.length + " 件）";
           if (got.length) anyGot = true;
@@ -1558,6 +1576,12 @@ async function main() {
         if (x.reservation) bits.push(x.reservation === "预约成功" ? "已预约" : ("预约" + x.reservation));
         if (x.prizeCount) bits.push("奖品" + x.prizeCount + "件" + (x.excludedCount ? "（已排除" + x.excludedCount + "件：含" + (x.exclude || "") + "）" : ""));
         if (x.rushTries) bits.push("疯狂抢" + x.rushTries + "次");
+        if (x.verifyCodes) {
+          const cs = Object.entries(x.verifyCodes)
+            .sort((a, b) => b[1] - a[1]).slice(0, 5)
+            .map(([k, v]) => k + "×" + v).join(" ");
+          bits.push("verify返回码[" + cs + "]");
+        }
         if (x.priority && x.prioId && x.prioId !== "清单中未找到") bits.push("优先目标" + x.priority + "(" + x.prioId + ")");
         if (x.countdownMs) bits.push("倒计时" + fmtCountdown(Number(x.countdownMs)));
         if (x.fastLane) bits.push(x.fastLane);
