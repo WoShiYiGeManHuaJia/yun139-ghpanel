@@ -1,0 +1,45 @@
+name: yun139-add-account
+
+# 把仓库 Secret NEW_ACCOUNTS_JSON 里的账号合并进 data/accounts.enc。
+# ⚠ 账号只走 Secret，绝不用 workflow_dispatch inputs —— 本仓库是公开的，
+#    inputs 会在 UI 与运行日志里明文可见，Secret 则自动脱敏。
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: yun139-panel-result
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 合并账号到 accounts.enc
+        env:
+          PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
+          NEW_ACCOUNTS_JSON: ${{ secrets.NEW_ACCOUNTS_JSON }}
+        run: node actions/add-account.js
+      - name: 提交
+        run: |
+          set -e
+          git config user.name "yun139-panel-bot"
+          git config user.email "yun139-panel-bot@users.noreply.github.com"
+          mkdir -p /tmp/out && cp data/accounts.enc /tmp/out/accounts.enc
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git checkout -f -B main FETCH_HEAD
+            cp /tmp/out/accounts.enc data/accounts.enc
+            git add data/accounts.enc
+            if git diff --cached --quiet; then echo "账号无变化，跳过提交"; exit 0; fi
+            git commit -m "chore: merge accounts $(date -u +%Y%m%d%H%M%S)"
+            if git push origin main; then echo "提交成功"; exit 0; fi
+            echo "第 $i 次推送失败，重试…"; sleep 8
+          done
+          echo "提交失败：已达最大重试次数"; exit 1
