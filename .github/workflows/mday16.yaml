@@ -53,7 +53,7 @@ jobs:
       - name: Run mday16
         env:
           EVENT_TYPE: mday16
-          PAYLOAD: ${{ github.event.inputs.mode && format('{{"mode":"{0}","priority":"星巴克","maxWaitSec":{1},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000}}', github.event.inputs.mode, steps.cfg.outputs.maxWaitSec) || format('{{"mode":"grab","priority":"星巴克","maxWaitSec":{0},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000}}', steps.cfg.outputs.maxWaitSec) }}
+          PAYLOAD: ${{ github.event.inputs.mode && format('{{"mode":"{0}","priority":"星巴克","maxWaitSec":{1},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000,"exclude":"支付宝","rushBeforeSec":20,"rushIntervalMs":500,"rushWindowSec":300}}', github.event.inputs.mode, steps.cfg.outputs.maxWaitSec) || format('{{"mode":"grab","priority":"星巴克","maxWaitSec":{0},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000,"exclude":"支付宝","rushBeforeSec":20,"rushIntervalMs":500,"rushWindowSec":300}}', steps.cfg.outputs.maxWaitSec) }}
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
           DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}

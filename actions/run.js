@@ -1315,6 +1315,12 @@ async function main() {
       const PRIORITY = String(payload.priority || "星巴克").trim();
       const GRAB_ROUNDS = Number(payload.grabRounds || 8);            // 优先奖品重试轮数
       const FAST_LANE_MS = Number(payload.fastLaneMs || 180000);      // 开闸前多久开始抢跑探测
+      // 排除名单：名字含这些关键词的奖品一律不碰（默认排除支付宝红包）
+      const EXCLUDE = String(payload.exclude || "支付宝").split(/[,，\s]+/).filter(Boolean);
+      // 疯狂抢：开闸前 RUSH_BEFORE_MS 起，每 RUSH_INTERVAL_MS 直打优先奖品
+      const RUSH_BEFORE_MS = Number(payload.rushBeforeSec || 20) * 1000;   // 提前 20 秒
+      const RUSH_INTERVAL_MS = Number(payload.rushIntervalMs || 500);      // 每 0.5 秒一次
+      const RUSH_WINDOW_MS = Number(payload.rushWindowSec || 300) * 1000;  // 最长 5 分钟，之后回归常规轮询
 
       const ra = await resolveAccounts();
       out.acctDiag = ra.diag;
@@ -1403,7 +1409,7 @@ async function main() {
             const r0 = g0.result || {};
             const a0 = [].concat(r0.nationalPrizeList || [], r0.provPrizeList || [], r0.extGiftList || []);
             const hit = a0.find(x => x && PRIORITY && String(x.prizeName || "").includes(PRIORITY));
-            if (hit) PRIO_ID = hit.prizeId;
+            if (hit && !EXCLUDE.some(k => String(hit.prizeName || "").includes(k))) PRIO_ID = hit.prizeId;
             it.priority = PRIORITY;
             it.prioId = PRIO_ID || "清单中未找到";
           } catch (e) { it.prioId = "取清单失败:" + String(e.message || e).slice(0, 40); }
@@ -1438,6 +1444,7 @@ async function main() {
             const FAST_MS = Number(payload.fastPollSec || 5) * 1000;
             let waited = Math.round((Date.now() - t0) / 1000);
             let checked = 0;
+            let rushStart = 0;
             while (Date.now() - t0 < MAX_WAIT_MS) {
               const i2 = await api("/common/activityInfo?marketName=mCloudDay").catch(() => ({}));
               checked++;
@@ -1447,9 +1454,33 @@ async function main() {
                 it.online = R2.online; it.activityDay = R2.activityDay;
                 break;
               }
-              // 快车道：临近开闸时直接探测优先奖品，verify 一放行就立刻领取
-              // （比等 online 标志更快，服务端有时先放行 verify）
-              if (PRIO_ID && !fastGot && (R2.countDownTimeStamp || 0) < FAST_LANE_MS) {
+              // 疯狂抢：开闸前 RUSH_BEFORE_MS 起进入，每 0.5 秒直打优先奖品，
+              // 不等 online 标志（服务端常先放行 verify/receive，后才更新 online）。
+              const cdNow = Number(R2.countDownTimeStamp || 0);
+              if (PRIO_ID && !fastGot && cdNow <= RUSH_BEFORE_MS) {
+                if (rushStart === 0) { rushStart = Date.now(); it.rushStartAt = new Date().toISOString(); }
+                // 窗口保护：疯狂模式最长 RUSH_WINDOW_MS，之后回归常规轮询，避免请求过密被限流
+                if (Date.now() - rushStart < RUSH_WINDOW_MS) {
+                  const vf = await api("/gift/verify", { prizeId: PRIO_ID }).catch(() => ({}));
+                  it.fastLaneTries = (it.fastLaneTries || 0) + 1;
+                  it.rushTries = (it.rushTries || 0) + 1;
+                  if (String(vf.code) === "0") {
+                    const rc = await api("/gift/receive", { prizeId: PRIO_ID }).catch(() => ({}));
+                    it.fastLaneCode = rc.code; it.fastLaneMsg = rc.msg || "";
+                    if (String(rc.code) === "0") {
+                      fastGot = true; open = true; it.waitedSec = waited; it.checked = checked;
+                      it.fastLane = "疯狂抢抢到（提前 20s，0.5s/次，共 " + it.rushTries + " 次）";
+                      it.got = [PRIORITY]; it.fastGot = true;
+                      break;
+                    }
+                  }
+                  await new Promise(r => setTimeout(r, RUSH_INTERVAL_MS));
+                  waited = Math.round((Date.now() - t0) / 1000);
+                  continue;
+                }
+              }
+              // 常规快车道：更早探测，间隔较长（5s）
+              if (PRIO_ID && !fastGot && cdNow > RUSH_BEFORE_MS && cdNow < FAST_LANE_MS) {
                 const vf = await api("/gift/verify", { prizeId: PRIO_ID }).catch(() => ({}));
                 it.fastLaneTries = (it.fastLaneTries || 0) + 1;
                 if (String(vf.code) === "0") {
@@ -1463,7 +1494,7 @@ async function main() {
                   }
                 }
               }
-              if ((R2.countDownTimeStamp || 0) > 300000) {
+              if (cdNow > 300000) {
                 await new Promise(r => setTimeout(r, 60000));
               } else {
                 await new Promise(r => setTimeout(r, FAST_MS));
@@ -1477,9 +1508,15 @@ async function main() {
           const gl = await api("/gift/list");
           const gr = gl.result || {};
           const prioOf = (x) => (PRIO_ID && String(x.prizeId) === String(PRIO_ID)) ? 0 : 1;
+          const isExcluded = (x) => EXCLUDE.some(k => String(x.prizeName || "").includes(k));
           const all = [].concat(gr.nationalPrizeList || [], gr.provPrizeList || [], gr.extGiftList || [])
             .filter(x => x && x.prizeId)
+            .filter(x => !isExcluded(x))
             .sort((a, b) => (prioOf(a) - prioOf(b)) || ((a.sort || 99) - (b.sort || 99)));
+          it.exclude = EXCLUDE.join("/");
+          const excludedCount = [].concat(gr.nationalPrizeList || [], gr.provPrizeList || [], gr.extGiftList || [])
+            .filter(x => x && x.prizeId && isExcluded(x)).length;
+          it.excludedCount = excludedCount;
           it.prizeCount = all.length;
           const got = [], tried = [];
           for (const pz of all) {
@@ -1519,7 +1556,8 @@ async function main() {
         const bits = [];
         bits.push("等级" + lv);
         if (x.reservation) bits.push(x.reservation === "预约成功" ? "已预约" : ("预约" + x.reservation));
-        if (x.prizeCount) bits.push("奖品" + x.prizeCount + "件");
+        if (x.prizeCount) bits.push("奖品" + x.prizeCount + "件" + (x.excludedCount ? "（已排除" + x.excludedCount + "件：含" + (x.exclude || "") + "）" : ""));
+        if (x.rushTries) bits.push("疯狂抢" + x.rushTries + "次");
         if (x.priority && x.prioId && x.prioId !== "清单中未找到") bits.push("优先目标" + x.priority + "(" + x.prioId + ")");
         if (x.countdownMs) bits.push("倒计时" + fmtCountdown(Number(x.countdownMs)));
         if (x.fastLane) bits.push(x.fastLane);
