@@ -1,0 +1,23 @@
+name: probe-api
+on:
+  workflow_dispatch:
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - run: pip install playwright -q && python3 -m playwright install chromium --with-deps
+      - run: mkdir -p data && python3 probe_api.py 2>&1 | tee data/probe_api.txt
+        env:
+          CMCC_COOKIE: ${{ secrets.CMCC_COOKIE }}
+      - name: commit
+        run: |
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add -f data/probe_api.txt
+          git commit -m pa || echo no-change
+          git push || echo nothing
