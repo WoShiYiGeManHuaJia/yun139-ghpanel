@@ -1,0 +1,61 @@
+{
+  "ts": "2026-09-16T12:39:26.404Z",
+  "phone": "17274079953",
+  "pages": [
+    {
+      "url": "https://yun.139.com/m/#/main",
+      "status": 200,
+      "title": "中国移动云盘",
+      "bal": false,
+      "text": "文件\n\n群组\n\n我的\n\n17274079953\n文档\n图片\n视频\n保险箱\n活动\n回收站\n全部\n系统繁忙，请稍后再试\n刷新\n提示\n当前登录已失效，请重新登录\n确定"
+    },
+    {
+      "url": "https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1427",
+      "status": 200,
+      "title": "移动云盘云朵中心",
+      "bal": false,
+      "text": "温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。  温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。  \n登录\n奖\n品\n规\n则\n\n0\n\n云盘专属AI豆\n\n*点击页面任意处将前往中国移动云盘APP\n\n戳我看看吧～\n\n本月已签到\n0\n天\n\n提醒我每天来\n\n周一\n周二\n周三\n周四\n周五\n周六\n周日\n\n未签\n\n1\n\n未签\n\n2\n\n未签\n\n3\n\n未签\n\n4\n\n未签\n\n5\n\n未签\n\n6\n\n未签\n\n7\n\n热门活动\n\n做任务\n\n兑好礼\n\n下月签到领惊喜福利\n+50豆\n\n连续签到月月可领\n\n立即预定\n绑定公众号\n+200豆\n\n云盘动态实时推送\n\n去绑定\n开启备份领好礼\n首月+400豆\n\n开启备份，云端无损存储\n\n去开启\n开启备份领好礼\n+200豆\n\n开启备份，云端无损存储\n\n去开启\n开启云盘APP通知领好礼\n+200豆\n\n福利活动实时提醒\n\n去开启\n连续31天开启云盘APP通知\n+200豆完成进度(0/31)\n去开启\n当月上传文件满100个\n\n满20个+50豆\n满100个+80豆\n去完成\n全部任务\n精彩福利\n更多精彩\n活动规则\n\n一、活动对象\n\n中国移动云盘用户(不包含港澳台用户、虚拟运营商号码、物联网卡用户)\n\n二、活动时间\n\n2026年1月1日-2026年12月31日\n\n三、签到说明\n\n1）登录中国移动云盘APP/中国移动云盘小程序/139邮箱APP，进入云朵中心活动页面即可完成每日签到，并获得签到奖励3豆。连续签到第7天、第14天、第28天可获得连签礼。用户在任意一端签到成功，则在另外一端不能重复签到。\n\n2）通过云朵中心获得的云盘专属AI豆仅限在本活动或关联活动页面内使用，可用于奖品兑换或抽奖获得的奖品仅支持发放至参与活动的本机号码。\n\n3）云盘专属AI豆有效期：用户领取但未使用的AI豆将在每个自然年底过期，到期将会对过期AI豆进行作废处理。2026年的AI豆将在12月31日23:59:59过期，过期后未使用的AI豆将自动失效，请在有效期内尽快使用。\n\n4）云盘专属AI豆说明：用户通过任务积累的AI豆需手动领取，每周（周日0:00-周六24:00）未及时领取的AI豆将于次周周日24:00失效。\n\n5）因活动参与用户较多，云盘专属AI豆可能存在延迟到账情况，请耐心等待。\n\n6）2026年7月31日起，云朵中心原 “云朵” 正式更名为 “云盘专属AI豆”。本次仅作名称调整，已获得的云朵将等额转为云盘专属AI豆，原有发放规则、使用范围及有效期保持不变。\n\n四、奖品兑换说明\n\n1）根据市场变化，云朵中心可调整云盘专属AI豆累计规则、更换奖品清单或调整兑换所需AI豆以及本规则其他内容，相关内容以云朵中心规则最新公示为准，可供兑换奖品种类及兑换值以兑换当日云朵中心福利专区公布内容为准。\n\n2）用户兑奖前，请仔细阅读奖品详情，确认兑换后，用户不可要求主办方取消兑奖及退回云盘专属AI豆。\n\n3）2025年11月26日起，云朵中心部分奖品仅限中国移动用户可兑换，具体可见各奖品详情。\n\n五、奖品说明\n\n1）活动奖品、兑奖规则、兑奖所需云盘专属AI豆请以用户登录活动后的的页面信息为准，数量有限，派完即止，奖品与兑换所需云盘专属AI豆将进行不定期调整，请以活动页信息为准。\n\n2）活动奖品兑换后领奖有效期至当月最后一天23:59:59，请在有效期内前往【领奖专区】点击【我要领奖】领取使用，逾期未领取视为放弃领奖处理，请及时领取使用。\n\n3）兑换奖品或者抽奖后，可通过奖品记录或者中国移"
+    }
+  ],
+  "api": [
+    "https://dc.cmicapm.com:7080/webid",
+    "https://yun.139.com/m/static/version.json?timestamp=1789562372400",
+    "https://yun.139.com/caiyun/openapi/manager/tracking.icon?keyword=Wap.All.Pageload&actionTime=2026-09-16+12:39:32",
+    "https://yun.139.com/caiyun/aas/tellin/forawd/nd.ILog.recordOprLogEx",
+    "https://yun.139.com/orchestration/group-rebuild/member/v1.0/queryAvailableBenefit",
+    "https://yun.139.com/platformInfo/advertapi/adv-filter/adv-filter/AdInfoFilter/getAdInfos",
+    "https://middle.yun.139.com/openapi/interNetworkTransfer/queryConfig",
+    "https://dc.cmicapm.com:7080/list",
+    "https://datacenter.mail.10086.cn/datacenter/",
+    "https://user-njs.yun.139.com/user/status/query",
+    "https://yun.139.com/m/undefined/file/list",
+    "https://yun.139.com/orchestration/auth-rebuild/token/v1.0/querySpecToken",
+    "https://user-njs.yun.139.com/user/userPrivacyValidate",
+    "https://yun.139.com/orchestration/group-rebuild/remind/v1.0/queryUserGroupRemind",
+    "https://user-njs.yun.139.com/user/getUser",
+    "https://yun.139.com/m/undefined/safebox/status",
+    "https://yun.139.com/platformInfo/advertapi/adv-filter/adv-filter/advertReported/reported",
+    "https://data.cmicapm.com:8080/newapp/web-config?v=3.7.0-zhongyihulianwang.1&_r=1789562380033&c=25f5153b46354b008f224909eb38d7dc",
+    "https://data.cmicapm.com:8080/newapp/action?e=55E5FBA04BB00D99284B12DA6D2DDA6C44B53500DE74B94753CB0BE414C18088092A87B099F8C598B9B23CAE79BDE46942CC0FAA4AA5E53A36F531CBF52F866AB8C9DB1DA7AD5A45092737A311",
+    "https://data.cmicapm.com:8080/newapp/action?e=55E5FBA04BB00D99284B12DA6D2DDA6C44B53500DE74B94753CB0BE414C18088092A87B099F8C598B9B23CAE79BDE46942CC0FAA4AA5E53A36F531CBF52F866AB8C9DB1DA7AD5A45092737A311",
+    "https://data.cmicapm.com:8080/newapp/action?e=55E5FBA04BB00D99284B12DA6D2DDA6C44B53500DE74B94753CB0BE414C18088092A87B099F8C598B9B23CAE79BDE46942CC0FAA4AA5E53A36F531CBF52F866AB8C9DB1DA7AD5A45092737A311",
+    "https://slw.h5cmpassport.com:9090/deviceprofile/v4",
+    "https://m.mcloud.139.com/ycloud/wechat/share?url=https%3A%2F%2Fm.mcloud.139.com%2Fportal%2Fmobilecloud%2Findex.html%3Fpath%3Dnewsignin%26sourceid%3D1427",
+    "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/data.json",
+    "https://m.mcloud.139.com/ycloud/manager/commonMarketconfig/getActivityConfig?marketName=sign_in_3",
+    "https://m.mcloud.139.com/ycloud/manager/commonMaintain/isMaintain?marketName=sign_in_3",
+    "https://m.mcloud.139.com/ycloud/manager/util/notice?marketName=sign_in_3",
+    "https://m.mcloud.139.com/ycloud/advert/getAdInfo",
+    "https://m.mcloud.139.com/ycloud/manager/publicParam/getValue?marketName=login&paramName=loginSwitch",
+    "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+    "https://m.mcloud.139.com/ycloud/advert/getAdvertInfo",
+    "https://m.mcloud.139.com/ycloud/auth-service/auth/getAccount",
+    "https://m.mcloud.139.com/ycloud/signin/public/text/sign_in_3/dialog.json",
+    "https://m.mcloud.139.com/ycloud/signin/public/text/sign_in_3/floatWindow.json",
+    "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
+    "https://data.cmicapm.com:8080/newapp/web-config?v=3.7.0-zhongyihulianwang.1&_r=1789562400417&c=d93ed5d589b14de2b634b164d735044a",
+    "https://data.cmicapm.com:8080/newapp/action?e=D5F535A08EB6DE4441C98816F0FD346BE6C7A86615DF550DB700B16BDD87A0B965D3F5921733085AC7723FD8A62A337850F1FA0E868D0903BCBCD1ABECEC5349B94C555329A4023E2977685BD7",
+    "https://data.cmicapm.com:8080/newapp/action?e=D5F535A08EB6DE4441C98816F0FD346BE6C7A86615DF550DB700B16BDD87A0B965D3F5921733085AC7723FD8A62A337850F1FA0E868D0903BCBCD1ABECEC5349B94C555329A4023E2977685BD7"
+  ],
+  "hits": []
+}
