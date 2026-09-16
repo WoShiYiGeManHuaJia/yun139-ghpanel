@@ -10,9 +10,12 @@ name: yun139-mday16
 # 三场各提前 5 分钟启动（预热+等开闸）；GitHub cron 用 UTC 且可能延迟数分钟。
 on:
   schedule:
-    - cron: '20 1 16 * *'    # 北京 09:20 → 抢 10:30 场
-    - cron: '25 4 16 * *'    # 北京 12:25 → 抢 12:30 场（第一次补货）
-    - cron: '25 7 16 * *'    # 北京 15:25 → 抢 15:30 场（第二次补货）
+    # 实测（09-16）：GitHub cron 延迟可达 7 分钟以上，原 12:25 启动实际 12:32 才跑，
+    # 开闸瞬间（12:30）已过，进去就是 415「单日已耗尽」。
+    # 故每场都大幅提前启动，用脚本内部长轮询等开闸，把 cron 延迟吃掉。
+    - cron: '50 0 16 * *'    # 北京 08:50 → 抢 10:30 场（提前 100 分钟）
+    - cron: '55 3 16 * *'    # 北京 11:55 → 抢 12:30 场（提前 35 分钟）
+    - cron: '55 6 16 * *'    # 北京 14:55 → 抢 15:30 场（提前 35 分钟）
   workflow_dispatch:
     inputs:
       mode:
@@ -36,16 +39,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      # 按 UTC 小时判断场次，设定不同的等待上限：
-      #   09:20 场要等到 10:30（约 70 分钟）→ 5100s
-      #   12:25 / 15:25 场只需等 5 分钟 → 2400s（留足 cron 延迟余量）
+      # 按 UTC 小时判断场次（用区间匹配，cron 迟到也能归到正确场次）：
+      #   00-01 → 早场（北京 08:50 起，等 10:30，约 100 分钟）
+      #   03-04 → 中场（北京 11:55 起，等 12:30，约 35 分钟）
+      #   06-07 → 晚场（北京 14:55 起，等 15:30，约 35 分钟）
+      # 每档都再加 20 分钟余量，覆盖 cron 自身延迟。
       - name: 计算本场等待上限
         id: cfg
         run: |
           H=$(date -u +%H)
           case "$H" in
-            01|00) W=5100 ;;   # 09:20 场
-            *)     W=2400 ;;   # 12:25 / 15:25 场
+            00|01) W=7200 ;;   # 早场：100 分钟 + 20 分钟余量
+            03|04) W=3300 ;;   # 中场：35 分钟 + 20 分钟余量
+            06|07) W=3300 ;;   # 晚场：35 分钟 + 20 分钟余量
+            *)     W=3300 ;;
           esac
           echo "maxWaitSec=$W" >> "$GITHUB_OUTPUT"
           echo "本场 UTC 小时=$H 等待上限=${W}s"
@@ -53,7 +60,7 @@ jobs:
       - name: Run mday16
         env:
           EVENT_TYPE: mday16
-          PAYLOAD: ${{ github.event.inputs.mode && format('{{"mode":"{0}","priority":"星巴克","maxWaitSec":{1},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000,"exclude":"支付宝","rushBeforeSec":20,"rushIntervalMs":500,"rushWindowSec":300}}', github.event.inputs.mode, steps.cfg.outputs.maxWaitSec) || format('{{"mode":"grab","priority":"星巴克","maxWaitSec":{0},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000,"exclude":"支付宝","rushBeforeSec":20,"rushIntervalMs":500,"rushWindowSec":300}}', steps.cfg.outputs.maxWaitSec) }}
+          PAYLOAD: ${{ github.event.inputs.mode && format('{{"mode":"{0}","priority":"星巴克","maxWaitSec":{1},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000,"exclude":"支付宝","rushBeforeSec":20,"rushIntervalMs":500,"rushWindowSec":600,"exhaustAbort":5}}', github.event.inputs.mode, steps.cfg.outputs.maxWaitSec) || format('{{"mode":"grab","priority":"星巴克","maxWaitSec":{0},"fastPollSec":5,"grabRounds":8,"fastLaneMs":180000,"exclude":"支付宝","rushBeforeSec":20,"rushIntervalMs":500,"rushWindowSec":600,"exhaustAbort":5}}', steps.cfg.outputs.maxWaitSec) }}
           PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
           DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
