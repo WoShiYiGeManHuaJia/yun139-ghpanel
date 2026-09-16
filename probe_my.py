@@ -67,4 +67,4 @@ for u in ["https://www.10086.cn/api/my/balance",
     s,b = get(u, ua=UA, accept="application/json, text/plain, */*")
     p("  [%d] %-50s %s" % (s, u.replace("https://",""), b[:150].replace("\n"," ")))
 
-io.open("data/probe_my.txt","w",encoding="utf-8").write("\n".join(out))
+io.open("data/pm2.txt","w",encoding="utf-8").write("\n".join(out))
