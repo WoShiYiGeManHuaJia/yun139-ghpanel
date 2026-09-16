@@ -1,0 +1,21 @@
+name: hunt
+on:
+  workflow_dispatch:
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir -p data && python3 hunt.py 2>&1 | tee data/hunt.txt
+        env:
+          CMCC_CK2: ${{ secrets.CMCC_CK2 }}
+      - name: commit
+        run: |
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add -f data/
+          git commit -m hunt || echo no-change
+          git pull --rebase origin main || true
+          git push || echo nothing
