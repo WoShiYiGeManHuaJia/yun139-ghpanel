@@ -1,219 +1,161 @@
 {
-  "ts": "2026-09-16 01:11:04",
-  "requestId": "daily-1789521064855-ju6a8y6y",
-  "type": "daily",
+  "ts": "2026-09-16 01:30:37",
+  "requestId": "mday16-1789522237831-f8a2xb4i",
+  "type": "mday16",
   "ok": true,
-  "msg": "共 3 个账号，成功 3 个",
-  "perAccount": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 11,
-      "taskOk": 11,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "异常：page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://m.mclo",
-      "ok": true
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 12,
-      "taskOk": 12,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "30G流量0元领",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（261→261）",
-      "ok": true
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 8,
-      "taskOk": 8,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（1013→1013）",
-      "ok": true
-    }
+  "msg": "会员日抢购完成，未抢到（3 个账号）",
+  "acctDiag": [
+    "cipher失败:缺少加密数据或密钥",
+    "store:3"
   ],
-  "enc_accounts": "ED7ncTiW2Qs1l4a8w8t5TaB+VvI6wXUBl/uBJL3AdruDDubzTSi9nVr126GFB48LCZTjV1UvzzpI5zgePWcZsU8MjGwIsDMu/4rcyUuB2kaVR+02cweFbYavxL+i4sp6RvH0n+LJfYbhiKm2m8VOta3wENJHqPD/DNWoiGPyDC6Tio6QckDth1um6/t5Ht7RyEDtW8ZmoQ+/JU8uIOnfYgq/kT3POT2nHgX+pmIGpvB4H6dih6gM433yOdrnMhdmBfV8wC6MITbSrw5aTVBpFTGWCrA0oWy63A3mMFS/Efl4AxulmiMP+iry5QbVL5zgn/QU3hgUEoxce4G+6hL0QhV/LZVPu7eFun8vYp1m0zoQx/h5rsZ91J81FuTLxpiPq9SqK7ts0fBzFOKFoouhgBz2nhoWNXbmIAkHH4Y9/EqvF4NtwxLV5dKsLavpNwoMSfsWcHgwyGPDqEDH5uOJ7v1SxKslwOs4FbXNb6LB4JHFSBfnUbfqaFKaIXwdYnwLKqUyL9/Jexu697IbicE5y2bC1e+fwcEjxD/OSPk7ZHk/iV5rhRJzPnYBjbZ1VgZDkXtSQQz9MV5NmVcMbnCBJMDjHSN9ndogz0T3yiA3mcdSMuhEGSsNEEh79iG7mVmSjkt5RMs9Q2xnsgV1gz2XmSnyDiPURZvlm2Rzqd/ybTjCifPuI+kXAnfzG2WkeQEJZCCOkXhRicigUz+gOF8r+cvZv0/CvH+vkooI09xTK48axWgkdDvZ+yE0101ZaGE4EpY6Ep46cv7APCQD2pGIL8EIfP9C7iz/e0FWzXaj3myPyBhLwgU4JYX1TC0seNujbj9VEkf8mDYhUMd17uBCBKBxEjd4fMRLIMq3DKecu6E8HQP253cx/buM18z7A0mkGRJ92ZHthBO6doGMdaqLAXGCrVTdSE9p5YkA51hJ1tSEixLObcRI0YDWrDqeW8GCQXSNVh51tsvg1TYYqtIl5zcjX6mk839zNujqCkE4CwsjQMyyj97fRalaBTsxa1FdkkCwWiEW5CMRnDWWpfNN8o/oniNGGrugfwEhSAceOz3MPs9Z5uH/5v69rF6ylizTcSosnRGNsLJy7OOj996h2ao2CkdhDnPV3PezMlZbTdVrE7KPpqDXD6iSqALaoo112Wsr/s9oZGV+7b+BudUnymV/t1DP7tPtDL1Mv5dBhItWWIkpY9Vfp2QoFFRowwLI3NB0OiW/ishz2q0yQM9KFUViPVvxY29f7My5xRXGYNSxzVPwcxLrde+iOcOjID+6OmU77kNaMZ6Hl1239okPqSOD0m9AjkhYqPg0eCIrysowYZqiaD2OfhHQi+QAJuyARxPQBEFgfA2mWfMyReDzlhyooXugeEC437Q7KWmcFSxE27iYMINGglINfnFjON1XWoFqy4SsSEkO2oq+LRsxWFO8l2fgTkWf+oGrmxYeWKIvnZa3Seg8TbTGojU+/1+gN2aLrCPP2IZmKHQaN6E1VCqUW1K2RZSI1HfzLzc0S5DZmiKNcw0nlexaqzHHStGw76mw0pAoj6JuL98s5tPrOH/dW9TwkK7rIhknaqn1B26M2V6wH8+9KZXxKJxDkhGvhXcGe22QAi9zEYThPypV9c1HA5XMpzqwA37LsQ8hLr6SyyqXzcA9lhpstycFbJrCjjw1Y4L3bVwWmMrTvOFm9PiaVu7mf3SX5gsQaNyt0tCaosWRe1rCc6TyFlwEXhyEhlMs6WhEHdeliXocN1LMdjTRpxnUCZAUEfdviVFXpcS2mF38FCo3DUsiPavuXbvZfcaCzAo1FrZEpVC+C/dqYAc5Qfe0PpAk3x1xkv37idNlUVstmBBO7QjYZb3w/2x1Of59Dt9kW4a6r8AGhU6dqWsKz10SQ3C3no1nlZvotebYUi72ZBJIZmgQBvHZg+jMly0r6zsuwUz6fXsL3x4R6Rz6mO6apjcTUveCSFL2czTP5iTriIpVgxU9QLzAyWGWqsWi+C0XmWcFRZRYsdfBtX/yXFEV",
+  "mode": "grab",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务11个；气泡异常：page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://m.mclo"
+      "memberLevel": "2",
+      "isMember": true,
+      "online": true,
+      "activityDay": true,
+      "countdownMs": 3557731,
+      "memberDesc": "黄金会员",
+      "reservation": "预约成功",
+      "priority": "星巴克",
+      "prioId": 260511002,
+      "coarseSleepSec": 3318,
+      "fastLaneTries": 27,
+      "waitedSec": 3559,
+      "checked": 37,
+      "prizeCount": 22,
+      "tried": [
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "msg": ""
+        },
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "msg": ""
+        },
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "msg": ""
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "msg": ""
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "msg": ""
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "msg": ""
+        },
+        {
+          "id": 260907016,
+          "name": "1元支付宝话费红包",
+          "msg": ""
+        },
+        {
+          "id": 260907016,
+          "name": "1元支付宝话费红包",
+          "msg": ""
+        },
+        {
+          "id": 260907016,
+          "name": "1元支付宝话费红包",
+          "msg": ""
+        }
+      ],
+      "got": [],
+      "result": "未抢到（已试 14 件）",
+      "name": "会员日",
+      "message": "等级黄金；已预约；奖品22件；优先目标星巴克(260511002)；倒计时0小时59分；未抢到（已试 14 件）",
+      "ok": true
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务12个；气泡+0（261→261）"
+      "memberLevel": "-1",
+      "isMember": false,
+      "online": true,
+      "activityDay": true,
+      "countdownMs": 0,
+      "memberDesc": "非会员",
+      "result": "非会员，无资格参加会员日",
+      "name": "会员日",
+      "message": "等级非会员；非会员，无资格参加会员日",
+      "ok": false
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务8个；气泡+0（1013→1013）"
+      "memberLevel": "1",
+      "isMember": true,
+      "online": true,
+      "activityDay": true,
+      "countdownMs": 0,
+      "memberDesc": "白银会员",
+      "reservation": "预约成功",
+      "priority": "星巴克",
+      "prioId": 260511002,
+      "prizeCount": 22,
+      "tried": [
+        {
+          "id": 260907016,
+          "name": "1元支付宝话费红包",
+          "msg": ""
+        },
+        {
+          "id": 260907016,
+          "name": "1元支付宝话费红包",
+          "msg": ""
+        },
+        {
+          "id": 260907016,
+          "name": "1元支付宝话费红包",
+          "msg": ""
+        }
+      ],
+      "got": [],
+      "result": "未抢到（已试 3 件）",
+      "name": "会员日",
+      "message": "等级白银；已预约；奖品22件；优先目标星巴克(260511002)；未抢到（已试 3 件）",
+      "ok": true
     }
   ],
-  "recheck": [
-    {
-      "masked": "137****4642",
-      "total": 261,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
-    },
-    {
-      "masked": "137****6553",
-      "total": 261,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
-    },
-    {
-      "masked": "172****9953",
-      "total": 1013,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
-    }
-  ],
-  "allClean": true,
   "dingtalk": {
     "ok": true,
     "status": 200,
