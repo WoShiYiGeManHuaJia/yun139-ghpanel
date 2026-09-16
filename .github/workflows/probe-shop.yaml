@@ -11,13 +11,28 @@ jobs:
       - uses: actions/setup-python@v5
         with: {python-version: '3.11'}
       - run: pip install playwright -q && python3 -m playwright install chromium --with-deps
-      - run: mkdir -p data && python3 probe_shop.py 2>&1 | tee data/probe_shop.txt
+      - name: run probe
         env:
           CMCC_COOKIE: ${{ secrets.CMCC_COOKIE }}
-      - name: commit
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 probe_shop.py 2>&1 | tee run_out.txt
+      - name: upload via api
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name bot
-          git config user.email bot@users.noreply.github.com
-          git add -f data/probe_shop.txt
-          git commit -m shop || echo no-change
-          git push || echo nothing
+          python3 - <<'EOF'
+          import os,json,base64,urllib.request
+          tok=os.environ["GH_TOKEN"]
+          R="https://api.github.com/repos/WoShiYiGeManHuaJia/yun139-ghpanel/"
+          H={"Authorization":f"Bearer {tok}","User-Agent":"v","Accept":"application/vnd.github+json","Content-Type":"application/json"}
+          p="data/probe_shop.txt"
+          try: content=open("run_out.txt","rb").read().decode("utf-8","ignore")
+          except Exception: content="NO OUTPUT FILE"
+          body={"message":"probe shop result","content":base64.b64encode(content.encode()).decode()}
+          try:
+              old=json.loads(urllib.request.urlopen(urllib.request.Request(R+"contents/"+p,headers=H),timeout=60).read().decode())
+              body["sha"]=old["sha"]
+          except Exception: pass
+          print(urllib.request.urlopen(urllib.request.Request(R+"contents/"+p,data=json.dumps(body).encode(),headers=H,method="PUT"),timeout=120).status)
+          EOF
