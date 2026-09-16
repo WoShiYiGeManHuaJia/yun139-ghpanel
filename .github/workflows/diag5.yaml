@@ -1,0 +1,35 @@
+name: yun139-diag5
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 安装 Playwright
+        run: |
+          npm i --no-audit --no-fund playwright@1.63.0
+          npx playwright install chromium
+      - name: 运行诊断
+        env:
+          DIAG_PHONE: "17274079953"
+          DIAG_AUTH: ${{ secrets.DIAG_AUTH_9953 }}
+          TARGETS: "https://cloud.139.com/,https://yun.139.com/"
+        run: node actions/diag5.js
+      - name: 保存
+        run: |
+          mkdir -p data
+          cp /tmp/diag5/out.json data/diag5.json || echo none
+          for f in /tmp/diag5/*.png; do cp "$f" data/ 2>/dev/null || true; done
+          git config user.name "bot"
+          git config user.email "bot@users.noreply.github.com"
+          git checkout -f -B main $(git rev-parse HEAD)
+          git add -f data/diag5.json data/shot_*.png
+          git diff --cached --quiet && echo "无变化" || git commit -m "diag5: 余额接口定位"
+          git push origin main || echo skip
