@@ -1,42 +1,25 @@
 --- https://touch.10086.cn/i/
-   goto: Page.goto: Timeout 60000ms exceeded.
-Call log:
-  - navigating to "https://touch.10086.cn/i/", waiting until "networkidle"
-
-   title=个人中心
-   文本长度=262
-      | 益  152.87 元  我的余额  199.94 GB  通用流量剩余  698 分钟  语音剩余  168   可用
-      |   199.94 GB  通用流量剩余  698 分钟  语音剩余  168   可用AI豆   创业卡  中国移动已陪
-      | 用流量剩余  698 分钟  语音剩余  168   可用AI豆   创业卡  中国移动已陪您走过374天.  充话费 
-      | 充流量 我的服务 查看更多  套餐余量  账单查询  已订业务  139邮箱  添加卡片  回顶部 网站无障碍 172*
-      | 199.94 GB  通用流量剩余  698 分钟  语音剩余  168   可用AI豆   创业卡  中国移动已陪您走
-   抓到API 11 条
+   title=用户登录
+   文本长度=117
+   抓到API 3 条
 --- https://touch.10086.cn/i/mybalance.html
    title=404页面—中国移动网上商城
    文本长度=4
-   抓到API 11 条
+   抓到API 3 条
 --- https://touch.10086.cn/i/balance.html
    title=404页面—中国移动网上商城
    文本长度=4
-   抓到API 11 条
+   抓到API 3 条
 --- https://touch.10086.cn/i/home.html
    title=404页面—中国移动网上商城
    文本长度=4
-   抓到API 11 条
+   抓到API 3 条
 --- https://touch.10086.cn/i/index.html
    title=404页面—中国移动网上商城
    文本长度=4
-   抓到API 11 条
+   抓到API 3 条
 
 == 本轮 API 清单 ==
    200 https://touch.10086.cn/i/v1/auth/loginfo
-   200 https://touch.10086.cn/i/v1/res/sysdate/?time=202691613236414&channel=02
-   200 https://touch.10086.cn/i/v1/res/optInfoQry?channel=0003&provCode=731&time=202691613236613
-   200 https://touch.10086.cn/i/v1/cust/mycard/RGhxY25xZklxVGQxd1BzVjRHdUhWUT09?channel=02&time=202691613236611
-   200 https://touch.10086.cn/i/v1/cust/message/RGhxY25xZklxVGQxd1BzVjRHdUhWUT09/noread?time=20269161323752&channel=02
-   200 https://touch.10086.cn/i/v1/cust/getMsgUnreadNum/RGhxY25xZklxVGQxd1BzVjRHdUhWUT09
-   200 https://touch.10086.cn/i/v1/cust/creditPointQry/RGhxY25xZklxVGQxd1BzVjRHdUhWUT09?time=20269161323755
-   200 https://touch.10086.cn/i/v1/cust/unreademail/RGhxY25xZklxVGQxd1BzVjRHdUhWUT09?time=20269161323758&channel=02
-   200 https://touch.10086.cn/i/v1/cust/flow/flowInfoQry/RGhxY25xZklxVGQxd1BzVjRHdUhWUT09?time=20269161323757
-   200 https://touch.10086.cn/i/v1/res/numarea/MTcyNzQwNzk5NTM=?time=202691613237876&channel=02
-   200 https://touch.10086.cn/i/v1/fee/cusinfomerger/RGhxY25xZklxVGQxd1BzVjRHdUhWUT09?time=20269161323756&channel=02
+   200 https://login.10086.cn/genCaptcha
+   200 https://login.10086.cn/checkUidAvailable.action
