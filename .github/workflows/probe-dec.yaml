@@ -1,0 +1,23 @@
+name: probe-dec
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - run: mkdir -p data && python3 probe_dec.py 2>&1 | tee data/probe_dec.txt
+        env:
+          CMCC_COOKIE: ${{ secrets.CMCC_COOKIE }}
+          CMCC_PHONE: ${{ secrets.CMCC_PHONE }}
+      - name: commit
+        run: |
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add -f data/probe_dec.txt data/outparam.txt
+          git commit -m pd || echo no-change
+          git push || echo nothing
