@@ -1,7 +1,7 @@
 Cookie 长度=1258  手机号=172****9953
 
 ===== A. www.10086.cn 首页：是否认登录 =====
-HTTP=200 字节=10312 最终=https://www.10086.cn/
+HTTP=0 字节=114 最终=https://www.10086.cn/
    含'我的移动': False
    含'欢迎': False
    含'请登录': False
@@ -12,15 +12,15 @@ HTTP=200 字节=10312 最终=https://www.10086.cn/
 ===== B. 找'我的移动'链接 =====
 
 ===== C. 我的移动 页面（DOM 里应有余额）=====
-  HTTP=403 字节=2177 https://www.10086.cn/my/  命中:[]
-  HTTP=403 字节=2177 https://www.10086.cn/my/index.html  命中:[]
-  HTTP=403 字节=2177 https://www.10086.cn/personal/  命中:[]
-  HTTP=403 字节=2177 https://www.10086.cn/mycenter/  命中:[]
+  HTTP=0 字节=114 https://www.10086.cn/my/  命中:[]
+  HTTP=0 字节=114 https://www.10086.cn/my/index.html  命中:[]
+  HTTP=0 字节=114 https://www.10086.cn/personal/  命中:[]
+  HTTP=0 字节=114 https://www.10086.cn/mycenter/  命中:[]
   HTTP=0 字节=56 https://my.10086.cn/  命中:[]
-  HTTP=403 字节=2177 https://www.10086.cn/i/  命中:[]
+  HTTP=0 字节=114 https://www.10086.cn/i/  命中:[]
 
 ===== D. touch 掌厅接口（旧路径对照）=====
-  HTTP=200 {"data":{"outParam":"S1RPNGhzaVFEN21OY1VzWkx4QXdXdytGcHBSa0pKTFkvZGlzVkhpL3hCMFF5ZUhtQ1F1QkxGVWZMamw1MnJER1gxeDdjc1BRaEg5NApFaDV1Z0FSeVN0S1gxWEJRa0hjWmpHNVlJUjNRNXo3eHA3Zzl2dHBMYmt
-  HTTP=200 {"data":{"outParam":"Um5Jd2tKVjB5TXBQYVg4ditVa2xacGRFZnl6UlFTdVVjNUdCTWJXakhUTXFLUWNVbEEwSFBwMDBRMzZjcS9zT250YUVhTVlKWEdMWgp4dzg4eTIydmtDeTN2V2IrQWFYT2t4OFN0T1JqRXp6N2RlMTJLTHhnU2Z
-  HTTP=200 {"data":null,"retCode":"999999","retMsg":"系统异常","sOperTime":null}
+  HTTP=200 {"retCode":"500003","retMsg":"not login.but must login.sso flag."}
+  HTTP=200 {"retCode":"500003","retMsg":"not login.but must login.sso flag."}
+  HTTP=200 {"data":null,"retCode":"500003","retMsg":"非登录状态","sOperTime":null}
 
