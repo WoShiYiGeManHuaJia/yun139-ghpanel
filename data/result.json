@@ -1,222 +1,53 @@
 {
-  "ts": "2026-09-15 18:02:26",
-  "requestId": "daily-1789495346260-5wwifahr",
-  "type": "daily",
+  "ts": "2026-09-16 01:03:33",
+  "requestId": "status-1789520613370-j03ext0i",
+  "type": "status",
   "ok": true,
-  "msg": "共 3 个账号，成功 3 个",
-  "perAccount": [
+  "msg": "已查询 3 个账号",
+  "acctDiag": [
+    "cipher失败:缺少加密数据或密钥",
+    "store:3"
+  ],
+  "status": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 11,
-      "taskOk": 11,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（261→261）",
-      "ok": true
+      "ok": true,
+      "total": 261,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 0,
+      "list": [],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":2,\"maxType\":\"\",\"cal"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 12,
-      "taskOk": 12,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "30G流量0元领",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（261→261）",
-      "ok": true
+      "ok": true,
+      "total": 261,
+      "toReceive": 0,
+      "receivable": 0,
+      "nextMonth": 0,
+      "list": [],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"20\",\"monthDays\":2,\"maxType\":\"\",\"cal\""
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 8,
-      "taskOk": 8,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（1013→1013）",
-      "ok": true
-    }
-  ],
-  "enc_accounts": "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",
-  "results": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；任务11个；气泡+0（261→261）"
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务12个；气泡+0（261→261）"
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务8个；气泡+0（1013→1013）"
-    }
-  ],
-  "recheck": [
-    {
-      "masked": "137****4642",
-      "total": 261,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
-    },
-    {
-      "masked": "137****6553",
-      "total": 261,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
-    },
-    {
-      "masked": "172****9953",
       "total": 1013,
+      "toReceive": 0,
       "receivable": 0,
-      "pending": 0,
-      "clean": true
+      "nextMonth": 88,
+      "list": [
+        {
+          "cloudType": 2,
+          "cloudNum": 88,
+          "recordId": null
+        }
+      ],
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":3,\"provinceCode\":\"731\",\"monthDays\":4,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
     }
   ],
-  "allClean": true,
-  "dingtalk": {
-    "ok": true,
-    "status": 200,
-    "body": "{\"errcode\":0,\"errmsg\":\"ok\"}"
-  }
+  "enc_accounts": "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"
 }
