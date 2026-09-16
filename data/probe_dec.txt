@@ -1,11 +1,12 @@
 == 1. 取完整 outParam ==
-HTTP=200  len=323
-outParam 长度=232
-前200: S1RPNGhzaVFEN21OY1VzWkx4QXdXdytGcHBSa0pKTFkvZGlzVkhpL3hCMFF5ZUhtQ1F1QkxGVWZMamw1MnJER1gxeDdjc1BRaEg5NApFaDV1Z0FSeVN0S1gxWEJRa0hjWmpHNVlJUjNRNXo3eHA3Zzl2dHBMYmtXMWJPUEFzNkJkeU5nYVFHWllUM0hLcGw4anhvbDBt
+HTTP=200  len=66
+解析失败 'data'
+outParam 长度=0
+前200: 
 
 == 2. 基础解码尝试 ==
-  base64 -> 174 字节, 前80: b'KTO4hsiQD7mNcUsZLxAwWw+FppRkJJLY/disVHi/xB0QyeHmCQuBLFUfLjl52rDGX1x7csPQhH94\nEh5'
-  base64+urlsafe -> 174 字节, 前80: b'KTO4hsiQD7mNcUsZLxAwWw+FppRkJJLY/disVHi/xB0QyeHmCQuBLFUfLjl52rDGX1x7csPQhH94\nEh5'
+  base64 -> 0 字节, 前80: b''
+  base64+urlsafe -> 0 字节, 前80: b''
 
 == 3. 抓掌厅 JS 找 AES 密钥/算法 ==
   common.js OK 2294 字节
