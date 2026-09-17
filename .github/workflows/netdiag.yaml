@@ -1,0 +1,39 @@
+name: netdiag
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check raw connectivity
+        run: |
+          for d in \
+            https://yun.139.com \
+            https://user-njs.yun.139.com \
+            https://orches.yun.139.com \
+            https://m.mcloud.139.com \
+            https://caiyun.feixin.10086.cn \
+            https://aas.caiyun.feixin.10086.cn \
+            https://mail.10086.cn \
+            https://smsrebuild1.mail.10086.cn \
+            https://api.github.com ; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -A 'Mozilla/5.0' "$d" || echo "ERR")
+            echo "$code  $d"
+          done
+      - name: Real API calls
+        env:
+          YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
+        run: |
+          echo "--- token refresh ---"
+          curl -s -i --max-time 25 \
+            -X POST 'https://user-njs.yun.139.com/user/session/refresh' \
+            -H 'Content-Type: application/json' \
+            -H "Authorization: $YUN139_AUTHORIZATION" \
+            -d '{}' | head -20
+          echo "--- mcloud ---"
+          curl -s -o /dev/null -w 'mcloud=%{http_code}\n' --max-time 20 'https://m.mcloud.139.com/portal/mobilecloud/index.html'
+          echo "--- orches ---"
+          curl -s -o /dev/null -w 'orches=%{http_code}\n' --max-time 20 'https://orches.yun.139.com/orchestration/'
