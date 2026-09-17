@@ -1,104 +1,23 @@
 [
   {
-    "phone": "17274079953",
-    "masked": "172****9953",
+    "phone": "13787464642",
+    "masked": "137****4642",
     "steps": [
-      "API 云豆=960 可领=50 待领=50 下月=88",
-      "页面气泡元素: 2 个",
-      "点击#1 ok 960→960",
-      "点击#2 ok 960→1010",
-      "最终云豆 1010"
+      "API 云豆=261 可领=0 待领=0 下月=0",
+      "页面气泡元素: 0 个",
+      "最终云豆 264"
     ],
-    "attempts": [
-      {
-        "via": "api",
-        "item": {
-          "cloudType": 2,
-          "cloudNum": 88,
-          "recordId": null
-        },
-        "got": 0,
-        "steps": [
-          "跳过无效项 {\"cloudType\":2,\"cloudNum\":88,\"recordId\":null}"
-        ]
-      },
-      {
-        "via": "api",
-        "item": {
-          "cloudType": 0,
-          "cloudNum": 50,
-          "recordId": 2344701789
-        },
-        "got": 0,
-        "steps": [
-          "✗ cloudId=2344701789 type=0 code=615 msg=活动太火爆啦，兑换失败，试试其他奖品吧"
-        ]
-      },
-      {
-        "via": "browser",
-        "idx": 0,
-        "res": "ok",
-        "before": 960,
-        "after": 960,
-        "delta": 0
-      },
-      {
-        "via": "browser",
-        "idx": 1,
-        "res": "ok",
-        "before": 960,
-        "after": 1010,
-        "delta": 50
-      }
-    ],
+    "attempts": [],
     "api": {
-      "total": 960,
-      "receivable": 50,
-      "toReceive": 50,
-      "nextMonth": 88,
-      "list": [
-        {
-          "cloudType": 2,
-          "cloudNum": 88,
-          "recordId": null
-        },
-        {
-          "cloudType": 0,
-          "cloudNum": 50,
-          "recordId": 2344701789
-        }
-      ]
+      "total": 261,
+      "receivable": 0,
+      "toReceive": 0,
+      "nextMonth": 0,
+      "list": []
     },
     "page": {
-      "count": 2,
-      "items": [
-        {
-          "i": 0,
-          "cls": "AIPoints one is-next-month",
-          "text": "+88",
-          "display": "flex",
-          "visibility": "visible",
-          "opacity": "1",
-          "x": 199,
-          "y": 82,
-          "w": 39,
-          "h": 39,
-          "inView": true
-        },
-        {
-          "i": 1,
-          "cls": "AIPoints two",
-          "text": "+50 可领取",
-          "display": "flex",
-          "visibility": "visible",
-          "opacity": "1",
-          "x": 148,
-          "y": 82,
-          "w": 39,
-          "h": 39,
-          "inView": true
-        }
-      ],
+      "count": 0,
+      "items": [],
       "alt": {
         ".bubble": 0,
         ".cloud-bubble": 0,
@@ -107,200 +26,200 @@
         "[class*=ubble]": 0,
         ".signin-bubble": 0
       },
-      "bodyLen": 4352,
-      "bodySnippet": "温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 172****9953 奖 品 规 则 960 云盘专属AI豆 +88 +50 可领取 点击气泡即可领取任务奖励哦 本月已签到 3 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 14 今天 16 17 18 19 20 热门活动 做任务 兑好礼 开启备份领好礼 +200豆 开启备份，云端无损存储 下月再来 连续31天开启云盘APP通知 +200豆完成进度(2/31) 开启中 使用PC"
+      "bodyLen": 4403,
+      "bodySnippet": "温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 137****4642 奖 品 规 则 264 云盘专属AI豆 点击气泡即可领取任务奖励哦 本月已签到 3 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 未签 14 15 16 未签 17 18 19 20 热门活动 做任务 兑好礼 绑定公众号 +200豆 云盘动态实时推送 去绑定 开启备份领好礼 首月+400豆 开启备份，云端无损存储 去开启 开启云盘APP通知领好礼 +200豆 "
     },
-    "final": 1010,
+    "final": 264,
     "net": [
       {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
-        "m": "POST"
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_10.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������>��@��c�߲���������������\u0012L�d��N��������*~����K��(|�������n�����������A�����%�V��"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_11.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLs��������������N�↳�E��������V��x��������|��d��5�����y�䐴�;��*}�������%s�������f�����N���"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_12.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������7}�������b�ݎ�����<�������顾����V�����D��.~����M��*}����������(|����e�����L��1�����"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_13.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���������C����������]��������������*}�(|���������������0����������v��6�ꋰ���x��/~����U�"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_14.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���9�b�����������h�����=��6�������������������*}�H�ܲ�ꉭ�(|����O��e�����C�����.����U���"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_15.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������=�޵�����m�ގ�����h�����*}�d��P�����������������/������������������������/}㓶�O�����"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_16.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLo��Z��Q��@��������������������b�����D��������J�����)}��鏱����9��.}�Q��7��G�偩�0��I�����g�"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_17.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002vPLTEGpL7}�J��]�����_�Ᏹ�v��������F�倷�������������i��W��M�����z�����������*}�]��P���������������"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_18.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������\\����M��������i����=�����T��������������B�����\u0010N�X��p�����c��L��8����T��������{��"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_19.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLN�����]������������z����x�䖸�R��n��������i��������\u0010M����G�����\u0018`����j��c�����0��P�����z�"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_20.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLo��Z��Q��@��������������������b�����D��������J�����)}��鏱����9��.}�Q��7��G�偩�0��I�����g�"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_21.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLr��K�����������n�ގ�����c��������������.}�p����������\u000fJ�U�����L��������������-�����P��a�"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_22.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���D��C��������������F�����o��C�����6����ꑱ����c�����\u0012K����/~����������L��0��'z�O��I����"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_24.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������7}�������b�ݎ�����<�������顾����V�����D��.~����M��*}����������(|����e�����L��1�����"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_23.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���_��\u0014U����C�������m��������������.~�u��\u0010K����d�����q��������0����������V�����������~�"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_25.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLs��������������N�↳�E��������V��x��������|��d��5�����y�䐴�;��*}�������%s�������f�����N���"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_27.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL<�������>�����_�ߒ������9�����������������3��*~�������)}�������N�������������k�����1��U"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_26.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���s�������4}�;�◺�������D��������������������%|�o��:����)}�Q��������k�����g�����������o"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_28.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������5{�������c�ߔ�����>��\u0012K�������H�������睿�������������(~挮�o�����U��(|���O��o�∯�)|���"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_29.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLC��?��d�������������H��������:�����j��\u0012K�������U�����c�����0��r�܆��N��������������6����"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_30.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���D��������G��A�������U�����t�����������x��E�����l�ކ��3��*}�������������)|�����������"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_31.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL?��b�߻��������T�����P����I�����k�����1��6��c�����������v��*}�q�������쐰�@��0��v��/~�x���"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_32.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������\u0019_�������P�㔼�z����������������\u0012K�������K�����������b��0��({����g��������L��=��-��"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_33.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������k�����u��O�����x��������b�����Y��������I��r��������*|����\u0011K�R�������Q����)|����"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_34.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLb��N�����������R�ᅸ�{��|��t��O��������m��N��G��\u0010N�������N�����h�������������������g�����"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_35.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLX��������c�������q��������J��������m��c��������\u0011J����������T��d��v��/��*~����O��L�����{"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_36.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\u0013\u0000\u0000\u0000\t\b\u0003\u0000\u0000\u0000���\u0003\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0000fPLTEGpLIC?%\u001f\u001cd[T50,WPI)\" ?96^SPA::bYSi`Y\"\u001c\u001a!\u001c\u0019:52_VQ_WPE?=PIDG<9=84MFA\u001b\u0017\u0015\" \u001eJEE)$\"$ \u001d2-*71-G@;"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_37.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\f\u0000\u0000\u0000\u0014\b\u0003\u0000\u0000\u0000�.,#\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0000�PLTEGpLSEAE:4�sWD=dVJK??q`UH@=o::��rIB={j`j^VI94k]SE83\u0019\u0010\u000e\u001e\u0015\u0012SFB�xlG@<<53fXN%\u001a\u0017 \u0011\u000fo[QfSJ \u0017\u0014HA>"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_38.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\u001c\u0000\u0000\u0000\u0011\b\u0003\u0000\u0000\u0000�M<x\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0000�PLTEGpL杘�4<�4;���С��6<��â5<�7>��գ8=�9@ʏ��LQ�C;�WM�|u�OU�4<�4;�.3�rk曖�39�?EȈ��sw�06�39�5<�-2�("
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_39.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000�\b\u0003\u0000\u0000\u0000)�r�\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0000uPLTEGpLt��������t��u��t�����u��u��������������������������������������������������������������"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com//uop_prod/20260807/b0163b72c8994073835a66eca8de2eca.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000P\u0000\u0000\u0000P\b\u0006\u0000\u0000\u0000�\u0011�\u0000\u0000\u0000\tpHYs\u0000\u0000\u000b\u0012\u0000\u0000\u000b\u0012\u0001��~�\u0000\u0000\b�IDATx��][o\u0013G\u0014���\u0013�\\H��8!\t\u0010R\b�\u0004R\u0010jՂԢ�> �?\u0000�}��\u0002�/hx�#��\n�З�m�*DE\u0003�B��B\\H��\u0002�\u00026�cou��x�^���ڄ|�Q.>{���3sf�3c\u0017J�p$z\u0018@?��\u0000���\ry<\n��_\u0000W�՞+����\u0004�#Q\"�H"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com//uop_prod/20260730/676282624ed64301be40100d6dd28e3c.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000P\u0000\u0000\u0000P\b\u0006\u0000\u0000\u0000�\u0011�\u0000\u0000\u0000\tpHYs\u0000\u0000\u000b\u0012\u0000\u0000\u000b\u0012\u0001��~�\u0000\u0000\u0007\u0011IDATx��]Ko\u0013W\u0014�fl'�\u0013B��G�R\u001c�D\u0005\u0012�U�JUI��A\u0005u�M%�e7�_��\u000b\b�na�\u0005��V�6��Q�\u0005I�#�\u0012bB\u0012\u0002�\u0010��!\u0019�S��\u001d��\u001e�s\u001fc;�']9����r�=�޹�ZC\u0005�4�c\u0000z\u0001\u001c\u0005\u0010e���(��\u001e\u0001�\u001e\t��W�\u000b_\t"
       },
       {
         "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
-        "m": "POST"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
-        "m": "POST"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
-        "m": "POST"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
-        "m": "POST"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
+        "u": "https://m.mcloud.139.com/ycloud/advert/show/report",
         "m": "POST"
       },
       {
         "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/public/img/signin_cloudIcon.70828306.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0001M\u0000\u0000\u0000T\b\u0003\u0000\u0000\u00001��\u0011\u0000\u0000\u0002�PLTE\u0000\u0000\u0000��k��R��`��a��o��k��`����M��u��d�xW�eH�������o�������=��U�bF��G�lM�oO�`D���qQ����V����v��3��w��]��h����F��-�^B��1��Y���kL���ڐ��T�iK��=��=������v��f��~�jL��?"
+      },
+      {
+        "t": "RES",
+        "u": "https://img.mcloud.139.com/portal/mobilecloud/public/img/signin2_bg.a7629198.png",
+        "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0002&\u0000\u0000\u0002X\b\u0003\u0000\u0000\u0000a8��\u0000\u0000\u0001�PLTE\u0000\u0000\u0000������������������������������������������������������������������������������������������������������������������������������������������������������������"
+      },
+      {
+        "t": "RES",
+        "u": "https://m.mcloud.139.com/ycloud/advert/show/report",
         "b": "{\"code\":0,\"msg\":\"success\"}"
       },
       {
+        "t": "REQ",
+        "u": "https://m.mcloud.139.com/ycloud/advert/show/report",
+        "m": "POST"
+      },
+      {
         "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
+        "u": "https://m.mcloud.139.com/ycloud/advert/show/report",
         "b": "{\"code\":0,\"msg\":\"success\"}"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/visitlog/journaling",
-        "b": "{\"code\":0,\"msg\":\"success\"}"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
-        "m": "GET"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
-        "m": "POST"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":50,\"total\":1010,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\""
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
-        "m": "GET"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
-        "m": "POST"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":0,\"total\":1010,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\","
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
-        "m": "GET"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
-        "m": "POST"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/receiveV3",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"receive\":0,\"total\":1010,\"canExchangeText\":[{\"prizeName\":\"美团外卖5元通用红包\",\"imgUrl\":\"https://img.mcloud.139.com//uop_prod/20260730/cea1e354322c4d7db044745c5a3a6454.png\","
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":[{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a1"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":[{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a1"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/task/taskListV3",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":[{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a1"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
-        "m": "POST"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
-        "m": "GET"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"showPop\":false}}"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
-        "m": "POST"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":false}"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
-        "m": "POST"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/infoV3?client=app",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":2,\"provinceCode\":\"731\",\"monthDays\":3,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\""
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
-        "m": "GET"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"showPop\":false}}"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
-        "m": "GET"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/public/getPopInfo",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":{\"showPop\":false}}"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":false}"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/popup",
-        "b": "{\"code\":0,\"msg\":\"success\",\"result\":false}"
-      },
-      {
-        "t": "REQ",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/getCloudNum",
-        "m": "GET"
-      },
-      {
-        "t": "RES",
-        "u": "https://m.mcloud.139.com/ycloud/signin/page/getCloudNum",
-        "b": "{\"code\":500,\"msg\":\"系统异常\"}"
       },
       {
         "t": "REQ",
