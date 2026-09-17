@@ -1633,7 +1633,22 @@ async function main() {
           item.tasks = results.length;
           item.taskOk = results.filter(r => r.ok).length;
           item.taskFail = results.filter(r => !r.ok).length;
-          item.taskDetail = results.map(r => ({ name: r.name, ok: r.ok }));
+          item.taskDetail = results.map(r => {
+            const nm = String(r.name || "");
+            const mm = nm.match(/(\d+)\s*\/\s*(\d+)/);
+            const o = { name: nm, ok: !!r.ok };
+            if (mm) {
+              o.progress = mm[1] + "/" + mm[2];
+              o.done = Number(mm[1]) >= Number(mm[2]);
+              // 点击成功 ≠ 任务完成：进度未满仍记未完成
+              if (!o.done) { o.ok = false; o.note = "进行中 " + o.progress + "（点击已推进，条件未达标）"; }
+              else o.note = "已完成 " + o.progress;
+            }
+            return o;
+          });
+          // 按真实完成度重算（原值只反映 click 接口是否返回 0）
+          item.taskOk = item.taskDetail.filter(t => t.ok).length;
+          item.taskFail = item.taskDetail.filter(t => !t.ok).length;
 
           // 3) 领气泡（真实浏览器，较慢）
           try {
@@ -1982,8 +1997,17 @@ async function main() {
 
   fs.writeFileSync(path.join(__dirname, "../data/result.json"), JSON.stringify(out, null, 2));
   console.log(JSON.stringify(out));
+  return out;
 }
 
 module.exports = { decodeAuth, cleanAuth, maskPhone, rsaEncrypt, pkcs7Unpad, hexToBytes, aesEcbDecryptBytes, aesGcmEncryptText, aesGcmDecryptText, deriveKey, stableJsonStringify, getJwt, cloudStatus, receiveViaApi };
 
-if (require.main === module) main().catch(e => { console.error("FATAL:", e); process.exit(1); });
+if (require.main === module) main().then(out => {
+  // 全部账号失败 -> 非零退出，让 Actions 变红（否则一直显示绿色，失败无人知）
+  if (out && out.type === "daily" && Array.isArray(out.perAccount) && out.perAccount.length > 0) {
+    const okN = out.perAccount.filter(x => x && x.ok).length;
+    if (okN === 0) { console.error("ALL_ACCOUNTS_FAILED: 0/" + out.perAccount.length); process.exit(2); }
+    const half = okN < out.perAccount.length;
+    if (half) console.error("PARTIAL_FAILURE: " + okN + "/" + out.perAccount.length);
+  }
+}).catch(e => { console.error("FATAL:", e); process.exit(1); });
