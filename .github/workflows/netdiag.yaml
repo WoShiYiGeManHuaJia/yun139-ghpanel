@@ -7,9 +7,15 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write
     steps:
+      - uses: actions/checkout@v4
       - name: Check raw connectivity
         run: |
+          mkdir -p data
+          {
+          echo "== $(date -u) =="
           for d in \
             https://yun.139.com \
             https://user-njs.yun.139.com \
@@ -20,20 +26,27 @@ jobs:
             https://mail.10086.cn \
             https://smsrebuild1.mail.10086.cn \
             https://api.github.com ; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -A 'Mozilla/5.0' "$d" || echo "ERR")
-            echo "$code  $d"
+            out=$(curl -s -o /dev/null -w '%{http_code} %{time_total}s' --max-time 20 -A 'Mozilla/5.0' "$d" 2>&1 || echo "ERR")
+            echo "$out  $d"
           done
+          } > data/netdiag.txt 2>&1
       - name: Real API calls
         env:
           YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
         run: |
-          echo "--- token refresh ---"
-          curl -s -i --max-time 25 \
-            -X POST 'https://user-njs.yun.139.com/user/session/refresh' \
-            -H 'Content-Type: application/json' \
-            -H "Authorization: $YUN139_AUTHORIZATION" \
-            -d '{}' | head -20
-          echo "--- mcloud ---"
-          curl -s -o /dev/null -w 'mcloud=%{http_code}\n' --max-time 20 'https://m.mcloud.139.com/portal/mobilecloud/index.html'
+          {
+          echo "--- user-njs session/refresh ---"
+          curl -s -i --max-time 25 -X POST 'https://user-njs.yun.139.com/user/session/refresh' \
+            -H 'Content-Type: application/json' -H "Authorization: ${YUN139_AUTHORIZATION:0:20}..." -d '{}' | head -12
           echo "--- orches ---"
-          curl -s -o /dev/null -w 'orches=%{http_code}\n' --max-time 20 'https://orches.yun.139.com/orchestration/'
+          curl -s -i --max-time 25 'https://orches.yun.139.com/orchestration/' | head -8
+          echo "--- mcloud ---"
+          curl -s -o /dev/null -w 'mcloud=%{http_code} t=%{time_total}\n' --max-time 20 'https://m.mcloud.139.com/portal/mobilecloud/index.html'
+          } >> data/netdiag.txt 2>&1
+      - name: Commit
+        run: |
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add data/netdiag.txt
+          git diff --cached --quiet && echo "no change" || git commit -m "netdiag $(date -u +%s)" -q
+          for i in 1 2 3; do git pull --rebase -q origin main && git push -q origin main && break || sleep 5; done
