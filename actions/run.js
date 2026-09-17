@@ -1602,18 +1602,25 @@ async function main() {
         try {
           const auth = await ensureAuth(a);
 
-          // 1) 续期
+          // 1) 续期（失败不中断：令牌仍有约 30 天有效期，本次沿用旧令牌继续跑任务与气泡）
           if (type === "daily") {
-            const rr = await refreshToken(a.phone, decodeAuth(auth).token);
-            if (rr.ok) {
-              const d = decodeAuth(auth);
-              a.authorization = base64Utf8Encode(`${d.prefix}:${a.phone}:${rr.data.new_token}`);
-              a.expires_at = rr.data.new_expires_at;
-              a.remaining_days = rr.data.remaining_days;
-              a.last_refresh = nowStr();
-              item.refresh = "成功，剩余 " + rr.data.remaining_days + " 天";
-            } else {
-              item.refresh = "失败：" + rr.error;
+            try {
+              const rr = await refreshToken(a.phone, decodeAuth(auth).token);
+              if (rr.ok) {
+                const d = decodeAuth(auth);
+                a.authorization = base64Utf8Encode(`${d.prefix}:${a.phone}:${rr.data.new_token}`);
+                a.expires_at = rr.data.new_expires_at;
+                a.remaining_days = rr.data.remaining_days;
+                a.last_refresh = nowStr();
+                item.refresh = "成功，剩余 " + rr.data.remaining_days + " 天";
+              } else {
+                item.refresh = "未续期：" + String(rr.error || "").slice(0, 80);
+              }
+            } catch (e) {
+              item.refresh = "未续期（接口不可达，沿用旧令牌，剩 " + (a.remaining_days != null ? a.remaining_days : "未知") + " 天）";
+            }
+            if (/^未续期/.test(String(item.refresh || "")) && a.remaining_days != null && Number(a.remaining_days) <= 3) {
+              item.warn = "令牌仅剩 " + a.remaining_days + " 天且续期失败，请尽快处理";
             }
           }
 
@@ -1656,7 +1663,8 @@ async function main() {
             item.receive = rb.ok ? ("+" + rb.got + "（" + rb.before + "→" + rb.after + "）") : ("失败：" + (rb.error || "未知"));
           } catch (e) { item.receive = "异常：" + String(e.message || e).slice(0, 80); }
 
-          item.ok = !item.refresh || !String(item.refresh).startsWith("失败：");
+          // 走到这里说明鉴权有效、任务与气泡已执行；续期只是附带动作，失败不应判整个账号失败
+          item.ok = true;
           if (item.ok) okCount++;
         } catch (e) {
           const msg = String(e.message || e);
@@ -1679,7 +1687,7 @@ async function main() {
       if (key && ra.trusted) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
       if (ra.trusted) await saveStore(accounts);
       out.results = perAccount.map(x => ({ phone: x.phone, masked: x.masked, name: "", ok: x.ok,
-        message: [x.refresh ? "续期" + x.refresh : "", x.tasks !== undefined ? "任务" + x.tasks + "个" : "", x.receive ? "气泡" + x.receive : "", x.error || ""].filter(Boolean).join("；") }));
+        message: [x.refresh ? "续期" + x.refresh : "", x.tasks !== undefined ? "任务" + x.tasks + "个" : "", x.receive ? "气泡" + x.receive : "", x.warn || "", x.error || ""].filter(Boolean).join("；") }));
       out.ok = okCount > 0;
       out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个";
 
