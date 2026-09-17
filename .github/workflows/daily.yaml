@@ -11,7 +11,7 @@ permissions:
 jobs:
   daily:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 45
     concurrency:
       group: yun139-panel-result
       cancel-in-progress: false
@@ -24,7 +24,10 @@ jobs:
         run: |
           npm i --no-audit --no-fund playwright@1.63.0
           npx playwright install chromium
-      - name: 自动续期令牌 + 执行云朵任务 + 领取气泡
+
+      - name: 第 1 轮：续期 + 任务 + 气泡
+        id: round1
+        continue-on-error: true
         env:
           EVENT_TYPE: daily
           PAYLOAD: "{}"
@@ -34,18 +37,33 @@ jobs:
           DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
           DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
         run: node actions/run.js
+
+      - name: 第 1 轮全失败，等 6 分钟自动重跑
+        if: steps.round1.outcome == 'failure'
+        env:
+          EVENT_TYPE: daily
+          PAYLOAD: "{}"
+          PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
+          YUN139_AUTHORIZATION: ${{ secrets.YUN139_AUTHORIZATION }}
+          YUN139_PHONE: ${{ secrets.YUN139_PHONE }}
+          DINGTALK_WEBHOOK: ${{ secrets.DINGTALK_WEBHOOK }}
+          DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
+        run: |
+          echo "第 1 轮失败（多为机房瞬时网络故障），等待 6 分钟后重试"
+          sleep 360
+          node actions/run.js
+
       - name: Commit result
+        if: always()
         run: |
           set -e
           git config user.name "yun139-panel-bot"
           git config user.email "yun139-panel-bot@users.noreply.github.com"
-          # 先保存本次运行结果，后面切分支不会丢失
           mkdir -p /tmp/panelout
           cp data/result.json /tmp/panelout/result.json
           if [ -f data/accounts.enc ]; then cp data/accounts.enc /tmp/panelout/accounts.enc; fi
           for i in 1 2 3 4 5; do
             git fetch origin main
-            # 基于远端最新 main 重建分支（accounts.enc 是二进制，用 rebase 必然冲突）
             git checkout -f -B main FETCH_HEAD
             cp /tmp/panelout/result.json data/result.json
             if [ -f /tmp/panelout/accounts.enc ]; then cp /tmp/panelout/accounts.enc data/accounts.enc; fi
