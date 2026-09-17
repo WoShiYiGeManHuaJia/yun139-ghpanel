@@ -1,69 +1,31 @@
 {
-  "ts": "2026-09-16 08:10:10",
-  "requestId": "daily-1789546210052-nnhcnk0a",
+  "ts": "2026-09-17 01:11:59",
+  "requestId": "daily-1789607519238-00levcci",
   "type": "daily",
   "ok": true,
-  "msg": "共 4 个账号，成功 4 个",
+  "msg": "共 4 个账号，成功 1 个；⚠ 137****4642(剩?)、137****6553(剩?)、172****9953(剩?)、182****4895(剩?) 仍有未领气泡",
   "perAccount": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 11,
-      "taskOk": 11,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（261→261）",
-      "ok": true
+      "ok": false,
+      "error": "网络异常（已重试3次）：fetch failed"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
+      "ok": false,
+      "error": "网络异常（已重试3次）：fetch failed"
+    },
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "ok": false,
+      "error": "网络异常（已重试3次）：fetch failed"
+    },
+    {
+      "phone": "18244754895",
+      "masked": "182****4895",
       "refresh": "成功，剩余 30 天",
       "tasks": 12,
       "taskOk": 12,
@@ -79,126 +41,6 @@
         },
         {
           "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "30G流量0元领",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "异常：page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://m.mclo",
-      "ok": true
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 8,
-      "taskOk": 8,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（1013→1013）",
-      "ok": true
-    },
-    {
-      "phone": "18244754895",
-      "masked": "182****4895",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 17,
-      "taskOk": 17,
-      "taskFail": 0,
-      "taskDetail": [
-        {
-          "name": "去使用移动云手机",
-          "ok": true
-        },
-        {
-          "name": "下月签到领惊喜福利",
-          "ok": true
-        },
-        {
-          "name": "去云盘图书馆阅读书籍",
-          "ok": true
-        },
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": true
-        },
-        {
-          "name": "调查问卷",
           "ok": true
         },
         {
@@ -234,80 +76,68 @@
           "ok": true
         },
         {
-          "name": "加入一个知识库",
-          "ok": true
-        },
-        {
           "name": "手动上传一个文件",
           "ok": true
         }
       ],
-      "receive": "+50（3→53）",
+      "receive": "失败：令牌失效或鉴权失败: fetch failed",
       "ok": true
     }
   ],
-  "enc_accounts": "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",
+  "enc_accounts": "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",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务11个；气泡+0（261→261）"
+      "ok": false,
+      "message": "网络异常（已重试3次）：fetch failed"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务12个；气泡异常：page.goto: Timeout 45000ms exceeded.\nCall log:\n  - navigating to \"https://m.mclo"
+      "ok": false,
+      "message": "网络异常（已重试3次）：fetch failed"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务8个；气泡+0（1013→1013）"
+      "ok": false,
+      "message": "网络异常（已重试3次）：fetch failed"
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；任务17个；气泡+50（3→53）"
+      "message": "续期成功，剩余 30 天；任务12个；气泡失败：令牌失效或鉴权失败: fetch failed"
     }
   ],
   "recheck": [
     {
       "masked": "137****4642",
-      "total": 261,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
+      "error": "fetch failed",
+      "clean": false
     },
     {
       "masked": "137****6553",
-      "total": 261,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
+      "error": "fetch failed",
+      "clean": false
     },
     {
       "masked": "172****9953",
-      "total": 1013,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
+      "error": "fetch failed",
+      "clean": false
     },
     {
       "masked": "182****4895",
-      "total": 53,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
+      "error": "fetch failed",
+      "clean": false
     }
   ],
-  "allClean": true,
+  "allClean": false,
   "dingtalk": {
     "ok": true,
     "status": 200,
