@@ -1,28 +1,0 @@
-Cookie 长度=817
-
-===== A. cloud.139.com 首页：判断是否登录 =====
-HTTP=200 字节=3884
-   含 '登录' : False
-   含 '云手机' : True
-   含 '未登录' : False
-   含 '退出' : False
-   含 '中国移动' : False
-   含 '我的' : False
-   标题片段: 云手机
-
-===== B. 云应用广场 / 应用列表 API 探测 =====
-  HTTP=404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </
-  HTTP=404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </
-  HTTP=404 {"timestamp":"2026-09-16 21:40:53","status":404,"error":"Not Found","path":"/cloudphone/api/app/list"}
-  HTTP=404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </
-  HTTP=404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </
-  HTTP=404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </
-  HTTP=404 <html> <head><title>404 Not Found</title></head> <body> <center><h1>404 Not Found</h1></center> <hr><center>nginx</center> </
-
-===== C. 页面内 JS 里的 API 路径 =====
-
-===== D. 云盘域：能否拿到话费/流量（对照）=====
-  HTTP=405 {"timestamp":"2026-09-16T13:41:01.385+0000","status":405,"error":"Method Not Allowed","message":"Request method 'GET' not supported","path":"/auth-rebuild/token/v1.0/querySpecToken"}
-  HTTP=200 {"success":false,"code":"01000101","message":"服务器响应异常","data":null}
-  HTTP=405 {"timestamp":"2026-09-16T13:41:04.208+0000","status":405,"error":"Method Not Allowed","message":"Request method 'GET' not supported","path":"/group-rebuild/member/v1.0/queryAvailableBenefit"}
-
