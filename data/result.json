@@ -1,243 +1,308 @@
 {
-  "ts": "2026-09-17 04:14:42",
-  "requestId": "diag-1789618482449-7xo0numk",
-  "type": "diag",
+  "ts": "2026-09-17 04:16:09",
+  "requestId": "daily-1789618569085-ya0gneui",
+  "type": "daily",
   "ok": true,
-  "msg": "诊断完成（1 个账号）",
-  "diag": [
+  "msg": "共 4 个账号，成功 4 个",
+  "perAccount": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "steps": [
-        "API 云豆=261 可领=0 待领=0 下月=0",
-        "页面气泡元素: 0 个",
-        "最终云豆 264"
-      ],
-      "attempts": [],
-      "api": {
-        "total": 261,
-        "receivable": 0,
-        "toReceive": 0,
-        "nextMonth": 0,
-        "list": []
-      },
-      "page": {
-        "count": 0,
-        "items": [],
-        "alt": {
-          ".bubble": 0,
-          ".cloud-bubble": 0,
-          ".points-item": 0,
-          "[class*=bubble]": 0,
-          "[class*=ubble]": 0,
-          ".signin-bubble": 0
-        },
-        "bodyLen": 4403,
-        "bodySnippet": "温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 温馨提醒：因系统升级，\"2GB全国流量日包\" 奖品暂时停止投放，具体恢复时间将另行通知，敬请谅解。 137****4642 奖 品 规 则 264 云盘专属AI豆 点击气泡即可领取任务奖励哦 本月已签到 3 天 提醒我每天来 周一 周二 周三 周四 周五 周六 周日 未签 14 15 16 未签 17 18 19 20 热门活动 做任务 兑好礼 绑定公众号 +200豆 云盘动态实时推送 去绑定 开启备份领好礼 首月+400豆 开启备份，云端无损存储 去开启 开启云盘APP通知领好礼 +200豆 "
-      },
-      "final": 264,
-      "net": [
+      "refresh": "成功，剩余 30 天",
+      "tasks": 12,
+      "taskOk": 12,
+      "taskFail": 0,
+      "taskDetail": [
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_10.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������>��@��c�߲���������������\u0012L�d��N��������*~����K��(|�������n�����������A�����%�V��"
+          "name": "从固定入口访问云朵中心",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_11.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLs��������������N�↳�E��������V��x��������|��d��5�����y�䐴�;��*}�������%s�������f�����N���"
+          "name": "使用PC客户端",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_12.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������7}�������b�ݎ�����<�������顾����V�����D��.~����M��*}����������(|����e�����L��1�����"
+          "name": "分享文件领好礼0/7",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_13.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���������C����������]��������������*}�(|���������������0����������v��6�ꋰ���x��/~����U�"
+          "name": "小云互动礼",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_14.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���9�b�����������h�����=��6�������������������*}�H�ܲ�ꉭ�(|����O��e�����C�����.����U���"
+          "name": "绑定公众号",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_15.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������=�޵�����m�ގ�����h�����*}�d��P�����������������/������������������������/}㓶�O�����"
+          "name": "开启备份领好礼",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_16.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLo��Z��Q��@��������������������b�����D��������J�����)}��鏱����9��.}�Q��7��G�偩�0��I�����g�"
+          "name": "开启备份领好礼",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_17.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002vPLTEGpL7}�J��]�����_�Ᏹ�v��������F�倷�������������i��W��M�����z�����������*}�]��P���������������"
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_18.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������\\����M��������i����=�����T��������������B�����\u0010N�X��p�����c��L��8����T��������{��"
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_19.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLN�����]������������z����x�䖸�R��n��������i��������\u0010M����G�����\u0018`����j��c�����0��P�����z�"
+          "name": "去体验AI相机",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_20.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLo��Z��Q��@��������������������b�����D��������J�����)}��鏱����9��.}�Q��7��G�偩�0��I�����g�"
+          "name": "和AI助手对话",
+          "ok": true
         },
         {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_21.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLr��K�����������n�ގ�����c��������������.}�p����������\u000fJ�U�����L��������������-�����P��a�"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_22.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���D��C��������������F�����o��C�����6����ꑱ����c�����\u0012K����/~����������L��0��'z�O��I����"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_24.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������7}�������b�ݎ�����<�������顾����V�����D��.~����M��*}����������(|����e�����L��1�����"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_23.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���_��\u0014U����C�������m��������������.~�u��\u0010K����d�����q��������0����������V�����������~�"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_25.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLs��������������N�↳�E��������V��x��������|��d��5�����y�䐴�;��*}�������%s�������f�����N���"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_27.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL<�������>�����_�ߒ������9�����������������3��*~�������)}�������N�������������k�����1��U"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_26.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���s�������4}�;�◺�������D��������������������%|�o��:����)}�Q��������k�����g�����������o"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_28.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������5{�������c�ߔ�����>��\u0012K�������H�������睿�������������(~挮�o�����U��(|���O��o�∯�)|���"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_29.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLC��?��d�������������H��������:�����j��\u0012K�������U�����c�����0��r�܆��N��������������6����"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_30.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL���D��������G��A�������U�����t�����������x��E�����l�ކ��3��*}�������������)|�����������"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_31.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL?��b�߻��������T�����P����I�����k�����1��6��c�����������v��*}�q�������쐰�@��0��v��/~�x���"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_32.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������\u0019_�������P�㔼�z����������������\u0012K�������K�����������b��0��({����g��������L��=��-��"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_33.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpL������k�����u��O�����x��������b�����Y��������I��r��������*|����\u0011K�R�������Q����)|����"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_34.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLb��N�����������R�ᅸ�{��|��t��O��������m��N��G��\u0010N�������N�����h�������������������g�����"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_35.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000?\b\u0003\u0000\u0000\u0000C�s}\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0002�PLTEGpLX��������c�������q��������J��������m��c��������\u0011J����������T��d��v��/��*~����O��L�����{"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_36.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\u0013\u0000\u0000\u0000\t\b\u0003\u0000\u0000\u0000���\u0003\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0000fPLTEGpLIC?%\u001f\u001cd[T50,WPI)\" ?96^SPA::bYSi`Y\"\u001c\u001a!\u001c\u0019:52_VQ_WPE?=PIDG<9=84MFA\u001b\u0017\u0015\" \u001eJEE)$\"$ \u001d2-*71-G@;"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_37.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\f\u0000\u0000\u0000\u0014\b\u0003\u0000\u0000\u0000�.,#\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0000�PLTEGpLSEAE:4�sWD=dVJK??q`UH@=o::��rIB={j`j^VI94k]SE83\u0019\u0010\u000e\u001e\u0015\u0012SFB�xlG@<<53fXN%\u001a\u0017 \u0011\u000fo[QfSJ \u0017\u0014HA>"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_38.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000\u001c\u0000\u0000\u0000\u0011\b\u0003\u0000\u0000\u0000�M<x\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0000�PLTEGpL杘�4<�4;���С��6<��â5<�7>��գ8=�9@ʏ��LQ�C;�WM�|u�OU�4<�4;�.3�rk曖�39�?EȈ��sw�06�39�5<�-2�("
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/images/newsignin/cloud_anim/images/img_39.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000�\u0000\u0000\u0000�\b\u0003\u0000\u0000\u0000)�r�\u0000\u0000\u0000$zTXtCreator\u0000\u0000\b�sL�OJUpL+I-RpMKKM.)\u0006\u0000Az\u0006�jz\u0015�\u0000\u0000\u0000\tpHYs\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0001\u0000O%��\u0000\u0000\u0000uPLTEGpLt��������t��u��t�����u��u��������������������������������������������������������������"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com//uop_prod/20260807/b0163b72c8994073835a66eca8de2eca.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000P\u0000\u0000\u0000P\b\u0006\u0000\u0000\u0000�\u0011�\u0000\u0000\u0000\tpHYs\u0000\u0000\u000b\u0012\u0000\u0000\u000b\u0012\u0001��~�\u0000\u0000\b�IDATx��][o\u0013G\u0014���\u0013�\\H��8!\t\u0010R\b�\u0004R\u0010jՂԢ�> �?\u0000�}��\u0002�/hx�#��\n�З�m�*DE\u0003�B��B\\H��\u0002�\u00026�cou��x�^���ڄ|�Q.>{���3sf�3c\u0017J�p$z\u0018@?��\u0000���\ry<\n��_\u0000W�՞+����\u0004�#Q\"�H"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com//uop_prod/20260730/676282624ed64301be40100d6dd28e3c.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000P\u0000\u0000\u0000P\b\u0006\u0000\u0000\u0000�\u0011�\u0000\u0000\u0000\tpHYs\u0000\u0000\u000b\u0012\u0000\u0000\u000b\u0012\u0001��~�\u0000\u0000\u0007\u0011IDATx��]Ko\u0013W\u0014�fl'�\u0013B��G�R\u001c�D\u0005\u0012�U�JUI��A\u0005u�M%�e7�_��\u000b\b�na�\u0005��V�6��Q�\u0005I�#�\u0012bB\u0012\u0002�\u0010��!\u0019�S��\u001d��\u001e�s\u001fc;�']9����r�=�޹�ZC\u0005�4�c\u0000z\u0001\u001c\u0005\u0010e���(��\u001e\u0001�\u001e\t��W�\u000b_\t"
-        },
-        {
-          "t": "REQ",
-          "u": "https://m.mcloud.139.com/ycloud/advert/show/report",
-          "m": "POST"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/public/img/signin_cloudIcon.70828306.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0001M\u0000\u0000\u0000T\b\u0003\u0000\u0000\u00001��\u0011\u0000\u0000\u0002�PLTE\u0000\u0000\u0000��k��R��`��a��o��k��`����M��u��d�xW�eH�������o�������=��U�bF��G�lM�oO�`D���qQ����V����v��3��w��]��h����F��-�^B��1��Y���kL���ڐ��T�iK��=��=������v��f��~�jL��?"
-        },
-        {
-          "t": "RES",
-          "u": "https://img.mcloud.139.com/portal/mobilecloud/public/img/signin2_bg.a7629198.png",
-          "b": "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0002&\u0000\u0000\u0002X\b\u0003\u0000\u0000\u0000a8��\u0000\u0000\u0001�PLTE\u0000\u0000\u0000������������������������������������������������������������������������������������������������������������������������������������������������������������"
-        },
-        {
-          "t": "RES",
-          "u": "https://m.mcloud.139.com/ycloud/advert/show/report",
-          "b": "{\"code\":0,\"msg\":\"success\"}"
-        },
-        {
-          "t": "REQ",
-          "u": "https://m.mcloud.139.com/ycloud/advert/show/report",
-          "m": "POST"
-        },
-        {
-          "t": "RES",
-          "u": "https://m.mcloud.139.com/ycloud/advert/show/report",
-          "b": "{\"code\":0,\"msg\":\"success\"}"
-        },
-        {
-          "t": "REQ",
-          "u": "https://m.mcloud.139.com/ycloud/signin/page/getCloudNum",
-          "m": "GET"
-        },
-        {
-          "t": "RES",
-          "u": "https://m.mcloud.139.com/ycloud/signin/page/getCloudNum",
-          "b": "{\"code\":500,\"msg\":\"系统异常\"}"
+          "name": "手动上传一个文件",
+          "ok": true
         }
-      ]
+      ],
+      "receive": "+0（264→264）",
+      "ok": true
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "refresh": "成功，剩余 30 天",
+      "tasks": 13,
+      "taskOk": 13,
+      "taskFail": 0,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": true
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "30G流量0元领",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+0（264→264）",
+      "ok": true
+    },
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "refresh": "成功，剩余 30 天",
+      "tasks": 9,
+      "taskOk": 9,
+      "taskFail": 0,
+      "taskDetail": [
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": true
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+0（1016→1016）",
+      "ok": true
+    },
+    {
+      "phone": "18244754895",
+      "masked": "182****4895",
+      "refresh": "成功，剩余 30 天",
+      "tasks": 12,
+      "taskOk": 12,
+      "taskFail": 0,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": true
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+0（56→56）",
+      "ok": true
     }
-  ]
+  ],
+  "enc_accounts": "4ONpphOrdy9hHpB/gO3ynGXuR3SbZhFzYkeqktPniWKlWNu4X1bOVcLtnSJ+fzHOO2zOA3XfTKM7hkM7M83KCMqemyswGy2c43MUNr08/gQ+4LvUgKUvr+trrQaZUUkCJD/aM1ihLODepmfbiZEgUskpe4pN0MKYOCg7BIgSf6BjJwmmonih0tWyAP4CPr+RvQbRruvc8vHndYyy/c1OZNUziRZxjbzziwnXSCwK3kjXVKp/t0GqiJ6pnJiQ4ymJ5BvhrdoacUHGwL600dp91yar3+80gNzBgniq+FoKVCA7lxiAJsBW0xyDxTMn+7XnpoWAyZ2JPfSxBBKLmkrB4OGYu4Ld3Qke/6bnS1KwitxINwKNYQsUfrM9JCPbnyr8QpbCsjsiuVWmafWl7kKIe/CQUSJjyDclhlnIsA1fJh6QvKS6E6X5wlku13Qk+c6q4pt5tloqDVobCaHGiY30U0I7zfRUGniaIF2Din8Rw8hz9f9WSQ2O8NwrufCG/nG0ISa3oweoIFGu8dHLb6zJvhBpiFZFt2AYfFJhtqoEOZdEYX+3Zmo28PGIaKzvJIgcTfl6FV6n9BWV4y1J82Qm0NU/I8pD+DUDqNGOOrlz01Do8p4eJJvYt3qMH2sLOGK+EhEvqDDuqQTB5D8R+QiEgNPrEMyvQ21/B7KTCr2pcLv4QIkMUBQX3VZzssWhb2DoyfwG9ucYfqCrL4OcXjBgCuKF+rp8K0FLaeZdXi3IhBsvoF9/+kh4oSv29inlw9yZWIvzTaT84gBv/qhSLXilXTd4Ca58Ix5NZRBVWR1Q1DNAxfrVFscA5+HFH7I2N3N16qKS0Ief5V0w846+1u1faiKG5WMNybEfe/9F36h/w8WCFSLQzDUpe0EMdUxFiqWUUNowzdFNDtHiXrY5iJKNTL1QCHLDRnYvezGQgeRsiUgunTJS2vti6hZcSSQnG2S1PzV+0EI3ds+5Ejpb3xDPfgPhujOcAeX2UYswVy5G70XlEalgoRTFyYXs62Z5RCGZVovpNDtvfj+nBc44A32qye/M2hDvd4CCKtn9hemCtPO1xkSdR/ZUU/FUVSnAV96Mj7oQQ7btrwl0nM+5DCO/UxWo8GSdO/D3I+xmnR964eTGO+HaZTfgd93e1aw9U0tL3bp35ZLu5nUUNuhderpbSsZjMg6MJP4BPKkBVEAXpO2qIeMurrZSh6RW8MJKAexcEUdPYit5+QF+b9cVS5m+pp+XliqTR1fogAqgkpC/4fcC++yMsadsvBpYBCk2Bgx1Gp+gJZVSbtcO9FGN+bqdWSQ/WAZTr71s27yEIeEII4+18DjxBQ2MzIG5ZHT6pExUs06+hgHKLhduO4HZDIGrt/b/XNnXyjXvL2mXgt+zwIOdC0EOfsSY0NLewfo7NXlFBhCiAy8iGk8hEa/JF6nVDY7Ic3QDBU04d3eBmWmlmm9ZvGENHfMrnjD9QYncOT3RjKF4XLo/3BRmePycm3qJj3MevlJqAeIhazMzQtcZzDqEXvDw19lmYsLjHWqhntuBjd/nunpbcKZYp+03jsgww4g8QfSfdkrYAorfJAfahjDp07wzB9p5IG3Pkzi1UTHGapy3rD7n1Ujuk105gFXcjlCgRMMvqZa8X1iKpuvAzHKiSVjzNSEC6t8bowSZvmMSBoePyVGSI0tFgSU++50yXBJKnekP3vrI6xEuJlQVx3XfVteRfHkjSqeWOMDXFvcb1eCgbXhPVLGsnTzrb08TFAO0wI6eQrJCLBF8Hk26MSsfN2F3sjZh4ufoW4pCK7viVuDIwHSvOimXJBVTqGGwvd6T7EDFs8M/EFoijmFctWHsyIn1fK9tYdLFyHcq4pfi0qWcIVUyxiyOi+ocQsSh8KNG/tsxI6mL9OPlHl0QM7uf5jJ6omWm0KV9l/mACiN7WvM4Rppr0qa1ydLW3Ixmn5MWXVWHXcK/bU0FbPxw6B1Q7gm+ZfETonS0BRBA2fad16lAma08CHI+R/E6P5DfBPaPrXPMhRau72pstDDvm81veTBhnNQXTadTs/954BrjSVI56hj6IhpDLPseSQtq7Xx9PhwnzX/VKvAX5YaYJ6OOTlPpMbF2E4qjY2yrF6+89aMWdmpltvvPjnqbir6hzwgr5jhtqKpqYoICqhWvutYu//gB2HGfp/EXd5LII9WrB8+eRy02OxiL7KOaRJtVHBnI7BGyJQbfMfDpYu0cyx0KD/4MHpNoUM7tIYOOvyiyQULAjfts27rh65JaUZqDls+ilnxdMXQ2z7cK3+nhH+LffkN9VmzVPZrIkzyubq1i2MRYjq0kLvzwfHCrjitamCgb2pCx8cmMzFksuz2yBrEv1yTDA6eYdmpiDqK/KSHBTCaSNXsfe9Z3Fd7dPaGHqVnnxUj9xga+124La6C/a6X1BOaFmriPHD9OM8Z/bcxv2EdlkUZBiMHFenDgAepNtUl6ViLVdjnnfxrA0gpdRGpdBiUkpo2PGJfwPQqtEIWjnEzWJIzFxqwUMkrERbGrQmb0pQZOPs+qwc/ZIbnkjhb05kymIP/Rj61jg62bjHJOPag7aE5nJ7PcQTh9uHvwSBhVfteg7LXH8miwfpVLQi3/qyimrkXYZY3ZR6gr1MBZa5ackr8Uvylh21mhTDbAykuQA2dBcaaJg/3ba6O4fr43EJLo",
+  "results": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "name": "",
+      "ok": true,
+      "message": "续期成功，剩余 30 天；任务12个；气泡+0（264→264）"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "name": "",
+      "ok": true,
+      "message": "续期成功，剩余 30 天；任务13个；气泡+0（264→264）"
+    },
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "name": "",
+      "ok": true,
+      "message": "续期成功，剩余 30 天；任务9个；气泡+0（1016→1016）"
+    },
+    {
+      "phone": "18244754895",
+      "masked": "182****4895",
+      "name": "",
+      "ok": true,
+      "message": "续期成功，剩余 30 天；任务12个；气泡+0（56→56）"
+    }
+  ],
+  "recheck": [
+    {
+      "masked": "137****4642",
+      "total": 264,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
+    },
+    {
+      "masked": "137****6553",
+      "total": 264,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
+    },
+    {
+      "masked": "172****9953",
+      "total": 1016,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
+    },
+    {
+      "masked": "182****4895",
+      "total": 56,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
+    }
+  ],
+  "allClean": true,
+  "dingtalk": {
+    "ok": true,
+    "status": 200,
+    "body": "{\"errcode\":0,\"errmsg\":\"ok\"}"
+  }
 }
