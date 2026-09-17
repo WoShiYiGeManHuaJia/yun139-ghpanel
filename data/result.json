@@ -1,9 +1,9 @@
 {
-  "ts": "2026-09-17 04:33:57",
-  "requestId": "daily-1789619637900-ymigjtn0",
+  "ts": "2026-09-17 04:53:31",
+  "requestId": "daily-1789620811078-907acjlm",
   "type": "daily",
-  "ok": true,
-  "msg": "共 4 个账号，成功 1 个；⚠ 137****4642(剩?)、137****6553(剩?)、172****9953(剩?)、182****4895(剩?) 仍有未领气泡",
+  "ok": false,
+  "msg": "共 4 个账号，成功 0 个",
   "perAccount": [
     {
       "phone": "13787464642",
@@ -14,69 +14,8 @@
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 13,
-      "taskOk": 12,
-      "taskFail": 1,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": false,
-          "progress": "0/7",
-          "done": false,
-          "note": "进行中 0/7（点击已推进，条件未达标）"
-        },
-        {
-          "name": "小云互动礼",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "30G流量0元领",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（264→264）",
-      "ok": true
+      "ok": false,
+      "error": "网络异常（已重试3次）：fetch failed"
     },
     {
       "phone": "17274079953",
@@ -91,7 +30,7 @@
       "error": "网络异常（已重试3次）：fetch failed"
     }
   ],
-  "enc_accounts": "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",
+  "enc_accounts": "2QOkpbPZef5XKt3Ks+yUALqk3WbF5DoAo4FlJn7e24TcQtui9gzSVA1PAnFl6UAD3PbiLC9RtaTfFcJlSJhQ4FQbas1DP+c11b3Qs9KtJZnxTsUy3k2WVuG1xuT+IH/4seYLZJurNKd3KoPEA89XeCSB/xUfE90PsQkG9/aio8bHpbJE5PInE6Ub7pDJq9mHjItwsgigWuLOtSf2ijyALU+Mrc0d/krlx8bRntVSQFL72jgkXDCKfbuBj/7cUHLLzteAImkN2P8aSK4gmzdLGCiaYCt+PtUV1RBsgNz+2+uXrXiEqgvl/ZX4kRG7m1be6N8N6ZK7KpXmgdO6xmwF6FGN1pUCX0Jvu0hijfosnN6A1QOa8ZojL9vQ5sZl7c4V0uvzBHp9QJkYMS86QhkyqmFI7mHYikxkTRSjJqbJHUVYfVMQ8XnD5Nqldd1zzJ8TD7hy/bod11A4C9JT8xf9Luwbon37Bk2KNDcRHn8hiQEDglHLK8dDRR2hHfimXHdUB/wZmw/n7Z6kHmQf5xUGKZegtQwtFSNEuPxvfYUeGf3s+k14PKgCTOHAGQnQtMJYvULU8mHNFqMYeDVHZ3zmTjdIh2xkRawTTFVRCaUN8eutfvA4AOUTKxc7kDPaPeisZzZnL8Wh8VbpvCjzuvyozTJT9rxyqqQmhJwEkQNGz40dJLX8ihzzFw2SEQ1tycAbgcg9mWzsxSPYPCL0vjBt27gLoYHGjH+CmQSL5ezPHTTe2NQouMXQgrtG+Nje1Zys6e4AdzqE6U0uikIy2hHSryV2BsK+5Fwh1hh03vVA47QIyqLNYtHI1TvTyUk7dbcnV/l+ocAETPjrZf5WduSimOkJGelAehkxHEXQcbXzn4OAEsw6El+cP8H5MUdecgJqg+ywmGzqAq7hRfuBUmQ2RiY9xvkHQuLechqKLOIaeHWXcjz+uwj4dq8+DGaTmKzoUpdmnUne7oyInLr+edkTy7cvnYBy71Lv9MKUuhgbBjSUigFZ40j8W949AZcDUitCAecjXTX7y1X+tcXNNVb4/dn84vMwipIjbSVfBCnI6QgstGolakaJ01rQawX2C91sKPuCbUg/xflaxCGXjCuPzOpUKiOqJ6xRGqTtRuMa/gjkOY0EqLClyg1rTaR+TNLJCxAuvk5ppaXVcJVzaBg+4bcUm+bEu1CHq9ybJFvZ4EaGJMnXZvc7JZhf2dhAjDtyIXU+AX+Ooxgqt6rbwTNbu2Sp1JiEeOgK/mbQzH4FJK2lqIlh9xjaeXFsBKbjDd0hfDP6qhTb431Yn30AQxrEnB8bpN05aHN5EfpjtA7uILSVgKIJQPaPqE1J4zNE1ffQAVrV74v/CHiBr36zrXQjXNktg/zqfuNK2dHZaci8Wt7yyYZqjAD4RIAkUgTd75W3H0wa7v9bPWHL4JIe1he2QDcZrKytNWK8IAx7FFWTmzdGw+8oc85L5DMFuCpmCg2+74yxpA51cNelagm5h6KQTo9ah6JVRPeiHVOKtXv0zMDz61+1PyDvXzxJw+rhD9Kqv5U50iuok0vjv7mAfFZlYrpb0MRDzvHVjW9qv5DZojA/rnaEKZS7talsoMK71T8MvS+lyYicibnxRb4G0Eab6IWTsyVKTwgPC5WTvhxtRHq6wkFKbOrjuVIFCTm6jwVjv/JkT8Z28rY0zOiskk4+NFdfmeP3ID3GfQKi/Y0NR6Dk9/cHFvAeJs2L2wn6TOCCYFyCqpUbLw3WXCgDPjud5anxwMV6S2WAN0CikzfsPK17Zvr1g0iA3rUgX5gvkhUo4z06QSfHsd55JAE+jR9UdYwWq6ZWPVVP6cZnDKkxL3fECMzvF7eR373tg4aBpqMZu3ptS+qR+l6ibQ19mjRnZGxWI43LfhGdP9IUF1iig2d612gATJ79JRwzval/hCxSWVhVfKIL4TRtjbnXzkqnYWgACJquQPP8FZb88Kts8A93BUVxz9/FSQs2wXbzEN5qs6LFuUMa2IHACc1Fs2rD0KtvL6UbVGRdvo/0rBDZmtbSIzjyQvdbHS9EGFQ1rC62VtgNDuyZMigSf8jxO/oIWULJOPndqlN9pdB2OgHFt2TIlPyuLt3UuzEiQvoSqxsxDpO0zLSasZuT3tRVSsfHR/Mf6+uZQ16cv1xQ6vdgwQwL2jLqgF9aR/g1j9oK2mxm1k/QEf9leqzOj7gw1vKXpYjukDkM5iwt7M8tT5KGRAbuuZVRY+frfSlIzG62svMkAb6n5ez6rPto45MANUieQzoceoJPNrK1NTLMYllTuQDJwDP3juOo16xl7TS5nku0MkPfq/TcM5DsilEK8u6Pn2eIFchT7IjNW//OX37f34ozJyTbI7paWuCOR1mdbINatSXKZApN0BiSVeSCvSixRyvzDL8GZHCRMnZ9D9mPOVd35OjApovWhdFQHFVqcEdt6y+9RrXx4fhbhuwo5w833pZHUweaizhskqd4xJTQY7ULzJwJTFbvHbb0nXXqlPgRcpBM0ji2U7YzaPZhp4ZDOC4R3OYVOWC87WbPTaBCgQ0KGf6m45PorEjRHYRENREWMrf72NimMqlq6PreFY67kWJv6DTrccLGQ/OQwPi3gjb4V49lPOJqZXj8UPsXOitrOvRsOovNz7vbUeVOGEX838fvimZJ3FGMqV/vBCWmo4ir0gmr",
   "results": [
     {
       "phone": "13787464642",
@@ -104,8 +43,8 @@
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；任务13个；气泡+0（264→264）"
+      "ok": false,
+      "message": "网络异常（已重试3次）：fetch failed"
     },
     {
       "phone": "17274079953",
@@ -125,26 +64,34 @@
   "recheck": [
     {
       "masked": "137****4642",
-      "error": "fetch failed",
-      "clean": false
+      "total": 264,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
     },
     {
       "masked": "137****6553",
-      "error": "fetch failed",
-      "clean": false
+      "total": 264,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
     },
     {
       "masked": "172****9953",
-      "error": "fetch failed",
-      "clean": false
+      "total": 1016,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
     },
     {
       "masked": "182****4895",
-      "error": "fetch failed",
-      "clean": false
+      "total": 56,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
     }
   ],
-  "allClean": false,
+  "allClean": true,
   "dingtalk": {
     "ok": true,
     "status": 200,
