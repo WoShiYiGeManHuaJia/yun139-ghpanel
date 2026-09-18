@@ -1,6 +1,6 @@
 {
-  "ts": "2026-09-17 05:02:38",
-  "requestId": "daily-1789621358885-m1jh4eh5",
+  "ts": "2026-09-18 05:35:47",
+  "requestId": "daily-1789709747869-0gab6x65",
   "type": "daily",
   "ok": true,
   "msg": "共 4 个账号，成功 4 个",
@@ -8,7 +8,7 @@
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "refresh": "成功，剩余 30 天",
+      "refresh": "未续期（接口不可达，沿用旧令牌，剩 30 天）",
       "tasks": 12,
       "taskOk": 11,
       "taskFail": 1,
@@ -71,9 +71,9 @@
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 12,
-      "taskOk": 11,
+      "refresh": "未续期（接口不可达，沿用旧令牌，剩 30 天）",
+      "tasks": 13,
+      "taskOk": 12,
       "taskFail": 1,
       "taskDetail": [
         {
@@ -90,6 +90,10 @@
           "progress": "0/7",
           "done": false,
           "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
         },
         {
           "name": "绑定公众号",
@@ -134,7 +138,7 @@
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "refresh": "成功，剩余 30 天",
+      "refresh": "未续期（接口不可达，沿用旧令牌，剩 30 天）",
       "tasks": 9,
       "taskOk": 8,
       "taskFail": 1,
@@ -185,9 +189,9 @@
     {
       "phone": "18244754895",
       "masked": "182****4895",
-      "refresh": "成功，剩余 30 天",
-      "tasks": 11,
-      "taskOk": 10,
+      "refresh": "未续期（接口不可达，沿用旧令牌，剩 30 天）",
+      "tasks": 12,
+      "taskOk": 11,
       "taskFail": 1,
       "taskDetail": [
         {
@@ -204,6 +208,10 @@
           "progress": "0/7",
           "done": false,
           "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
         },
         {
           "name": "绑定公众号",
@@ -242,35 +250,35 @@
       "ok": true
     }
   ],
-  "enc_accounts": "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",
+  "enc_accounts": "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",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；任务12个；气泡+0（264→264）"
+      "message": "续期未续期（接口不可达，沿用旧令牌，剩 30 天）；任务12个；气泡+0（264→264）"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；任务12个；气泡+0（264→264）"
+      "message": "续期未续期（接口不可达，沿用旧令牌，剩 30 天）；任务13个；气泡+0（264→264）"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；任务9个；气泡+0（1016→1016）"
+      "message": "续期未续期（接口不可达，沿用旧令牌，剩 30 天）；任务9个；气泡+0（1016→1016）"
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；任务11个；气泡+0（61→61）"
+      "message": "续期未续期（接口不可达，沿用旧令牌，剩 30 天）；任务12个；气泡+0（61→61）"
     }
   ],
   "recheck": [
