@@ -1,0 +1,391 @@
+{
+  "ts": "2026-09-19T05:29:41.267Z",
+  "accts": [
+    {
+      "phone": "137****4642",
+      "rounds": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "id": 409,
+          "start": {
+            "state": "WAIT",
+            "currstep": 1
+          },
+          "hits": [
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            }
+          ]
+        },
+        {
+          "name": "使用PC客户端",
+          "id": 113,
+          "start": {
+            "state": "WAIT",
+            "currstep": 1
+          },
+          "hits": [
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            }
+          ]
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "id": 434,
+          "start": {
+            "state": "WAIT",
+            "currstep": 2
+          },
+          "hits": [
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            }
+          ]
+        }
+      ],
+      "num0": 267,
+      "num1": 267,
+      "finProbe": [
+        {
+          "id": 431,
+          "path": "/market/signin/task/receive",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 431,
+          "path": "/market/signin/task/getReward",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 431,
+          "path": "/market/signin/task/award",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 607,
+          "path": "/market/signin/task/receive",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 607,
+          "path": "/market/signin/task/getReward",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 607,
+          "path": "/market/signin/task/award",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 604,
+          "path": "/market/signin/task/receive",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 604,
+          "path": "/market/signin/task/getReward",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 604,
+          "path": "/market/signin/task/award",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        }
+      ],
+      "ok": true
+    },
+    {
+      "phone": "137****6553",
+      "rounds": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "id": 409,
+          "start": {
+            "state": "WAIT",
+            "currstep": 1
+          },
+          "hits": [
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            }
+          ]
+        },
+        {
+          "name": "使用PC客户端",
+          "id": 113,
+          "start": {
+            "state": "WAIT",
+            "currstep": 1
+          },
+          "hits": [
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 1,
+              "cloudId": 0
+            }
+          ]
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "id": 434,
+          "start": {
+            "state": "WAIT",
+            "currstep": 2
+          },
+          "hits": [
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            },
+            {
+              "click": "0/success",
+              "state": "WAIT",
+              "currstep": 2,
+              "cloudId": 0
+            }
+          ]
+        }
+      ],
+      "num0": 267,
+      "num1": 267,
+      "finProbe": [
+        {
+          "id": 431,
+          "path": "/market/signin/task/receive",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 431,
+          "path": "/market/signin/task/getReward",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 431,
+          "path": "/market/signin/task/award",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 607,
+          "path": "/market/signin/task/receive",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 607,
+          "path": "/market/signin/task/getReward",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 607,
+          "path": "/market/signin/task/award",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 604,
+          "path": "/market/signin/task/receive",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 604,
+          "path": "/market/signin/task/getReward",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        },
+        {
+          "id": 604,
+          "path": "/market/signin/task/award",
+          "err": "cyGet 失败: HTTP200:<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name"
+        }
+      ],
+      "ok": true
+    }
+  ]
+}
