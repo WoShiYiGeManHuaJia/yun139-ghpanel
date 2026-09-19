@@ -1,0 +1,1220 @@
+{
+  "ts": "2026-09-19T05:18:38.787Z",
+  "accounts": [
+    {
+      "phone": "137****4642",
+      "ok": true,
+      "jwt": true,
+      "host": "https://caiyun.feixin.10086.cn:7071",
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"cloudEmail\":[{\"id\":431,\"marketname\":\"sign_in_3\",\"groupid\":\"cloudEmail\",\"enable\":1,\"name\":\"去使用移动云手机\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/ff224788f70a4563b0d3f25a109fb3eb.png\",\"steps\":[],\"starttime\":\"2025-05-31T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":180,\"button\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloudphoneh5.buy.139.com/#/login?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001304\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+20豆\",\"stepTypeSet\":[\"sendcloud\",\"processbindtask\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789396871902,\"recordid\":40394488066,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloudphoneh5.buy.139.com/#/login?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001304\"}}}],\"month\":[{\"id\":409,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"从固定入口访问云朵中心\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/676282624ed64301be40100d6dd28e3c.png\",\"steps\":[],\"starttime\":\"2023-03-02T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":80,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIwIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=409&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+6豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789788171044,\"recordid\":40394488065,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIwIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=409&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":113,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"使用PC客户端\",\"description\":\"备份后完成任务奖励翻倍\",\"rule\":\"<h5 class=\\\"f30 c333 guide_icon1\\\">操作指引</h5> <div class=\\\"text\\\">1.客户端下载：使用电脑登录中国移动云盘官网https://yun.139.com/，点击【客户端下载】按钮，下载并安装中国移动云盘PC客户端；<br>2.客户端使用：登录PC客户端后，<span class=\\\"f_bold\\\">成功上传文件</span>，即可获得奖励。</div> <h5 class=\\\"f30 c333 guide_icon2\\\">奖品领取</h5> <div class=\\\"text\\\">完成任务后，点击云朵中心顶部\\\"完成任务\\\"小气泡即可领取奖励。</div>\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/8b2c3cfded2b415d840a9b9f16c0f93f.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":100,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"mini\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=113&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":1,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+60豆\",\"stepTypeSet\":[\"sendcloud\",\"nda\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789788171827,\"recordid\":40394488061,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"mini\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=113&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"}}},{\"id\":434,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"分享文件领好礼<span id='share_title'>0/7</span>\",\"description\":\"5豆*7+20豆\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6c04ee004fe84c76bbfb5bb3a5ca2e8b.png\",\"steps\":[],\"starttime\":\"2023-11-02T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":110,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIxIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=434&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":1,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"stepTypeSet\":[\"sendcloud\",\"checktime\",\"nda\",\"click\"],\"state\":\"WAIT\",\"currstep\":2,\"process\":0,\"lastupdate\":1789788172604,\"recordid\":40394488067,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIxIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=434&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":607,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"下月签到领惊喜福利\",\"description\":\"连续签到月月可领\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260807/471cbc0596974d608cc98096e72c5b39.png\",\"steps\":[],\"starttime\":\"2026-08-06T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":5,\"button\":{\"app\":{\"text\":\"次月可领\"},\"out\":{\"text\":\"次月可领\"},\"email\":{\"text\":\"次月可领\"},\"appcard\":{\"text\":\"次月可领\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=435&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"次月可领\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+50豆\",\"stepTypeSet\":[\"reservationstep\",\"finish\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789442077654,\"recordid\":40394488079,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"次月可领\"},\"out\":{\"text\":\"次月可领\"},\"email\":{\"text\":\"次月可领\"},\"appcard\":{\"text\":\"次月可领\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=435&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"次月可领\"}}},{\"id\":604,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"去云盘图书馆阅读书籍\",\"description\":\"告别书荒，随时畅读\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6a64ce2ad1854c8f9d2c171336312fa6.png\",\"steps\":[],\"starttime\":\"2026-06-30T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":70,\"button\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+10豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"FINISH\",\"currstep\":2,\"process\":0,\"lastupdate\":1789396872758,\"recordid\":40394488077,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}}}],\"hidden\":[{\"id\":118,\"marketname\":\"sign_in_3\",\"groupid\":\"hidden\",\"enable\":1,\"name\":\"调查问卷\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20221117/8321650618ab4253961cefc3d969f61d.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2030-11-30T16:00:00.000+00:00\",\"sort\":0,\"button\":{\"app\":{\"text\":\"去完成\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":0,\"stepTypeSet\":[\"click\"],\"state\":\"FINISH\",\"currstep\":1,\"process\":0,\"lastupdate\":1789396876144,\"recordid\":40394488063,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\"}}}],\"hiddenabc\":[{\"id\":319,\"marketname\":\"sign_in_3\",\"groupid\":\"hiddenabc\",\"enable\":1,\"name\":\"小云互动礼\",\"icon\":\"https://uop.mcloud.139.com/uop/prod/advert_media/1/20220813/0555b7d0b18d4cacbadaa2eeebb41267.png\",\"steps\":[],\"starttime\":\"2022-08-12T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":99,\"button\":{\"app\":{\"text\":\"去完成\"},\"out\":{\"text\":\"去完成\"}},\"limitType\":\"DAY\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":3,\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":1,\"lastupdate\":1789788173382,\"recordid\":40427421593,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\"},\"out\":{\"text\":\"去完成\"}}}],\"time\":[{\"id\":105,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"绑定公众号\",\"description\":\"云盘动态实时推送\",\"rule\":\"<h5 class=\\\"f30 c333 guide_icon1\\\">操作指引</h5>   \\n<div class=\\\"text\\\">  \\n    点击下方按钮【去绑定】，进入中国移动云盘小程序，<span style=\\\"color: red; font-weight: bold;\\\">跳转页面后点击\\\"关注公众号\\\"，进入公众号菜单栏-我的云盘-绑定移动云盘，输入手机号验证完成绑定。</span>  \\n</div>  \\n\\n<br>  \\n\\n<div class=\\\"text\\\">  \\n    <span style=\\\"color: #8E8C8C;\\\">注意：绑定的号码需与登录移动云盘的账号保持一致，完成绑定后，点击云朵中心活动顶部云朵小气泡即可领取奖励。</span>  \\n</div>\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/1d07f810812148aab60cbc39be70b139.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去绑定\",\"action\":\"popjump\",\"link\":\"mcloud://miniProgram?params=eyJtaW5pSWQiOiJnaF9jYWFlZDU0YzcxOGUiLAoicGF0aCI6InBhZ2VzL3Nzb19wYWdlL21haW4/YWNjb3VudD0jYWNjb3VudCMmYXJ0aWZhY3Q9I3Nzb1Rva2VuIyZ0YXJnZXRVcmw9JTJGcGFnZXMlMkZob21lJTJGbWFpbiUzRmFkbGluayUzRGh0dHBzJTI1M0ElMjUyRiUyNTJGbXAud2VpeGluLnFxLmNvbSUyNTJGcyUyNTJGZ2ZzR0Y2SlR4NDBqUWFwRVVCQnJJZyZ0YXJnZXRTb3VyY2VJZD0wMDEwMDUiLCJuYW1lIjoi5Y2z5bCG6Lez6L2s5Lit5Zu956e75Yqo5LqR55uY5b6u5L+h5bCP56iL5bqP77yM5Y+C5LiO5rS75YqoIn0=\",\"popBtn\":\"去绑定\"},\"out\":{\"text\":\"去绑定\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=105&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"show\":{\"isTaskDisappear\":\"1\"},\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":1,\"content_display2\":\"+200豆\",\"stepTypeSet\":[\"sendcloud\",\"wechatbinding\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789795123048,\"recordid\":40394488058,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去绑定\",\"action\":\"popjump\",\"link\":\"mcloud://miniProgram?params=eyJtaW5pSWQiOiJnaF9jYWFlZDU0YzcxOGUiLAoicGF0aCI6InBhZ2VzL3Nzb19wYWdlL21haW4/YWNjb3VudD0jYWNjb3VudCMmYXJ0aWZhY3Q9I3Nzb1Rva2VuIyZ0YXJnZXRVcmw9JTJGcGFnZXMlMkZob21lJTJGbWFpbiUzRmFkbGluayUzRGh0dHBzJTI1M0ElMjUyRiUyNTJGbXAud2VpeGluLnFxLmNvbSUyNTJGcyUyNTJGZ2ZzR0Y2SlR4NDBqUWFwRVVCQnJJZyZ0YXJnZXRTb3VyY2VJZD0wMDEwMDUiLCJuYW1lIjoi5Y2z5bCG6Lez6L2s5Lit5Zu956e75Yqo5LqR55uY5b6u5L+h5bCP56iL5bqP77yM5Y+C5LiO5rS75YqoIn0=\",\"popBtn\":\"去绑定\"},\"out\":{\"text\":\"去绑定\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=105&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":548,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/beb4e0c8397e462f86276a4d669e0404.png\",\"steps\":[],\"starttime\":\"2026-09-10T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":1,\"content_display2\":\"首月+400豆\",\"stepTypeSet\":[\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1789788174945,\"recordid\":40394488071,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}}},{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a12023f311d742b2b831deef47020e33.png\",\"steps\":[],\"starttime\":\"2026-09-10T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939",
+      "tasks": [
+        {
+          "group": "cloudEmail",
+          "groupid": "cloudEmail",
+          "id": 431,
+          "name": "去使用移动云手机",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "processbindtask",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+20豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 409,
+          "name": "从固定入口访问云朵中心",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+6豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 113,
+          "name": "使用PC客户端",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+60豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 434,
+          "name": "分享文件领好礼0/7",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "checktime",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 607,
+          "name": "下月签到领惊喜福利",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "reservationstep",
+            "finish",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+50豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 604,
+          "name": "去云盘图书馆阅读书籍",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": "+10豆"
+        },
+        {
+          "group": "hidden",
+          "groupid": "hidden",
+          "id": 118,
+          "name": "调查问卷",
+          "state": "FINISH",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "hiddenabc",
+          "groupid": "hiddenabc",
+          "id": 319,
+          "name": "小云互动礼",
+          "state": "WAIT",
+          "limitType": "DAY",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 1,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 105,
+          "name": "绑定公众号",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "sendcloud",
+            "wechatbinding",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 548,
+          "name": "开启备份领好礼",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "首月+400豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 549,
+          "name": "开启备份领好礼",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 550,
+          "name": "开启云盘APP通知领好礼",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 551,
+          "name": "连续31天开启云盘APP通知",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 522,
+          "name": "当月上传文件满100个",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "sendsms",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 585,
+          "name": "去体验AI相机",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 609,
+          "name": "和AI助手对话",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "cloudtasklogstep",
+            "sendcloud",
+            "processbindtask",
+            "click",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+20豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 547,
+          "name": "加入一个知识库",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": "+10豆"
+        },
+        {
+          "group": "day",
+          "groupid": "day",
+          "id": 106,
+          "name": "手动上传一个文件",
+          "state": "WAIT",
+          "limitType": "DAY",
+          "stepTypeSet": [
+            "sendcloud",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+6豆"
+        }
+      ]
+    },
+    {
+      "phone": "137****6553",
+      "ok": true,
+      "jwt": true,
+      "host": "https://caiyun.feixin.10086.cn:7071",
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"cloudEmail\":[{\"id\":431,\"marketname\":\"sign_in_3\",\"groupid\":\"cloudEmail\",\"enable\":1,\"name\":\"去使用移动云手机\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/ff224788f70a4563b0d3f25a109fb3eb.png\",\"steps\":[],\"starttime\":\"2025-05-31T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":180,\"button\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloudphoneh5.buy.139.com/#/login?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001304\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+20豆\",\"stepTypeSet\":[\"sendcloud\",\"processbindtask\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789442109603,\"recordid\":40394975785,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloudphoneh5.buy.139.com/#/login?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001304\"}}}],\"month\":[{\"id\":409,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"从固定入口访问云朵中心\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/676282624ed64301be40100d6dd28e3c.png\",\"steps\":[],\"starttime\":\"2023-03-02T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":80,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIwIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=409&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+6豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789788209402,\"recordid\":40394975784,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIwIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=409&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":113,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"使用PC客户端\",\"description\":\"备份后完成任务奖励翻倍\",\"rule\":\"<h5 class=\\\"f30 c333 guide_icon1\\\">操作指引</h5> <div class=\\\"text\\\">1.客户端下载：使用电脑登录中国移动云盘官网https://yun.139.com/，点击【客户端下载】按钮，下载并安装中国移动云盘PC客户端；<br>2.客户端使用：登录PC客户端后，<span class=\\\"f_bold\\\">成功上传文件</span>，即可获得奖励。</div> <h5 class=\\\"f30 c333 guide_icon2\\\">奖品领取</h5> <div class=\\\"text\\\">完成任务后，点击云朵中心顶部\\\"完成任务\\\"小气泡即可领取奖励。</div>\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/8b2c3cfded2b415d840a9b9f16c0f93f.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":100,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"mini\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=113&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":1,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+60豆\",\"stepTypeSet\":[\"sendcloud\",\"nda\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789788210182,\"recordid\":40394975780,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"mini\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=113&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"}}},{\"id\":434,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"分享文件领好礼<span id='share_title'>0/7</span>\",\"description\":\"5豆*7+20豆\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6c04ee004fe84c76bbfb5bb3a5ca2e8b.png\",\"steps\":[],\"starttime\":\"2023-11-02T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":110,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIxIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=434&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":1,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"stepTypeSet\":[\"sendcloud\",\"checktime\",\"nda\",\"click\"],\"state\":\"WAIT\",\"currstep\":2,\"process\":0,\"lastupdate\":1789788210960,\"recordid\":40394975783,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIxIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=434&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":607,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"下月签到领惊喜福利\",\"description\":\"连续签到月月可领\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260807/471cbc0596974d608cc98096e72c5b39.png\",\"steps\":[],\"starttime\":\"2026-08-06T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":5,\"button\":{\"app\":{\"text\":\"次月可领\"},\"out\":{\"text\":\"次月可领\"},\"email\":{\"text\":\"次月可领\"},\"appcard\":{\"text\":\"次月可领\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=435&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"次月可领\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+50豆\",\"stepTypeSet\":[\"reservationstep\",\"finish\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789442110391,\"recordid\":40394975792,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"次月可领\"},\"out\":{\"text\":\"次月可领\"},\"email\":{\"text\":\"次月可领\"},\"appcard\":{\"text\":\"次月可领\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=435&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"次月可领\"}}},{\"id\":604,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"去云盘图书馆阅读书籍\",\"description\":\"告别书荒，随时畅读\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6a64ce2ad1854c8f9d2c171336312fa6.png\",\"steps\":[],\"starttime\":\"2026-06-30T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":70,\"button\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+10豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"FINISH\",\"currstep\":2,\"process\":0,\"lastupdate\":1789442111185,\"recordid\":40394975795,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}}}],\"hidden\":[{\"id\":118,\"marketname\":\"sign_in_3\",\"groupid\":\"hidden\",\"enable\":1,\"name\":\"调查问卷\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20221117/8321650618ab4253961cefc3d969f61d.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2030-11-30T16:00:00.000+00:00\",\"sort\":0,\"button\":{\"app\":{\"text\":\"去完成\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":0,\"stepTypeSet\":[\"click\"],\"state\":\"FINISH\",\"currstep\":1,\"process\":0,\"lastupdate\":1789442114339,\"recordid\":33402757158,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\"}}}],\"hiddenabc\":[{\"id\":319,\"marketname\":\"sign_in_3\",\"groupid\":\"hiddenabc\",\"enable\":1,\"name\":\"小云互动礼\",\"icon\":\"https://uop.mcloud.139.com/uop/prod/advert_media/1/20220813/0555b7d0b18d4cacbadaa2eeebb41267.png\",\"steps\":[],\"starttime\":\"2022-08-12T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":99,\"button\":{\"app\":{\"text\":\"去完成\"},\"out\":{\"text\":\"去完成\"}},\"limitType\":\"DAY\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":3,\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":1,\"lastupdate\":1789788211739,\"recordid\":40427487540,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\"},\"out\":{\"text\":\"去完成\"}}}],\"time\":[{\"id\":105,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"绑定公众号\",\"description\":\"云盘动态实时推送\",\"rule\":\"<h5 class=\\\"f30 c333 guide_icon1\\\">操作指引</h5>   \\n<div class=\\\"text\\\">  \\n    点击下方按钮【去绑定】，进入中国移动云盘小程序，<span style=\\\"color: red; font-weight: bold;\\\">跳转页面后点击\\\"关注公众号\\\"，进入公众号菜单栏-我的云盘-绑定移动云盘，输入手机号验证完成绑定。</span>  \\n</div>  \\n\\n<br>  \\n\\n<div class=\\\"text\\\">  \\n    <span style=\\\"color: #8E8C8C;\\\">注意：绑定的号码需与登录移动云盘的账号保持一致，完成绑定后，点击云朵中心活动顶部云朵小气泡即可领取奖励。</span>  \\n</div>\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/1d07f810812148aab60cbc39be70b139.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去绑定\",\"action\":\"popjump\",\"link\":\"mcloud://miniProgram?params=eyJtaW5pSWQiOiJnaF9jYWFlZDU0YzcxOGUiLAoicGF0aCI6InBhZ2VzL3Nzb19wYWdlL21haW4/YWNjb3VudD0jYWNjb3VudCMmYXJ0aWZhY3Q9I3Nzb1Rva2VuIyZ0YXJnZXRVcmw9JTJGcGFnZXMlMkZob21lJTJGbWFpbiUzRmFkbGluayUzRGh0dHBzJTI1M0ElMjUyRiUyNTJGbXAud2VpeGluLnFxLmNvbSUyNTJGcyUyNTJGZ2ZzR0Y2SlR4NDBqUWFwRVVCQnJJZyZ0YXJnZXRTb3VyY2VJZD0wMDEwMDUiLCJuYW1lIjoi5Y2z5bCG6Lez6L2s5Lit5Zu956e75Yqo5LqR55uY5b6u5L+h5bCP56iL5bqP77yM5Y+C5LiO5rS75YqoIn0=\",\"popBtn\":\"去绑定\"},\"out\":{\"text\":\"去绑定\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=105&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"show\":{\"isTaskDisappear\":\"1\"},\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":1,\"content_display2\":\"+200豆\",\"stepTypeSet\":[\"sendcloud\",\"wechatbinding\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789795127889,\"recordid\":6544113923,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去绑定\",\"action\":\"popjump\",\"link\":\"mcloud://miniProgram?params=eyJtaW5pSWQiOiJnaF9jYWFlZDU0YzcxOGUiLAoicGF0aCI6InBhZ2VzL3Nzb19wYWdlL21haW4/YWNjb3VudD0jYWNjb3VudCMmYXJ0aWZhY3Q9I3Nzb1Rva2VuIyZ0YXJnZXRVcmw9JTJGcGFnZXMlMkZob21lJTJGbWFpbiUzRmFkbGluayUzRGh0dHBzJTI1M0ElMjUyRiUyNTJGbXAud2VpeGluLnFxLmNvbSUyNTJGcyUyNTJGZ2ZzR0Y2SlR4NDBqUWFwRVVCQnJJZyZ0YXJnZXRTb3VyY2VJZD0wMDEwMDUiLCJuYW1lIjoi5Y2z5bCG6Lez6L2s5Lit5Zu956e75Yqo5LqR55uY5b6u5L+h5bCP56iL5bqP77yM5Y+C5LiO5rS75YqoIn0=\",\"popBtn\":\"去绑定\"},\"out\":{\"text\":\"去绑定\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=105&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":548,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/beb4e0c8397e462f86276a4d669e0404.png\",\"steps\":[],\"starttime\":\"2026-09-10T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":1,\"content_display2\":\"首月+400豆\",\"stepTypeSet\":[\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1789788213300,\"recordid\":40394975791,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}}},{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a12023f311d742b2b831deef47020e33.png\",\"steps\":[],\"starttime\":\"2026-09-10T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\"",
+      "tasks": [
+        {
+          "group": "cloudEmail",
+          "groupid": "cloudEmail",
+          "id": 431,
+          "name": "去使用移动云手机",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "processbindtask",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+20豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 409,
+          "name": "从固定入口访问云朵中心",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+6豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 113,
+          "name": "使用PC客户端",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+60豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 434,
+          "name": "分享文件领好礼0/7",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "checktime",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 607,
+          "name": "下月签到领惊喜福利",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "reservationstep",
+            "finish",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+50豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 604,
+          "name": "去云盘图书馆阅读书籍",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": "+10豆"
+        },
+        {
+          "group": "hidden",
+          "groupid": "hidden",
+          "id": 118,
+          "name": "调查问卷",
+          "state": "FINISH",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "hiddenabc",
+          "groupid": "hiddenabc",
+          "id": 319,
+          "name": "小云互动礼",
+          "state": "WAIT",
+          "limitType": "DAY",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 1,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 105,
+          "name": "绑定公众号",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "sendcloud",
+            "wechatbinding",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 548,
+          "name": "开启备份领好礼",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "首月+400豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 549,
+          "name": "开启备份领好礼",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 550,
+          "name": "开启云盘APP通知领好礼",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 120,
+          "name": "30G流量0元领",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 551,
+          "name": "连续31天开启云盘APP通知",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 522,
+          "name": "当月上传文件满100个",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "sendsms",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 585,
+          "name": "去体验AI相机",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 609,
+          "name": "和AI助手对话",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "cloudtasklogstep",
+            "sendcloud",
+            "processbindtask",
+            "click",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+20豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 547,
+          "name": "加入一个知识库",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": "+10豆"
+        },
+        {
+          "group": "day",
+          "groupid": "day",
+          "id": 106,
+          "name": "手动上传一个文件",
+          "state": "WAIT",
+          "limitType": "DAY",
+          "stepTypeSet": [
+            "sendcloud",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+6豆"
+        }
+      ]
+    },
+    {
+      "phone": "172****9953",
+      "ok": true,
+      "jwt": true,
+      "host": "https://caiyun.feixin.10086.cn:7071",
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"cloudEmail\":[{\"id\":431,\"marketname\":\"sign_in_3\",\"groupid\":\"cloudEmail\",\"enable\":1,\"name\":\"去使用移动云手机\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/ff224788f70a4563b0d3f25a109fb3eb.png\",\"steps\":[],\"starttime\":\"2025-05-31T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":180,\"button\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloudphoneh5.buy.139.com/#/login?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001304\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+20豆\",\"stepTypeSet\":[\"sendcloud\",\"processbindtask\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789395165897,\"recordid\":40207767457,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloudphoneh5.buy.139.com/#/login?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001304\"}}}],\"month\":[{\"id\":113,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"使用PC客户端\",\"description\":\"备份后完成任务奖励翻倍\",\"rule\":\"<h5 class=\\\"f30 c333 guide_icon1\\\">操作指引</h5> <div class=\\\"text\\\">1.客户端下载：使用电脑登录中国移动云盘官网https://yun.139.com/，点击【客户端下载】按钮，下载并安装中国移动云盘PC客户端；<br>2.客户端使用：登录PC客户端后，<span class=\\\"f_bold\\\">成功上传文件</span>，即可获得奖励。</div> <h5 class=\\\"f30 c333 guide_icon2\\\">奖品领取</h5> <div class=\\\"text\\\">完成任务后，点击云朵中心顶部\\\"完成任务\\\"小气泡即可领取奖励。</div>\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/8b2c3cfded2b415d840a9b9f16c0f93f.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":100,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"mini\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=113&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":1,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+60豆\",\"stepTypeSet\":[\"sendcloud\",\"nda\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789788247230,\"recordid\":40218790916,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"mini\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=113&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"}}},{\"id\":434,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"分享文件领好礼<span id='share_title'>0/7</span>\",\"description\":\"5豆*7+20豆\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6c04ee004fe84c76bbfb5bb3a5ca2e8b.png\",\"steps\":[],\"starttime\":\"2023-11-02T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":110,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIxIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=434&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":1,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"stepTypeSet\":[\"sendcloud\",\"checktime\",\"nda\",\"click\"],\"state\":\"WAIT\",\"currstep\":2,\"process\":0,\"lastupdate\":1789788248009,\"recordid\":40146535525,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIxIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=434&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":607,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"下月签到领惊喜福利\",\"description\":\"连续签到月月可领\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260807/471cbc0596974d608cc98096e72c5b39.png\",\"steps\":[],\"starttime\":\"2026-08-06T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":5,\"button\":{\"app\":{\"text\":\"次月可领\"},\"out\":{\"text\":\"次月可领\"},\"email\":{\"text\":\"次月可领\"},\"appcard\":{\"text\":\"次月可领\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=435&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"次月可领\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+50豆\",\"stepTypeSet\":[\"reservationstep\",\"finish\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789367271443,\"recordid\":40207767594,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"次月可领\"},\"out\":{\"text\":\"次月可领\"},\"email\":{\"text\":\"次月可领\"},\"appcard\":{\"text\":\"次月可领\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=435&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"次月可领\"}}},{\"id\":604,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"去云盘图书馆阅读书籍\",\"description\":\"告别书荒，随时畅读\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6a64ce2ad1854c8f9d2c171336312fa6.png\",\"steps\":[],\"starttime\":\"2026-06-30T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":70,\"button\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+10豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"FINISH\",\"currstep\":2,\"process\":0,\"lastupdate\":1789393594767,\"recordid\":40391739029,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}}},{\"id\":409,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"从固定入口访问云朵中心\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/676282624ed64301be40100d6dd28e3c.png\",\"steps\":[],\"starttime\":\"2023-03-02T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":80,\"button\":{\"app\":{\"text\":\"已完成\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=409&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+6豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789397906878,\"recordid\":40207767452,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=409&token=#ssoToken#&targetSourceId=001005\"}}}],\"hidden\":[{\"id\":118,\"marketname\":\"sign_in_3\",\"groupid\":\"hidden\",\"enable\":1,\"name\":\"调查问卷\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20221117/8321650618ab4253961cefc3d969f61d.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2030-11-30T16:00:00.000+00:00\",\"sort\":0,\"button\":{\"app\":{\"text\":\"去完成\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":0,\"stepTypeSet\":[\"click\"],\"state\":\"FINISH\",\"currstep\":1,\"process\":0,\"lastupdate\":1789395169908,\"recordid\":33778225470,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\"}}}],\"hiddenabc\":[{\"id\":319,\"marketname\":\"sign_in_3\",\"groupid\":\"hiddenabc\",\"enable\":1,\"name\":\"小云互动礼\",\"icon\":\"https://uop.mcloud.139.com/uop/prod/advert_media/1/20220813/0555b7d0b18d4cacbadaa2eeebb41267.png\",\"steps\":[],\"starttime\":\"2022-08-12T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":99,\"button\":{\"app\":{\"text\":\"去完成\"},\"out\":{\"text\":\"去完成\"}},\"limitType\":\"DAY\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":3,\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":1,\"lastupdate\":1789788248788,\"recordid\":40427478077,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\"},\"out\":{\"text\":\"去完成\"}}}],\"time\":[{\"id\":548,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/beb4e0c8397e462f86276a4d669e0404.png\",\"steps\":[],\"starttime\":\"2026-09-10T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":1,\"content_display2\":\"首月+400豆\",\"stepTypeSet\":[\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1789788249571,\"recordid\":40391739025,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}}},{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a12023f311d742b2b831deef47020e33.png\",\"steps\":[],\"starttime\":\"2026-09-10T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+200豆\",\"stepTypeSet\":[\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1789788250350,\"recordid\":40391739026,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}}},{",
+      "tasks": [
+        {
+          "group": "cloudEmail",
+          "groupid": "cloudEmail",
+          "id": 431,
+          "name": "去使用移动云手机",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "processbindtask",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+20豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 113,
+          "name": "使用PC客户端",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+60豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 434,
+          "name": "分享文件领好礼0/7",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "checktime",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 607,
+          "name": "下月签到领惊喜福利",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "reservationstep",
+            "finish",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+50豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 604,
+          "name": "去云盘图书馆阅读书籍",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": "+10豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 409,
+          "name": "从固定入口访问云朵中心",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+6豆"
+        },
+        {
+          "group": "hidden",
+          "groupid": "hidden",
+          "id": 118,
+          "name": "调查问卷",
+          "state": "FINISH",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "hiddenabc",
+          "groupid": "hiddenabc",
+          "id": 319,
+          "name": "小云互动礼",
+          "state": "WAIT",
+          "limitType": "DAY",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 1,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 548,
+          "name": "开启备份领好礼",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "首月+400豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 549,
+          "name": "开启备份领好礼",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 550,
+          "name": "开启云盘APP通知领好礼",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 551,
+          "name": "连续31天开启云盘APP通知",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 522,
+          "name": "当月上传文件满100个",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "sendsms",
+            "interfacecallback"
+          ],
+          "process": 20,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 585,
+          "name": "去体验AI相机",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 609,
+          "name": "和AI助手对话",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "cloudtasklogstep",
+            "sendcloud",
+            "processbindtask",
+            "click",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 6,
+          "currDay": 0,
+          "reward": "+20豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 547,
+          "name": "加入一个知识库",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": "+10豆"
+        },
+        {
+          "group": "day",
+          "groupid": "day",
+          "id": 106,
+          "name": "手动上传一个文件",
+          "state": "WAIT",
+          "limitType": "DAY",
+          "stepTypeSet": [
+            "sendcloud",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+6豆"
+        }
+      ]
+    },
+    {
+      "phone": "182****4895",
+      "ok": true,
+      "jwt": true,
+      "host": "https://caiyun.feixin.10086.cn:7071",
+      "raw": "{\"code\":0,\"msg\":\"success\",\"result\":{\"cloudEmail\":[{\"id\":431,\"marketname\":\"sign_in_3\",\"groupid\":\"cloudEmail\",\"enable\":1,\"name\":\"去使用移动云手机\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/ff224788f70a4563b0d3f25a109fb3eb.png\",\"steps\":[],\"starttime\":\"2025-05-31T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":180,\"button\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloudphoneh5.buy.139.com/#/login?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001304\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+20豆\",\"stepTypeSet\":[\"sendcloud\",\"processbindtask\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789546358098,\"recordid\":40409390178,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloud.139.com/#/?channelSrc=02211&loginType=0&targetSourceId=001216&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=431&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://cloudphoneh5.buy.139.com/#/login?channelSrc=02051&loginType=0&token=#ssoToken#&targetSourceId=001304\"}}}],\"month\":[{\"id\":409,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"从固定入口访问云朵中心\",\"description\":\"备份后完成任务奖励翻倍\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/676282624ed64301be40100d6dd28e3c.png\",\"steps\":[],\"starttime\":\"2023-03-02T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":80,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIwIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=409&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+6豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789788282752,\"recordid\":40409390177,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"popjump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIwIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=409&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":113,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"使用PC客户端\",\"description\":\"备份后完成任务奖励翻倍\",\"rule\":\"<h5 class=\\\"f30 c333 guide_icon1\\\">操作指引</h5> <div class=\\\"text\\\">1.客户端下载：使用电脑登录中国移动云盘官网https://yun.139.com/，点击【客户端下载】按钮，下载并安装中国移动云盘PC客户端；<br>2.客户端使用：登录PC客户端后，<span class=\\\"f_bold\\\">成功上传文件</span>，即可获得奖励。</div> <h5 class=\\\"f30 c333 guide_icon2\\\">奖品领取</h5> <div class=\\\"text\\\">完成任务后，点击云朵中心顶部\\\"完成任务\\\"小气泡即可领取奖励。</div>\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/8b2c3cfded2b415d840a9b9f16c0f93f.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":100,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"mini\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=113&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":1,\"hasBak\":1,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+60豆\",\"stepTypeSet\":[\"sendcloud\",\"nda\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789788283530,\"recordid\":40409390175,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"mini\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=113&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"去完成\",\"action\":\"pop\",\"popBtn\":\"好的\"}}},{\"id\":434,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"分享文件领好礼<span id='share_title'>0/7</span>\",\"description\":\"5豆*7+20豆\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6c04ee004fe84c76bbfb5bb3a5ca2e8b.png\",\"steps\":[],\"starttime\":\"2023-11-02T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":110,\"button\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIxIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=434&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":1,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"stepTypeSet\":[\"sendcloud\",\"checktime\",\"nda\",\"click\"],\"state\":\"WAIT\",\"currstep\":2,\"process\":0,\"lastupdate\":1789788284310,\"recordid\":40409390179,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\",\"action\":\"jump\",\"link\":\"mcloud://main/tab?params=eyJpbmRleCI6ICIxIn0=\"},\"out\":{\"text\":\"去完成\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=434&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":607,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"下月签到领惊喜福利\",\"description\":\"连续签到月月可领\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260807/471cbc0596974d608cc98096e72c5b39.png\",\"steps\":[],\"starttime\":\"2026-08-06T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":5,\"button\":{\"app\":{\"text\":\"次月可领\"},\"out\":{\"text\":\"次月可领\"},\"email\":{\"text\":\"次月可领\"},\"appcard\":{\"text\":\"次月可领\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=435&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"次月可领\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+50豆\",\"stepTypeSet\":[\"reservationstep\",\"finish\",\"click\"],\"state\":\"FINISH\",\"currstep\":3,\"process\":0,\"lastupdate\":1789546358915,\"recordid\":40409390192,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"次月可领\"},\"out\":{\"text\":\"次月可领\"},\"email\":{\"text\":\"次月可领\"},\"appcard\":{\"text\":\"次月可领\",\"link\":\"https://caiyun.feixin.10086.cn:7071/portal/newsignin/index.html?sourceid=1054&taskId=435&token=#ssoToken#&targetSourceId=001005\"},\"harmony\":{\"text\":\"次月可领\"}}},{\"id\":604,\"marketname\":\"sign_in_3\",\"groupid\":\"month\",\"enable\":1,\"name\":\"去云盘图书馆阅读书籍\",\"description\":\"告别书荒，随时畅读\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/6a64ce2ad1854c8f9d2c171336312fa6.png\",\"steps\":[],\"starttime\":\"2026-06-30T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":70,\"button\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}},\"limitType\":\"MONTH\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":4,\"content_display2\":\"+10豆\",\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"FINISH\",\"currstep\":2,\"process\":0,\"lastupdate\":1789546359727,\"recordid\":40409390188,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"},\"out\":{\"text\":\"已完成\"},\"harmony\":{\"text\":\"已完成\",\"action\":\"jump\",\"link\":\"https://h.139.com/content/cloudClass?columnId=56&level=1&channel=400&token=#ssoToken#\"}}}],\"hidden\":[{\"id\":118,\"marketname\":\"sign_in_3\",\"groupid\":\"hidden\",\"enable\":1,\"name\":\"调查问卷\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20221117/8321650618ab4253961cefc3d969f61d.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2030-11-30T16:00:00.000+00:00\",\"sort\":0,\"button\":{\"app\":{\"text\":\"去完成\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":0,\"stepTypeSet\":[\"click\"],\"state\":\"FINISH\",\"currstep\":1,\"process\":0,\"lastupdate\":1789546362949,\"recordid\":13691110875,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\"}}}],\"hiddenabc\":[{\"id\":319,\"marketname\":\"sign_in_3\",\"groupid\":\"hiddenabc\",\"enable\":1,\"name\":\"小云互动礼\",\"icon\":\"https://uop.mcloud.139.com/uop/prod/advert_media/1/20220813/0555b7d0b18d4cacbadaa2eeebb41267.png\",\"steps\":[],\"starttime\":\"2022-08-12T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":99,\"button\":{\"app\":{\"text\":\"去完成\"},\"out\":{\"text\":\"去完成\"}},\"limitType\":\"DAY\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":3,\"stepTypeSet\":[\"sendcloud\",\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":1,\"lastupdate\":1789788285089,\"recordid\":40427342921,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去完成\"},\"out\":{\"text\":\"去完成\"}}}],\"time\":[{\"id\":105,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"绑定公众号\",\"description\":\"云盘动态实时推送\",\"rule\":\"<h5 class=\\\"f30 c333 guide_icon1\\\">操作指引</h5>   \\n<div class=\\\"text\\\">  \\n    点击下方按钮【去绑定】，进入中国移动云盘小程序，<span style=\\\"color: red; font-weight: bold;\\\">跳转页面后点击\\\"关注公众号\\\"，进入公众号菜单栏-我的云盘-绑定移动云盘，输入手机号验证完成绑定。</span>  \\n</div>  \\n\\n<br>  \\n\\n<div class=\\\"text\\\">  \\n    <span style=\\\"color: #8E8C8C;\\\">注意：绑定的号码需与登录移动云盘的账号保持一致，完成绑定后，点击云朵中心活动顶部云朵小气泡即可领取奖励。</span>  \\n</div>\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260730/1d07f810812148aab60cbc39be70b139.png\",\"steps\":[],\"starttime\":\"2021-11-16T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T16:00:00.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去绑定\",\"action\":\"popjump\",\"link\":\"mcloud://miniProgram?params=eyJtaW5pSWQiOiJnaF9jYWFlZDU0YzcxOGUiLAoicGF0aCI6InBhZ2VzL3Nzb19wYWdlL21haW4/YWNjb3VudD0jYWNjb3VudCMmYXJ0aWZhY3Q9I3Nzb1Rva2VuIyZ0YXJnZXRVcmw9JTJGcGFnZXMlMkZob21lJTJGbWFpbiUzRmFkbGluayUzRGh0dHBzJTI1M0ElMjUyRiUyNTJGbXAud2VpeGluLnFxLmNvbSUyNTJGcyUyNTJGZ2ZzR0Y2SlR4NDBqUWFwRVVCQnJJZyZ0YXJnZXRTb3VyY2VJZD0wMDEwMDUiLCJuYW1lIjoi5Y2z5bCG6Lez6L2s5Lit5Zu956e75Yqo5LqR55uY5b6u5L+h5bCP56iL5bqP77yM5Y+C5LiO5rS75YqoIn0=\",\"popBtn\":\"去绑定\"},\"out\":{\"text\":\"去绑定\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=105&token=#ssoToken#&targetSourceId=001005\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"show\":{\"isTaskDisappear\":\"1\"},\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":1,\"content_display2\":\"+200豆\",\"stepTypeSet\":[\"sendcloud\",\"wechatbinding\",\"click\"],\"state\":\"WAIT\",\"currstep\":1,\"process\":0,\"lastupdate\":1789795139066,\"recordid\":8020162778,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去绑定\",\"action\":\"popjump\",\"link\":\"mcloud://miniProgram?params=eyJtaW5pSWQiOiJnaF9jYWFlZDU0YzcxOGUiLAoicGF0aCI6InBhZ2VzL3Nzb19wYWdlL21haW4/YWNjb3VudD0jYWNjb3VudCMmYXJ0aWZhY3Q9I3Nzb1Rva2VuIyZ0YXJnZXRVcmw9JTJGcGFnZXMlMkZob21lJTJGbWFpbiUzRmFkbGluayUzRGh0dHBzJTI1M0ElMjUyRiUyNTJGbXAud2VpeGluLnFxLmNvbSUyNTJGcyUyNTJGZ2ZzR0Y2SlR4NDBqUWFwRVVCQnJJZyZ0YXJnZXRTb3VyY2VJZD0wMDEwMDUiLCJuYW1lIjoi5Y2z5bCG6Lez6L2s5Lit5Zu956e75Yqo5LqR55uY5b6u5L+h5bCP56iL5bqP77yM5Y+C5LiO5rS75YqoIn0=\",\"popBtn\":\"去绑定\"},\"out\":{\"text\":\"去绑定\"},\"appcard\":{\"text\":\"去完成\",\"link\":\"https://m.mcloud.139.com/portal/mobilecloud/index.html?path=newsignin&sourceid=1054&taskId=105&token=#ssoToken#&targetSourceId=001005\"}}},{\"id\":548,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/beb4e0c8397e462f86276a4d669e0404.png\",\"steps\":[],\"starttime\":\"2026-09-10T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}},\"limitType\":\"EVER\",\"prov\":\"0\",\"whiteList\":0,\"hasNda\":0,\"hasBak\":0,\"taskType\":0,\"limitCloud\":1,\"content_display2\":\"首月+400豆\",\"stepTypeSet\":[\"click\"],\"state\":\"WAIT\",\"currstep\":0,\"process\":0,\"lastupdate\":1789788286666,\"recordid\":40409390183,\"currDay\":0,\"cloudId\":0,\"buttonProperty\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"email\":{\"text\":\"去开启\",\"link\":\"https://y.10086.cn/x/cyistb\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"harmony\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"}}},{\"id\":549,\"marketname\":\"sign_in_3\",\"groupid\":\"time\",\"enable\":1,\"name\":\"开启备份领好礼\",\"description\":\"开启备份，云端无损存储\",\"icon\":\"https://img.mcloud.139.com//uop_prod/20260910/a12023f311d742b2b831deef47020e33.png\",\"steps\":[],\"starttime\":\"2026-09-10T16:00:00.000+00:00\",\"endtime\":\"2026-12-31T15:59:59.000+00:00\",\"sort\":10,\"button\":{\"app\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\",\"textBtnColorMiddle\":\"#ffffff\",\"textFinish\":\"下月再来\",\"linkFinish\":\"\",\"actionFinish\":\"\",\"btnBgFinish\":\"#ffcb88\",\"textBtnColorFinish\":\"#ffffff\"},\"out\":{\"text\":\"去开启\",\"link\":\"mcloud://backup/album?params=ewoiaXNPcGVuIjogIjEiCn0=\",\"action\":\"jump\",\"btnBg\":\"#ffa939\",\"textBtnColor\":\"#ffffff\",\"textMiddle\":\"领AI豆\",\"linkMiddle\":\"\",\"actionMiddle\":\"\",\"btnBgMiddle\":\"#ffa939\"",
+      "tasks": [
+        {
+          "group": "cloudEmail",
+          "groupid": "cloudEmail",
+          "id": 431,
+          "name": "去使用移动云手机",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "processbindtask",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+20豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 409,
+          "name": "从固定入口访问云朵中心",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+6豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 113,
+          "name": "使用PC客户端",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+60豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 434,
+          "name": "分享文件领好礼0/7",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "checktime",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 607,
+          "name": "下月签到领惊喜福利",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "reservationstep",
+            "finish",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+50豆"
+        },
+        {
+          "group": "month",
+          "groupid": "month",
+          "id": 604,
+          "name": "去云盘图书馆阅读书籍",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": "+10豆"
+        },
+        {
+          "group": "hidden",
+          "groupid": "hidden",
+          "id": 118,
+          "name": "调查问卷",
+          "state": "FINISH",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "hiddenabc",
+          "groupid": "hiddenabc",
+          "id": 319,
+          "name": "小云互动礼",
+          "state": "WAIT",
+          "limitType": "DAY",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 1,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 105,
+          "name": "绑定公众号",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "sendcloud",
+            "wechatbinding",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 548,
+          "name": "开启备份领好礼",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "首月+400豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 549,
+          "name": "开启备份领好礼",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 550,
+          "name": "开启云盘APP通知领好礼",
+          "state": "WAIT",
+          "limitType": "EVER",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": "+200豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 551,
+          "name": "连续31天开启云盘APP通知",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "click"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 522,
+          "name": "当月上传文件满100个",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "sendsms",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 0,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 585,
+          "name": "去体验AI相机",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": ""
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 609,
+          "name": "和AI助手对话",
+          "state": "WAIT",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "cloudtasklogstep",
+            "sendcloud",
+            "processbindtask",
+            "click",
+            "interfacecallback"
+          ],
+          "process": 0,
+          "currstep": 3,
+          "currDay": 0,
+          "reward": "+20豆"
+        },
+        {
+          "group": "time",
+          "groupid": "time",
+          "id": 547,
+          "name": "加入一个知识库",
+          "state": "FINISH",
+          "limitType": "MONTH",
+          "stepTypeSet": [
+            "sendcloud",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 2,
+          "currDay": 0,
+          "reward": "+10豆"
+        },
+        {
+          "group": "day",
+          "groupid": "day",
+          "id": 106,
+          "name": "手动上传一个文件",
+          "state": "WAIT",
+          "limitType": "DAY",
+          "stepTypeSet": [
+            "sendcloud",
+            "nda",
+            "click"
+          ],
+          "process": 0,
+          "currstep": 1,
+          "currDay": 0,
+          "reward": "+6豆"
+        }
+      ]
+    }
+  ],
+  "accountCount": 4
+}
