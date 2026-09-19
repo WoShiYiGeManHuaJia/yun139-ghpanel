@@ -1,0 +1,37 @@
+name: tl3
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: 抓取真实任务清单
+        env:
+          PANEL_DATA_KEY: ${{ secrets.PANEL_DATA_KEY }}
+        run: node actions/tl3.js 2>&1 | tail -c 6000
+      - name: 提交结果
+        run: |
+          git config user.name "yun139-bot"
+          git config user.email "yun139-bot@users.noreply.github.com"
+          mkdir -p /tmp/o && cp data/tl3.json /tmp/o/tl3.json 2>/dev/null || true
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git checkout -f -B main FETCH_HEAD
+            cp /tmp/o/tl3.json data/tl3.json 2>/dev/null || true
+            git add -f data/tl3.json
+            git diff --cached --quiet && { echo "无变化"; exit 0; }
+            git commit -m "tl: 任务清单诊断 $(date -u +%Y%m%d%H%M%S)"
+            git push origin main && { echo ok; exit 0; }
+            sleep 8
+          done
+          exit 1
