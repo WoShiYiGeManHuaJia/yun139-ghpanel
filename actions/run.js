@@ -715,9 +715,11 @@ async function cloudStatus(jwt) {
     out.toReceive = numOf(res.toReceive !== undefined ? res.toReceive : res.receiveNum);
     const arr = res.receiveList || res.taskList || res.list || [];
     if (Array.isArray(arr)) {
-      out.list = arr.slice(0, 12).map(x => ({
+      out.list = arr.slice(0, 100).map(x => ({
         cloudType: x.cloudType, cloudNum: numOf(x.cloudNum !== undefined ? x.cloudNum : x.num),
-        recordId: x.recordId || x.cloudId || null,
+        recordId: x.recordId !== undefined && x.recordId !== null ? x.recordId : (x.cloudId !== undefined ? x.cloudId : null),
+        name: String(x.name || x.taskName || x.title || "").slice(0, 30),
+        keys: Object.keys(x).slice(0, 12).join(","),
       }));
     }
     out.raw = JSON.stringify(j2).slice(0, 200);
@@ -801,7 +803,10 @@ async function receiveViaApi(jwt, list) {
     const cloudId = Number(rawId);
     const ct = Number(it.cloudType);
     const num = Number(it.cloudNum !== undefined ? it.cloudNum : (it.num || 0)) || 0;
-    if (!cloudId || isNaN(cloudId)) { steps.push("跳过无效项 " + JSON.stringify(it).slice(0, 100)); continue; }
+    if (!cloudId || isNaN(cloudId)) {
+      steps.push("⚠ 清单项缺 recordId/cloudId，无法 API 领取（字段:" + Object.keys(it || {}).join(",") + " 内容:" + JSON.stringify(it).slice(0, 120) + "）");
+      continue;
+    }
     let j = null;
     try { j = await postReceiveV3(jwt, { client: "app", cloudId, cloudType: ct }); }
     catch (e) { steps.push("cloudId=" + cloudId + " 请求异常: " + String(e.message).slice(0, 60)); continue; }
@@ -1624,7 +1629,15 @@ async function main() {
             }
           }
 
-          // 2) 推进可点击任务
+          // 2) 每日签到（daily 此前缺失该步骤：只续期+点任务+领气泡，签到豆从未主动触发）
+          try {
+            const sg = await signOne(a.authorization, a.phone, a);
+            item.sign = sg.ok
+              ? ("签到成功" + (sg.data && sg.data.result ? "（" + String(sg.data.result).slice(0, 40) + "）" : ""))
+              : ("签到失败：" + String(sg.message || "").slice(0, 70));
+          } catch (e) { item.sign = "签到异常：" + String(e.message || e).slice(0, 70); }
+
+          // 3) 推进可点击任务
           const jwt = await getJwt(a.authorization, a.phone);
           const before = await fetchTaskList(jwt);
           const wanted = Array.isArray(payload.tasks) && payload.tasks.length ? payload.tasks.slice(0, 100).map(x => String(x).slice(0, 80)) : [];
@@ -1657,7 +1670,7 @@ async function main() {
           item.taskOk = item.taskDetail.filter(t => t.ok).length;
           item.taskFail = item.taskDetail.filter(t => !t.ok).length;
 
-          // 3) 领气泡（真实浏览器，较慢）
+          // 4) 领气泡（真实浏览器，较慢）
           try {
             const rb = await receiveBubbles(a.authorization, a.phone, { ud_id: a.ud_id, a_k: a.a_k });
             item.receive = rb.ok ? ("+" + rb.got + "（" + rb.before + "→" + rb.after + "）") : ("失败：" + (rb.error || "未知"));
@@ -1687,7 +1700,7 @@ async function main() {
       if (key && ra.trusted) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
       if (ra.trusted) await saveStore(accounts);
       out.results = perAccount.map(x => ({ phone: x.phone, masked: x.masked, name: "", ok: x.ok,
-        message: [x.refresh ? "续期" + x.refresh : "", x.tasks !== undefined ? "任务" + x.tasks + "个" : "", x.receive ? "气泡" + x.receive : "", x.warn || "", x.error || ""].filter(Boolean).join("；") }));
+        message: [x.refresh ? "续期" + x.refresh : "", x.sign ? "签到" + (/成功/.test(x.sign) ? "成功" : x.sign.replace("签到","")) : "", x.tasks !== undefined ? "任务" + x.tasks + "个" : "", x.receive ? "气泡" + x.receive : "", x.warn || "", x.error || ""].filter(Boolean).join("；") }));
       out.ok = okCount > 0;
       out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个";
 
@@ -1730,6 +1743,7 @@ async function main() {
           if (x.tasks !== undefined) {
             const failed = (x.taskDetail || []).filter(t => !t.ok);
             if (!failed.length) {
+              if (x.sign) L.push("- 签到：" + x.sign);
               L.push("- 任务：" + (x.tasks || 0) + " 个全部完成 ✅");
             } else {
               L.push("- 任务：执行 " + x.tasks + " 个，成功 " + (x.taskOk || 0) + " 个，失败 " + failed.length + " 个 ❌");
