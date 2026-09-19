@@ -1,0 +1,382 @@
+{
+  "ts": "2026-09-19T05:25:01.996Z",
+  "accounts": [
+    {
+      "phone": "137****4642",
+      "num0": 267,
+      "info0": {
+        "toReceive": 0,
+        "rawLen": 0,
+        "rawHead": "{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":4,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":4,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":5,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":6,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":7,\"s\":false,\"n\":0,\"p\":0,\"t\"",
+        "items": []
+      },
+      "clicks": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "id": 409,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "使用PC客户端",
+          "id": 113,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "id": 434,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "小云互动礼",
+          "id": 319,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "绑定公众号",
+          "id": 105,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启备份领好礼",
+          "id": 548,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启备份领好礼",
+          "id": 549,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "id": 550,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "id": 551,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "去体验AI相机",
+          "id": 585,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "和AI助手对话",
+          "id": 609,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "手动上传一个文件",
+          "id": 106,
+          "code": "0",
+          "msg": "success"
+        }
+      ],
+      "info1": {
+        "toReceive": 0,
+        "rawLen": 0,
+        "rawHead": "{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":4,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":4,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":5,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":6,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":7,\"s\":false,\"n\":0,\"p\":0,\"t\"",
+        "items": []
+      },
+      "receive": [],
+      "num1": 267,
+      "info2": {
+        "toReceive": 0,
+        "rawLen": 0,
+        "rawHead": "{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":0,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":4,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":4,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":5,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":6,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":7,\"s\":false,\"n\":0,\"p\":0,\"t\"",
+        "items": []
+      },
+      "ok": true
+    },
+    {
+      "phone": "137****6553",
+      "num0": 267,
+      "info0": {
+        "toReceive": 0,
+        "rawLen": 0,
+        "rawHead": "{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"20\",\"monthDays\":4,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":4,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":5,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":6,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":7,\"s\":false,\"n\":0,\"p\":0,\"t\":",
+        "items": []
+      },
+      "clicks": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "id": 409,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "使用PC客户端",
+          "id": 113,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "id": 434,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "小云互动礼",
+          "id": 319,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "绑定公众号",
+          "id": 105,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启备份领好礼",
+          "id": 548,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启备份领好礼",
+          "id": 549,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "id": 550,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "30G流量0元领",
+          "id": 120,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "id": 551,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "去体验AI相机",
+          "id": 585,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "和AI助手对话",
+          "id": 609,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "手动上传一个文件",
+          "id": 106,
+          "code": "0",
+          "msg": "success"
+        }
+      ],
+      "error": "fetch failed"
+    },
+    {
+      "phone": "172****9953",
+      "num0": 1019,
+      "info0": {
+        "toReceive": 0,
+        "rawLen": 1,
+        "rawHead": "{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":6,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":4,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":5,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":6,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":7,\"s\":true,\"n\":0,\"p\":0,\"",
+        "items": [
+          {
+            "cloudType": 2,
+            "num": 88,
+            "name": "",
+            "keys": "cloudType,cloudNum"
+          }
+        ]
+      },
+      "clicks": [
+        {
+          "name": "使用PC客户端",
+          "id": 113,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "id": 434,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "小云互动礼",
+          "id": 319,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启备份领好礼",
+          "id": 548,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启备份领好礼",
+          "id": 549,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "id": 550,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "id": 551,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "去体验AI相机",
+          "id": 585,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "手动上传一个文件",
+          "id": 106,
+          "code": "0",
+          "msg": "success"
+        }
+      ],
+      "info1": {
+        "toReceive": 0,
+        "rawLen": 1,
+        "rawHead": "{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":6,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":4,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":5,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":6,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":7,\"s\":true,\"n\":0,\"p\":0,\"",
+        "items": [
+          {
+            "cloudType": 2,
+            "num": 88,
+            "name": "",
+            "keys": "cloudType,cloudNum"
+          }
+        ]
+      },
+      "receive": [],
+      "num1": 1019,
+      "info2": {
+        "toReceive": 0,
+        "rawLen": 1,
+        "rawHead": "{\"curMonthBackup\":true,\"cardInfo\":0,\"beforeTotal\":30,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":6,\"curMonthBackupSignAccept\":true,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":4,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":5,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":6,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":7,\"s\":true,\"n\":0,\"p\":0,\"",
+        "items": [
+          {
+            "cloudType": 2,
+            "num": 88,
+            "name": "",
+            "keys": "cloudType,cloudNum"
+          }
+        ]
+      },
+      "ok": true
+    },
+    {
+      "phone": "182****4895",
+      "num0": 64,
+      "info0": {
+        "toReceive": 0,
+        "rawLen": 0,
+        "rawHead": "{\"curMonthBackup\":false,\"curMonthBackupAccept\":false,\"cardInfo\":1,\"beforeTotal\":0,\"signInPoints\":3,\"signCount\":1,\"provinceCode\":\"731\",\"monthDays\":3,\"maxType\":\"\",\"cal\":[{\"d\":31,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":0},{\"d\":1,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":2,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":3,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":4,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":5,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":6,\"s\":false,\"n\":0,\"p\":0,\"t\":false,\"currentMonth\":1},{\"d\":7,\"s\":false,\"n\":0,\"p\":0,\"t\"",
+        "items": []
+      },
+      "clicks": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "id": 409,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "使用PC客户端",
+          "id": 113,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "id": 434,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "小云互动礼",
+          "id": 319,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "绑定公众号",
+          "id": 105,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启备份领好礼",
+          "id": 548,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启备份领好礼",
+          "id": 549,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "id": 550,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "id": 551,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "去体验AI相机",
+          "id": 585,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "和AI助手对话",
+          "id": 609,
+          "code": "0",
+          "msg": "success"
+        },
+        {
+          "name": "手动上传一个文件",
+          "id": 106,
+          "code": "0",
+          "msg": "success"
+        }
+      ],
+      "error": "fetch failed"
+    }
+  ]
+}
