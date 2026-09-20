@@ -406,7 +406,7 @@ async function signOne(authorization, phone, dev) {
         if (!j) { lastErr = `${at.tag} 非JSON(${r.status})`; continue; }
         const ok = String(j.code) === "0" || String(j.code).toLowerCase() === "success" || j.success === true;
         return { ok, message: (ok ? "已提交签到" : "签到接口返回失败") + `[${at.tag}]`,
-                 data: { code: j.code, via: at.tag, result: String(j.result || j.msg || "").slice(0, 200) } };
+                 data: { code: j.code, via: at.tag, result: (typeof (j.result || j.msg) === "object" ? JSON.stringify(j.result || j.msg) : String(j.result || j.msg || j.code || "")).slice(0, 200) } };
       } catch (e) { lastErr = `${at.tag} ${String(e.message || e).slice(0, 60)}`; }
     }
     return { ok: false, message: "签到失败：全部方式不可用 " + lastErr, data: { via: "none" } };
