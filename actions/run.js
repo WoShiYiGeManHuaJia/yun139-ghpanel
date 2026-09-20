@@ -387,14 +387,29 @@ async function signOne(authorization, phone, dev) {
     const jwt = await getJwt(authorization, phone);
     // 优先使用账号自身设备标识（与多账号风控原则一致），缺失才回退内置 deviceId
     const deviceId = (dev && (dev.ud_id || dev.deviceId)) || DEFAULT_DEVICE;
-    const r = await fetchWithTimeout(`https://m.mcloud.139.com/ycloud/signin/page/startSignIn?client=app&deviceId=${encodeURIComponent(deviceId)}`, {
-      method: "POST",
-      headers: { "Host": "m.mcloud.139.com", "jwtToken": jwt, "Origin": "https://m.mcloud.139.com", "Referer": "https://m.mcloud.139.com/", "Accept": "application/json, text/plain, */*", "Content-Type": "application/json" },
-      body: "{}",
-    });
-    const j = await responseJsonChecked(r, "签到");
-    const ok = String(j.code) === "0" || String(j.code).toLowerCase() === "success" || j.success === true;
-    return { ok, message: j.msg || j.message || (ok ? "已提交签到" : "签到接口返回失败"), data: { code: j.code, result: String(j.result || "").slice(0, 200) } };
+    const url = `https://m.mcloud.139.com/ycloud/signin/page/startSignIn?client=app&deviceId=${encodeURIComponent(deviceId)}`;
+    const baseH = { "Host": "m.mcloud.139.com", "jwtToken": jwt, "Origin": "https://m.mcloud.139.com", "Referer": "https://m.mcloud.139.com/", "Accept": "application/json, text/plain, */*" };
+    // 2026-09-20: 该接口返回 405，移动疑似调整了请求方法。依次回退尝试，命中即停。
+    const attempts = [
+      { tag: "GET", opt: { method: "GET", headers: baseH } },
+      { tag: "POST-form", opt: { method: "POST", headers: { ...baseH, "Content-Type": "application/x-www-form-urlencoded" }, body: "" } },
+      { tag: "POST-json", opt: { method: "POST", headers: { ...baseH, "Content-Type": "application/json" }, body: "{}" } },
+      { tag: "GET-noclient", opt: { method: "GET", headers: baseH, url: `https://m.mcloud.139.com/ycloud/signin/page/startSignIn?deviceId=${encodeURIComponent(deviceId)}` } },
+    ];
+    let lastErr = "";
+    for (const at of attempts) {
+      try {
+        const r = await fetchWithTimeout(at.url || url, { ...at.opt, signal: undefined });
+        if (r.status === 405) { lastErr = `${at.tag} 405`; continue; }
+        const txt = await r.text();
+        let j = null; try { j = JSON.parse(txt); } catch (_) {}
+        if (!j) { lastErr = `${at.tag} 非JSON(${r.status})`; continue; }
+        const ok = String(j.code) === "0" || String(j.code).toLowerCase() === "success" || j.success === true;
+        return { ok, message: (ok ? "已提交签到" : "签到接口返回失败") + `[${at.tag}]`,
+                 data: { code: j.code, via: at.tag, result: String(j.result || j.msg || "").slice(0, 200) } };
+      } catch (e) { lastErr = `${at.tag} ${String(e.message || e).slice(0, 60)}`; }
+    }
+    return { ok: false, message: "签到失败：全部方式不可用 " + lastErr, data: { via: "none" } };
   } catch (e) {
     return { ok: false, message: String(e.message || e).slice(0, 300) };
   }
