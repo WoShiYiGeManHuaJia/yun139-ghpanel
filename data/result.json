@@ -1,6 +1,6 @@
 {
-  "ts": "2026-09-20 01:51:24",
-  "requestId": "daily-1789869084622-m24u3t97",
+  "ts": "2026-09-20 01:59:15",
+  "requestId": "daily-1789869555641-ybru438c",
   "type": "daily",
   "ok": true,
   "msg": "共 4 个账号，成功 4 个",
@@ -9,7 +9,7 @@
       "phone": "13787464642",
       "masked": "137****4642",
       "refresh": "成功，剩余 30 天",
-      "sign": "签到失败：签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body>",
+      "sign": "签到成功（[object Object]）",
       "tasks": 12,
       "taskOk": 11,
       "taskFail": 1,
@@ -73,7 +73,7 @@
       "phone": "13717306553",
       "masked": "137****6553",
       "refresh": "成功，剩余 30 天",
-      "sign": "签到失败：签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body>",
+      "sign": "签到成功（[object Object]）",
       "tasks": 13,
       "taskOk": 12,
       "taskFail": 1,
@@ -141,7 +141,7 @@
       "phone": "17274079953",
       "masked": "172****9953",
       "refresh": "成功，剩余 30 天",
-      "sign": "签到失败：签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body>",
+      "sign": "签到成功（[object Object]）",
       "tasks": 9,
       "taskOk": 8,
       "taskFail": 1,
@@ -193,7 +193,7 @@
       "phone": "18244754895",
       "masked": "182****4895",
       "refresh": "成功，剩余 30 天",
-      "sign": "签到失败：签到 HTTP 405: {\"code\":502,\"msg\":\"请求方法异常\"}",
+      "sign": "签到成功（[object Object]）",
       "tasks": 12,
       "taskOk": 11,
       "taskFail": 1,
@@ -254,35 +254,35 @@
       "ok": true
     }
   ],
-  "enc_accounts": "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",
+  "enc_accounts": "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",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到失败：签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body>；任务12个；气泡+0（270→270）"
+      "message": "续期成功，剩余 30 天；签到成功；任务12个；气泡+0（270→270）"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到失败：签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body>；任务13个；气泡+0（270→270）"
+      "message": "续期成功，剩余 30 天；签到成功；任务13个；气泡+0（270→270）"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到失败：签到 HTTP 405: <html> <head><title>405 Not Allowed</title></head> <body>；任务9个；气泡+0（1022→1022）"
+      "message": "续期成功，剩余 30 天；签到成功；任务9个；气泡+0（1022→1022）"
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到失败：签到 HTTP 405: {\"code\":502,\"msg\":\"请求方法异常\"}；任务12个；气泡+0（67→67）"
+      "message": "续期成功，剩余 30 天；签到成功；任务12个；气泡+0（67→67）"
     }
   ],
   "recheck": [
