@@ -405,8 +405,15 @@ async function signOne(authorization, phone, dev) {
         let j = null; try { j = JSON.parse(txt); } catch (_) {}
         if (!j) { lastErr = `${at.tag} 非JSON(${r.status})`; continue; }
         const ok = String(j.code) === "0" || String(j.code).toLowerCase() === "success" || j.success === true;
+        const raw = (j.result !== undefined && j.result !== null) ? j.result : j.msg;
+        const robj = (raw && typeof raw === "object") ? raw : {};
+        // todaySignIn=true 表示"今天已经签过"，本次调用不会再加分 —— 必须如实区分，
+        // 否则每次都报"签到成功"但云豆不动，看起来就像"跑成功却一个都没涨"。
+        const todaySignIn = robj.todaySignIn !== undefined ? !!robj.todaySignIn : null;
+        const points = numOf(robj.signInPoints !== undefined ? robj.signInPoints : robj.points);
         return { ok, message: (ok ? "已提交签到" : "签到接口返回失败") + `[${at.tag}]`,
-                 data: { code: j.code, via: at.tag, result: (typeof (j.result || j.msg) === "object" ? JSON.stringify(j.result || j.msg) : String(j.result || j.msg || j.code || "")).slice(0, 200) } };
+                 data: { code: j.code, via: at.tag, todaySignIn, points,
+                         result: (typeof raw === "object" ? JSON.stringify(raw) : String(raw || j.code || "")).slice(0, 200) } };
       } catch (e) { lastErr = `${at.tag} ${String(e.message || e).slice(0, 60)}`; }
     }
     return { ok: false, message: "签到失败：全部方式不可用 " + lastErr, data: { via: "none" } };
@@ -1657,9 +1664,18 @@ async function main() {
           // 2) 每日签到（daily 此前缺失该步骤：只续期+点任务+领气泡，签到豆从未主动触发）
           try {
             const sg = await signOne(a.authorization, a.phone, a);
-            item.sign = sg.ok
-              ? ("签到成功" + (sg.data && sg.data.result ? "（" + String(sg.data.result).slice(0, 40) + "）" : ""))
-              : ("签到失败：" + String(sg.message || "").slice(0, 70));
+            const tsi = sg && sg.data ? sg.data.todaySignIn : null;
+            const pts = sg && sg.data ? sg.data.points : null;
+            item.signAlready = (tsi === true);
+            item.signPoints = pts;
+            if (!sg.ok) {
+              item.sign = "签到失败：" + String(sg.message || "").slice(0, 70);
+            } else if (tsi === true) {
+              item.sign = "今日已签，本次无新增" + (pts != null ? "（今日已得 " + pts + " 分）" : "");
+            } else {
+              item.sign = "签到成功" + (pts != null ? "，本次 +" + pts : "") +
+                (sg.data && sg.data.result ? "（" + String(sg.data.result).slice(0, 40) + "）" : "");
+            }
           } catch (e) { item.sign = "签到异常：" + String(e.message || e).slice(0, 70); }
 
           // 3) 推进可点击任务
@@ -1716,7 +1732,9 @@ async function main() {
 
           // 成功判定：签到成功 或 气泡确实领到，才算这个账号跑通
           // 旧逻辑是无条件 item.ok=true，导致签到失败也计入"成功 N 个" —— 这是误报的根源
-          const signOk = /签到成功/.test(String(item.sign || ""));
+          // 「今日已签，本次无新增」属正常状态，不能算失败；只有失败/异常才算
+          const signTxt = String(item.sign || "");
+          const signOk = !!signTxt && !/签到失败|签到异常/.test(signTxt);
           item.ok = signOk || (item.bubbleGot || 0) > 0;
           if (!item.ok) item.error = item.error || (String(item.sign || "签到未成功").slice(0, 80));
           if (item.ok) okCount++;
@@ -1738,6 +1756,26 @@ async function main() {
         await new Promise(x => setTimeout(x, 1200));
       }
       out.perAccount = perAccount;
+      // ---- 每日余额快照：写进 data/totals.json，用来回答"云豆到底涨没涨" ----
+      try {
+        const p = path.join(process.cwd(), "data", "totals.json");
+        let hist = {};
+        try { hist = JSON.parse(fs.readFileSync(p, "utf8")); } catch (e) { hist = {}; }
+        if (!hist || typeof hist !== "object" || Array.isArray(hist)) hist = {};
+        const day = nowStr().slice(0, 10);
+        hist[day] = Object.assign({}, hist[day] || {});
+        let g = 0;
+        for (const x of perAccount) {
+          if (!x.masked || x.total == null) continue;
+          hist[day][x.masked] = x.total;
+          if (x.gain) g += Number(x.gain) || 0;
+        }
+        hist[day]._gain = g;
+        fs.mkdirSync(path.dirname(p), { recursive: true });
+        fs.writeFileSync(p, JSON.stringify(hist, null, 2));
+        out.todayGain = g;
+        out.totals = hist[day];
+      } catch (e) { /* 快照失败不影响主流程 */ }
       if (key && ra.trusted) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
       if (ra.trusted) await saveStore(accounts);
       out.results = perAccount.map(x => ({ phone: x.phone, masked: x.masked, name: "", ok: x.ok,
@@ -1763,23 +1801,30 @@ async function main() {
             okCount = Math.min(okCount, accounts.length - 1);
           }
         } catch (e) {
-          rechecks.push({ masked: maskPhone(a.phone), error: String(e.message || e).slice(0, 80), clean: false });
+          // 复检接口异常 ≠ 有未领气泡：分开记，避免把网络/登录失败误报成"仍有未领"
+          rechecks.push({ masked: maskPhone(a.phone), error: String(e.message || e).slice(0, 80), clean: false, failed: true });
         }
         await new Promise(r => setTimeout(r, 1500));
       }
       out.recheck = rechecks;
-      const dirty = rechecks.filter(r => !r.clean);
-      out.allClean = dirty.length === 0;
-      if (!out.allClean) {
-        out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个；⚠ " +
-                  dirty.map(d => d.masked + "(剩" + (d.pending || "?") + ")").join("、") + " 仍有未领气泡";
-      }
+      const dirty = rechecks.filter(r => !r.clean && !r.failed);
+      const chkFail = rechecks.filter(r => r.failed);
+      out.allClean = dirty.length === 0 && chkFail.length === 0;
+      const tail = [];
+      if (dirty.length) tail.push("⚠ " + dirty.map(d => d.masked + "(剩" + (d.pending != null ? d.pending : "未知") + ")").join("、") + " 仍有未领气泡");
+      if (chkFail.length) tail.push("⚠ " + chkFail.map(d => d.masked + "(" + String(d.error || "异常").slice(0, 24) + ")").join("、") + " 复检接口异常（非未领）");
+      if (tail.length) out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个；" + tail.join("；");
 
       // ---- 钉钉推送每日报告（含任务完成情况）----
       try {
         const L = [];
         L.push("### 移动云盘 · 每日签到报告");
         L.push("**时间**：" + nowStr());
+        if (out.todayGain != null) {
+          L.push("");
+          L.push("**本次运行云豆净增：" + (out.todayGain > 0 ? "+" : "") + out.todayGain + "**" +
+                 (out.todayGain === 0 ? "（今日均已签过，本次不再加分，属正常）" : ""));
+        }
         L.push("");
         for (const x of perAccount) {
           L.push("#### " + x.masked + "　" + (x.ok ? "✅ 正常" : "❌ 异常"));
