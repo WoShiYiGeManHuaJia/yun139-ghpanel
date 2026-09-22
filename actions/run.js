@@ -1644,6 +1644,16 @@ async function main() {
             }
           }
 
+          // 2.0) 记录本次运行前的云豆基线
+          // 签到豆是直接到账的（signInPoints 当场入账），基线必须取在签到之前，
+          // 否则领气泡时读到的已经是签到后的余额，永远显示 +0，看起来像"没涨"。
+          let baseTotal = null;
+          try {
+            const jb = await getJwt(a.authorization, a.phone);
+            const sb = await cloudStatus(jb);
+            baseTotal = sb.total;
+          } catch (e) { /* 基线取不到不影响主流程 */ }
+
           // 2) 每日签到（daily 此前缺失该步骤：只续期+点任务+领气泡，签到豆从未主动触发）
           try {
             const sg = await signOne(a.authorization, a.phone, a);
@@ -1689,10 +1699,26 @@ async function main() {
           try {
             const rb = await receiveBubbles(a.authorization, a.phone, { ud_id: a.ud_id, a_k: a.a_k });
             item.receive = rb.ok ? ("+" + rb.got + "（" + rb.before + "→" + rb.after + "）") : ("失败：" + (rb.error || "未知"));
-          } catch (e) { item.receive = "异常：" + String(e.message || e).slice(0, 80); }
+            item.bubbleGot = rb.got || 0;
+          } catch (e) { item.receive = "异常：" + String(e.message || e).slice(0, 80); item.bubbleGot = 0; }
 
-          // 走到这里说明鉴权有效、任务与气泡已执行；续期只是附带动作，失败不应判整个账号失败
-          item.ok = true;
+          // 5) 复核本次运行的真实净增（签到豆直接到账，必须单独再查一次余额才看得见）
+          try {
+            const jf = await getJwt(a.authorization, a.phone);
+            const sf = await cloudStatus(jf);
+            item.total = sf.total;
+            if (baseTotal !== null && baseTotal !== undefined && sf.total !== null && sf.total !== undefined) {
+              item.base = baseTotal;
+              item.gain = sf.total - baseTotal;
+              item.gainText = (item.gain >= 0 ? "+" : "") + item.gain + "（" + baseTotal + "→" + sf.total + "）";
+            }
+          } catch (e) { /* 复核失败不影响主流程 */ }
+
+          // 成功判定：签到成功 或 气泡确实领到，才算这个账号跑通
+          // 旧逻辑是无条件 item.ok=true，导致签到失败也计入"成功 N 个" —— 这是误报的根源
+          const signOk = /签到成功/.test(String(item.sign || ""));
+          item.ok = signOk || (item.bubbleGot || 0) > 0;
+          if (!item.ok) item.error = item.error || (String(item.sign || "签到未成功").slice(0, 80));
           if (item.ok) okCount++;
         } catch (e) {
           const msg = String(e.message || e);
@@ -1715,7 +1741,10 @@ async function main() {
       if (key && ra.trusted) out.enc_accounts = await aesGcmEncryptText(key, JSON.stringify(accounts));
       if (ra.trusted) await saveStore(accounts);
       out.results = perAccount.map(x => ({ phone: x.phone, masked: x.masked, name: "", ok: x.ok,
-        message: [x.refresh ? "续期" + x.refresh : "", x.sign ? "签到" + (/成功/.test(x.sign) ? "成功" : x.sign.replace("签到","")) : "", x.tasks !== undefined ? "任务" + x.tasks + "个" : "", x.receive ? "气泡" + x.receive : "", x.warn || "", x.error || ""].filter(Boolean).join("；") }));
+        message: [x.refresh ? "续期" + x.refresh : "", x.sign ? "签到" + (/成功/.test(x.sign) ? "成功" : x.sign.replace("签到","")) : "",
+                  x.gainText ? "云豆" + x.gainText : "",
+                  (x.bubbleGot || 0) > 0 ? ("气泡+" + x.bubbleGot) : (x.receive ? "气泡无可领" : ""),
+                  x.tasks !== undefined ? "任务" + x.tasks + "个" : "", x.warn || "", x.error || ""].filter(Boolean).join("；") }));
       out.ok = okCount > 0;
       out.msg = "共 " + accounts.length + " 个账号，成功 " + okCount + " 个";
 
@@ -1766,7 +1795,8 @@ async function main() {
               if (failed.length > 10) L.push("    - ……共失败 " + failed.length + " 个");
             }
           }
-          if (x.receive) L.push("- 云豆气泡：" + x.receive);
+          if (x.gainText) L.push("- 本次云豆：" + x.gainText + (x.total != null ? "（当前 " + x.total + "）" : ""));
+          else if (x.receive) L.push("- 云豆气泡：" + x.receive);
           const rc = (out.recheck || []).find(r => r.masked === x.masked);
           if (rc) L.push("- 领取核对：" + (rc.clean ? "可领已清零 ✅（余额 " + rc.total + "）" : "⚠ 仍剩 " + (rc.pending || "?") + " 个未领"));
           if (x.error) L.push("- 异常：" + x.error);
