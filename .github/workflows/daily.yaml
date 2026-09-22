@@ -92,13 +92,16 @@ jobs:
           git config user.email "yun139-panel-bot@users.noreply.github.com"
           mkdir -p /tmp/panelout
           cp data/result.json /tmp/panelout/result.json
+          if [ -f data/totals.json ]; then cp data/totals.json /tmp/panelout/totals.json; fi
           if [ -f data/accounts.enc ]; then cp data/accounts.enc /tmp/panelout/accounts.enc; fi
           for i in 1 2 3 4 5; do
             git fetch origin main
             git checkout -f -B main FETCH_HEAD
             cp /tmp/panelout/result.json data/result.json
+            if [ -f /tmp/panelout/totals.json ]; then cp /tmp/panelout/totals.json data/totals.json; fi
             if [ -f /tmp/panelout/accounts.enc ]; then cp /tmp/panelout/accounts.enc data/accounts.enc; fi
             git add data/result.json
+            if [ -f data/totals.json ]; then git add data/totals.json; fi
             if [ -f data/accounts.enc ]; then git add data/accounts.enc; fi
             if git diff --cached --quiet; then
               echo "结果无变化，跳过提交"
