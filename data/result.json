@@ -1,15 +1,88 @@
 {
-  "ts": "2026-09-28 17:28:21",
-  "requestId": "daily-1790616501574-h61eepgn",
+  "ts": "2026-09-29 18:02:27",
+  "requestId": "daily-1790704947987-nzxh8fei",
   "type": "daily",
   "ok": true,
-  "msg": "共 4 个账号，成功 3 个",
+  "msg": "共 4 个账号，成功 4 个",
   "perAccount": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "ok": false,
-      "error": "网络异常（已重试3次）：fetch failed"
+      "refresh": "成功，剩余 30 天",
+      "signAlready": false,
+      "signPoints": 3,
+      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
+      "tasks": 14,
+      "taskOk": 13,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "体验智能消除",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        },
+        {
+          "name": "记录国庆节欢乐瞬间",
+          "ok": true
+        }
+      ],
+      "receive": "+0（290→290）",
+      "bubbleGot": 0,
+      "total": 290,
+      "base": 287,
+      "gain": 3,
+      "gainText": "+3（287→290）",
+      "ok": true
     },
     {
       "phone": "13717306553",
@@ -86,12 +159,12 @@
           "ok": true
         }
       ],
-      "receive": "+15（294→309）",
-      "bubbleGot": 15,
-      "total": 309,
-      "base": 291,
-      "gain": 18,
-      "gainText": "+18（291→309）",
+      "receive": "+0（312→312）",
+      "bubbleGot": 0,
+      "total": 312,
+      "base": 309,
+      "gain": 3,
+      "gainText": "+3（309→312）",
       "ok": true
     },
     {
@@ -153,9 +226,12 @@
           "ok": true
         }
       ],
-      "receive": "+0（1037→1037）",
-      "bubbleGot": 0,
-      "total": 1037,
+      "receive": "+6（1040→1046）",
+      "bubbleGot": 6,
+      "total": 1046,
+      "base": 1037,
+      "gain": 9,
+      "gainText": "+9（1037→1046）",
       "ok": true
     },
     {
@@ -229,75 +305,79 @@
           "ok": true
         }
       ],
-      "receive": "+0（90→90）",
+      "receive": "+0（93→93）",
       "bubbleGot": 0,
-      "total": 90,
+      "total": 93,
+      "base": 90,
+      "gain": 3,
+      "gainText": "+3（90→93）",
       "ok": true
     }
   ],
   "todayGain": 18,
   "totals": {
-    "137****6553": 309,
-    "172****9953": 1037,
-    "182****4895": 90,
+    "137****4642": 290,
+    "137****6553": 312,
+    "172****9953": 1046,
+    "182****4895": 93,
     "_gain": 18
   },
-  "enc_accounts": "rsfSNzjhB9sxoQKyLqMaXP94yl+kuVpWiIEtq24fIdKIwbcR7OSQO/6Sr9Bnc9TPHnt7vSnDHgJdpyEoOaYMfpFzvIgd0Ew1yr8eUFH8bSyJeG2Fx3hK5GDUZhE1kGdLxHaSdLf5VvUh3X5me2a6DjuQnJY2/x3FqOMnbyu39toRHOwSLuSBxK3RoNGvw1Ld+TRKdU6D8rPTTdAYzwoFmJ7SBzpYTfkrgRqLEioOL/LEieWzL2ZqehVS8MfvNWdt1bY2FqmbirtAFs1HgmxI019aO9BoWh7gZar7CFfTAi2/3eWT009WeJqiD1D6Cb760b6m9TcG9J85MkkCBjZw7lELIdzB5wDWly8oB/5n5Qaaz4CCr5XuUg/3PjiiGnsox//V7xYrdojo8cTvK2jetBsn2PYL+E6Y39aRT2IrmXg+FPcNxZo32b741dePx6FXNwX0srcNxaew6W1IeW9i5eHF1CArq/oeHDIN03jKL7kKUMXGdYBxx+3zmdJ6VDC4LfZzzIftG7Hb53kPYRBmZiuoJV6ZbQpjwJnhxIYuQBNVbCbx9te3ZbKSZSQK724vSyUZylzmf51R5Lfhn40kAuQrr86fVOxd7vT0tzkAM7iwLrQUmLiZmXMwvPPhO53qbXfyoQQRfwHZV1xyDf1IuyFqTmD3j3XByStkcZf1K3DnQgsW23fKHPICN+Lp+cvLYBqtSUTVToSDW9YoVXBXnUStq1pFM76V1z8WyqdykwMU1hJVLv/R0chupTDC/DcQlm6EGbgvw4cPP0C+VhZV6q6N2nKCNIkq3CqrmBhrgmLp4nUfTjH7gOnR8Rju6/5QQz+RHGbomuLJd+bbp+00kiJikEwhbTW7JAs8EyWJH0xxd4/UJEwgnk1Nn+NB2wB7S/N/ERd6+rH9ctRwpp1bmE+lHIinw7Mxus1Y0+kIh9YSHmVgF0JgO26LjqqdUaN5ZqGLT1ysiTA6Nvo1rhG3htPoTkSfSc3Uozs0dv9h8PyzcYAIAn641GPkrS1+7uprJ2/S39ZgwFtMHtRQjRQbf0pU8F+0t6UZ0wXaqS4KAtVGZ6vTH+yztYUKanRtMSLr4zn3Ym5Xzo1rhZ674euTLd0KaMbm3vj9iXdQyQQtheZMBVFXViMTSRJ2Nntj7uuiasm4lu3DRRrMKcq+a22JVkCkH5r2PieAFRBr0sbAMY+eH4Fr+emgM2l4SBQmOtxZIIkrcXEhAziZqS+gQiBVqhj5SK9s+CeZc+b3moo1USFnxgX0qgM33NNp60+O6IKZYKBSfIwV8qcz5Nl73/TY7ohFeP+Zq6n2WsOVPpN2D7hbCGSCRau8A31reJ8hhkVBKYQoebo7tPUmFj2uWRG6PAl32Y26rd7gJ+DAb3DyAyRJ19yPI0Mn7wduoP1D2b2CI8mH1n2b3xCAshqq9msORItyAMS8VYd1/s/K+QiOw6jb7VjM7ncvcV10xJ8FkT+MPoEWTxuUezUJGJAw68S2s3kGiZx76gSHxYgVDa7+DkFhXvH7aNmqNF/mMZ8qu0z3z/9JPkz1jfmx+QkmlBHJ0C+21Lf8V4+UZXUgEY+QehJyh4GOq4XGh2+gYrTExFYuwy9m71Y57EXY3o0ei9iLbzrXZRoc54xBgI8onJRSYwk3q2iO13QRfKtwqH8R4o6eDUtGXIC4qBCT+4fCWjHbQXnFusk+XUTOC3YBYUuX+WOggfKzkvxb4Vdo1V8TOuxGpH7M7g+x0yr61x8iYKd7PdnL7oRuyLh5eH/rXRd7hncsrUQBq/4OpFvAhPNUGtrRrBxJB4xZuC/MvhlO/jIYqh+sMVPZ+Ct8WZcPpMIRMdHTeUqCBt3yF7ZR7w3D7nA+IrIumCe83daXmOTfVPUfJUcJ8nUQXodCChoVMb3L2jyVgusMbwtSE9zgwJXJcAMlqpJhc1tYxTKSyNbJKmgDQwmDdkCKOmTngMayI2WZmIoIXemtS/syu0SQL8XfHKuFixJJNgkte2FHh3WTd9fIOk7t843Hq3S9C/mR6uafSXn+S5Yk2wwHF9Nw2symYRtocqoeW8MLw+C0RY0dmp19GY6S1YGC1nWpN6pHW+VLuyoFFqCX6/ujKJCiChfeSc+vnz7kZ1VF1Vhc0lSVU7rvqvqUsPgHVPAMIlw57RYPQiWPlGRASWkjkftBUmyxQWh1VEazjklwWnZptcXcJnAW038E6pUtF7n/0RMqDJyrWnaV5sQbVgukIkir1QeIl6f1huWD0UBuZ9vW4pWwBQcNFGdKHo1vRhrliPVCICkxC1MA/sSpyQR3CzeZ1LOwCLNcEksDgs53MWWabd0zoE2bMQs/LdpcZ+C3fsX3yDl6f1MUsPnI2ZeLTsBB7+uR+aW+JQrZOciMPHSblU6RcS0PgLmSuNQjSpMHETxjvZIgmXam2k8mnTyHnJKYJq1qHm8IMmR3OcvcpQIULiF+D7kaX9ots4UlnVUEwUlYprpfOJys4yZWFIznqT3WtARvzq/Qs4SP1W65Gmp9NJMzvtNSCENfS/zsGW0taAWU1AD4G+17+2BAPTngFU6dsLwA1o/c+L0wpqVa1JLVxukbawB1Z2LPSqVRbjfKprBLZ3mHxvNXps5lBr4Hn0NF0i1/CL/TFWgpAyDiyWveXQMmrq3BpT3J1bdXPMf2y5JTMtzX9EaPUQQL",
+  "enc_accounts": "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",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
-      "ok": false,
-      "message": "网络异常（已重试3次）：fetch failed"
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到成功；云豆+3（287→290）；气泡无可领；任务14个"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+18（291→309）；气泡+15；任务15个"
+      "message": "续期成功，剩余 30 天；签到成功；云豆+3（309→312）；气泡无可领；任务15个"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；气泡无可领；任务11个"
+      "message": "续期成功，剩余 30 天；签到成功；云豆+9（1037→1046）；气泡+6；任务11个"
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；气泡无可领；任务14个"
+      "message": "续期成功，剩余 30 天；签到成功；云豆+3（90→93）；气泡无可领；任务14个"
     }
   ],
   "recheck": [
     {
       "masked": "137****4642",
-      "total": 287,
+      "total": 290,
       "receivable": 0,
       "pending": 0,
       "clean": true
     },
     {
       "masked": "137****6553",
-      "total": 309,
+      "total": 312,
       "receivable": 0,
       "pending": 0,
       "clean": true
     },
     {
       "masked": "172****9953",
-      "total": 1037,
+      "total": 1046,
       "receivable": 0,
       "pending": 0,
       "clean": true
     },
     {
       "masked": "182****4895",
-      "total": 90,
+      "total": 93,
       "receivable": 0,
       "pending": 0,
       "clean": true
