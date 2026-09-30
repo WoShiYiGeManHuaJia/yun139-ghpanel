@@ -1,21 +1,29 @@
 {
-  "ts": "2026-09-29 18:02:27",
-  "requestId": "daily-1790704947987-nzxh8fei",
+  "ts": "2026-09-30 18:08:15",
+  "requestId": "daily-1790791695915-wt2o5174",
   "type": "daily",
   "ok": true,
-  "msg": "共 4 个账号，成功 4 个",
+  "msg": "共 4 个账号，成功 1 个；⚠ 137****4642(fetch failed)、137****6553(tyrzLogin 所有主机均失败)、172****9953(tyrzLogin 所有主机均失败) 复检接口异常（非未领）",
   "perAccount": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "refresh": "成功，剩余 30 天",
-      "signAlready": false,
+      "refresh": "未续期（接口不可达，沿用旧令牌，剩 30 天）",
+      "signAlready": true,
       "signPoints": 3,
-      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
-      "tasks": 14,
-      "taskOk": 13,
+      "sign": "今日已签，本次无新增（今日已得 3 分）",
+      "tasks": 17,
+      "taskOk": 16,
       "taskFail": 1,
       "taskDetail": [
+        {
+          "name": "去使用移动云手机",
+          "ok": true
+        },
+        {
+          "name": "去云盘图书馆阅读书籍",
+          "ok": true
+        },
         {
           "name": "从固定入口访问云朵中心",
           "ok": true
@@ -68,6 +76,10 @@
           "ok": true
         },
         {
+          "name": "加入一个知识库",
+          "ok": true
+        },
+        {
           "name": "手动上传一个文件",
           "ok": true
         },
@@ -76,314 +88,97 @@
           "ok": true
         }
       ],
-      "receive": "+0（290→290）",
-      "bubbleGot": 0,
-      "total": 290,
-      "base": 287,
-      "gain": 3,
-      "gainText": "+3（287→290）",
+      "receive": "+60（293→353）",
+      "bubbleGot": 60,
+      "total": 353,
+      "base": 293,
+      "gain": 60,
+      "gainText": "+60（293→353）",
       "ok": true
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "refresh": "成功，剩余 30 天",
-      "signAlready": false,
-      "signPoints": 3,
-      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
-      "tasks": 15,
-      "taskOk": 14,
-      "taskFail": 1,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": false,
-          "progress": "0/7",
-          "done": false,
-          "note": "进行中 0/7（点击已推进，条件未达标）"
-        },
-        {
-          "name": "小云互动礼",
-          "ok": true
-        },
-        {
-          "name": "体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "体验智能消除",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "30G流量0元领",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        },
-        {
-          "name": "记录国庆节欢乐瞬间",
-          "ok": true
-        }
-      ],
-      "receive": "+0（312→312）",
-      "bubbleGot": 0,
-      "total": 312,
-      "base": 309,
-      "gain": 3,
-      "gainText": "+3（309→312）",
-      "ok": true
+      "ok": false,
+      "error": "tyrzLogin 所有主机均失败"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "refresh": "成功，剩余 30 天",
-      "signAlready": false,
-      "signPoints": 3,
-      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
-      "tasks": 11,
-      "taskOk": 10,
-      "taskFail": 1,
-      "taskDetail": [
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": false,
-          "progress": "0/7",
-          "done": false,
-          "note": "进行中 0/7（点击已推进，条件未达标）"
-        },
-        {
-          "name": "小云互动礼",
-          "ok": true
-        },
-        {
-          "name": "体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "体验智能消除",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        },
-        {
-          "name": "记录国庆节欢乐瞬间",
-          "ok": true
-        }
-      ],
-      "receive": "+6（1040→1046）",
-      "bubbleGot": 6,
-      "total": 1046,
-      "base": 1037,
-      "gain": 9,
-      "gainText": "+9（1037→1046）",
-      "ok": true
+      "ok": false,
+      "error": "网络异常（已重试3次）：fetch failed"
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
-      "refresh": "成功，剩余 30 天",
-      "signAlready": false,
-      "signPoints": 3,
-      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
-      "tasks": 14,
-      "taskOk": 13,
-      "taskFail": 1,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": false,
-          "progress": "0/7",
-          "done": false,
-          "note": "进行中 0/7（点击已推进，条件未达标）"
-        },
-        {
-          "name": "小云互动礼",
-          "ok": true
-        },
-        {
-          "name": "体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "体验智能消除",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启备份领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        },
-        {
-          "name": "记录国庆节欢乐瞬间",
-          "ok": true
-        }
-      ],
-      "receive": "+0（93→93）",
-      "bubbleGot": 0,
-      "total": 93,
-      "base": 90,
-      "gain": 3,
-      "gainText": "+3（90→93）",
-      "ok": true
+      "ok": false,
+      "error": "网络异常（已重试3次）：fetch failed"
     }
   ],
-  "todayGain": 18,
+  "todayGain": 60,
   "totals": {
-    "137****4642": 290,
-    "137****6553": 312,
-    "172****9953": 1046,
-    "182****4895": 93,
-    "_gain": 18
+    "_gain": 60,
+    "137****4642": 353
   },
-  "enc_accounts": "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",
+  "enc_accounts": "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",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+3（287→290）；气泡无可领；任务14个"
+      "message": "续期未续期（接口不可达，沿用旧令牌，剩 30 天）；签到今日已签，本次无新增（今日已得 3 分）；云豆+60（293→353）；气泡+60；任务17个"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+3（309→312）；气泡无可领；任务15个"
+      "ok": false,
+      "message": "tyrzLogin 所有主机均失败"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+9（1037→1046）；气泡+6；任务11个"
+      "ok": false,
+      "message": "网络异常（已重试3次）：fetch failed"
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
       "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+3（90→93）；气泡无可领；任务14个"
+      "ok": false,
+      "message": "网络异常（已重试3次）：fetch failed"
     }
   ],
   "recheck": [
     {
       "masked": "137****4642",
-      "total": 290,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
+      "error": "fetch failed",
+      "clean": false,
+      "failed": true
     },
     {
       "masked": "137****6553",
-      "total": 312,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
+      "error": "tyrzLogin 所有主机均失败",
+      "clean": false,
+      "failed": true
     },
     {
       "masked": "172****9953",
-      "total": 1046,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
+      "error": "tyrzLogin 所有主机均失败",
+      "clean": false,
+      "failed": true
     },
     {
       "masked": "182****4895",
-      "total": 93,
+      "total": null,
       "receivable": 0,
       "pending": 0,
       "clean": true
     }
   ],
-  "allClean": true,
+  "allClean": false,
   "dingtalk": {
     "ok": true,
     "status": 200,
