@@ -1,0 +1,171 @@
+{
+  "ts": "2026-10-01T12:46:28.925Z",
+  "net": [
+    {
+      "h": "https://user-njs.yun.139.com",
+      "ok": true,
+      "status": 404,
+      "ms": 1415
+    },
+    {
+      "h": "https://orches.yun.139.com",
+      "ok": true,
+      "status": 404,
+      "ms": 953
+    },
+    {
+      "h": "https://caiyun.feixin.10086.cn:7071",
+      "ok": false,
+      "err": "fetch failed",
+      "ms": 417
+    },
+    {
+      "h": "https://caiyun.feixin.10086.cn",
+      "ok": true,
+      "status": 200,
+      "ms": 3989
+    },
+    {
+      "h": "https://yun.139.com",
+      "ok": true,
+      "status": 200,
+      "ms": 419
+    },
+    {
+      "h": "https://m.mcloud.139.com",
+      "ok": true,
+      "status": 200,
+      "ms": 2513
+    }
+  ],
+  "accounts": [
+    {
+      "masked": "137****4642",
+      "specToken": {
+        "http": 200,
+        "head": "{\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidssolgca04b1279107bec55ab0a"
+      },
+      "ssoLen": 42,
+      "tyrz": [
+        {
+          "h": "https://caiyun.feixin.10086.cn:7071",
+          "http": 200,
+          "token": true,
+          "head": "{\"code\":0,\"result\":{\"account\":\"UeE5ezoQaBGeCIXZ8TxUe9M/UzaxZszNQKOL2FOhyrDBRlV+2x1zNRMSZpAMrsHjlpi9ta+Z2PvHd9FYc9zP+QBw0"
+        },
+        {
+          "h": "https://caiyun.feixin.10086.cn",
+          "http": 200,
+          "token": false,
+          "head": "{\"code\":200050409,\"msg\":\"token已失效\"}"
+        },
+        {
+          "h": "https://yun.139.com",
+          "http": 200,
+          "token": false,
+          "head": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"force-r"
+        }
+      ],
+      "jwt": {
+        "ok": false,
+        "err": "getJwtOnce is not a function"
+      }
+    },
+    {
+      "masked": "137****6553",
+      "specToken": {
+        "http": 200,
+        "head": "{\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidssolge641c743b67b041b4711f"
+      },
+      "ssoLen": 42,
+      "tyrz": [
+        {
+          "h": "https://caiyun.feixin.10086.cn:7071",
+          "http": 200,
+          "token": true,
+          "head": "{\"code\":0,\"result\":{\"account\":\"kb6p+ds7dGppcNwRZ3yhXAFYJiZXAQkyLvFskd5WSc0gmXOYu/1yEFl96Wxk/u+v1PzzmVdgppbz64NfO7cT72iuH"
+        },
+        {
+          "h": "https://caiyun.feixin.10086.cn",
+          "http": 200,
+          "token": false,
+          "head": "{\"code\":200050409,\"msg\":\"token已失效\"}"
+        },
+        {
+          "h": "https://yun.139.com",
+          "http": 200,
+          "token": false,
+          "head": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"force-r"
+        }
+      ],
+      "jwt": {
+        "ok": false,
+        "err": "getJwtOnce is not a function"
+      }
+    },
+    {
+      "masked": "172****9953",
+      "specToken": {
+        "http": 200,
+        "head": "{\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidssolg19894eab7f9212c926bea"
+      },
+      "ssoLen": 42,
+      "tyrz": [
+        {
+          "h": "https://caiyun.feixin.10086.cn:7071",
+          "http": 200,
+          "token": true,
+          "head": "{\"code\":0,\"result\":{\"account\":\"J8gvgogPzG9YuQx/QREZIm2VmF4hT3Q3gb+ieZ7dWYjvS6PW8pIZU/uc00JVrXEcYAQp5ccEIJA5+8z272bZS2yIj"
+        },
+        {
+          "h": "https://caiyun.feixin.10086.cn",
+          "http": 200,
+          "token": false,
+          "head": "{\"code\":200050409,\"msg\":\"token已失效\"}"
+        },
+        {
+          "h": "https://yun.139.com",
+          "http": 200,
+          "token": false,
+          "head": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"force-r"
+        }
+      ],
+      "jwt": {
+        "ok": false,
+        "err": "getJwtOnce is not a function"
+      }
+    },
+    {
+      "masked": "182****4895",
+      "specToken": {
+        "http": 200,
+        "head": "{\"success\":true,\"code\":\"0\",\"message\":\"OK\",\"data\":{\"result\":{\"resultCode\":\"0\",\"resultDesc\":\"请求成功\"},\"resultCode\":\"104000\",\"token\":\"YZsidssolg741923cc8bd2ca59c3d11"
+      },
+      "ssoLen": 42,
+      "tyrz": [
+        {
+          "h": "https://caiyun.feixin.10086.cn:7071",
+          "http": 200,
+          "token": true,
+          "head": "{\"code\":0,\"result\":{\"account\":\"J8E6WQDPsUubwh1MMKGDyN8wLpIAGxl2YvxDlvZH8c+/JYGaPoaJchSeSv2CGbSG/Eo0vWJ21HzN//OZ0TN+q8FJY"
+        },
+        {
+          "h": "https://caiyun.feixin.10086.cn",
+          "http": 200,
+          "token": false,
+          "head": "{\"code\":200050409,\"msg\":\"token已失效\"}"
+        },
+        {
+          "h": "https://yun.139.com",
+          "http": 200,
+          "token": false,
+          "head": "<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"renderer\" content=\"webkit\"><meta name=\"force-r"
+        }
+      ],
+      "jwt": {
+        "ok": false,
+        "err": "getJwtOnce is not a function"
+      }
+    }
+  ]
+}
