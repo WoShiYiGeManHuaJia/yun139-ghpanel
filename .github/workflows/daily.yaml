@@ -28,13 +28,35 @@ jobs:
             exit 0
           fi
           TODAY="$(TZ=Asia/Shanghai date +%Y-%m-%d)"
-          TS="$(node -e 'const j=require("./data/result.json");const s=(j.ts||"").trim();if(!s){process.exit(1)}const d=new Date(s.replace(" ","T")+"Z");console.log(new Date(d.getTime()+8*3600e3).toISOString().slice(0,10))' 2>/dev/null || echo '')"
-          echo "北京今天=$TODAY ; 上次成功结果的北京日期=$TS"
-          if [ "$TS" = "$TODAY" ]; then
-            echo "今天已成功跑过 → 跳过，避免重复签到与重复钉钉推送"
+          # 旧逻辑只看 ts 日期，不看成败：某轮 4 个账号只成功 1 个，
+          # ts 却已落到当天，于是当天后续调度全部判「已跑过」跳过，
+          # 3 个账号整天不再重试 —— 这正是本次「签到炸了」的直接原因。
+          # 改为：先看是否全部账号成功，再看当天已重试次数（上限 3 次）。
+          EVAL="$(node -e '
+            const fs=require("fs");
+            let j={}; try{ j=JSON.parse(fs.readFileSync("./data/result.json","utf8")); }catch(e){}
+            const s=(j.ts||"").trim();
+            let d="";
+            if(s){ const x=new Date(s.replace(" ","T")+"Z"); d=new Date(x.getTime()+8*3600e3).toISOString().slice(0,10); }
+            const pa=Array.isArray(j.perAccount)?j.perAccount:[];
+            const fail=pa.filter(a=>a&&a.ok===false).length;
+            // 全部成功才算完成（无任何失败账号，且确实有账号被处理）
+            const done = pa.length>0 && fail===0 && d!=="";
+            const rt = Number(j._retryToday||0);
+            console.log(JSON.stringify({date:d, total:pa.length, fail, done, retry:rt}));
+          ' 2>/dev/null || echo '{}')"
+          echo "北京今天=$TODAY ; 上次结果=$EVAL"
+          DATE="$(echo "$EVAL" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{console.log(JSON.parse(s).date||"")}catch(e){console.log("")}})')"
+          DONE="$(echo "$EVAL" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{console.log(JSON.parse(s).done?"1":"0")}catch(e){console.log("0")}})')"
+          RT="$(echo "$EVAL" | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{console.log(JSON.parse(s).retry||0)}catch(e){console.log(0)}})')"
+          if [ "$DATE" = "$TODAY" ] && [ "$DONE" = "1" ]; then
+            echo "今天已全部账号成功 → 跳过，避免重复签到与重复钉钉推送"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          elif [ "$DATE" = "$TODAY" ] && [ "$RT" -ge 3 ]; then
+            echo "今天已重试 $RT 次仍存在失败账号 → 停止重试，避免无限重跑"
             echo "run=false" >> "$GITHUB_OUTPUT"
           else
-            echo "今天尚未成功 → 执行"
+            echo "今天尚未全部成功（已重试 $RT 次）→ 执行"
             echo "run=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -83,6 +105,23 @@ jobs:
           echo "第 1 轮失败（多为机房瞬时网络故障），等待 6 分钟后重试"
           sleep 360
           node actions/run.js
+
+      - name: 记录当天重试次数（供 guard 判断是否继续重试）
+        if: always()
+        run: |
+          node -e '
+            const fs=require("fs");
+            const p="./data/result.json";
+            let j={}; try{ j=JSON.parse(fs.readFileSync(p,"utf8")); }catch(e){ j={}; }
+            const s=(j.ts||"").trim();
+            let d="";
+            if(s){ const x=new Date(s.replace(" ","T")+"Z"); d=new Date(x.getTime()+8*3600e3).toISOString().slice(0,10); }
+            const today=new Date(Date.now()+8*3600e3).toISOString().slice(0,10);
+            j._retryToday = (d && d===today) ? Number(j._retryToday||0)+1 : 1;
+            j._retryDate = today;
+            fs.writeFileSync(p, JSON.stringify(j,null,2));
+            console.log("retryToday =", j._retryToday, "date =", today);
+          ' 2>&1 || echo "[警告] 重试计数写入失败，不影响结果提交"
 
       - name: Commit result
         if: always()
