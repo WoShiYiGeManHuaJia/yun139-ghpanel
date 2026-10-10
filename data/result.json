@@ -1,6 +1,6 @@
 {
-  "ts": "2026-10-10 11:05:24",
-  "requestId": "daily-1791630324098-gzrx6tp7",
+  "ts": "2026-10-10 17:18:12",
+  "requestId": "daily-1791652692870-2x8gdoee",
   "type": "daily",
   "ok": true,
   "msg": "共 4 个账号，成功 4 个",
@@ -68,12 +68,12 @@
           "ok": true
         }
       ],
-      "receive": "+0（440→440）",
+      "receive": "+0（443→443）",
       "bubbleGot": 0,
-      "total": 440,
-      "base": 437,
+      "total": 443,
+      "base": 440,
       "gain": 3,
-      "gainText": "+3（437→440）",
+      "gainText": "+3（440→443）",
       "ok": true
     },
     {
@@ -139,23 +139,23 @@
           "ok": true
         }
       ],
-      "receive": "+0（548→548）",
+      "receive": "+0（551→551）",
       "bubbleGot": 0,
-      "total": 548,
-      "base": 545,
+      "total": 551,
+      "base": 548,
       "gain": 3,
-      "gainText": "+3（545→548）",
+      "gainText": "+3（548→551）",
       "ok": true
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "refresh": "成功，剩余 30 天",
-      "signAlready": true,
+      "signAlready": false,
       "signPoints": 3,
-      "sign": "今日已签，本次无新增（今日已得 3 分）",
-      "tasks": 9,
-      "taskOk": 8,
+      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
+      "tasks": 10,
+      "taskOk": 9,
       "taskFail": 1,
       "taskDetail": [
         {
@@ -196,14 +196,18 @@
         {
           "name": "去体验AI相机",
           "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
         }
       ],
-      "receive": "+6（1739→1745）",
-      "bubbleGot": 6,
-      "total": 1745,
-      "base": 1739,
-      "gain": 6,
-      "gainText": "+6（1739→1745）",
+      "receive": "+0（1748→1748）",
+      "bubbleGot": 0,
+      "total": 1748,
+      "base": 1745,
+      "gain": 3,
+      "gainText": "+3（1745→1748）",
       "ok": true
     },
     {
@@ -269,79 +273,79 @@
           "ok": true
         }
       ],
-      "receive": "+0（243→243）",
+      "receive": "+0（246→246）",
       "bubbleGot": 0,
-      "total": 243,
-      "base": 240,
+      "total": 246,
+      "base": 243,
       "gain": 3,
-      "gainText": "+3（240→243）",
+      "gainText": "+3（243→246）",
       "ok": true
     }
   ],
-  "todayGain": 15,
+  "todayGain": 12,
   "totals": {
-    "_gain": 15,
-    "137****4642": 440,
-    "137****6553": 548,
-    "172****9953": 1745,
-    "182****4895": 243
+    "_gain": 12,
+    "137****4642": 443,
+    "137****6553": 551,
+    "172****9953": 1748,
+    "182****4895": 246
   },
-  "enc_accounts": "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",
+  "enc_accounts": "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",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+3（437→440）；气泡无可领；任务12个"
+      "message": "续期成功，剩余 30 天；签到成功；云豆+3（440→443）；气泡无可领；任务12个"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+3（545→548）；气泡无可领；任务12个"
+      "message": "续期成功，剩余 30 天；签到成功；云豆+3（548→551）；气泡无可领；任务12个"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到今日已签，本次无新增（今日已得 3 分）；云豆+6（1739→1745）；气泡+6；任务9个"
+      "message": "续期成功，剩余 30 天；签到成功；云豆+3（1745→1748）；气泡无可领；任务10个"
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
       "name": "",
       "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+3（240→243）；气泡无可领；任务12个"
+      "message": "续期成功，剩余 30 天；签到成功；云豆+3（243→246）；气泡无可领；任务12个"
     }
   ],
   "recheck": [
     {
       "masked": "137****4642",
-      "total": 440,
+      "total": 443,
       "receivable": 0,
       "pending": 0,
       "clean": true
     },
     {
       "masked": "137****6553",
-      "total": 548,
+      "total": 551,
       "receivable": 0,
       "pending": 0,
       "clean": true
     },
     {
       "masked": "172****9953",
-      "total": 1745,
+      "total": 1748,
       "receivable": 0,
       "pending": 0,
       "clean": true
     },
     {
       "masked": "182****4895",
-      "total": 243,
+      "total": 246,
       "receivable": 0,
       "pending": 0,
       "clean": true
@@ -354,5 +358,5 @@
     "body": "{\"errcode\":0,\"errmsg\":\"ok\"}"
   },
   "_retryToday": 1,
-  "_retryDate": "2026-10-10"
+  "_retryDate": "2026-10-11"
 }
