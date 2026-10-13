@@ -1,94 +1,354 @@
 {
-  "ts": "2026-10-13 16:54:30",
-  "requestId": "daily-1791910470450-tydj31r7",
+  "ts": "2026-10-13 19:12:31",
+  "requestId": "daily-1791918751242-nv6eghed",
   "type": "daily",
-  "ok": false,
-  "msg": "共 4 个账号，成功 0 个；⚠ 137****4642(querySpecToken 失败 code=1)、137****6553(querySpecToken 失败 code=1)、172****9953(querySpecToken 失败 code=1)、182****4895(querySpecToken 失败 code=1) 复检接口异常（非未领）",
+  "ok": true,
+  "msg": "共 4 个账号，成功 3 个；⚠ 172****9953(剩2) 仍有未领气泡",
   "perAccount": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "ok": false,
-      "error": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"1010000500\",\"message\":\"系统服务不可用\",\"data\":null}"
+      "refresh": "成功，剩余 30 天",
+      "signAlready": false,
+      "signPoints": 3,
+      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
+      "tasks": 12,
+      "taskOk": 11,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+15（452→467）",
+      "bubbleGot": 15,
+      "total": 467,
+      "base": 449,
+      "gain": 18,
+      "gainText": "+18（449→467）",
+      "ok": true
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "ok": false,
-      "error": "网络异常（已重试3次）：fetch failed"
+      "refresh": "成功，剩余 30 天",
+      "signAlready": false,
+      "signPoints": 3,
+      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
+      "tasks": 12,
+      "taskOk": 11,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "30G流量0元领",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+15（560→575）",
+      "bubbleGot": 15,
+      "total": 575,
+      "base": 557,
+      "gain": 18,
+      "gainText": "+18（557→575）",
+      "ok": true
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "ok": false,
-      "error": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"1010000500\",\"message\":\"系统服务不可用\",\"data\":null}"
+      "refresh": "成功，剩余 30 天",
+      "signAlready": false,
+      "signPoints": 3,
+      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
+      "tasks": 10,
+      "taskOk": 9,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+100（1763→1863）",
+      "bubbleGot": 100,
+      "total": 1863,
+      "base": 1760,
+      "gain": 103,
+      "gainText": "+103（1760→1863）",
+      "ok": true
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
-      "ok": false,
-      "error": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"1010000500\",\"message\":\"系统服务不可用\",\"data\":null}"
+      "refresh": "成功，剩余 30 天",
+      "signAlready": false,
+      "signPoints": 3,
+      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
+      "tasks": 12,
+      "taskOk": 11,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启备份领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+15（255→270）",
+      "bubbleGot": 15,
+      "total": 270,
+      "base": 252,
+      "gain": 18,
+      "gainText": "+18（252→270）",
+      "ok": true
     }
   ],
-  "todayGain": 0,
+  "todayGain": 157,
   "totals": {
-    "_gain": 0
+    "_gain": 157,
+    "137****4642": 467,
+    "137****6553": 575,
+    "172****9953": 1863,
+    "182****4895": 270
   },
-  "enc_accounts": "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",
+  "enc_accounts": "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",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
       "name": "",
-      "ok": false,
-      "message": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"1010000500\",\"message\":\"系统服务不可用\",\"data\":null}"
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到成功；云豆+18（449→467）；气泡+15；任务12个"
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
       "name": "",
-      "ok": false,
-      "message": "网络异常（已重试3次）：fetch failed"
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到成功；云豆+18（557→575）；气泡+15；任务12个"
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
       "name": "",
-      "ok": false,
-      "message": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"1010000500\",\"message\":\"系统服务不可用\",\"data\":null}"
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到成功；云豆+103（1760→1863）；气泡+100；任务10个"
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
       "name": "",
-      "ok": false,
-      "message": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"1010000500\",\"message\":\"系统服务不可用\",\"data\":null}"
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到成功；云豆+18（252→270）；气泡+15；任务12个"
     }
   ],
   "recheck": [
     {
       "masked": "137****4642",
-      "error": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"10100",
-      "clean": false,
-      "failed": true
+      "total": 467,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
     },
     {
       "masked": "137****6553",
-      "error": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"10100",
-      "clean": false,
-      "failed": true
+      "total": 575,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
     },
     {
       "masked": "172****9953",
-      "error": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"10100",
-      "clean": false,
-      "failed": true
+      "total": 1863,
+      "receivable": 21,
+      "pending": 2,
+      "clean": false
     },
     {
       "masked": "182****4895",
-      "error": "querySpecToken 失败 code=1010000500 msg=系统服务不可用 raw={\"success\":false,\"code\":\"10100",
-      "clean": false,
-      "failed": true
+      "total": 270,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
     }
   ],
   "allClean": false,
