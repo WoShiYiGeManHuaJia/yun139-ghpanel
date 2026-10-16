@@ -1,87 +1,359 @@
 {
-  "ts": "2026-10-16 07:24:25",
-  "requestId": "mday16-1792135465956-t2rg7xcl",
-  "type": "mday16",
+  "ts": "2026-10-16 09:39:38",
+  "requestId": "daily-1792143578269-111xe05f",
+  "type": "daily",
   "ok": true,
-  "msg": "会员日抢购完成，未抢到（4 个账号）",
-  "acctDiag": [
-    "cipher失败:缺少加密数据或密钥",
-    "store:4"
-  ],
-  "mode": "grab",
-  "results": [
+  "msg": "共 4 个账号，成功 4 个",
+  "perAccount": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "memberLevel": "2",
-      "isMember": true,
-      "online": true,
-      "activityDay": true,
-      "countdownMs": 0,
-      "memberDesc": "黄金会员",
-      "reservation": "预约成功",
-      "priority": "星巴克",
-      "prioId": 260511002,
-      "prizeCount": 17,
-      "tried": [],
-      "got": [],
-      "result": "未抢到（已试 0 件）",
-      "name": "会员日",
-      "message": "等级黄金；已预约；奖品17件；优先目标星巴克(260511002)；未抢到（已试 0 件）",
+      "refresh": "成功，剩余 30 天",
+      "signAlready": true,
+      "signPoints": 3,
+      "sign": "今日已签，本次无新增（今日已得 3 分）",
+      "tasks": 12,
+      "taskOk": 11,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "备份文件领好礼",
+          "ok": true
+        },
+        {
+          "name": "备份文件领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+0（573→573）",
+      "bubbleGot": 0,
+      "total": 573,
+      "base": 573,
+      "gain": 0,
+      "gainText": "+0（573→573）",
       "ok": true
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "memberLevel": "-1",
-      "isMember": false,
-      "online": true,
-      "activityDay": true,
-      "countdownMs": 0,
-      "memberDesc": "非会员",
-      "result": "非会员，无资格参加会员日",
-      "name": "会员日",
-      "message": "等级非会员；非会员，无资格参加会员日",
-      "ok": false
+      "refresh": "成功，剩余 30 天",
+      "signAlready": true,
+      "signPoints": 3,
+      "sign": "今日已签，本次无新增（今日已得 3 分）",
+      "tasks": 12,
+      "taskOk": 11,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "备份文件领好礼",
+          "ok": true
+        },
+        {
+          "name": "备份文件领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "30G流量0元领",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+5（781→786）",
+      "bubbleGot": 5,
+      "total": 786,
+      "ok": true
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "memberLevel": "1",
-      "isMember": true,
-      "online": true,
-      "activityDay": true,
-      "countdownMs": 0,
-      "memberDesc": "白银会员",
-      "reservation": "预约成功",
-      "priority": "星巴克",
-      "prioId": 260511002,
-      "prizeCount": 17,
-      "tried": [],
-      "got": [],
-      "result": "未抢到（已试 0 件）",
-      "name": "会员日",
-      "message": "等级白银；已预约；奖品17件；优先目标星巴克(260511002)；未抢到（已试 0 件）",
+      "refresh": "成功，剩余 30 天",
+      "signAlready": true,
+      "signPoints": 3,
+      "sign": "今日已签，本次无新增（今日已得 3 分）",
+      "tasks": 10,
+      "taskOk": 9,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "备份文件领好礼",
+          "ok": true
+        },
+        {
+          "name": "备份文件领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+0（1896→1896）",
+      "bubbleGot": 0,
+      "total": 1896,
+      "base": 1896,
+      "gain": 0,
+      "gainText": "+0（1896→1896）",
       "ok": true
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
-      "memberLevel": "-1",
-      "isMember": false,
-      "online": true,
-      "activityDay": true,
-      "countdownMs": 0,
-      "memberDesc": "非会员",
-      "result": "非会员，无资格参加会员日",
-      "name": "会员日",
-      "message": "等级非会员；非会员，无资格参加会员日",
-      "ok": false
+      "refresh": "成功，剩余 30 天",
+      "signAlready": true,
+      "signPoints": 3,
+      "sign": "今日已签，本次无新增（今日已得 3 分）",
+      "tasks": 12,
+      "taskOk": 11,
+      "taskFail": 1,
+      "taskDetail": [
+        {
+          "name": "从固定入口访问云朵中心",
+          "ok": true
+        },
+        {
+          "name": "使用PC客户端",
+          "ok": true
+        },
+        {
+          "name": "分享文件领好礼0/7",
+          "ok": false,
+          "progress": "0/7",
+          "done": false,
+          "note": "进行中 0/7（点击已推进，条件未达标）"
+        },
+        {
+          "name": "小云互动礼",
+          "ok": true
+        },
+        {
+          "name": "绑定公众号",
+          "ok": true
+        },
+        {
+          "name": "备份文件领好礼",
+          "ok": true
+        },
+        {
+          "name": "备份文件领好礼",
+          "ok": true
+        },
+        {
+          "name": "开启云盘APP通知领好礼",
+          "ok": true
+        },
+        {
+          "name": "连续31天开启云盘APP通知",
+          "ok": true
+        },
+        {
+          "name": "去体验AI相机",
+          "ok": true
+        },
+        {
+          "name": "和AI助手对话",
+          "ok": true
+        },
+        {
+          "name": "手动上传一个文件",
+          "ok": true
+        }
+      ],
+      "receive": "+5（276→281）",
+      "bubbleGot": 5,
+      "total": 281,
+      "base": 276,
+      "gain": 5,
+      "gainText": "+5（276→281）",
+      "ok": true
     }
   ],
+  "todayGain": 5,
+  "totals": {
+    "137****4642": 573,
+    "137****6553": 786,
+    "172****9953": 1896,
+    "182****4895": 281,
+    "_gain": 5
+  },
+  "enc_accounts": "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",
+  "results": [
+    {
+      "phone": "13787464642",
+      "masked": "137****4642",
+      "name": "",
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到今日已签，本次无新增（今日已得 3 分）；云豆+0（573→573）；气泡无可领；任务12个"
+    },
+    {
+      "phone": "13717306553",
+      "masked": "137****6553",
+      "name": "",
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到今日已签，本次无新增（今日已得 3 分）；气泡+5；任务12个"
+    },
+    {
+      "phone": "17274079953",
+      "masked": "172****9953",
+      "name": "",
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到今日已签，本次无新增（今日已得 3 分）；云豆+0（1896→1896）；气泡无可领；任务10个"
+    },
+    {
+      "phone": "18244754895",
+      "masked": "182****4895",
+      "name": "",
+      "ok": true,
+      "message": "续期成功，剩余 30 天；签到今日已签，本次无新增（今日已得 3 分）；云豆+5（276→281）；气泡+5；任务12个"
+    }
+  ],
+  "recheck": [
+    {
+      "masked": "137****4642",
+      "total": 573,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
+    },
+    {
+      "masked": "137****6553",
+      "total": 786,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
+    },
+    {
+      "masked": "172****9953",
+      "total": 1896,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
+    },
+    {
+      "masked": "182****4895",
+      "total": 281,
+      "receivable": 0,
+      "pending": 0,
+      "clean": true
+    }
+  ],
+  "allClean": true,
   "dingtalk": {
     "ok": true,
     "status": 200,
     "body": "{\"errcode\":0,\"errmsg\":\"ok\"}"
-  }
+  },
+  "_retryToday": 1,
+  "_retryDate": "2026-10-16"
 }
