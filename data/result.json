@@ -1,239 +1,238 @@
 {
-  "ts": "2026-10-15 16:51:31",
-  "requestId": "daily-1792083091572-5xp8dg84",
-  "type": "daily",
+  "ts": "2026-10-16 01:19:21",
+  "requestId": "mday16-1792113561762-fktokqzp",
+  "type": "mday16",
   "ok": true,
-  "msg": "共 4 个账号，成功 2 个；⚠ 137****4642(fetch failed) 复检接口异常（非未领）",
-  "perAccount": [
-    {
-      "phone": "13787464642",
-      "masked": "137****4642",
-      "ok": false,
-      "error": "网络异常（已重试3次）：fetch failed"
-    },
-    {
-      "phone": "13717306553",
-      "masked": "137****6553",
-      "refresh": "成功，剩余 30 天",
-      "signAlready": false,
-      "signPoints": 3,
-      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
-      "tasks": 12,
-      "taskOk": 11,
-      "taskFail": 1,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": false,
-          "progress": "0/7",
-          "done": false,
-          "note": "进行中 0/7（点击已推进，条件未达标）"
-        },
-        {
-          "name": "小云互动礼",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "备份文件领好礼",
-          "ok": true
-        },
-        {
-          "name": "备份文件领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "30G流量0元领",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（781→781）",
-      "bubbleGot": 0,
-      "total": 781,
-      "base": 778,
-      "gain": 3,
-      "gainText": "+3（778→781）",
-      "ok": true
-    },
-    {
-      "phone": "17274079953",
-      "masked": "172****9953",
-      "ok": false,
-      "error": "网络异常（已重试3次）：fetch failed"
-    },
-    {
-      "phone": "18244754895",
-      "masked": "182****4895",
-      "refresh": "成功，剩余 30 天",
-      "signAlready": false,
-      "signPoints": 3,
-      "sign": "签到成功，本次 +3（{\"todaySignIn\":false,\"signInPoints\":3,\"s）",
-      "tasks": 12,
-      "taskOk": 11,
-      "taskFail": 1,
-      "taskDetail": [
-        {
-          "name": "从固定入口访问云朵中心",
-          "ok": true
-        },
-        {
-          "name": "使用PC客户端",
-          "ok": true
-        },
-        {
-          "name": "分享文件领好礼0/7",
-          "ok": false,
-          "progress": "0/7",
-          "done": false,
-          "note": "进行中 0/7（点击已推进，条件未达标）"
-        },
-        {
-          "name": "小云互动礼",
-          "ok": true
-        },
-        {
-          "name": "绑定公众号",
-          "ok": true
-        },
-        {
-          "name": "备份文件领好礼",
-          "ok": true
-        },
-        {
-          "name": "备份文件领好礼",
-          "ok": true
-        },
-        {
-          "name": "开启云盘APP通知领好礼",
-          "ok": true
-        },
-        {
-          "name": "连续31天开启云盘APP通知",
-          "ok": true
-        },
-        {
-          "name": "去体验AI相机",
-          "ok": true
-        },
-        {
-          "name": "和AI助手对话",
-          "ok": true
-        },
-        {
-          "name": "手动上传一个文件",
-          "ok": true
-        }
-      ],
-      "receive": "+0（276→276）",
-      "bubbleGot": 0,
-      "total": 276,
-      "base": 273,
-      "gain": 3,
-      "gainText": "+3（273→276）",
-      "ok": true
-    }
+  "msg": "会员日抢购完成，未抢到（4 个账号）",
+  "acctDiag": [
+    "cipher失败:缺少加密数据或密钥",
+    "store:4"
   ],
-  "todayGain": 6,
-  "totals": {
-    "137****4642": 570,
-    "137****6553": 781,
-    "172****9953": 1893,
-    "182****4895": 276,
-    "_gain": 6
-  },
-  "enc_accounts": "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",
+  "mode": "grab",
   "results": [
     {
       "phone": "13787464642",
       "masked": "137****4642",
-      "name": "",
-      "ok": false,
-      "message": "网络异常（已重试3次）：fetch failed"
+      "memberLevel": "2",
+      "isMember": true,
+      "online": true,
+      "activityDay": true,
+      "countdownMs": 4234968,
+      "memberDesc": "黄金会员",
+      "reservation": "预约成功",
+      "priority": "星巴克",
+      "prioId": 260511002,
+      "coarseSleepSec": 3995,
+      "fastLaneTries": 27,
+      "waitedSec": 4234,
+      "checked": 37,
+      "prizeCount": 19,
+      "tried": [
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260511002,
+          "name": "星巴克15元会员礼包",
+          "msg": ""
+        },
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "msg": ""
+        },
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "msg": ""
+        },
+        {
+          "id": 260615001,
+          "name": "肯德基10元优惠满减券",
+          "msg": ""
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "msg": ""
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "msg": ""
+        },
+        {
+          "id": 260206017,
+          "name": "霸王茶姬无门槛10元满减券",
+          "msg": ""
+        },
+        {
+          "id": 260206011,
+          "name": "2元支付宝红包",
+          "msg": ""
+        },
+        {
+          "id": 260206011,
+          "name": "2元支付宝红包",
+          "msg": ""
+        },
+        {
+          "id": 260206011,
+          "name": "2元支付宝红包",
+          "msg": ""
+        },
+        {
+          "id": 260206016,
+          "name": "1元微信立减金",
+          "msg": ""
+        },
+        {
+          "id": 260206016,
+          "name": "1元微信立减金",
+          "msg": ""
+        },
+        {
+          "id": 260206016,
+          "name": "1元微信立减金",
+          "msg": ""
+        },
+        {
+          "id": 260206012,
+          "name": "1元支付宝红包",
+          "msg": ""
+        },
+        {
+          "id": 260206012,
+          "name": "1元支付宝红包",
+          "msg": ""
+        },
+        {
+          "id": 260206012,
+          "name": "1元支付宝红包",
+          "msg": ""
+        }
+      ],
+      "got": [],
+      "result": "未抢到（已试 23 件）",
+      "name": "会员日",
+      "message": "等级黄金；已预约；奖品19件；优先目标星巴克(260511002)；倒计时1小时10分；未抢到（已试 23 件）",
+      "ok": true
     },
     {
       "phone": "13717306553",
       "masked": "137****6553",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+3（778→781）；气泡无可领；任务12个"
+      "memberLevel": "-1",
+      "isMember": false,
+      "online": true,
+      "activityDay": true,
+      "countdownMs": 0,
+      "memberDesc": "非会员",
+      "result": "非会员，无资格参加会员日",
+      "name": "会员日",
+      "message": "等级非会员；非会员，无资格参加会员日",
+      "ok": false
     },
     {
       "phone": "17274079953",
       "masked": "172****9953",
-      "name": "",
-      "ok": false,
-      "message": "网络异常（已重试3次）：fetch failed"
+      "memberLevel": "1",
+      "isMember": true,
+      "online": true,
+      "activityDay": true,
+      "countdownMs": 0,
+      "memberDesc": "白银会员",
+      "reservation": "预约成功",
+      "priority": "星巴克",
+      "prioId": 260511002,
+      "prizeCount": 19,
+      "tried": [
+        {
+          "id": 260206016,
+          "name": "1元微信立减金",
+          "msg": ""
+        },
+        {
+          "id": 260206016,
+          "name": "1元微信立减金",
+          "msg": ""
+        },
+        {
+          "id": 260206016,
+          "name": "1元微信立减金",
+          "msg": ""
+        },
+        {
+          "id": 260206012,
+          "name": "1元支付宝红包",
+          "msg": ""
+        },
+        {
+          "id": 260206012,
+          "name": "1元支付宝红包",
+          "msg": ""
+        },
+        {
+          "id": 260206012,
+          "name": "1元支付宝红包",
+          "msg": ""
+        }
+      ],
+      "got": [],
+      "result": "未抢到（已试 6 件）",
+      "name": "会员日",
+      "message": "等级白银；已预约；奖品19件；优先目标星巴克(260511002)；未抢到（已试 6 件）",
+      "ok": true
     },
     {
       "phone": "18244754895",
       "masked": "182****4895",
-      "name": "",
-      "ok": true,
-      "message": "续期成功，剩余 30 天；签到成功；云豆+3（273→276）；气泡无可领；任务12个"
+      "memberLevel": "-1",
+      "isMember": false,
+      "online": true,
+      "activityDay": true,
+      "countdownMs": 0,
+      "memberDesc": "非会员",
+      "result": "非会员，无资格参加会员日",
+      "name": "会员日",
+      "message": "等级非会员；非会员，无资格参加会员日",
+      "ok": false
     }
   ],
-  "recheck": [
-    {
-      "masked": "137****4642",
-      "error": "fetch failed",
-      "clean": false,
-      "failed": true
-    },
-    {
-      "masked": "137****6553",
-      "total": 781,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
-    },
-    {
-      "masked": "172****9953",
-      "total": 1893,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
-    },
-    {
-      "masked": "182****4895",
-      "total": 276,
-      "receivable": 0,
-      "pending": 0,
-      "clean": true
-    }
-  ],
-  "allClean": false,
   "dingtalk": {
     "ok": true,
     "status": 200,
     "body": "{\"errcode\":0,\"errmsg\":\"ok\"}"
-  },
-  "_retryToday": 1,
-  "_retryDate": "2026-10-16"
+  }
 }
