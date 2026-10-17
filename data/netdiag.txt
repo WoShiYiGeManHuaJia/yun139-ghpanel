@@ -1,0 +1,22 @@
+== 出口IP ==
+myip失败
+
+== DNS ==
+user-njs.yun.139.com               2409:8c5b:ffff:6003::6a user-njs.gtm.yun.139.com user-njs.yun.139.com
+orches.yun.139.com                 2409:8c5b:ffff:6010::a7 orches.yun.139.com
+caiyun.feixin.10086.cn             2409:8c85:aa10:1c69::e caiyun.feixin.10086.cn
+yun.139.com                        2409:8c5b:ffff:6010::61 yun.139.com
+m.mcloud.139.com                   2409:8c85:aa10:1c69::e m.mcloud.139.com
+== curl 详细 ==
+--- https://user-njs.yun.139.com/
+http=404 connect=1.210454s dns=0.955972s
+--- https://orches.yun.139.com/
+http=404 connect=1.209953s dns=0.963752s
+--- https://m.mcloud.139.com/
+http=301 connect=0.724773s dns=0.499212s
+--- https://yun.139.com/
+http=302 connect=0.757242s dns=0.498570s
+== node fetch 错误原文 ==
+https://user-njs.yun.139.com/ -> 404
+https://orches.yun.139.com/ -> 404
+https://m.mcloud.139.com/ -> ERR fetch failed | cause: ETIMEDOUT
