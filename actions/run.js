@@ -2,6 +2,12 @@
 // 环境变量: EVENT_TYPE(签到=sign/续期=refresh/发码=send_code/登录=do_login), PAYLOAD(JSON), PANEL_DATA_KEY(数据密钥)
 // 输出: data/result.json {ts,type,ok,msg,enc_accounts?}
 
+// 2026-10-17: 139.com 系列域名同时返回 AAAA(IPv6) 与 A 记录，而 GitHub Actions
+// runner 常无可用 IPv6 出口，undici 会先连 IPv6 直到 ETIMEDOUT，表现为随机
+// "fetch failed"（同一时刻 curl 却正常，实测 node fetch 报 ETIMEDOUT 而 curl 404 连通）。
+// 强制优先解析 IPv4，消除这条不稳定来源。
+try { require("dns").setDefaultResultOrder("ipv4first"); } catch (e) {}
+
 // ---------------- 常量 ----------------
 const UA_EDGE = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 Edg/141.0.0.0";
 const DEFAULT_DEVICE = "BKeBfkGru6F2XMZXyGlYrhCEUZ+PO5LWbH1Rokz6vhuYyU4l7qEYfTv0z3B3qfTeV2I+VwCyCOzY7k8u";
