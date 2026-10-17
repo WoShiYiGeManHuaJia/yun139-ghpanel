@@ -1,0 +1,40 @@
+name: netdiag139
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: 网络诊断
+        run: |
+          {
+          echo "== 出口IP =="
+          curl -s --max-time 15 https://myip.ipip.net || echo "myip失败"
+          echo
+          echo "== DNS =="
+          for h in user-njs.yun.139.com orches.yun.139.com caiyun.feixin.10086.cn yun.139.com m.mcloud.139.com; do
+            printf "%-34s " "$h"; getent hosts "$h" | head -1 || echo "(无解析)"
+          done
+          echo "== curl 详细 =="
+          for u in https://user-njs.yun.139.com/ https://orches.yun.139.com/ https://m.mcloud.139.com/ https://yun.139.com/; do
+            echo "--- $u"
+            curl -sS -o /dev/null --max-time 20 -w "http=%{http_code} connect=%{time_connect}s dns=%{time_namelookup}s\n" "$u" 2>&1 | tail -3
+          done
+          echo "== node fetch 错误原文 =="
+          node -e '
+          const hs=["https://user-njs.yun.139.com/","https://orches.yun.139.com/","https://m.mcloud.139.com/"];
+          (async()=>{for(const h of hs){try{const r=await fetch(h,{signal:AbortSignal.timeout(15000)});console.log(h,"->",r.status);}catch(e){console.log(h,"-> ERR",e.message,"| cause:",e.cause&&(e.cause.code||e.cause.message||e.cause));}}})();
+          '
+          } 2>&1 | tee data/netdiag.txt
+      - name: 提交
+        run: |
+          git config user.name bot
+          git config user.email bot@users.noreply.github.com
+          git add -f data/netdiag.txt
+          git commit -m "netdiag $(date -u +%Y%m%d%H%M%S)" || echo no-change
+          git pull --rebase origin main || true
+          git push || echo nothing
